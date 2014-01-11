@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Installing Opera Mini emulator locally</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Installing Opera Mini emulator locally</h1>
+<div><p>If I remember correctly, Opera website earlier had instructions on how to use Opera Mini on the desktop, but now they are either gone or unreachable. So here’s a simple set of instructions to get Opera Mini running in a JVM emulator.</p>
+<ol>
+<li><p>make sure that JRE is installed</p>
+</li>
+<li><p><a href="http://code.google.com/p/microemu/downloads/list">download latest microemulator</a> and unzip it somewhere</p>
+</li>
+<li><p>download Opera Mini jars:</p>
+<ul>
+<li><p><a href="http://demo.opera-mini.net/public/skin.jar">http://demo.opera-mini.net/public/skin.jar</a></p>
+</li>
+<li><p><a href="http://demo.opera-mini.net/public/mini.jar">http://demo.opera-mini.net/public/mini.jar</a></p>
+</li>
+<li><p><a href="http://demo.opera-mini.net/public/applet.jar">http://demo.opera-mini.net/public/applet.jar</a></p>
+</li>
+</ul>
+</li>
+<li><p>run microemu: java -jar microemulator.jar</p>
+</li>
+<li><p>Make sure Options&rarr;MIDlet network access is checked so that your emulator will have access to the network</p>
+</li>
+<li><p>Select Options&rarr;Select device and choose “Resizable device” and set it as a default – this will allow you to resize your emulator to any width you like</p>
+</li>
+<li><p>Select File&rarr;Open midlet, locate mini.jar and select it</p>
+</li>
+</ol>
+<p>However, this setup is only useful to see how your website looks in Opera Mini, and is certainly not a proper development environment. For instance, I couldn’t find a way to inspect what’s being transferred over the network – and even if I did, I’d obviously only see Opera’s OBML traffic between the jar and Opera’s servers and nothing more.</p>
+<p>The only useful thing hiding in Opera Mini is <strong>server:source</strong>.</p>
+<p>Basically, if you want to view the source of the page, you can type in <strong>server:source</strong> in the address bar while viewing a website and you’ll get awfully-rendered page source (note that this will not be OBML, but rather the original page source that Opera’s servers got from the URL you specified). And if want to inspect the source on your desktop rather than small emulator screen, you can ask Opera’s servers to post the source to a URL by specifying <strong>server:source?post=<a href="http://youraddress/script">http://youraddress/script</a></strong> and three values will be POSTed to the URL provided:</p>
+<ul>
+<li><p>html – the original page source</p>
+</li>
+<li><p>host – the HTTP host field value</p>
+</li>
+<li><p>URL – the URL that was fetched</p>
+</li>
+</ul>
+</div>
+    
+</body>
+</html>

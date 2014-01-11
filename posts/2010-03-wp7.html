@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Windows Phone 7 Internet Explorer IEMobile 7.0</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Windows Phone 7 Internet Explorer IEMobile 7.0</h1>
+<div><p>I’ve just watched <a href="http://www.microsoft.com/presspass/events/mix/videogallery.aspx">MIX keynotes</a> and as soon as MSFT announced there was free VS2010 Express for Windows Phone 7 with proper emulator, I downloaded, installed it, created sample app and ran the debugger.</p>
+<p>Here’s some screenshots:</p>
+<p>VS2010 Express for Windows Phone IDE:</p>
+<p><a href="http://sharovatov.files.wordpress.com/2010/03/untitled2.jpg"><img title="Untitled-2" border="0" alt="Untitled-2" src="http://sharovatov.files.wordpress.com/2010/03/untitled2_thumb.jpg?w=252&#038;h=196" width="252" height="196"></a></p>
+<p>Windows Phone 7 Emulator running in the debug mode:</p>
+<p><a href="http://sharovatov.files.wordpress.com/2010/03/untitled12.jpg"><img title="Untitled-1" border="0" alt="Untitled-1" src="http://sharovatov.files.wordpress.com/2010/03/untitled1_thumb2.jpg?w=252&#038;h=206" width="252" height="206"></a></p>
+<p>The most interesting thing for me was to find out which IE version Microsoft decided to ship with Windows Phone 7. They said it wouldn’t be IE9, but would be something between IE7 and IE8. They also assured that the Windows Phone emulator (which comes bundled into the VS2010 Express for Windows Phone 7) is a proper virtual machine, a real copy of Windows Phone OS sandboxed in the VM engine.</p>
+<p>So bearing this in mind I thought that I’d test the WP7 IE in emulator.</p>
+<p>And here’s interesting stuff:</p>
+<ul>
+<li><p><code>navigator.appVersion</code> on Windows Phone 7 IE returns </p>
+<pre><code>  4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0
+</code></pre></li>
+<li><p>User-Agent string is</p>
+<pre><code>  Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone Os 7.0; Trident/3.1; IEMobile/7.0
+</code></pre></li>
+<li><p><code>@_jscript_version</code> reports 5.8 (as IE8 does)</p>
+</li>
+<li><p><code>[if IE 7]</code> conditional comments section gets applied</p>
+</li>
+<li><p><code>*+html selector { rules }</code> hack works</p>
+</li>
+</ul>
+<p>So at this moment IEMobile/7.0 seems to be a slightly adjusted Trident (layout engine) of IE7 and jscript of version 5.8. (as it turns out below, some features are either disabled or not accessible now, or will not be supported at all)</p>
+<p>To dive deeper into the details, I’ve tested several things and prepared the following table:</p>
+<table border="1" cellspacing="0" cellpadding="5" width="462">
+    <tbody>
+    <tr>
+        <td valign="top" width="276">Feature</td>
+        <td valign="top" width="184"><strong>Supports</strong></td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">native
+            <a href="http://msdn.microsoft.com/en-us/library/ms535874(VS.85).aspx">XMLHttpRequest</a></td>
+        <td valign="top" width="184">Yes</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">
+            <a href="http://msdn.microsoft.com/en-us/library/cc288060(VS.85).aspx">XDomainRequest</a>
+        </td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276"><a href="http://msdn.microsoft.com/en-us/library/cc304115(VS.85).aspx">Selectors
+            API</a></td>
+        <td valign="top" width="184">Yes</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">
+            <a href="http://msdn.microsoft.com/en-us/library/ms535220(VS.85).aspx">clipboardData</a>
+        </td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276"><a href="http://msdn.microsoft.com/en-us/library/cc848897(VS.85).aspx">data
+            URI</a></td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">
+            <a href="http://msdn.microsoft.com/en-us/library/cc197013(VS.85).aspx">maxConnectionsPerServer</a>
+        </td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">
+            <a href="http://msdn.microsoft.com/en-us/library/cc197020(VS.85).aspx">sessionStorage/localStorage</a>
+        </td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">
+            <a href="http://msdn.microsoft.com/en-us/library/ms534198(VS.85).aspx">offscreenBuffering</a>
+        </td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">native <a href="http://msdn.microsoft.com/en-us/library/cc836458(VS.85).aspx">JSON</a>
+        </td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276"><a href="http://msdn.microsoft.com/en-us/library/dd282900(VS.85).aspx">DOM
+            Objects prototypes</a></td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    <tr>
+        <td valign="top" width="276">
+            <a href="http://msdn.microsoft.com/en-us/library/dd229916(VS.85).aspx">getters/setters</a>
+        </td>
+        <td valign="top" width="184">No</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<p>So from the CSS prospective Windows Phone IEMobile 7.0 is <strong>indistinguishable</strong> from desktop IE7, it applies the same conditional comments rules, supports the same subset of CSS selectors, same hacks work and same bugs are there. If you know how to support desktop IE7 Trident, you won’t have a problem with IEMobile 7.0.</p>
+<p>Completely different situation is with javascript – jscript version is 5.8 (same that IE8 has), but many features that IE8 supports via COM wrappers do not exist on IEMobile 7.0 (does it have COM at all?). Also it lacks support for some native features of jscript 5.8 (e.g. native JSON, DOM objs prototypes, getters/settters). The only feature I can see from IE8 is Selectors API support, which is great, but really – is that what we really expected?</p>
+<p>So from what I see now, Microsoft took IE7 Trident (3.1), took jscript 5.8 and cut off as much as possible (all COM wrappers and some native features), put IE8 icon on top and shipped it to Windows Phone 7.</p>
+<p>I really hoped it would have IE9 or at least IE8.</p>
+<p>The only hope is that it’s still beta and all the IE8 stuff will be shipped with the final version. Hope it’s not just a wishful thinking.</p>
+<p>It’s such a frustration to see a beautiful and free VS2010 Express for Windows Phone 7, awesome SL4 which runs everywhere, and then look at this crippled “IE7.234”. If this is a marketing choice to make web-developers write in Silverlight, then it’s silly because it breaks the most important feature Microsoft provided – backwards compatibility. Old sites and current sites which Windows Phone users will want to visit will break in this browser. Gmail works in html-only mode. Surely, some will adapt. But not all.</p>
+<p>And by the way, Apple got it right on iPhone.</p>
+<p>P.S. <a href="http://www.istartedsomething.com/20100316/windows-update-like-service-coming-to-windows-phone-7-series/">Todd Brix said</a> there would be a Windows Update-like service in Windows Phone 7, so let’s hope that IEMobile will get updated.</p>
+</div>
+    
+</body>
+</html>

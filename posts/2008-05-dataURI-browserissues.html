@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>data URI browser issues</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>data URI browser issues</h1>
+<div><h2 id="length-limit">Length limit</h2>
+<h3 id="theory">Theory</h3>
+<p><a href="http://www.ietf.org/rfc/rfc2397.txt">data URI specification</a> says the following:</p>
+<blockquote>
+<p>some applications that use URLs may impose a length limit; for example, URLs embedded within <A> anchors in HTML have a length limit determined by the SGML declaration for HTML [RFC1866]. The LITLEN (1024) limits the number of characters which can appear in a single attribute value literal, the ATTSPLEN (2100) limits the sum of all lengths of all attribute value specifications which appear in a tag, and the TAGLEN (2100) limits the overall length of a tag.</p>
+</blockquote>
+<p>Though at the time of writing data URI specification <a href="http://www.w3.org/TR/REC-html32">HTML3.2</a> was current HTML recommendation, author intentionally used LITLEN, ATTSPLEN and TAGLEN values from the older <a href="http://www.w3.org/MarkUp/html-spec/html-spec_9.html#SEC9.5">HTML2.0 SGML declaration</a> to show that some user-agents may impose a length limit for URI.</p>
+<p><a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP1.1</a> doesn&#39;t put a limit on the length of URI, but it warns us:</p>
+<blockquote>
+<p>Note: Servers ought to be cautious about depending on URI lengths above 255 bytes, because some older client or proxy implementations might not properly support these lengths.</p>
+</blockquote>
+<p>which basically means that if all clients in the network support URIes more than 255 bytes long, we&#39;re ok.</p>
+<p><a href="http://www.w3.org/TR/REC-html32#sgmldecl">HTML3.2 SGML declaration</a> states the maximum length of an attribute to be 65535. Even more, <a href="http://www.w3.org/TR/html40/sgml/sgmldecl.html">HTML4.01 SGML declaration</a> uses value 65535 as a maximum allowed in SGML but says that fixed limits should be avoided. <a href="http://xml.coverpages.org/xmlSGMLDecl970627.html">XML1.0 SGML declaration</a> uses 99999999 value just to show that there&#39;s no limit specified.</p>
+<h3 id="practice">Practice</h3>
+<p>Different browsers have different maximum length of dataURI&#39;ed values supported.</p>
+<p>As per <a href="http://support.microsoft.com/kb/208427">the kb208427 article</a>, IE supports URI length of up to 2048 bytes. According to the <a href="http://go.microsoft.com/fwlink?LinkID=110274">Microsoft IE8 data URI support whitepaper</a>, IE8 supports up to 32Kbytes of data URI and silently discards dataURI value if its size exceeds 32Kbytes (which can be checked in the <a href="http://sharovatov.ru/testcases/dataURI_maxlength.html">testcase1</a> and <a href="http://sharovatov.ru/testcases/dataURI_maxlength2.html">testcase2</a>). As I&#39;ve already mentioned in the previous post, other browsers provide bigger-sized URI support, but I doubt that IE8 will have minor market share so we will still have to stick to 32Kbytes. And I will repeat: data URI spec author that the only reasonable and semantic use of data URI is embedding small resources, so realistically
+speaking 32Kbytes limit shouldn&#39;t be a problem.</p>
+<h2 id="serving-css-datauri-ed">Serving CSS dataURI&#39;ed</h2>
+<p>In theory, CSS has to be served with its MIME type (<code>text/css</code>).</p>
+<p>In practice, only Firefox and only in standards compliancy mode cares about MIME type that CSS&#39;s been served with. Please see the testcases with CSS served with wrong MIME type in different render modes: <a href="http://sharovatov.ru/testcases/dataURI_extCSSwrongMIME.html">in standards compliancy mode</a> and <a href="http://sharovatov.ru/testcases/dataURI_extCSSwrongMIME_quirks.html">in quirks mode</a>.</p>
+<p>Opera, Safari and Internet Explorer 8 all apply CSS served with any MIME type in all modes. The behaviour is the same for both CSS files served using dataURI and by referencing normal external files.</p>
+<h2 id="serving-javascript-and-html-datauri-ed">Serving Javascript and HTML dataURI&#39;ed</h2>
+<p>Safari, Opera and Firefox support <a href="http://sharovatov.ru/testcases/dataURI_extJS.html">embedding javascript using data URI scheme</a>. According to <a href="http://code.msdn.microsoft.com/ie8whitepapers/Release/ProjectReleases.aspx?ReleaseId=575">the whitepaper</a>, IE8b1 doesn&#39;t support this. Here&#39;s the quote:</p>
+<blockquote>
+<p>Scripts in data URIs are unsupported because they allow potentially harmful script to bypass server- and proxy-script filters for applications such as HTML email. (Web-based email clients generally do not allow emails to execute script; data URIs could be used to easily bypass these filters).</p>
+</blockquote>
+<p>I do agree that this is a valid point, it is a potential security issue, dataURIed javascript is even <a href="http://ha.ckers.org/xss.html">published as an XSS vector</a>. </p>
+<p>Please see <a href="http://sharovatov.ru/testcases/dataURI_JSXSS.html">the testcase</a>.</p>
+<p>Opera and Safari run dataURI&#39;ed HTML page in a separate isolated context, IE8b1 doesn&#39;t support dataURI&#39;ed html at all, so the only affected browser here is Firefox. There&#39;s an interesting bugzilla <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=296871">entry describing the XSS</a> (marked as duplicate to <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=255107">the security proposal</a>) which says:</p>
+<blockquote>
+<p>The attack works by exploiting an ambiguity in RFC 2397 with regard to the Javascript same-origin security policy &#8212; what is the origin of a URI? Is it the containing page? If so, preventing this attack is the responsibility of site maintainers. If not, FF should launch the child of a data: URI without same-origin privileges.</p>
+</blockquote>
+<p>Firefox authors reply that this is site maintainers&#39; problem to filter dataURI and compare this to filtering <code>javascript:</code> (which is quite fair) but why did they want to create a new hole in all the sites for some vague benefits of executing dataURI&#39;ed scripts in the same context?</p>
+<p>To me it seems a bit weird especially looking at the fact that other browsers do care about execution context. <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=255107">The bugzilla entry</a> is still opened, but I doubt that this is going to be fixed. So, “site maintainers”, be aware! (note from 2012 - this bug report is still open)</p>
+<h3 id="nested-datauri-es">Nested dataURI&#39;es</h3>
+<p>Neither dataURI spec nor any other mentions if dataURI&#39;es can not be nested. So here&#39;s <a href="http://sharovatov.ru/testcases/dataURI_extCSS_dataURI_img.html">the testcase</a> where dataURI&#39;ed CSS has dataURI&#39;ed image embedded. IE8b1, Firefox3 and Safari applied the stylesheet and showed the image, Opera9.50 (build 9613) applies the stylesheet but <strong>doesn&#39;t show the embedded image</strong>! So it seems that Opera9 doesn&#39;t expect to get anything embedded inside of an already embedded resource! :D</p>
+<p>But funny thing, as IE8b1 supports expressions and also supports nested data URI&#39;es, it has the same potential security flaw as Firefox does (as described in the section above). See <a href="http://sharovatov.ru/testcases/dataURI_JSXSSIE.html">the testcase</a> — embedded CSS has the following code: <code>body { background: expression(a()); }</code>which calls <var>function a()</var> defined in the javascript of the main page, and this function is called every time the expression is reevaluated. Though IE8b1 has limited expressions support (which is going to be explained in a separate post) you can&#39;t use <em>any</em> code as the expression value, but you can only call already defined functions or use direct
+string values. </p>
+<p>So in order to exploit this feature we need to have a ready javascript function already located on the page and then we can just call it from the expression embedded in the stylesheet. That&#39;s not very trivial obviously, but if you have a website that allows people to specify their own stylesheets and you want to be on the safe side, you have to either make sure you don&#39;t have a javascript function that can cause any potential harm or filter expressions from people&#39;s stylesheets.</p>
+<h3 id="line-feeds">Line feeds</h3>
+<p>Firefox, Opera, Safari and IE8b1 support both data URI values supplied as one line (as an URI) and splitted by 76 bytes (as specified in <a href="http://tools.ietf.org/html/rfc2045">MIME</a> and <a href="http://www.faqs.org/rfcs/rfc2557.html">MHTML</a> RFCs). See <a href="http://sharovatov.ru/testcases/dataURI_extCSSIMGs_split.html">the testcase</a>.</p>
+<p>But <a href="http://tools.ietf.org/html/rfc3548#section-2.1">base64 RFC</a> doesn&#39;t put a requirement to split base64 strings:</p>
+<blockquote>
+<p>MIME [3] is often used as a reference for base 64 encoding. However, MIME does not define &quot;base 64&quot; per se, but rather a &quot;base 64 Content-Transfer-Encoding&quot; for use within MIME. As such, MIME enforces a limit on line length of base 64 encoded data to 76 characters. MIME inherits the encoding from PEM [2] stating it is &quot;virtually identical&quot;, however PEM uses a line length of 64 characters. The MIME and PEM limits are both due to limits within SMTP.</p>
+<p>Implementations <strong>MUST NOT not add line feeds</strong> to base encoded data unless the specification referring to this document explicitly directs base encoders to add line feeds after a specific number of characters.</p>
+</blockquote>
+<h3 id="datauried-images-with-images-turned-off">DataURIed images with images turned off</h3>
+<p>When you turn off images in your browser, only Firefox still shows dataURIed images. IE8b1, Safari and Opera don&#39;t show the image as it&#39;s supposed to be when you turn the images off. To test this turn off images in your browser and run <a href="http://sharovatov.ru/testcases/dataURI_img.html">the testcase</a>.</p>
+<p><strong>UPDATE:</strong> Firefox developers told me this is by design as unchecking “Load images automatically” option in the browser settings <strong>disables only network request to get the image</strong>. So if the image is accessible without doing a network request — either from cache or embedded as dataURI, it will be displayed in any case.</p>
+<h3 id="dynamically-created-datauries">Dynamically created dataURIes</h3>
+<p>As dataURI can contain binary data (e.g. to show images), there are thoughts on using this. Ajaxian has a <a href="http://ajaxian.com/archives/jsonvid-pure-javascript-video-player">crazy article</a> on creating pure JS video player that doesn&#39;t use flash but changes dataURI&#39;ed images instead. This technique may get some practical evolution and usage, but now it&#39;s rather impractical.</p>
+<h3 id="links-and-references">Links and references</h3>
+<ul>
+<li><p><a href="http://www.w3.org/MarkUp/html-spec/html-spec_9.html#SEC9.5">HTML 2.0 SGML declaration</a></p>
+</li>
+<li><p><a href="http://www.w3.org/TR/html40/sgml/sgmldecl.html">HTML 4.01 SGML declaration</a></p>
+</li>
+<li><p><a href="http://www.w3.org/MarkUp/html3/sgmldecl.dtd">HTML 3.0 SGML declaration</a></p>
+</li>
+<li><p><a href="http://www.w3.org/TR/REC-html32#sgmldecl">HTML 3.2 SGML delcaration</a></p>
+</li>
+<li><p><a href="http://go.microsoft.com/fwlink?LinkID=110274">Microsoft IE8 data URI support</a></p>
+</li>
+<li><p><a href="http://xml.coverpages.org/xmlSGMLDecl970627.html">XML1.0 SGML declaration</a></p>
+</li>
+<li><p><a href="http://www.boutell.com/newfaq/misc/urllength.html">Maximum Length of the URL</a></p>
+</li>
+<li><p><a href="http://developer.mozilla.org/en/docs/How_Mozilla_determines_MIME_Types">How Mozilla determines MIME types</a></p>
+</li>
+</ul>
+<p>P.S. And here’s a great tool from Nicholas C. Zakas – <a href="http://www.nczonline.net/blog/2009/11/03/automatic-data-uri-embedding-in-css-files/">CSSEmbed</a> – it reads the CSS file you want, finds all the images references, converts images to dataURIes and saves resulting CSS file. So if you have small presentational images referenced in your CSS file, feed CSSEmbed with your CSS file and you’ll get them all converted in one go! Nice and simple! This tool can be also easily integrated into your publishing process if required.</p>
+</div>
+    
+</body>
+</html>

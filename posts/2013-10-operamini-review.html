@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opera Mini review</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Opera Mini review</h1>
+<div><p>This is the exerpt of my Opera Mini review for Mail Ru where we had to decide  what browsers we had to support for one of our mobile projects and what functionality had to be provided for the target platforms. </p>
+<h2 id="intro">Intro</h2>
+<p>Every request to a website is done not directly from the client installed on the phone, but through Opera servers farm in Norway, Poland, Korea, China and the United States as per <a href="http://www.operasoftware.com/press/releases/mobile/opera-slashes-power-usage-with-new-server-parks">this press release</a>.</p>
+<p>Opera Mini is just a viewer (with a few features) for the website rendered image that is composed on the server by Presto rendering engine (and now with Presto’s death all the servers may eventually be upgraded to Webkit). This image is rendered in a proprietary format called OBML (Opera Binary Markup Language). It has “language” word because though being compressed, it presents some dynamic features.</p>
+<p>So Opera Mini is basically a very thin client that doesn’t have its own HTML/JS/CSS engines and hence the following consequences apply:</p>
+<ol>
+<li><p>Opera Mini cannot do any recalculations on its own – no animation, no background processing, no timers, no generated events.</p>
+</li>
+<li><p>as the actual page is rendered somewhere on the server possibly in another country, you won’t be able to access your localhost or your protected network from neither Opera Mini emulator nor from a real device. The address you are trying to fetch must be publicly accessible from the outside world.</p>
+</li>
+<li><p>There is nothing to debug on the actual device and there’s no way Opera will provide remote debuggers access to their servers. Hence ther are no development toolbars and no script debugging. You’re back to alerting debugging information, and even with alerts Opera Mini doesn’t make it easy for you – usually only one alert at a page load is displayed, even if you put few alerts calls one after another in the code.</p>
+</li>
+</ol>
+<h2 id="rendering-modes">Rendering modes</h2>
+<p>Opera mini has two rendering modes: <strong>desktop view</strong> and <strong>mobile view</strong>. <strong>Desktop view</strong> is enabled by default and <strong>mobile view</strong> can be enabled in the settings.</p>
+<h2 id="desktop-view">Desktop view</h2>
+<p><strong>Desktop view</strong> makes Opera Mini report its media type to CSS as <strong>screen</strong> and the corresponding media queries fire.</p>
+<p><strong>Desktop mode</strong> has two viewing modes:</p>
+<ol>
+<li>as it is, 1:1, automatically enabled if the page viewport width is <em>not more</em> than the device doubled screen width.</li>
+<li>“zoomed out” mode, automatically enabled if the page viewport width is <em>more</em> than the device doubled screen width. The whole page is zoomed out to fit in the screen without a horizontal scroll. So the user sees the page zoomed out and selects an area of interest to zoom in. </li>
+</ol>
+<p>To prevent “zoomed out” mode and to make Opera Mini show the pages in 1:1 mode, the following javascript code can be of help: <code>window.operamini.page.samePage=true;</code></p>
+<p>However, if the first page the user visits is very wide, “zoomed out” mode will be enabled for this page regardless of the <strong>samePage</strong> property value, and only the next page will respect the corresponding value.</p>
+<p>In the <strong>desktop view</strong> mode page content is not reflowed.</p>
+<h2 id="mobile-view">Mobile view</h2>
+<p>In the <strong>mobile view</strong> mode page content is reflowed into one column to fit in the screen width.</p>
+<p>Opera Mini starts reporting its Media as <strong>handheld</strong> and corresponding media queries are applied in the CSS.</p>
+<p>There’s no way to prevent user from changing rendering modes and the reflow rules Opera Mini uses are not published or documented, so targeting <strong>mobile view</strong> is very problematic and can only be experimentally driven.</p>
+<h2 id="rendering">Rendering</h2>
+<p>Currently Opera servers use Presto (though the desktop version of Opera abandoned Presto in favour of Webkit). </p>
+<p>The following features are supported:</p>
+<ul>
+<li>media queries</li>
+<li>CSS3 colours</li>
+<li>CSS3 selectors </li>
+<li>CSS3 multiple backgrounds</li>
+<li>all popular image types (though the server will convert them to internal OBML imaging with quality loss anyway)</li>
+<li>SVG (rasterized by the server!)</li>
+<li>favicon</li>
+<li>document title</li>
+<li>reads RSS</li>
+<li>canvas (but rasterized and shows only the first frame)</li>
+<li>text styling: bold, underline, overline, strike</li>
+</ul>
+<p>And the following features are not supported:</p>
+<ul>
+<li>web fonts</li>
+<li>italic font style (seems to depend on the fonts installed on the phone)</li>
+<li>transitions</li>
+<li>flash</li>
+<li>dotted/dashed borders are drawn as solid </li>
+<li><strong>line-height</strong></li>
+<li><strong>there’s only one scrollable area, everything that might have scrollbars is flattened and the hidden content is cropped</strong></li>
+<li><strong>animated images only have the first frame displayed</strong></li>
+<li>only few fonts available on the device are shown + 1 UTF font is included (most often sans-serif)</li>
+<li>only one font-family for the whole page + monospace</li>
+<li>different devices can have different font sizes (though I didn’t observe that)</li>
+<li>tables can not be properly reflowed in the mobile view mode and the horizontal scroll will be shown</li>
+<li>no CSS features requiring Vega (Opera’s graphical library) are supported: drop-shadow, border-radiua, gradients)</li>
+</ul>
+<h2 id="javascript">Javascript</h2>
+<p>Opera Mini doesn’t have its own JS engine and it just shows a “snapshot” of the page state as it was rendered and executed on the server. Elements with event handlers are transformed to so called “active areas”, when user clicks one of these areas, a request is sent to Opera Mini server where the page is ressurected and corresponding javascript event fires. As soon as the Presto engine completes javascript execution (within the timeout), new page state is dumped to OBML and sent back to Opera Mini.</p>
+<p>Active area state is considered to be changed when one of the elements contained within this active area is clicked or form values are changed, neither scrolling nor other actions cause Opera Mini to request fresh page state from the server.</p>
+<p>The following events are fired on the server:</p>
+<ul>
+<li>window.onload – as soon as the server loads the page</li>
+<li>when a form element active area state is changed on the Opera Mini and Opera Mini sends the change to the server, corresponding form elements fire focus-&gt;click-&gt;change-&gt;blur events sequence (without any delay between them), waits for javascript handlers to complete execution and compile resulting DOM state back to OBML and sends to the Opera Mini client.</li>
+</ul>
+<p>Javascript execution time on the server is limited by 2.5 seconds for Opera Mini 4 servers and 5 seconds for Opera Mini 5 and newer. As soon as the limit is hit, execution is paused and resulting DOM is compiled to OBML and sent to the Opera Mini client. So for each fresh page state request from Opera Mini to Opera Mini servers javascript code on the page has up to 5 seconds to perform (this limitation applies to all javascript APIs: XHR, setTimeout/setInterval etc.).</p>
+<p>Opera Mini 5 and later support progressive rendering so that OBML can be delivered to Opera Mini client and rendered by chunks, when this process is occuring, download progress bar is animated and javascript is still being executed on the server. With this progressive rendering the 5 seconds javascript execution time limit still apply.</p>
+<h2 id="important">Important</h2>
+<ul>
+<li>window.open replaces current page with the new one. The old one is either discarded or hidden, there will be no communication between the opener and the new window.</li>
+<li>no client-side storage exist: localStorage, sessionStorage etc.</li>
+<li>no html5 client-side validation, new form elements (input type=email|range etc are not validated on the client)</li>
+<li>no webworkers support (otherwise Opera servers would be a perfect free bitcoin mining servers)</li>
+</ul>
+<h2 id="additional-functionality">Additional functionality</h2>
+<p>Opera Mini provides additional information about the phone it runs on. Opera Mini somehow sends this information to its servers and then the server sends some information to the requested URL via HTTP headers. Note that OBML is binary and not documented, so we don’t know what exactly is sent to its servers in Norway or elsewhere, we can only observe what these servers request from our servers. Also note that true privacy can not be ensured because all the communication is done through their servers and noone knows what statistics or data they collect.</p>
+<h2 id="headers">Headers</h2>
+<p>Opera Mini servers have the following headers when requesting data from target servers:</p>
+<p><strong>User-Agent</strong>: Opera/9.80 ($PLATFORM_NAME$; $PRODUCT_NAME$/$CLIENT_VERSION$/
+$SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$</p>
+<p><strong>X-OperaMini-Features</strong>: Basic comma-separated list of features supported on the device. </p>
+<ul>
+<li><p><strong>advanced</strong> - MIDP2-version (has more RAM)</p>
+</li>
+<li><p><strong>basic</strong> - MIDP1-version (usually installed on the cheapest phones)</p>
+</li>
+<li><p><strong>camera</strong> - shows support for photos file upload using HTML input type=file. Unfortunately there’s no available statistical data (or a list of models) on what phones support this and what don’t.</p>
+</li>
+<li><p><strong>file_system</strong> - file system support (i.e. user is able to download and/or upload files)</p>
+</li>
+<li><p><strong>folding</strong> - content folding feature status </p>
+</li>
+<li><p><strong>secure</strong> - connection between Opera Mini and Opera Mini servers is encrypted.</p>
+</li>
+<li><p><strong>touch</strong> - Opera Mini is running on a touch-operated device</p>
+</li>
+</ul>
+<p><strong>X-OperaMini-Phone</strong>: phone model and vendor, useful for the project audience statistics. </p>
+<p><strong>X-Forwarded-For</strong>: the list of proxy agents between the Opera Mini servers and your server, the first entry in the list shows the actual phone connection IP address. This is the only place where the actual phone’s IP address is shown.</p>
+<p>The same information is exposed to javascript via <strong>window.operamini.features</strong> object (e.g. <code>window.operamini.features.folding == 1</code> check will tell if content folding is enabled). So this list of features can both be checked in the server-side code and on the client-side in javascript.</p>
+<p>However, javascript <strong>window.operamini</strong> object has some additional properties:</p>
+<ul>
+<li><p><strong>window.operamini.page.maxAge</strong> - time that the client will keep the page cached (minutes)</p>
+</li>
+<li><p><strong>window.operamini.page.samePage</strong> - indicates if the pages is forced be left in <em>zoomed in</em> mode or it can be allowed to be switched to <em>zoomed out</em> mode</p>
+</li>
+<li><p><strong>window.operamini.sms</strong> - shows sms send dialogue as soon as <strong>window.operamini.sms.number</strong> and <strong>window.operamini.sms.body</strong> values are filled in. This method could be used to ask user to send some sms somewhere (even paid ones). The availability of sms sending feature can be checked by <strong>window.operamini.features.sms</strong></p>
+</li>
+<li><p><strong>window.operamini.remote</strong> - <em>X-Forwarded-For</em> analogue, first value in the list is the client IP address, other values are just a list of proxies between Opera Mini server and your server. Most of the times, the list only contains one value - phone IP address.</p>
+</li>
+</ul>
+<h2 id="hidden-settings">Hidden settings</h2>
+<p>There are some hidden settings available in Opera Mini client. To toggle any of them, type the corresponding name into the address bar and press “Go”.</p>
+<ul>
+<li><p><strong>config:</strong> - most of the additiional settings</p>
+</li>
+<li><p><strong>server:source</strong> - shows the html page source (in the exact form as it was sent to Opera Mini servers by your server for the requested URL). Unfortunately, the source is rendered in the ugly monospace font (so ugly that it’s obvious it’s included in Opera Mini package). As OBML format is binary and not documented, inspecting this source is the only view-source option a client-side developer has.</p>
+</li>
+<li><p><strong>opera:cache</strong> - shows the elements cached by the client</p>
+</li>
+<li><p><strong>about:</strong> - shows all versions and patent information.</p>
+</li>
+</ul>
+<h2 id="issues-and-quirks">Issues and quirks</h2>
+<p>Never use <code>:after</code> or <code>:before</code> selectors with <code>content</code> property on form elements such as inputs – input value can be erraneously overwritten by the <code>content</code> property value. I witnessed this on a live project - input value was overwritten right before form submit.</p>
+</div>
+    
+</body>
+</html>

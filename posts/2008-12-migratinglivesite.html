@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Migrating live website</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Migrating live website</h1>
+<div><p>I will describe the migration strategy I used to move the live website from the old server to the new one.</p>
+<p>Old website configuration:</p>
+<ul>
+<li>Windows 2000 Server</li>
+<li>MSSQL 2000</li>
+<li>ASP, ASP.NET1.1, PHP5</li>
+</ul>
+<p>It was a virtual hosting with all its drawbacks - shared MS SQLServer 2000, no RDP, no way to install ISAPI modules or even additional scripting languages (or change their configuration), no proper control over the email server, no ability to set custom backup scheme and so on and so on. It&#39;s obvious that when a website starts to be much more than just a set of a static informational pages but rather a full-blown complicated web-app, it needs better and more controlled infrastructure.</p>
+<p>So we wanted our server fully managed by professional hosters, we wanted it sitting behind a properly configured firewall in the reliable datacentre but still under our full control.</p>
+<p>That&#39;s why we decided to go for a dedicated server hosted at <a href="http://www.ukfast.net/">UKFAST</a> in their datacentre in Manchester. I&#39;ve been to this datacenter, and I can tell you - it was really exciting :)</p>
+<p>But due to the fact that our website is used 24 hours a day we had to find a way to move it along with the SSL certificate, mail server and the database causing as less interruption to the live site work as possible.</p>
+<h1 id="phase-0-preparing-the-infrastructure">Phase 0: preparing the infrastructure</h1>
+<p>During this stage we made sure that changing addresses of the resources web-apps used was just a matter of changing one-two lines in the global configuration files (e.g. SQL Server name, mail server name). We also configured all the services on the new dedicated hosting to have the same settings/user logins etc; uploaded web-apps scripts and checked that they worked correctly. </p>
+<p>To get everything tested properly, we temprorarily added a line to <strong>%systemroot%\system32\hosts</strong> files to make our computers think that the domain name was bound to the new dedicated server IP address. Found errors were fixed, required modules were installed and configured. As emails that our web-apps send were still being sent through the old virtual hosting mail server and all data was still stored on the old virtual hosting SQL Server, we didn&#39;t have to modify anything in the code of our web applications, we just made sure that there were no errors and the new server infrastructure was ready for the website migration.</p>
+<p>I estimated this phase to take 3 days, but it actually took 2 working days.</p>
+<h1 id="phase-1-preparing-for-moving-the-domain-name">Phase 1: preparing for moving the domain name</h1>
+<p>With our dedicated server package we&#39;ve got full control over two DNS servers, so the first step was to create four DNS records:</p>
+<ul>
+<li><p>A record for ourdomain.co.uk pointing to the new server IP address</p>
+</li>
+<li><p>A record for <a href="http://www.ourdomain.co.uk" rel="nofollow"><a href="http://www.ourdomain.co.uk">http://www.ourdomain.co.uk</a></a> pointing to the new server IP address</p>
+</li>
+<li><p>A record for mail.ourdomain.co.uk pointing to the old mail server IP address</p>
+</li>
+</ul>
+<p>Then DNS propagation period kicked in - during ~48 hours (TTL for <strong>.co.uk</strong> TLD is 172800 seconds) all the DNS servers in the world were copying the information.</p>
+<p>This phase took us an hour.</p>
+<h1 id="phase-2-preparing-to-move-the-data">Phase 2: preparing to move the data</h1>
+<p>As we had to wait at least 48 hours before we could change the <strong>NS records</strong> for our domain name, we took our time to prepare a migration plan for the SQL server data. As we had users committing data to our SQL server all the time, we decided that the only possible way to migrate the server was at night.</p>
+<p>The simplest way to move data from one SQL Server to another is to do a full backup on the old server and restore it on the new one. We measured that backup-upload-restore sequence took up to 2 hours, so we decided to down the website for two hours on a Friday night to move the SSL key and SQL Server data.</p>
+<p>This phase had been estimated as 4 hours task and it took exactly 4 :)</p>
+<h1 id="phase-3-moving-the-sql-server-data">Phase 3: moving the SQL Server data</h1>
+<p>On one Friday night we stopped clients from commiting data to the old SQL server and moved the data. Here&#39;s the procedure we followed:</p>
+<ol>
+<li><p>We created a custom error page with the &ldquo;maintenance&rdquo; message on the old server</p>
+</li>
+<li><p>changed SQL connection strings on the old server webapps configuration files to point to an inexistant SQL Server address, so if any client tried to write data to the SQL server, he was shown the custom error page</p>
+</li>
+<li><p>did a backup of the data, uploaded it to the new dedicated server and ran the import</p>
+</li>
+<li><p>changed SQL connection strings in the configuration files on the <em>new server</em> to point to the new SQL server</p>
+</li>
+<li><p>changed SQL connection strings in the configuration files on the <em>old server</em> to point to the new SQL server, so all the clients coming to the old site would still get their data saved to the new SQL Server</p>
+</li>
+<li><p>disable HTTPS on the old server</p>
+</li>
+<li><p>exported SSL key from the old server, uploaded and imported to the new one</p>
+</li>
+</ol>
+<p>This phase took us 3 hours. While the third task was in progress clients could&#39;t place an order or post a message on the forum. This third task took nearly two hours but as soon as it was finished and task 4 and 5 were done, normal work of the website was restored and clients could save data and it was committed to the new SQL Server, so actual downtime was ~2 hours due to SQL data transfer process.</p>
+<p>Also during this step we disabled HTTPS on the old webserver and moved the SSL key to the new one.</p>
+<h1 id="phase-4-final-steps">Phase 4: final steps</h1>
+<p>To summarise the state at the time when Phase 3 is completed:</p>
+<p>Old host has the following configuration:</p>
+<ul>
+<li><p>DNS servers have the following records:</p>
+<ul>
+<li><p>A record for ourdomain.co.uk pointing to the IP address of the old webserver</p>
+</li>
+<li><p>A record for <a href="http://www.ourdomain.co.uk" rel="nofollow"><a href="http://www.ourdomain.co.uk">http://www.ourdomain.co.uk</a></a> pointing to the IP address of the old webserver</p>
+</li>
+<li><p>A record for mail.ourdomain.co.uk pointing to the IP address of the old mail server</p>
+</li>
+<li><p>MX record for mail.ourdomain.co.uk</p>
+</li>
+</ul>
+</li>
+<li><p>SQL connection strings in the configuration files point to the new SQL server so data gets saved there</p>
+</li>
+<li><p>mail is sent through mail.ourdomain.co.uk which according to the DNS settings on all the DNS servers point to the IP address of the old mail server</p>
+</li>
+<li><p>https is disabled</p>
+</li>
+</ul>
+<p>And the new host:</p>
+<ul>
+<li><p>DNS servers have the following records:</p>
+<ul>
+<li><p>A record for ourdomain.co.uk pointing to the IP address of the new webserver</p>
+</li>
+<li><p>A record for <a href="http://www.ourdomain.co.uk" rel="nofollow"><a href="http://www.ourdomain.co.uk">http://www.ourdomain.co.uk</a></a> pointing to the IP address of the new webserver</p>
+</li>
+<li><p>A record for mail.ourdomain.co.uk pointing to the IP address of the old mail server</p>
+</li>
+<li><p>MX record for mail.ourdomain.co.uk</p>
+</li>
+</ul>
+</li>
+<li><p>SQL connection strings in the configuration files point to the new SQL server</p>
+</li>
+<li><p>mail is sent through mail.ourdomain.co.uk i.e. through the old mail server</p>
+</li>
+<li><p>https is enabled and uses the imported certificate for our domain name</p>
+</li>
+</ul>
+<p>On this step we changed NS records for our domain name to be the new DNS servers. During next 48 hours DNS changes were propagating throughout the world and we were noticing as clients were starting to visit our new webserver. Wherever a client came to, his data was stored in the new SQL Server and emails were sent through the old mail server; but only if he came to the new webserver, he could use HTTPS.</p>
+<p>Then we started Exchange integration process which I&#39;m going to cover in one of the next posts.</p>
+<h1 id="summary">Summary</h1>
+<p>We tried to have as less downtime as possible and we achieved the goal without any additional investments.</p>
+<p>During the process we had complete downtime (when clients couldn&#39;t put orders) only of 2 hours during the SQL migration and up to 48 hours when HTTPS was disabled on the old server (but for the UK clients DNS propagation took less than a day - we changed NS records on Friday night and had first clients coming to the new webserver on Saturday morning!).</p>
+<p>Actually we could migrate the website without any downtime at all and that would require two additional steps:</p>
+<ul>
+<li><p>Obtain a separate SSL license for Load Balancing, this would allow us not to have any HTTPS downtime - the certificate for our domain name would be installed on both servers. But this means that we would lose the money we paid for this license as soon as the migration process is finished.</p>
+</li>
+<li><p>Set MSSQL mirroring so that both SQL servers synchronise transparently, in which case we wouldn&#39;t have a downtime of two hours when clients could&#39;t place orders. This wasn&#39;t possible with our old virtual hosting.</p>
+</li>
+</ul>
+</div>
+    
+</body>
+</html>

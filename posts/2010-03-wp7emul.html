@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Windows Phone 7 emulator, updates and app blacklist</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Windows Phone 7 emulator, updates and app blacklist</h1>
+<div><p>Today twitter brought me a link to a very interesting <a href="http://sviluppomobile.blogspot.com">blog of Dan Ardelean</a> who’s exploring Windows Phone 7.</p>
+<p>As you know, Microsoft offers a free version of <a href="http://www.microsoft.com/express/Phone/">Visual Studio Express for Windows Phone 7</a> which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.</p>
+<p>So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit <a href="http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html">his blogpost</a> for more details <strike>and the link to the modified emulator image</strike> (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).</p>
+<p>Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):</p>
+<pre><code>&quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&quot; &quot;C:\dist\WM70Full.bin&quot;
+</code></pre><p>And you’ll get the emulator running the unlocked image!</p>
+<p><a href="http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg"><img title="wphone1" border="0" alt="wphone1"
+src="http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&#038;h=254" width="158" height="254"></a> <a href="http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg"><img title="wphone2" border="0" alt="wphone2" src="http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&#038;h=254" width="154" height="254"></a></p>
+<p>As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!</p>
+<p>But what’s more interesting is that:</p>
+<ul>
+<li><p>apps are going to be distributed only through WP Marketplace</p>
+</li>
+<li><p>there will be a Windows Update-like service on the Phone 7</p>
+</li>
+<li><p>there’s a blacklist registry hive for apps on the phone which Dan discovered</p>
+</li>
+</ul>
+<p>So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.</p>
+<p>At this moment the system has this configuration screen for updates:</p>
+<p><a href="http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg"><img title="wphone3" border="0" alt="wphone3" src="http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&#038;h=258" width="155" height="258"></a></p>
+<p>Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.</p>
+<p>Useful links:</p>
+<ul>
+<li><p><a href="http://sviluppomobile.blogspot.com">Dan Ardelean’s blog</a></p>
+</li>
+<li><p><a href="http://www.microsoft.com/express/Phone/">Visual Studio Express for Windows Phone 7 beta</a></p>
+</li>
+<li><p><a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;displaylang=en">Microsoft Expression Blend 4 beta</a></p>
+</li>
+<li><p><a href="http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)">Microsoft Expression Blend SDK preview for Windows Phone</a></p>
+</li>
+<li><p><a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;displaylang=en">Microsoft Expression Blend Add-in preview for Windows Phone</a></p>
+</li>
+</ul>
+</div>
+    
+</body>
+</html>

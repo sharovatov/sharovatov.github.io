@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Javascript Events</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Javascript Events</h1>
+<div><p>Пожалуй, события (а точнее, обработчики событий) в javascript играют чуть ли не самую важную роль - именно благодаря обработке событий возможно интерактивное общение веб-приложения с пользователем. Изначально обработчики событий начал поддерживать браузер Netscape 2, следом IE3, и затем уже все остальные браузеры.
+В этом посте я начну рассказывать про события в js, в течение месяца постараюсь &quot;добить&quot; тему событий и приступить к более интересным вещам.</p>
+<h3 id="-">Способы установки обработчиков</h3>
+<p>Существуют четыре варианта &quot;навешивания&quot; обработчиков на определенное событие:</p>
+<p><ol></p>
+<p><li id="pseudoprotocol"><strong>псевдопротокол <var>javascript:</var></strong>. Псевдопротокол <var>javascript:</var> по-настоящему бывает необходим очень редко, но, к сожалению, используется повсеместно. Делают это так:</p>
+<pre><code>&lt;a href=&quot;javascript:alert(&#39;got click!&#39;)&quot;&gt;link&lt;/a&gt;
+</code></pre><p>Изначально этот протокол был создан для тестов - и до сих пор удобно проверять что-то по-быстрому, вписав в адресную строку выражение (например, в IE я раньше проверял hasLayout таким образом - писал в адресную строку <code>javascript:alert(someElement.currentStyle.hasLayout)</code>). Этот протокол никогда не был предназначен для навешивания обработчиков событий. Но люди поняли, что при нажатии на ссылку происходит выполнение содержимого её атрибута <var>href</var> (вспомните, что происходит при нажатии на ссылку, имеющую <var>href=&quot;mailto:somemail@serv.com&quot;</var>), и стали использовать псевдопротокол <var>javascript:</var> для <strong>замены</strong> основного предназначения ссылки (исполнения роли идентификатора связанного документа посредством универсального локатора ресурса (URL)).</p>
+<p>Стоит отметить, что <a href="http://www.iana.org/assignments/uri-schemes.html">ни</a> <a href="http://www.gbiv.com/protocols/uri/rfc/rfc3986.html">в</a> <a href="http://www.ietf.org/rfc/rfc2718.txt">одной</a> <a href="http://www.ietf.org/rfc/rfc2396.txt">спецификации</a> не сказано про наличие протокола <var>javascript:</var>, потому я и называю его &quot;псевдопротоколом&quot; (в то же время <var>mailto:</var> <a href="ftp://ds.internic.net/rfc/rfc1738.txt">как раз</a> <a href="http://www.w3.org/Addressing/URL/url-spec.html">описан</a>).</p>
+<p>Более того, WCAG <a href="http://www.w3.org/WAI/GL/WCAG20/tests/test181.html">говорит</a> о том, что псевдопротокол <var>javascript:</var> использовать вообще нельзя, и в этом случае я с ними полностью согласен.</p>
+<p>Однако авторы браузеров из соображений обратной совместимости продолжают поддерживать эту пакость, а колхозные веб-девелоперы продолжают пользоваться этой дрянью. Основное неудобство и контрпродуктивность такого подхода в том, что теряется сам смысл ссылки. Ведь со ссылкой можно сделать множество различных вещей - добавить в закладки, открыть в новом окне, распечатать содержимое, сохранить содержимое. Весь этот функционал теряется при использовании этого псевдопротокола. Вообще же этот способ не является полноценным методом установки обработчика события, потому что этот метод может быть примёнен только для элементов, имеющих атрибуты src/href.</p>
+<p>При использовании ссылок с таким обработчиком необходимо помнить, что функция ни в коем случае ничего не должна возвращать, иначе произойдёт &quot;переход&quot; на страницу, содержимое которой будет состоять из возвращённого значения.</li></p>
+<p><li id="inlinemethod"><strong>inline-метод</strong>. Запись атрибута on<strong>event</strong> html-элемента. Пример: </p>
+<pre><code>&lt;a href=&quot;someurl.html&quot; onclick=&quot;alert(&#39;got click!&#39;)&quot;&gt;link&lt;/a&gt;
+</code></pre><p>Этот метод появился самым первым, и поддерживается <strong>абсолютно везде</strong>. Недостаток его заключается в том, что логика смешивается с содержимым. (если вдруг придётся изменить обработчики, придётся лезть в код (х)html). Применять же его можно, как мне кажется, лишь в самых простых сайтах-визитках, где весь js-функционал заключается, например, в открытии/скрытии какой-нибудь карты проезда. Ссылка сохраняет свой основной функционал, её можно положить в закладки и т.д. Если же Вы не можете держать в памяти все установленные обработчики в проекте, то этот способ неприемлим.</li></p>
+<p><li id="elementattribute"><strong>Установка element.onclick в js</strong>. Данный метод сообразен предыдущему за тем исключением, что установка обработчика происходит не непосредственно в (x)html, а в скрипте, и это удобнее. Пример: </p>
+<pre><code>где-то в html: 
+&lt;a href=&quot;someurl&quot; id=&quot;myhref&quot;&gt;link&lt;/a&gt;
+
+где-то в javascript:
+var handler = function(){ alert(&#39;clicked&#39;); };
+document.getElementById(&#39;myhref&#39;).onclick = handler;
+</code></pre><p><li id="addeventlistener"><strong><a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-EventTarget-addEventListener">addEventListener</a>/<a href="http://msdn.microsoft.com/library/default.asp?url=/workshop/author/dhtml/reference/methods/attachevent.asp">attachEvent</a></strong>.</p>
+<p><var>addEventListener</var> - специфицированный в DOM Level2 метод, <var>attachEvent</var> же встречается только в IE.</p>
+<p>Оба этих метода предоставляют наиболее многофункциональную реализацию добавления обработчика события. Пример:</p>
+<pre><code>var handler = function(e){ alert(&#39;clicked&#39;); };
+var elem = document.getElementById(&#39;note&#39;);
+</code></pre><p>addEventListener:</p>
+<pre><code>elem.addEventListener(&#39;click&#39;, handler, false);
+</code></pre><p>attachEvent:</p>
+<pre><code>elem.attachEvent(&#39;onclick&#39;, handler);
+</code></pre><p></li></ol>
+Также существуют ещё два метода установки обработчиков событий:</p>
+<ul>
+<li><p><strong>в IE4 и старше: </strong></p>
+<p>  <p id="myP">text</p></p>
+  <script for="myP" event="onclick">
+      //code
+  </script>
+</li>
+<li><p><strong>Opera9, Firefox1.5: </strong><a href="http://www.w3.org/TR/xml-events/">XML events</a></p>
+</li>
+</ul>
+<p>Но мы эти методы рассматривать не будем, т.к. до поддержки XML events самому популярному браузеру (IE) гораздо дальше, чем до поддержки событийной модели w3c, а <var>script for</var> нарушает принцип отделения логики от содержания (и работает только в IE).</p>
+<p>Как Вы успели заметить, первая пара методов отличается от второй коренным образом - обработчики, определяемые в (x)html-документе, представляют собой последовательность javascript-команд, обработчик же, установленный в самом скрипте, обязан быть объектом типа &quot;функция&quot;.</p>
+<p>Также при использовании второй пары способов возникает одна проблема - если скрипт расположен в документе <strong>до</strong> элемента, событие которого будет обрабатывать какая-то функция из скрипта, велика вероятность того, что браузер попытается &quot;навесить&quot; обработчик на ещё несуществующий элемент. Такое может произойти, если браузер <strong>уже</strong> получил содержимое скрипта и распарсил его, но ещё не получил сам элемент в (x)html-документе. Это далеко не такая редкая ситуация, как может показаться - скрипты, вынесенные во внешние файлы, часто кэшируются, и несколько документов используют одни и те же скрипты, потому браузер часто берёт файлы скриптов из кэша, соответственно, сразу же исполняя их. Впрочем, скрипты, описанные внутри элемента <var>head</var> (x)html-документа, также будут исполнены сразу же, не дожидаясь полной загрузки (x)html-документа в память. Проблема эта решается просто - в структуре DOM, предоставляемой каждым браузером скриптам, есть объект window, имеющий кучу свойств, методов и событий, и одно из таких событий - <var>window.onload</var>. Это событие вызывается браузером после получения и парсинга всего (х)html-документа. Соответственно, в js наиболее безопасно работать с документом и его элементами
+<strong>после</strong> появления этого события.</p>
+<p>Пример:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;test&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        **window.onload = function(e) {**
+            //it&#39;s safe inside
+            var handler = function(e){ alert(&#39;clicked on paragraph&#39;); };
+            document.all[&#39;text&#39;].onclick = handler;
+        **};**
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;header&lt;/h1&gt;
+    &lt;p id=&quot;text&quot;&gt;text&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Так как пример будет работать во всех браузерах в quirks mode, я имею полное право использовать document.all (к тому же, так ещё и IE4 будет поддержан). Цель примера исключительно иллюстрационная, потому кому нужен standarts compliancy mode, переделайте <var>document.all[&#39;text&#39;]</var> на <var>document.getElementById(&#39;text&#39;)</var>. </p>
+<p>Итак, мы выяснили, <em>когда</em> добавлять обработчики, договорились не использовать первые два метода (inline-описание и псевдопротокол javascript:). Теперь я подробнее остановлюсь на последних двух методах.</p>
+<p>Метод установки element.onclick хорош тем, что прост. Основной же его минус заключается
+в том, что он не позволяет <em>добавить обработчик</em>, он даёт лишь возможность
+<em>заменить существующий</em> (если таковой был определён). Получается, что с помощью установки свойства onclick невозможно использовать несколько обработчиков на одном элементе, что иногда бывает нужно. <small>Вообще, конечно, добавить можно и через onclick, только геморрой.</small> Методы же addEventListener и attachEvent позволяют именно добавлять обработчики (для них существуют и соответствующие методы удаления обработчиков - removeEventListener и detachEvent).</p>
+<p>При установке какому-то событию определенного элемента одного и того же обработчика, дупликат не будет установлен.</p>
+<p>В следующем примере обработчик divHandler будет вызван только один раз:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;test&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        window.onload = function(e) {
+            var handler = function(e) { alert(&#39;clicked on div&#39;); };
+            document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, handler, false);
+            document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, handler, false);
+        };
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;header&lt;/h1&gt;
+    &lt;div id=&quot;text&quot;&gt;text&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Когда на одном элементе &quot;висит&quot; несколько обработчиков, они выполняются в том порядке,
+в каком были установлены - стэк, хранящий обработчики событий, имеет тип FIFO.</p>
+<pre><code>var elem = document.getElementById(&#39;note&#39;);
+var handler1 = function(e){ alert(&#39;handler1&#39;); };
+var handler2 = function(e){ alert(&#39;handler2&#39;); };
+var handler3 = function(e){ alert(&#39;handler3&#39;); };
+note.addEventListener(&#39;click&#39;, handler1, false);
+//note.attachEvent(&#39;onclick&#39;, handler1);
+note.addEventListener(&#39;click&#39;, handler2, false);
+//note.attachEvent(&#39;onclick&#39;, handler2);
+note.addEventListener(&#39;click&#39;, handler3, false);
+//note.attachEvent(&#39;onclick&#39;, handler3);
+</code></pre><p>В этом примере выполнится сначала <var>handler1</var>, затем <var>handler2</var>, потом <var>handler3</var>.</p>
+<p>Несмотря на то, что в msdn сказано, что обработчики, буде таких несколько на событии объекта, выполняются в рандомном порядке, опыт говорит, что они выполняются именно в FIFO-порядке.</p>
+<h4 id="-">Резюмируем:</h4>
+<ol>
+<li><p>Обработчики могут устанавливаться четырьмя основными способами: <a href="#pseudoprotocol">используя псевдопротокол <var>javascript:</var></a>, <a href="#inlinemethod">c помощью установки атрибута элемента в (x)html</a>, <a href="#elementattribute">устанавливая свойство объекта в javascript</a>, <a href="#pseudoprotocol">используя специальные методы (<var>attachEvent</var> для IE и <var>addEventListener</var> для реализующих стандарт DOM2 Events браузеров)</a>.</p>
+</li>
+<li><p>Методы использования псевдопротокола <var>javascript:</var> и установки атрибута элемента малоприменимы в реальных условиях.</p>
+</li>
+<li><p>Использование специальных методов (<var>attachEvent</var>/<var>detachEvent</var> и <var>addEventListener</var>/<var>removeEventListener</var>) позволяют, в отличие от метода установки свойства объекта, <em>добавлять и удалять</em> обработчики событий (а не устанавливать единственный и отменять вовсе). Метод же установки свойства объекта наиболее прост в использовании, и там, где точно хватит одного обработчика события, будет более удобен.</p>
+</li>
+<li><p>Если у элемента несколько обработчиков одного события, при возникновении события они будут запущены в том же порядке, в каком были добавлены.</p>
+</li>
+<li><p>Регистрация одного и того же обработчика события дважды невозможна, обработчики должны быть уникальны.</p>
+</li>
+</ol>
+<h3 id="-">Порядок запуска обработчиков события</h3>
+<p>Так как (x)html-документ имеет иерархическую древовидную структуру, разработчики браузеров посчитали, что &quot;пропускание события&quot; по всей иерархии документа даст б`ольшую свободу веб-разработчикам в реализации интересных обработчиков.</p>
+<p>Итак, предположим, у нас есть следующий код:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;test&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+window.onload = function(e) {
+    var pHandler = function(e){ alert(&#39;clicked on paragraph&#39;); };
+    var bodyHandler = function(e){ alert(&#39;clicked on body&#39;);}
+    var docHandler = function(e){ alert(&#39;clicked on document&#39;); };
+    document.onclick = docHandler;
+    document.body.onclick = bodyHandler;
+    document.all[&#39;text&#39;].onclick = pHandler;
+};
+
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;header&lt;/h1&gt;
+&lt;p id=&quot;text&quot;&gt;text&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Если нажать на <var>p</var>, запустится сначала обработчик <var>pHandler</var>, затем <var>bodyHandler</var> и уже потом <var>docHandler</var>.</p>
+<p><img src="http://photos1.blogger.com/blogger/2964/3399/320/bubbling.gif" alt="bubbling event model"> Событийная модель, в которой браузер выстраивает очередь обработчиков от целевого элемента, инициировавшего событие до корневого элемента <var>document</var>, называется <dfn>bubbling-моделью</dfn> (bubble, англ., - пузырь).</p>
+<p>Событие как бы &quot;всплывает&quot; по иерархии документа от элемента, вызвавшего его и до корня. При прохождении каждого родительского элемента браузер проверяет, не установлен ли у этого родителя обработчик события такого же типа, и если установлен, вызывает его. </p>
+<p>Эта модель реализована в IE.</p>
+<p>Если запустить этот пример в браузере Netscape4(с небольшими изменениями), обработчики будут выполнены в обратном порядке - <var>docHandler</var>&rarr;<var>bodyHandler</var>&rarr;<var>divHandler</var>.</p>
+<p><img src="http://photos1.blogger.com/blogger/2964/3399/320/capturing.gif" alt="capturing event model"> Событийная модель, в которой браузер выстравивает очередь обработчиков от корневого элемента <var>document</var> до целевого элемента (инициировавшего событие), называется <dfn>capturing-моделью</dfn> (capturing, англ., - захват).
+При прохождении каждого элемента вниз по иерархии браузер проверяет наличие обработчика события такого же типа, и если обработчик есть, вызывает его.</p>
+<p>Эта модель появилась в браузере Netscape3 и со времен Netscape4 в диком виде не наблюдается.</p>
+<p>Вообще же Netscape4 - сущий баг, да и процент его на рынке исчезающе мал, потому на нём внимание заострять не будем.</p>
+<p>Позже, когда проблемы с разными событийными моделями всем надоели, дядьки из W3C решили стандартизировать событийную модель. Назвали они ее нехитро - <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">DOM Events</a>.</p>
+<p>Они попытались объединить обе модели. К сожалению, этой спецификации следуют только браузеры Firefox1.5 и Opera9, но в свете проснувшегося интереса IETeam к следованию стандартов, к 8-й версии IE также можно ожидать поддержки этой спецификации. И потому я попытаюсь рассказать о ней.</p>
+<p>Как я уже сказал, событийная модель w3c объединяет capturing и bubbling модели с небольшими изменениями. В стандарте w3c для установки обработчика события используется метод <var>addEventListener.</var> Он описан в интерфейсе <var>EventTarget</var>, который авторы браузеров обязаны реализовать для любого элемента.</p>
+<pre><code>interface EventTarget {
+    void addEventListener(in DOMString type, in EventListener listener, in boolean useCapture);
+    void removeEventListener(in DOMString type, in EventListener listener, in boolean useCapture);
+    boolean dispatchEvent(in Event evt) raises(EventException);
+};
+</code></pre><p>Для нас сейчас существенно то, что третий параметр метода <var>addEventListener</var> (<var>useCapture</var>) - флаг, говорящий браузеру, на какой стадии прохождения события должен быть запущен добавляемый обработчик.</p>
+<p>Реализующий w3c-модель браузер при появлении события сначала проходит по иерархии документа сверху вниз, как в <var>capturing-модели</var>, затем, когда добирается до целевого элемента, инициировавшего событие, исполняет его обработчик события и совершает путь снизу вверх по иерархии документа, как в <var>bubbling-модели</var>. В w3c-модели при обработке события выделяют capturing- и bubbling-<strong>фазы</strong> прохождения события.</p>
+<p>Таким образом можно выстраивать очень гибкие системы, особенно если учесть тот факт, что на любой фазе можно остановить дальнейшее &quot;продвижение&quot; прохождения события.</p>
+<p>Таким образом, любой элемент документа в w3c-модели (в отличие от IE bubbling model и NN4 capturing model) имеет два стэка для хранения обработчиков событий - для хранения обработчиков для capturing-стадии и для хранения обработчиков, назначенных на исполнение в bubbling-стадии.</p>
+<p>Возьмём для примера следующий код:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;test&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+window.onload = function(e) {
+    var doc1Capturing = function(e) { alert(&#39;document: first capturing handler&#39;); };
+    var doc2Capturing = function(e) { alert(&#39;document: second capturing handler&#39;); };
+    var doc3Capturing = function(e) { alert(&#39;document: third capturing handler&#39;); };
+
+    var doc1Bubbling = function(e) { alert(&#39;document: first bubbling handler&#39;); };
+    var doc2Bubbling = function(e) { alert(&#39;document: second bubbling handler&#39;); };
+    var doc3Bubbling = function(e) { alert(&#39;document: third bubbling handler&#39;); };
+
+    var body1Capturing = function(e) { alert(&#39;body: first capturing handler &#39;); };
+    var body2Capturing = function(e) { alert(&#39;body: second capturing handler&#39;); };
+    var body3Capturing = function(e) { alert(&#39;body: third capturing handler &#39;); };
+
+    var body1Bubbling = function(e) { alert(&#39;body: first bubbling handler &#39;); };
+    var body2Bubbling = function(e) { alert(&#39;body: second bubbling handler&#39;); };
+    var body3Bubbling = function(e) { alert(&#39;body: third bubbling handler &#39;); };
+
+    var div1Capturing = function(e) { alert(&#39;div: first capturing handler &#39;); };
+    var div2Capturing = function(e) { alert(&#39;div: second capturing handler&#39;); };
+    var div3Capturing = function(e) { alert(&#39;div: third capturing handler &#39;); };
+
+    var div1Bubbling = function(e) { alert(&#39;div: first bubbling handler &#39;); };
+    var div2Bubbling = function(e) { alert(&#39;div: second bubbling handler&#39;); };
+    var div3Bubbling = function(e) { alert(&#39;div: third bubbling handler &#39;); };
+
+    document.addEventListener(&#39;click&#39;, doc1Capturing, true);
+    document.addEventListener(&#39;click&#39;, doc2Capturing, true);
+    document.addEventListener(&#39;click&#39;, doc3Capturing, true);
+
+    document.addEventListener(&#39;click&#39;, doc1Bubbling, false);
+    document.addEventListener(&#39;click&#39;, doc2Bubbling, false);
+    document.addEventListener(&#39;click&#39;, doc3Bubbling, false);
+
+    document.body.addEventListener(&#39;click&#39;, body1Capturing, true);
+    document.body.addEventListener(&#39;click&#39;, body2Capturing, true);
+    document.body.addEventListener(&#39;click&#39;, body3Capturing, true);
+
+    document.body.addEventListener(&#39;click&#39;, body1Bubbling, false);
+    document.body.addEventListener(&#39;click&#39;, body2Bubbling, false);
+    document.body.addEventListener(&#39;click&#39;, body3Bubbling, false);
+
+    document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, div1Capturing, true);
+    document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, div2Capturing, true);
+    document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, div3Capturing, true);
+
+    document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, div1Bubbling, false);
+    document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, div2Bubbling, false);
+    document.all[&#39;text&#39;].addEventListener(&#39;click&#39;, div3Bubbling, false);
+};
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;header&lt;/h1&gt;
+&lt;div id=&quot;text&quot;&gt;text&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Если нажать в приведённом примере на <var>div</var>, порядок выполения обработчиков должен быть следующим:</p>
+<p><img src="http://photos1.blogger.com/blogger/2964/3399/320/w3c.gif" alt=""></p>
+<p>Я не забыл указать в capturing-фазе обработчики события, установленные на элемент <var>div</var> на исполнение в capturing-фазе (<var>div1Capturing</var>, <var>div2Capturing</var>, <var>div3Capturing</var>), они не должны быть запущены. Спецификация указывает, что обработчики событий, назначенные на capturing-фазу, должны выполняться только для родителей целевого элемента. В данном случае только Opera следует стандарту.</p>
+<p><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=235441">Этот баг в FF</a> открыт уже 2 с половиной года, когда же будет решение, неизвестно.</p>
+<p>При появлении события в соответствии с w3c-моделью браузер должен:</p>
+<ul>
+<li><p>подготовить маршрут для обхода дерева от корневого элемента до целевого (приготовление к capturing-фазе). <small>Этот пункт важен, так как в процессе прохождения фазы <em>порядок</em> исполнения обработчиков нельзя будет изменить даже посредством удаления элементов, на которые они установлены, можно будет лишь остановить процесс прохождения фазы вообще.</small></p>
+</li>
+<li><p>запустить обхода дерева в capturing-фазе: для каждого последующего элемента в иерархии проверить наличие обработчиков события данного типа, в случае наличия таковых, запустить. Как только событие приходит к целевому элементу, исполнение capturing-фазы прекратить.</p>
+</li>
+<li><p>подготовить маршрут для обхода дерева от целевого элемента до корневого (приготовления для bubbling-фазы). <small>Этот пункт важен, так как в процессе прохождения фазы <em>порядок</em> исполнения обработчиков нельзя будет изменить даже посредством удаления элементов, на которые они установлены, можно будет лишь остановить процесс прохождения фазы вообще.</small></p>
+</li>
+<li><p>запустить обхода дерева в bubbling-фазе: для каждого последующего элемента в иерархии проверить наличие обработчиков события данного типа, в случае наличия таковых, запустить. После исполнения обработчиков события данного типа, назначенных на корневой элемент (<var>document</var>) на исполнение в bubbling-фазе закончить процесс прохождения фазы.</p>
+</li>
+</ul>
+<p>Фактически получается, что изменить порядок выполнения обработчиков можно только для обработчиков, назначенных на исполнение в bubbling-фазе и только из обработчиков, выполняющихся в capturing-фазе.</p>
+<h4 id="-">Резюмируем:</h4>
+<ol>
+<li><p><dfn>bubbling-модель</dfn> подразумевает прохождение дерева (x)html-документа снизу вверх, от целевого элемента, возбудившего события, до корневого элемента <var>document</var>. При прохождении каждого элемента проверяется, не зарегистрировано ли у него обработчиков события такого же типа, если да, запуск этих обработчиков.</p>
+</li>
+<li><p><dfn>capturing-модель</dfn> подразумевает прохождение дерева (x)html-документа сверху вниз, от корневого элемента <var>document</var> до целевого элемента, возбудившего событие. При прохождении каждого элемента проверяется, не зарегистрировано ли у него обработчиков события такого же типа, если да, запуск этих обработчиков.</p>
+</li>
+<li><p><dfn>W3C DOM2 Events-модель</dfn> сочетает в себе обе модели. При возбуждении события браузер обходит документ сначала сверху вниз по иерархии (<dfn>capturing-фаза</dfn>), при наличии выполняя обработчики события данного типа у каждого из предков целевого элемента; затем переходит к <dfn>bubbling-фазе</dfn>, при которой сначала запускаются обработчики целевого элемента, назначенные на <dfn>bubbling-фазу</dfn>, затем браузер идёт вверх по иерархии документа, запуская обработчики события данного типа (в случае наличия) у каждого следующего элемента в иерархии, достигая корневого элемента <var>document</var>, выполняя его обработчики события, назначенные на <dfn>bubbling-фазу</dfn>. Ещё раз акцентирую внимание: обработчики, назначенные на <dfn>capturing-фазу</dfn>, не должны быть запущены на целевом элементе. Я думаю, баг в FF всё-таки исправят и этот браузер тоже начнет следовать стандарту.</p>
+</li>
+</ol>
+</div>
+    
+</body>
+</html>

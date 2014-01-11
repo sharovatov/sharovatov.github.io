@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP loadHTMLFile and a html file without DOCTYPE</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>PHP loadHTMLFile and a html file without DOCTYPE</h1>
+<div><p>Just noticed that when you parse an html file with <code>DOMDocument</code>’s method <code>loadHTMLFile</code> and <strong>there&#39;s no DOCTYPE defined in your html, PHP will silently load an empty DOM document</strong>.</p>
+<p>Just try saving the following in a test.html file:</p>
+<pre><code>&lt;html&gt;&lt;body&gt;&lt;div id=&quot;toc&quot;&gt;wtf&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
+</code></pre><p>And then run the following php code:</p>
+<pre><code>$doc = new DOMDocument();
+if ($doc-&gt;loadHTMLFile(&#39;test.html&#39;)) {
+    echo &#39;loadHTMLFile was successfully executed&lt;br&gt;&#39;;
+    $toc = $doc-&gt;getElementById(&#39;toc&#39;);
+    echo &#39;now trying to var_dump the $toc:&lt;br&gt;&#39;;
+    var_dump($toc);
+}
+</code></pre><p>You’ll get NULL as a result of the <code>var_dump</code> call. As if <code>getElementById</code> couldn’t
+find the node.</p>
+<p>Interesting?</p>
+<p>Citing <a href="http://ru.php.net/manual/en/domdocument.loadhtmlfile.php">php.net</a>,</p>
+<blockquote>
+<p>The function parses the HTML document in the file named filename. <strong>Unlike loading XML, HTML does not have to be well-formed to load</strong>.</p>
+</blockquote>
+<p>Does this imply that DOCTYPE may be omitted? I think so. But then the abovementioned code wouldn’t show NULL as a dump of $toc. Unfortunately, experiment shows that DOCTYPE is required, even a HTML5-ish <code>&lt;!DOCTYPE html&gt;</code> will do the job.</p>
+<p>But why on earth doesn’t <code>loadHTMLFile</code> throw a warning or at least return false as it should according to the documentation? Nobody knows.</p>
+<p><strong>So if you notice that your DOM-based php script acts in a weird way, check if you have a DOCTYPE defined on the HTML document you’re trying to parse.</strong></p>
+<p>Hope this saves someone some time.</p>
+<p>P.S. More bugs to come — if you have a HTML file saved in utf-8 codepage with <a href="http://en.wikipedia.org/wiki/Byte_order_mark">BOM</a>, <code>loadHTMLFile</code> will throw the
+following E_WARNING:</p>
+<pre><code>**Warning**: DOMDocument::loadHTMLFile() [function.DOMDocument-loadHTMLFile]:
+Misplaced DOCTYPE declaration in test-BOM.html, line: 1 in /home/test/www/test-DOMDocument.php on line 3
+</code></pre><p>Remove the BOM and everything works fine. Apparently, <code>loadHTMLFile</code> doesn’t know that BOM usually indicates that the document is saved in UTF8/16/32. Weird.</p>
+<p>P.P.S. Another issue. Try pointing <code>loadHTMLFile</code> to an HTML-document saved in UTF-8 with some international characters (Russian words, in my case). Then get a node with international characters and do <code>echo $node-&gt;nodeValue</code>. Are you getting corrupted symbols? I was. The whole project is in UTF-8, every single file is saved in UTF-8.</p>
+<p>I added</p>
+<pre><code>&lt;meta http-equiv=&quot;Content-type&quot; content=&quot;text/html;charset=utf-8&quot;/&gt;
+</code></pre><p>to the head section — characters started showing in a correct encoding, but the following
+WARNING appeared:</p>
+<pre><code>**Warning**: DOMDocument::loadHTMLFile() [function.DOMDocument-loadHTMLFile]: Input is
+not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line: 65 in
+/home/test/www/test-DOMDocument.php on line 29
+</code></pre><p>And the only way to properly get rid of this warning is to add</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+</code></pre><p>to the first line of your html document and it finally worked without any warnings or issues. Awesome. XML header must be used for <code>load**HTML**File</code> to run properly. Way too buggy to use.</p>
+</div>
+    
+</body>
+</html>

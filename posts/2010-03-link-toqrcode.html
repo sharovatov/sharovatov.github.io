@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>link-to-QRCode IE8 accelerator</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>link-to-QRCode IE8 accelerator</h1>
+<div><p>I have Nokia N78 phone and use it a lot for surfing web (with beautiful <a href="http://www.opera.com/mobile/">Opera Mobile 10</a>), reading RSS (with internal webkit-based browser), tweeting (with <a href="http://mobileways.de/products/gravity/gravity/">awesome Gravity client</a>), reading CHMs (with <a href="http://www.hugematrix.com/modules/news/article.php?storyid=8">great mobiCHM tool</a>) or using <a href="http://www.skype.com/intl/en/download/skype/symbian/">Skype</a>, or doing many other tasks.</p>
+<p>But mostly I use the phone to read something on the internet when I’m on the way to some place (as it takes at least an hour to get somewhere in Moscow using public transport). And usually when I’m browsing web on a PC and find something worthy to save to mobile, I type its URL  on the phone and save it to bookmarks. </p>
+<p>Which, even with <a href="http://bit.ly/">bit.ly</a> or any other url-shortening service, is a kerfuffle, and T9 doesn’t really help here.</p>
+<p>So I was trying to find an easier way to get URLs transferred from my PC onto the mobile. Opera 10 Mobile comes with <a href="http://link.opera.com/">Opera Link</a> bookmarks synchronisation service, but I don’t surf internet in Opera on a PC. There’re some social bookmarking sites, but I’m not adding every link that I want to read on mobile to my bookmarks, be it a web-service or browser bookmarks.</p>
+<p>And here comes <a href="http://en.wikipedia.org/wiki/QR_Code">QRCode</a> scanning to the rescue. I knew that Nokia <a href="http://mobilecodes.nokia.com/scan.htm">provided a nice free easy-to-use QRCode scanner</a> for their smartphones, and I gave it a go. Downloaded, installed, tried with some QRCodes I had, everything was fine, scanning and recognition speed was really high – I just pointed the phone camera onto my computer’s screen and the encoded text was momentarily recognised. I decided to try encoding links in QRCodes using Nokia service, and it worked fine as well – the scanner made them active so I could either copy them to use in Opera Mobile or open with default web-browser (handy if it’s a link to RSS feed).</p>
+<p>Of course, encoding each link manually and then scanning resulting QRCode is taking much more time than just typing the link in the phone, so the idea of making the browser show QRCode for any link made more sense to me.</p>
+<p>The easiest way to integrate some web-service to IE8 is its beautiful <a href="http://msdn.microsoft.com/en-us/library/cc289775(VS.85).aspx">Accelerators platform</a>. I did 10 lines of PHP code which shortens any URL with bit.ly service, and then echoes the IMG tag pointing to <a href="http://mobilecodes.nokia.com/create.jsp">Nokia QR Code creation service</a> URL. Here’s the code:</p>
+<pre><code>&lt;?php
+require_once(&#39;bitly.php&#39;);
+$sUrl = make_bitly_url($_GET[&#39;url&#39;]); //shorten the original URL first
+echo &#39;&lt;img src=&quot;http://mobilecodes.nokia.com/qr?DATA=&#39;.$sUrl.&#39;&amp;amp;MODULE_SIZE=4&amp;amp;name=&amp;amp;MARGIN=2&amp;amp;ENCODING=BYTE&amp;amp;type=link&amp;amp;MODE=TEXT&amp;amp;a=view&quot;&gt;&#39;;
+?&gt;
+</code></pre><p>Bit.ly is used to make QRCode creation faster and easier as only small chunk of data is encoded.</p>
+<p>Then I created a very simple XML file which instructs IE8 what to do with the link:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!-- author: Vitaly Sharovatov (http://sharovatov.ru) --&gt;
+&lt;openServiceDescription xmlns=&quot;http://www.microsoft.com/schemas/openservicedescription/1.0&quot;&gt;
+    &lt;homepageUrl&gt;http://sharovatov.ru&lt;/homepageUrl&gt;
+    &lt;display&gt;
+        &lt;name&gt;link QRCode&lt;/name&gt;
+        &lt;icon&gt;http://sharovatov.ru/qrcode/favicon.ico&lt;/icon&gt;
+    &lt;/display&gt;
+    &lt;description&gt;Get the QRCode for selected link&lt;/description&gt;
+    &lt;activity category=&quot;mobile&quot;&gt;
+        &lt;activityAction context=&quot;link&quot;&gt;
+            &lt;preview action=&quot;http://sharovatov.ru/qrcode/createCode.php?url={link}&quot; /&gt;
+            &lt;execute method=&quot;get&quot; action=&quot;http://sharovatov.ru/qrcode/createCode.php?url={link}&quot; /&gt;
+        &lt;/activityAction&gt;
+    &lt;/activity&gt;
+&lt;/openServiceDescription&gt;
+</code></pre><p>And then just uploaded the php script and my accelerator to my site. Dead easy, 10 minutes job.</p>
+<p>As wordpress.com doesn’t allow javascript onclick handlers on the links (and accelerator gets added to IE by <code>window.external.addService</code> call), I had to put the install page on my site. Please visit <a href="http://sharovatov.ru/current.html"><a href="http://sharovatov.ru/current.html">http://sharovatov.ru/current.html</a></a> for this and few other IE8 accelerators. To get this accelerator installed, just press on “Install now” link in its description.</p>
+<p>Now if you right-click on any link, go to Accelerators, and just hover “link to QRCode” accelerator you’ll get the window with QRCode for the current link:</p>
+<p><a href="http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator1.gif" target="_blank"><img title="qrcode-accelerator" border="0" alt="qrcode-accelerator"
+src="http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1.gif?w=256&#038;h=239" width="256" height="239"></a></p>
+<p>Then you just run Barcode app on the mobile, get the QRCode scanned and then can do anything with the link – copy it to the clipboard, open right now in the default browser. Seems to be quite handy.</p>
+<p>In order to get this accelerator in the main right-click menu, you need to go to Page &rarr; All Accelerators &rarr; Manage accelerators and in the window that appears select “link QRCode” accelerator and press on “Set as default” button.</p>
+<p>Here’s some guiding screenshots:</p>
+<p><a href="http://sharovatov.files.wordpress.com/2010/03/manageaccels1.gif" target="_blank"><img title="manageaccels" border="0" alt="manageaccels" src="http://sharovatov.files.wordpress.com/2010/03/manageaccels_thumb1.gif?w=209&#038;h=256" width="209" height="256"></a> <a href="http://sharovatov.files.wordpress.com/2010/03/manageaddones1.gif" target="_blank"><img title="manageaddones" border="0" alt="manageaddones" src="http://sharovatov.files.wordpress.com/2010/03/manageaddones_thumb1.gif?w=256&#038;h=170" width="256" height="170"></a></p>
+<p>Then your link QRCode accelerator will be in the default context menu:</p>
+<p><a href="http://sharovatov.files.wordpress.com/2010/03/defaultmenu1.gif" target="_blank"><img title="defaultmenu" border="0" alt="defaultmenu" src="http://sharovatov.files.wordpress.com/2010/03/defaultmenu_thumb1.gif?w=232&#038;h=256" width="232" height="256"/></a></p>
+<p>So now you can get a QRCode for any link, scan it and use it on your mobile.</p>
+<p>P.S. There’re QRCode scanners for all mobile platforms, so if you want similar functionality on your phone, google for “QRCode scanner %yourphone%”.</p>
+</div>
+    
+</body>
+</html>

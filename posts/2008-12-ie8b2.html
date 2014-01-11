@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internet Explorer 8 beta 2 — new tests</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Internet Explorer 8 beta 2 — new tests</h1>
+<div><p>Finally I had some time to test Internet Explorer 8 beta 2, so first of all I ran all the test I had previously done to check if bugs were fixed.</p>
+<p>Here&#39;s the list:</p>
+<ul>
+<li><p>applying <code>:first-child</code> selector to dynamically added element still doesn&#39;t work, see <a href="http://sharovatov.ru/testcases/addingFirstChild.html">the testcase</a>. When you click on &quot;Add first child&quot; button, a new paragraph is added which then becomes the actual first-child of the parent div and only this new paragraph should apply CSS rules defined for the corresponding <code>:first-child</code> selector. In IE8b2 new element gets the CSS applied, but the element that previously was first-child doesn&#39;t lose CSS as if it still was the first child (see <a href="http://sharovatov.ru/screenshots/addingFirstChild.jpg">IE8b2 screenshot</a> and <a href="http://sharovatov.ru/screenshots/addingFirstChild_proper.jpg">Google Chrome screenshot</a>).</p>
+</li>
+<li><p><code>:last-child</code> is still not supported. Of course, it&#39;s CSS3, but it would be really handy to have this supported and most browsers already support <code>:last-child</code>. See <a href="http://sharovatov.ru/testcases/lastchild.html">testcase</a>.</p>
+</li>
+<li><p>Now about bugs that I blogged about <a href="http://sharovatov.wordpress.com/2008/04/08/ie8b1-generated-content-support/">here</a> and <a href="http://sharovatov.wordpress.com/2008/05/06/ie8b1-attribute-selectors-generated-content/">here</a>:</p>
+</li>
+<li><p><em>position: relative for the generated content rule</em> - <strong>fixed</strong> - now <a href="http://sharovatov.ru/testcases/genPosition.html">the testcase</a> doesn&#39;t kill the tab where it&#39;s been opened.</p>
+</li>
+<li><p><em>generated content is created after window.onload</em> - <strong>fixed</strong> - now all the generated content is created right at the stage of applying CSS rules which can be <a href="http://sharovatov.ru/testcases/textOnly.html">clearly seen here</a>.</p>
+</li>
+<li><p><em><code>content: attr(class)</code> showing <code>null</code></em> - <strong>fixed</strong> - now IE8b2 correctly shows the value of class attribute. <code>content: attr(className)</code> results as an empty string, right as it&#39;s defined in the CSS spec for non-existing attributes. Here&#39;s <a href="http://sharovatov.ru/testcases/classNameBug.html">the testcase</a>.</p>
+</li>
+<li><p><em>expressions don&#39;t work in generated content</em> - <a href="http://blogs.msdn.com/ie/archive/2008/10/16/ending-expressions.aspx">expressions don&#39;t work in standards compliancy mode any more</a> at all, so this bug is outdated</p>
+</li>
+<li><p><em><code>text-transform</code> doesn&#39;t work for generated content</em> - <strong>fixed</strong> - see <a href="http://sharovatov.ru/testcases/genContTextTransform2.html">testcase</a>.</p>
+</li>
+<li><p><em><code>text-indent</code> doesn&#39;t work for generated content</em> - <strong>fixed</strong> - see <a href="http://sharovatov.ru/testcases/genContTextIndent2.html">testcase</a>.</p>
+</li>
+</ul>
+<p>So I was really convinced by IE8b1 tests that some hidden javascript code was used to support generated content, but now I&#39;m absolutely sure that IE8b2 has decent native support for generated content and attribute selectors! Plus all the text-transform, text-align, text-indent issues are now fixed!</p>
+</div>
+    
+</body>
+</html>

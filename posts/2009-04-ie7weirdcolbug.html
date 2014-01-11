@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weird bug with hiding columns in IE7</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Weird bug with hiding columns in IE7</h1>
+<div><p>Sometimes when you create a table, you need to dynamically toggle certain columns visibility. I usually use the following approach:</p>
+<ul>
+<li><p>Set those columns that are supposed to be hidden and shown with a className, e.g. <code>tohide</code></p>
+</li>
+<li><p>Set their parent with some className, say, <code>hiddenChildren</code>.</p>
+</li>
+<li><p>Define the following CSS rule: <code>.</code>hiddenChildren <code>.tohide { display: none }</code>, which basically says that if there is a parent node with <code>className=&quot;hiddenChildren&quot;</code> and it has child nodes with <code>className=&quot;tohide&quot;</code>, all these child nodes will be hidden.</p>
+</li>
+<li><p>When I need to show cells, I remove this <code>hiddenChildren</code> class from parent’s className, and when I need to hide them again, I add it back.</p>
+</li>
+</ul>
+<p>This is a very common scenario and it’s much more efficient than the approach where you go through all the elements in javascript and toggle their personal display mode.</p>
+<p>There’s also an <em>inverted</em> approach where by default elements are hidden and assigned class specifies <em>positive</em> display – <code>table-cell</code> for CSS2.1-compliant browsers and <code>block</code> for IE6. But my approach is better as it’s cleaner – there’s no need for IE6-specific code (usually assigned by star hack).</p>
+<p>However, in IE7 with both of the approaches the cells’ display is not switched as you may notice by viewing <a href="http://sharovatov.ru/testcases/hideColumns0.html">the testcase</a>.</p>
+<p>But as in most cases, there’s a workaround – you have to “poke” any TH of your table. In <a href="http://sharovatov.ru/testcases/hideColumns1.html">this testcase</a> I added the following code:</p>
+<pre><code>/*@cc_on if (!document.querySelector)
+    document.getElementsByTagName(&#39;th&#39;)[0].className = &#39;wt2&#39;; 
+@*/
+</code></pre><p>to the toggling function. As you may know, js code within <code>/*@cc_on ... @*/</code> block will be executed only by IE, and only IE8 has support for <code>document.querySelector</code> interface, so chances are that this code will be executed only in IE with version earlier than 8, which is precisely what we need (as IE8 doesn&#39;t have this problem).</p>
+<p>It’s interesting to know, that YUI Team in their <a href="http://developer.yahoo.com/yui/datatable/">DataTable control</a> in order to implement hiding/showing functionality choosed to loop through all the cells and set their display individually (see <code>hideColumn</code>/<code>showColumn</code> functions <a href="http://yui.yahooapis.com/2.7.0/build/datatable/datatable.js">here</a>). I understand that this is the bulletproof approach ready to use in any environment, but it can be rather ineffective when your table has a significant amount of rows as it will have to go through all the TR’s. And it will do the loop twice if you choose to hide two columns :) Of course, using my approach requires setting classes for those cells that you were going to hide, so it’s not that flexible, but in the controlled environment it’s definitely the best option.</p>
+</div>
+    
+</body>
+</html>

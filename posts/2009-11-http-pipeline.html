@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTTP persistent connections, pipelining and chunked encoding</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>HTTP persistent connections, pipelining and chunked encoding</h1>
+<div><p>When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.</p>
+<p>And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)</p>
+<p>So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
+encoding.</p>
+<p>HTTP/1.0 said that for every request to a server you have to open a TCP/IP connection, write a request to the socket and get the data back.</p>
+<p>But pages on the internet became more complex and authors started including more and more resources on their pages (images, scripts, stylesheets, objects — everything that browsers had to download from the server).</p>
+<p>And for every resource request clients were opening separate connections, and it was taking time and CPU/memory resources to open a new connection, so from users prospective, resulting latency was becoming worse. Something could be done to improve the situation.</p>
+<p>So HTTP IETF decided to implement a nice technique called “persistent connections”.</p>
+<p><strong>Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.</strong></p>
+<p>As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying <code>Connection: Close</code> header.</p>
+<p>Usually HTTP/1.1 client sends <code>Connection: Close</code> header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends <code>Connection: Close</code> with the 10<sup>th</sup> image request and the server sends the last image and closes the connection after it’s done).</p>
+<p><strong>Persistent connections are the default for HTTP/1.1 clients and servers. </strong></p>
+<p>And even more interestingly, HTTP/1.1 introduced <strong>pipelining</strong> support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.</p>
+<p><strong>Note:</strong> pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. </p>
+<p>In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&#39;t get a response back will be resubmitted through the new connection.</p>
+<p>But as one connection is used to send multiple requests and receive responses, how does the client know when it has to finish reading the first request?</p>
+<p>Obviously, <code>Content-Length</code> header must be set for each response.</p>
+<p><strong>But what happens when the data is dynamic or the whole response’s content length can’t be determined by the time transmission starts?</strong></p>
+<p>In HTTP/1.0 everything’s easy — <code>Content-Length</code> header can just be left out, so the transmission starts, client starts reading the data it’s getting from the connection, then when the server finishes sending the data, it just closes the TCP/IP connection, so client can’t read from the socket any more and considers the transmission completed.</p>
+<p>However, as I’ve said, in HTTP/1.1 each transaction has to have correct <code>Content-Length</code> header because client needs to know when each transmission is completed, so that the client can either start waiting for the next response (if requests were pipelined), or stop reading current response from the socket and send new request through this TCP/IP connection (if requests are sent in a normal sequential mode), or close the connection it if it was the last response he was to receive.</p>
+<p><strong>So as the connection is reused for multiple resources’ content transmission, the client needs to know exactly when each resource download is completed, i.e. it needs the exact number of bytes it has to read from the connection socket.</strong></p>
+<p>And it&#39;s obvious that if <code>Content-Length</code> can not be determined before the transmission starts, the whole persistent connections concept is useless.</p>
+<p><strong>That is why HTTP/1.1 introduced chunked encoding concept.</strong></p>
+<p>The concept is quite simple — if exact <code>Content-Length</code> for the resource is unknown at the time when transmission starts, server may send resource content piece by piece (so-called chunks) and provide <code>Content-Length</code> for each chunk, plus sends an empty chunk with zero <code>Content-Length</code> at the end of the whole response to notify client that this response transmission is complete.</p>
+<p>To let HTTP/1.1 conforming clients know that chunked response is coming, server sends special header — <code>Transfer-Encoding: chunked</code>.</p>
+<p>Chunked encoding approach allows client to safely read the data — it knows the exact number of bytes that are to be read for each chunk and knows that if an empty chunk arrived, this resource transmission is completed.</p>
+<p>It’s a little bit more complex than HTTP/1.0 scenario where server just closes the connection as soon as it’s finished, but truly worth it — persistent connections save server resources and reduce whole network latency, therefore improving overall user experience.</p>
+<p>Links and resources:</p>
+<ul>
+<li><p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html">HTTP/1.1 Persistent connections</a></p>
+</li>
+<li><p><a href="http://en.wikipedia.org/wiki/HTTP_pipelining">Wikipedia about HTTP Pipelining</a></p>
+</li>
+<li><p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html">HTTP/1.1 Chunked encoding</a></p>
+</li>
+</ul>
+</div>
+    
+</body>
+</html>

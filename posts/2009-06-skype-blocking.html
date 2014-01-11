@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skype blocking 80 and 443 ports</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Skype blocking 80 and 443 ports</h1>
+<div><p>When trying to start an IIS7 website, you can get the following message: “The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0&#215;80070020)”:</p>
+<p><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image2.png?w=491&#038;h=173" width="491" height="173"></p>
+<p>It’s saying it can’t access the file, but actually IIS can’t bind the ports you’ve configured in Bindings configuration. But which port?</p>
+<p>Usually I use the following procedure to find out which application occupies the port:</p>
+<ol>
+<li><p>run <code>netstat –ano –p tcp</code> to get the list of opened ports, find the port that’s been taken and see which PID the port is bound to</p>
+</li>
+<li><p>run <code>tasklist /FI &quot;PID eq XXX&quot;</code> where XXX is the found PID</p>
+</li>
+</ol>
+<p>So in my case the 80 and 443 ports were taken by Skype. Whenever you start Skype, it tries to bind 80 and 443 ports, and so if you start your web server later, it won’t be able to work as ports are occupied. This Skype behaviour can be turned off by deselecting “Use port 80 and 443 as alternatives for incoming connections” here:</p>
+<p><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&#038;h=579" width="661" height="579"></p>
+<p>Hope this saves somebody some time :)</p>
+</div>
+    
+</body>
+</html>

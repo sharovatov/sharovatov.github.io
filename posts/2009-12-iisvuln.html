@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>critical IIS vulnerability</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>critical IIS vulnerability</h1>
+<div><p>Just got a link from our <a href="http://trukhanov.wordpress.com">system administrator</a> &#8211; <a title="http://securityvulns.ru/Wdocument993.html" href="http://securityvulns.ru/Wdocument993.html"><a href="http://securityvulns.ru/Wdocument993.html">http://securityvulns.ru/Wdocument993.html</a></a></p>
+<p>Go read the vulnerability description now!</p>
+<p>Basically – if your users upload files to your site and THEY specify file names, you’re vulnerable:</p>
+<blockquote>
+<p><strong>Vulnerability/Risk Description</strong>:</p>
+<p>IIS can execute any extension as an Active Server Page or any other executable extension.</p>
+<p>For instance “malicious.asp;.jpg” is executed as an ASP file on the server. Many file uploaders protect the system by checking only the last section of the filename as its extension. And by using this vulnerability, an attacker can bypass this protection and upload a dangerous executable file on the server.</p>
+</blockquote>
+<p>There’s an unchecked <a href="http://securityvulns.ru/files/iissemi1.cpp">patch</a> for this vulnerability, but again this shows that you just can’t allow any user input saved to your system without filtering.</p>
+<p>So, if you allow file uploads – your script has to specify filenames, not users.</p>
+</div>
+    
+</body>
+</html>

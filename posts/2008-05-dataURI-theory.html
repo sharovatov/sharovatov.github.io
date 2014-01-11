@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>data URI theory and practice</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>data URI theory and practice</h1>
+<div><h1 id="theory">Theory</h1>
+<p>Data URI&#39;es is an <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC 2397</a> published in 1998. It&#39;s a URL scheme which is used to embed small resources right into the (X)HTML page.</p>
+<p>Syntax is quite simple: <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code></p>
+<p>To see how it works let&#39;s take the following code (<a href="http://sharovatov.ru/testcases/dataURI_extCSS.html">testcase</a>):</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;data:text/css;base64,Ym9keXtiYWNrZ3JvdW5kOmdyZWVuO30=&quot;&gt;
+</code></pre><p>Browser supporting data URI will base64-decode the encoded string <code>Ym9keXtiYWNrZ3JvdW5kOmdyZWVuO30=</code> to <code>body{background:green;}</code> and then <em>load</em> this string as if it was a result of an http request to an external file containing this CSS code.</p>
+<p>According to the RFC we can embed any small resource into our page, e.g:</p>
+<ul>
+<li><p><a href="http://sharovatov.ru/testcases/dataURI_img.html">images</a> (as <var>img</var> elements and CSS backgrounds)</p>
+</li>
+<li><p><a href="http://sharovatov.ru/testcases/dataURI_extJS.html">javascript</a></p>
+</li>
+<li><p><a href="http://sharovatov.ru/testcases/dataURI_HTML.html">html</a> (links, iframes)</p>
+</li>
+<li><p><a href="http://sharovatov.ru/testcases/dataURI_extCSS.html">css</a> (and even <a href="http://sharovatov.ru/testcases/dataURI_extCSS_dataURI_img.html">dataURIed images inside dataURIed CSS</a>!)</p>
+</li>
+<li><p>any other resource supported by browsers</p>
+</li>
+</ul>
+<p>So theoretically we could have the same functionality as we have in MHTML - some or all external resources embedded directly in the page.</p>
+<p>All data URI advocates say that as most of the browsers have 2 concurrent connections per server (but 6 in total), dataURI mechanism potentially can speed up page load by decreasing the amount of HTTP requests (especially in case of HTTPS where encrypting payload produces quite big overhead). But:</p>
+<ul>
+<li><p>HTTP protocol already has methods to help building efficient applications - persistent connections to avoid recreating the sockets, different caching mechanisms to reduce overhead (Conditional GET) or avoid total amount of requests (aggressive caching using Expires header).</p>
+</li>
+<li><p>Even more, using <a href="http://www.ajaxperformance.com/2006/12/18/circumventing-browser-connection-limits-for-fun-and-profit/">simple technique</a> you can have your browser use 6 concurrent connections to parallelize fetching data as much as it can and therefore fasten page load.</p>
+</li>
+<li><p>Though <a href="http://tools.ietf.org/html/rfc2616#section-8.1.4">HTTP 1.1 spec says</a> that we shouldn&#39;t have more than 2 concurrent connections per server, in real world we have 2 concurrent connections only in Firefox and IE6/7. In IE8b1 the number is 6, in Opera 9 and Safari it&#39;s 4. In the next post I will give more details on this.</p>
+</li>
+</ul>
+<p>So keeping all this in mind we can&#39;t just say that dataURI is the only usable way to improve page load times. But it definetely is the only option when you have a limited access to the server and/or the server is not configured properly, so you can&#39;t set Expires header for aggressive caching, you can&#39;t set DNS wildcards or CNAME records to get your resources served from different hosts (and therefore leverage the maximum available concurrent connection in browsers) or server doesn&#39;t support HTTP caching properly.</p>
+<h1 id="practice">Practice</h1>
+<p>I can only see the following cases where dataURI can be effectively used:</p>
+<ul>
+<li><p><strong>CSS sprites, rounded corners images, icons and other images that have only presentational
+  semantics</strong>. It&#39;s the perfect target for dataURI + base64 to be applied to. If we embed them
+  in the CSS file, we <em>remove</em> HTTP requests that would be queried if these images were normal
+  files. These images are part of the design described in the stylesheet, so it makes perfect sense to
+  embed them in CSS. CSS files can be perfectly cached and while design doesn&#39;t change, we don&#39;t
+  need to touch this CSS and change anything. But there should be a common sense here as well -
+  firstly, base64 decoding takes system resources and secondly, who wants to wait for a CSS file of couple
+  hundred kilobytes in size to load?</p>
+</li>
+<li><p><strong>Reasonably small CSS files with rules specific for a page</strong>. If there is a semantical sense to define an inline CSS on a page, then there&#39;s a perfect sense to set it using dataURI.
+  Another thing is that if CSS file is not going to be parsed until it&#39;s fully downloaded by a browser. So when we embed a big image, we&#39;ll have first client opening the page wait till CSS is fully loaded. So we loose our HTTP parallelism benefits here.</p>
+</li>
+</ul>
+<p>Please don&#39;t forget that if a resource is embedded on multiple pages, it&#39;s obviously going to be redownloaded as many times as these containing pages are. And if a resource is not dataURI&#39;ed but referenced normally as an external file, it can be cached quite aggressively and requested from the server only once (all popular web-servers already provide good caching support for static files).</p>
+<p>However, this is all ideal world where specification don&#39;t have flaws and all browsers follow them.</p>
+<p>In our world we have the following:</p>
+<ul>
+<li><p>Lack of support. Only IE8b1/Opera9/Firefox2/Safari support data URI. No IE6/IE7<sup><a href="#dataURI_note1">1</a></sup>. That means that for the next three or four years while IE6 and IE7 will still have a significant market share, we can&#39;t just go and start using dataURI.</p>
+</li>
+<li><p>Different size limits on URI length in different browsers. As far as I know for now IE8 supports up to 32 kilobytes in <var>data:</var> value. Even though all other browsers support bigger sizes, our limit will obviously be 32Kb.<br>See <a href="http://sharovatov.ru/testcases/dataURI_maxlength.html">testcase 1 with data URI of 32755 bytes</a> and <a href="http://sharovatov.ru/testcases/dataURI_maxlength2.html">testcase2 with dataURI of 32868 bytes</a>.</p>
+</li>
+</ul>
+<p>Also I would strongly discourage from dynamically base64-encoding and embedding images in CSS files by some scripting language unless you&#39;re well aware of HTTP caching principles.</p>
+<p>Let&#39;s consider the following composed code from <a href="http://en.wikipedia.org/wiki/Data:_URI_scheme">Wikipedia data:URI page</a>:</p>
+<pre><code>&lt;?php
+function data_url($file, $mime)
+{
+    $contents = file_get_contents($file);
+    $base64 = base64_encode($contents);
+    return (&#39;data:&#39; . $mime . &#39;;base64,&#39; . $base64);
+}
+
+header(&#39;Content-type: text/css&#39;);
+
+?&gt;
+
+div.menu {
+    background-image:url(&lt;?php echo data_url(&#39;menu_background.png&#39;,&#39;image/png&#39;)?&gt;);
+}
+</code></pre><p>Unless accompanied with correct HTTP caching algorythm, this CSS file will be downloaded <strong>every time the page that references this CSS file is loaded</strong>! So every time user accesses the page referencing this CSS file, server will get a request, initiate script parsing, base64-encode the image and send it back to client. So you get rid of one simple request for an image (that in case of being a static file will be perfectly cached) but have one heavy request that will be run every time user requests a page! Not a fair change I think. So again, if you decide to use data URI scheme for your resources, encode and embed them beforehand or implement proper server-side HTTP caching and compressing support.</p>
+<p><strong>Note for russian-speaking users</strong>: - there&#39;s <a href="http://bolknote.ru/2006/08/25/~314">a way to embed images even for IE6/IE7</a>. Though it&#39;s rather a proof-of-concept - it doesn&#39;t support HTTP caching/compressing, but it works!</p>
+<h2 id="links-and-resources-">Links and resources:</h2>
+<ul>
+<li><p><a href="http://www.ietf.org/rfc/rfc2397.txt">RFC 2397 - The &ldquo;data&rdquo; URL scheme</a></p>
+</li>
+<li><p><a href="http://www.mozilla.org/quality/networking/testing/datatests.html">Mozilla tests for data URI support</a></p>
+</li>
+<li><p><a href="http://www.packetgram.com/pktg/docs/std/urls/techrfc2397.html">Technical review of RFC 2397</a></p>
+</li>
+<li><p><a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396 - URI generic syntax</a></p>
+</li>
+<li><p><a href="http://www.ietf.org/rfc/rfc2616.txt">RFC 2616 - HTTP/1.1</a></p>
+</li>
+<li><p><a href="http://support.microsoft.com/kb/208427">Maximum URL length is 2,083 characters in Internet Explorer</a></p>
+</li>
+<li><p><a href="http://www.geocities.com/max1million/bookmarklets.htm">Bookmarklets for Firefox</a></p>
+</li>
+<li><p><a href="http://www.alistapart.com/articles/sprites">CSS sprites</a></p>
+</li>
+<li><p><a href="http://code.msdn.microsoft.com/ie8whitepapers/Release/ProjectReleases.aspx?ReleaseId=575">Microsoft IE8b1 data URI support</a></p>
+</li>
+<li><p><a href="http://www.ajaxperformance.com/2006/12/18/circumventing-browser-connection-limits-for-fun-and-profit/">Circumventing browser connection limits for fun and profit</a></p>
+</li>
+<li><p><a href="http://forevergeek.com/open_source/make_firefox_faster.php">Make Firefox faster</a></p>
+</li>
+<li><p><a href="http://bolknote.ru/2006/08/25/~314">Embedding resources in IE6/IE7</a></p>
+</li>
+</ul>
+</div>
+    
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beanstalkapp and Fogbugz - free online bugtracking and version control</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Beanstalkapp and Fogbugz - free online bugtracking and version control</h1>
+<div><p>Once I tried <a href="http://www.fogcreek.com/fogbugz/learnmore.html">Fogbugz</a> bug tracking <a href="http://www.fogcreek.com/FogBugz/IntrotoOnDemand.html">on-demand service</a> and was amazed how cool it was and how easy it was to use it – no problems with installing and managing anything – just register and start working. And it’s not only a bug tracking software, but a full-fledged project management solution, and as the support cost is zero, it’s almost invaluable for small projects or your own start-up. </p>
+<p>It’s free for 2 users only, which is more than enough if you’re running a hobby project, but if you have a budget, you can easily afford $25 for each additional user.</p>
+<p>But in proper development you also need <a href="http://en.wikipedia.org/wiki/Revision_control">source code management system</a> (SCM). And <a href="http://www.fogcreek.com/FogBugz/docs/60/topics/advanced/Sourcecontrolintegration.html?isl=130641">Fogbugz allows for great level of integration</a> with all popular SCM systems. But if you choose Fogbugz on-demand to avoid support costs of running it locally, does it sound logical to install SCM locally? Definitely not.</p>
+<p>And here comes <a href="http://beanstalkapp.com/">beanstalk</a> – great hosted hassle-free version control service. It’s free for 3 users and a repository of up to 100Mbytes, and you can easily upgrade at any time.</p>
+<p>In most cases, free version should suit your hobby project or start up. Beanstalk runs <a href="http://en.wikipedia.org/wiki/Subversion_(software)">subversion</a> SCM which is almost a de-facto standard in project development and has client software for all platforms.</p>
+<p>But the best thing in Beanstalk for me is that it provides <a href="http://help.beanstalkapp.com/faqs/integration-tools/integrating-with-fogbugz">integration with Fogbugz on-demand</a>!</p>
+<p><strong>So you can have bug tracking/PM and version control software at no cost!</strong> It is just a dream for a hobby project or a small start-up.</p>
+<p>The installation process is dead easy:</p>
+<ol>
+<li><p>register at fogbugz.com for on-demand service and get <strong>yourproject.fogbugz.com</strong> address</p>
+</li>
+<li><p>register at beanstalkapp.com for a free account and get <strong>yourproject.beanstalkapp.com</strong> address and login there. You will be prompted to set your first repository. I assume that you’re just starting and don’t have SCM system yet, so just zip your working directory (where all your project files are) and upload it. Your first repository will be created.</p>
+</li>
+<li><p>go to your repository setup → integration → fogbugz. All you need to do is follow the instructions – but basically they will just need your fogbugz URL (yourproject.fogbugz.com) and username with password.</p>
+</li>
+<li><p><a href="http://help.beanstalkapp.com/faqs/getting-started-11/choosing-your-subversion-client">choose your subversion client</a>, download it and install. All you’ll have to configure in the client is a repository URL, it will look something like this: </p>
+<pre><code> http://yourproject.svn.beanstalkapp.com/myfirstrepo/ 
+</code></pre><p> and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use <a href="http://en.wikipedia.org/wiki/TortoiseSVN">tortoiseSVN</a> so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!</p>
+</li>
+<li><p>in Fogbugz – set “<strong>Source Control URL for logs</strong>” and “<strong>Source Control URL for diffs</strong>”. To do this, you need to go to your fogbugz account, to Settings → site → Main. Grab your repository URL from beanstalk, add “browse/^FILE” to it and set it as “<strong>Source Control URL for logs</strong>”. It should look something like that:</p>
+<pre><code> http://yourProject.beanstalkapp.com/yourRepository/browse/^FILE
+</code></pre><p> And “<strong>Source Control URL for diffs</strong>” will be</p>
+<pre><code> http://yourProject.beanstalkapp.com/yourRepositroy/diff/path/^FILE?from=^R2&amp;amp;to=^R1
+</code></pre></li>
+</ol>
+<p>Voila! Everything should be working.</p>
+<p>So the workflow will be like that:</p>
+<ol>
+<li><p>If you have a bug or a feature request, you enter it to Fogbugz, it will get a number assigned.</p>
+</li>
+<li><p>When you (or someone else) start working on a bug, you just edit your code and then commit it. When committing, you can add tags to a commit message. For example, if you do a commit with the following message:</p>
+<pre><code> [case:34 status:resolved] 
+ fixed IE5.5 lack of .toFixed() support
+</code></pre><p> Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. <a href="http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/">See here</a> for more commit tags.</p>
+</li>
+<li><p>Then in Fogbugz bug#34 you will see that it’s been just resolved and you will be able to check what files were changed and look at the diff of the changes.</p>
+</li>
+</ol>
+<p>So that’s it, you’ve got your bug tracking and version control software set up and integrated. It’s working online so support cost is zero, and it’s completely free :)</p>
+<p>P.S. What’s also great about Beanstalk is that it supports twitter integration – so if you have an open-source project, your users can follow it on twitter and see what you’re committing! It also supports web-hooks API so integration is limited to your fantasy only :)</p>
+<p>P.P.S. The only thing that’s left is database versioning control – we need something like RoR migrations, but that’s a topic for another post :)</p>
+</div>
+    
+</body>
+</html>

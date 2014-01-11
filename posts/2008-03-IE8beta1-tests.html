@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Some IE8b1 test results:</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>Some IE8b1 test results:</h1>
+<div><h1 id="ie8b1-intitial-tests">IE8b1 intitial tests</h1>
+<ul>
+<li><p>As earlier,<code>alert([1,2,3,].length)</code> shows <strong>4</strong> and 4<sup>th</sup> element has <code>undefined</code> value.</p>
+</li>
+<li><p>Unfortunately no support for so wanted <code>:last-child</code> CSS3 Selector and buggy support for dynamically added elements that match <code>:first-child</code> and should therefore enforce layout to be recalculated. See <a href="http://www.quirksmode.org/css/firstchild.html">PPK&#39;s testcase on quirksmode.org</a>.</p>
+</li>
+<li><p>We can&#39;t set padding on html element for some reason - see <a href="http://sharovatov.ru/testcases/htmlPadding.html">testcase</a>.</p>
+</li>
+</ul>
+<p>But I really enjoy Selectors API implemented in IE8b1.    It was the second browser to support this right after Webkit. I will describe the support and prepare some testcases in the next post.</p>
+<p>I&#39;ve tested generated content model in IE8b1 quite thoroughly, have found quite weird bugs and here&#39;s what I&#39;ve come up with:</p>
+<ul>
+<li><p>First bug I&#39;ve noticed was happening when you set <code>position: relative</code> for the generated content rule. The tab where you have this page opened dies. And then due to newly introduced <a href="http://www.microsoft.com/windows/products/winfamily/ie/ie8/readiness/NewFeatures.htm#crash">crash recovery system</a>, it tries to recover the tab, loads the page and dies again and so on - an infinite loop that you can&#39;t break. But the weird thing is that it doesn&#39;t actually <em>die</em> - it shows a window promting to select a debugger. The kind of window that appears when you have errors in your javascript code.</p>
+<p>  here&#39;s the code sample:</p>
+<pre><code>  p:before {content: &quot;test&quot;; position: relative;}` 
+</code></pre><p>  and <a href="http://sharovatov.ru/testcases/genPosition.html">the testcase</a>.</p>
+</li>
+<li><p>I noted the bug and continued testing. 
+  Next thing I came up with was the fact that if the page doesn&#39;t have IMG/OBJECT/IFRAME elements or an image set as a background for an element, generated content is created <strong>after</strong> <code>window.onload</code>!</p>
+<p>  Please have a look on the following testcases:</p>
+<ul>
+<li><p>Document contains <a href="http://sharovatov.ru/testcases/textOnly.html">None of the elements listed above</a>, and generated content <strong>is not being generated</strong> till you press OK. It means that generated content is created <strong>after</strong> <code>window.onload</code> occurred!</p>
+</li>
+<li><p>Generated content is created before <code>window.onload</code> as it should be in the following cases:
+  <a href="http://sharovatov.ru/testcases/withCssBg.html">an element has CSS <code>background-image</code> rule set</a>,
+  or page includes one of the elements: <a href="http://sharovatov.ru/testcases/withImage.html">IMG</a>,
+  <a href="http://sharovatov.ru/testcases/withObject.html">OBJECT</a>
+  or an <a href="http://sharovatov.ru/testcases/withIframe.html">IFRAME</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>At this point I thought - wait - it&#39;s strange - all CSS rules were always
+  applied <em>before</em> <code>window.onload</code>! Anyway, I just went on testing.</p>
+</li>
+<li><p>And then there was another strange thing - when you use <code>content: attr(class)</code>, IE8b1 doesn&#39;t show the attribute value but shows <code>null</code> instead. But if you set the rule as <code>content: attr(className)</code>, it actually shows the attribute value!</p>
+<p>  Here&#39;s <a href="http://sharovatov.ru/testcases/classNameBug.html">the testcase</a> for this bug.</p>
+</li>
+<li><p>And another interesting thing is that <code>expression</code> doesn&#39;t work in generated content rules.
+  Please see <a href="http://sharovatov.ru/testcases/genContExpression.html">the testcase</a>.</p>
+</li>
+</ul>
+<p>Of course I can only guess but my feeling is that IE8b1 doesn&#39;t have proper support for the generated content, it&#39;s rather done by a hook somewhere firing off the function that generates the content. All these four bugs have something in common - debug window (that&#39;s usually shown for javascript errors); generating content after <code>window.onload</code> in some cases; reading <code>class</code> attribute value by its DOM name (<code>className</code>). Basically it&#39;s all about javascript.</p>
+<p>And I can&#39;t help thinking that IE8b1 uses some hidden javascript code to support generated content. And this functionality is triggered by some hidden event like DomContentLoaded.</p>
+<p>And if so I would be really happy if they could give us access to this handler :)</p>
+<h1 id="selectors-api-and-ie8b1">Selectors API and IE8b1</h1>
+<p>As mentioned above, IE8b1 introduced support for very powerful DOM accessing concept - <a href="http://www.w3.org/TR/selectors-api/">Selectors API</a>. It is still a W3C working draft, but I bet that as IE and Webkit already support it, Presto and Gecko will soon have it as well.</p>
+<p>So what do we have? As per the <a href="http://www.w3.org/TR/selectors-api/">spec</a>, we have 2 methods: <code>.querySelector()</code> and <code>.querySelectorAll()</code> which can be applied to any <var>HTMLElement</var> and based on he parameter (CSS selectors string) provided return an <var>Element</var> or <var>StaticNodeList</var> populated with elements matching the provided CSS selectors. Bottom line, you give it CSS selector, they return you matching element(s).</p>
+<p>It provides you with a new flexible way to select elements in DOM. We can do any weird and wonderful stuff we want with the power of JS combined with the flexibility of CSS selectors:</p>
+<ul>
+<li><p>Get all paragraphs with the <code>.note</code> classname from one div? Not a problem – <code>document.querySelectorAll(&#39;#myDiv .note&#39;);</code></p>
+</li>
+<li><p>Get all elements with some classname? Forget about <code>document.getElementsByClassName</code> slow kludges - use <code>document.querySelectorAll(&#39;.myClass&#39;);</code></p>
+</li>
+<li><p>Get a link with <code>.current</code> classname from your UL-based menu? <code>document.querySelector(&#39;#menu .current&#39;);</code></p>
+</li>
+</ul>
+<p>So generally we don&#39;t have to iterate over huge <var>StaticNodeLists</var> anymore - it&#39;s done natively and very fast (much faster then by JS libraries). Please see <a href="http://webkit.org/perf/slickspeed/">the testcase prepared by Webkit authors</a> to measure
+their Selectors API support - it works in IE8b1 except for CSS3 Selectors block (IE8b1 doesn&#39;t support CSS3 <code>:nth-</code> and <code>:last-child</code> selectors).</p>
+<p>Bottom line, <strong>Selectors</strong> is a way to find elements in DOM. All browsers know how do it already when they parse CSS rules and find elements to which these rules have to be applied. So it&#39;s just an existing browser functionality exposed to the developer. And we have to keep in mind that if browser supports a CSS selector, it will allow you to query for this element using <strong>Selectors API</strong>. And obviously if there&#39;s no support for some CSS selector, you won&#39;t be able to get this element using <strong>Selectors</strong>.</p>
+<p>For example, as IE8b1 doesn&#39;t support <code>:last-child</code> CSS3 selector, you can&#39;t style such
+elements in CSS and you can&#39;t query them using <strong>Selectors</strong>.</p>
+<h2 id="notes-">Notes:</h2>
+<ul>
+<li><p>Unfortunately, IE8b1 doesn&#39;t fully implement the <a href="http://www.w3.org/TR/selectors-api/">Selectors API spec</a>. Here&#39;s the <a href="http://msdn2.microsoft.com/en-us/library/cc288326(VS.85).aspx">MSDN article</a> quotation:</p>
+<blockquote>
+<p>Because Internet Explorer 8 does not formally support XHTML documents, it does not support the namespace features of the W3C Selectors API specification, such as the <var>NSResolver</var> parameter.
+  But for websites where namespaces are not used it&#39;s not gonna be of any problem.</p>
+</blockquote>
+</li>
+<li><p>Another interesting issue that Selectors API spec raises is a potential history theft.</p>
+<p>  Basically you can get all visited links <code>href</code>s and send them by AJAX somewhere (just a matter of getting a <var>StaticNodeList</var> of elements by doing <code>document.querySelectorAll(&quot;a:visited&quot;)</code>).</p>
+<p>  <a href="http://www.w3.org/TR/selectors-api/">Spec leaves it for the vendor to fix</a>. So IE8b1 ignores the <code>:visited</code> and <code>:link</code> selectors when they appear in the selector query criteria.</p>
+<p>  Please see the <a href="http://sharovatov.ru/testcases/example.html">Testcase</a></p>
+</li>
+</ul>
+<h2 id="attribute-selectors">Attribute selectors</h2>
+<p>Both <code>[class=myclass]</code> and <code>[className=myclass]</code> work in IE7/IE8. The last one can be used as a CSS hack to target those browsers, but I would still recommend using conditional comments to target different IE versions.</p>
+<p>If you look at <a href="http://sharovatov.ru/testcases/attrClassName.html">the testcase</a>, you will see that both <code>[class=test1]</code> and <code>[classname=test2]</code> selectors work. When I saw className working, I immediately tested other DOM properties like nodeName. Unfortunately, it didn&#39;t work there - <a href="http://sharovatov.ru/testcases/attrClassName2.html">here&#39;s the testcase</a>. If it did, if there was such a way to access not HTML attribute but DOM properties from CSS selectors, it would be really weird but interesting.</p>
+<h2 id="generated-content">Generated content</h2>
+<p>When I was <a href="http://sharovatov.wordpress.com/2008/04/08/ie8b1-generated-content-support/">testing it</a>, I noticed that if you want to get element&#39;s class, you can&#39;t use <code>content: attr(class)</code> rule, you have to use <code>content: attr(className)</code>. It&#39;s obvious that this is a DOM property name rather than HTML element&#39;s attribute.</p>
+<p>This violates the standard which clearly says that <code>attr(X)</code> must return an attribute string value for the element matching the selector. It also violates the standard by returning <code>null</code> value for not existing attributes.</p>
+<p>This behavior also gives us some strange options. Please see <a href="http://sharovatov.ru/testcases/genContJs.html">the testcase</a>.</p>
+<p>I don&#39;t know if it&#39;s a bug or a feature - none of the Microsoft documents on IE8 describes this behaviour, so I don&#39;t know if this is going to be fixed or not; but it may be used in some interesting ways.<br>E.g. using <code>outerHTML</code> IE-only DOM property I rebuilt <a href="http://sharovatov.ru/testcases/attrClassName3.html">the testcase</a> for the attribute selectors bug mentioned above. If you have IE8, don&#39;t wait to have a look. And please have a look at another <a href="http://sharovatov.ru/testcases/DOMgenCont.html">interesting thing</a> - again it&#39;s IE8-only as it uses <code>attr(nodeName)</code> function to show every element&#39;s nodeName.</p>
+<p>During testing I&#39;ve noticed some more bugs with generated content:</p>
+<ul>
+<li><p>text-transform doesn&#39;t work for generated content. Please see <a href="http://sharovatov.ru/testcases/genContTextTransform.html">the testcase</a></p>
+</li>
+<li><p>text-indent doesn&#39;t work for generated content. <a href="http://sharovatov.ru/testcases/genContTextIndent.html">Here&#39;s the testcase</a></p>
+</li>
+<li><p>text-align doesn&#39;t work for generated content. <a href="http://sharovatov.ru/testcases/genContTextAlign.html">The testcase</a></p>
+</li>
+</ul>
+<h1 id="ie8-and-expressions">IE8 and expressions</h1>
+<p>Internet Explorer keeps on changing. One example is <a href="http://msdn.microsoft.com/en-us/library/ms537634.aspx">expressions</a> - their support is dropping from version to version. In different versions of IE <a href="http://sharovatov.ru/testcases/expressions_test.html">this testcase</a> produces <a href="http://sharovatov.ru/testcases/expressions_shots.html">the following output</a>.</p>
+<p>So IE started filtering values in expressions since IE6, and now IE8b1 in both modes doesn&#39;t even allow you to use object property accessors (both dot and square brackets notations - see <a href="http://sharovatov.ru/testcases/exp_propacc.html">testcase</a>). So in IE8b1 in expressions you can only use plain string values in your expressions (which is not handy at all) or call externally defined functions.</p>
+<p>I can&#39;t think of any other reason for disabling this except for protecting from potential XSS threat that I described in the previous post.</p>
+<p>Also in IE8b1 expressions are not reevaluated on <var>mouseover</var> event (see <a href="http://sharovatov.ru/testcases/exps_recalc.html">testcase</a>), but <var>onscroll</var> still fires <code>document.recalc</code> (this again seems to be left intentionally in order to support all cludges that were invented to implement for example non-existent position: fixed CSS rule).</p>
+<p>Bottom line, if you have expressions used in your CSS code, don&#39;t wait - separate all the stuff you do there to JS functions and just call these functions from your expressions.</p>
+</div>
+    
+</body>
+</html>

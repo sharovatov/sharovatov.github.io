@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>X-FRAME-OPTIONS</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+    <h1>X-FRAME-OPTIONS</h1>
+<div><p>This X-FRAME-OPTIONS HTTP header invented by Microsoft for IE8 provides an easy way to work around <a href="http://en.wikipedia.org/wiki/Clickjacking">Clickjacking</a> security issue (see <a href="http://w2spconf.com/2010/papers/p27.pdf">this great paper</a> for even more details). The main article explaining how X-FRAME-OPTION works is this: <a href="http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx">http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx</a></p>
+<p>Basically, here’s what behaviour you get with different X-FRAME-OPTIONS values:</p>
+<table border="0" cellspacing="0" cellpadding="5" width="703">
+    <tbody>
+    <tr>
+        <td valign="top" width="201"><code>DENY</code></td>
+        <td valign="top" width="500">browser will not render the iframe contents in any case</td>
+    </tr>
+    <tr>
+        <td valign="top" width="201"><code>SAMEORIGIN</code></td>
+        <td valign="top" width="500">browser will only render the iframe contents if host page origin is the same as the iframe page origin
+    </td>
+    </tr>
+    <tr>
+        <td valign="top" width="201"><code>ALLOW FROM http://host</code></td>
+        <td valign="top" width="500">browser will only render the iframe contents if the iframe host is httр://host </td>
+    </tr>
+    </tbody>
+</table>
+
+<p><strong>Please note that specifying the header in META tag won’t work</strong>.</p>
+<p>Good news – all browsers vendors copied this from Microsoft and now we’ve got all modern browsers supporting this header (Firefox 3.6.9, IE8, Opera 10.50, Safari 4.0, Chrome 4.1).</p>
+<p>Unfortunately, for some reason only Opera and IE show a meaningful message why the frame was blocked, all others just display the empty iframe (it’s especially weird for Firefox, which should show the warning as per their bugzilla):</p>
+<p><a href="http://sharovatov.files.wordpress.com/2012/01/image.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2012/01/image_thumb.png?w=700&#038;h=238" width="700" height="238"></a></p>
+<p>In any case, study the security papers I linked to above to understand how the attack works and what it can do to your visitors or your business.</p>
+<p>However, if you strongly believe no one should embed your page in an iframe – then your silver bullet is to add <code>X-FRAME-OPTIONS: DENY</code> to all the pages you serve.</p>
+<p>P.S. X-FRAME-OPTIONS is now proposed to IETF: <a href="http://tools.ietf.org/html/draft-gondrom-frame-options-01">http://tools.ietf.org/html/draft-gondrom-frame-options-01</a></p>
+</div>
+    
+</body>
+</html>
