@@ -3,8 +3,9 @@
 <head>
     <title>PHP loadHTMLFile and a html file without DOCTYPE</title>
     <meta name="generator" content="DocPad v6.59.6" />
-    
+    <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
 </head>
 <body>
     <h1>PHP loadHTMLFile and a html file without DOCTYPE</h1>
@@ -47,6 +48,33 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 </code></pre><p>to the first line of your html document and it finally worked without any warnings or issues. Awesome. XML header must be used for <code>load**HTML**File</code> to run properly. Way too buggy to use.</p>
 </div>
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2009-11-php-xml.html';
+		window.disqus_identifier = 'posts-2009-11-php-xml';
+		window.disqus_title = 'PHP loadHTMLFile and a html file without DOCTYPE';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     
 </body>
 </html>

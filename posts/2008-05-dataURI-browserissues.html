@@ -3,8 +3,9 @@
 <head>
     <title>data URI browser issues</title>
     <meta name="generator" content="DocPad v6.59.6" />
-    
+    <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
 </head>
 <body>
     <h1>data URI browser issues</h1>
@@ -80,6 +81,33 @@ string values. </p>
 </ul>
 <p>P.S. And here’s a great tool from Nicholas C. Zakas – <a href="http://www.nczonline.net/blog/2009/11/03/automatic-data-uri-embedding-in-css-files/">CSSEmbed</a> – it reads the CSS file you want, finds all the images references, converts images to dataURIes and saves resulting CSS file. So if you have small presentational images referenced in your CSS file, feed CSSEmbed with your CSS file and you’ll get them all converted in one go! Nice and simple! This tool can be also easily integrated into your publishing process if required.</p>
 </div>
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2008-05-dataURI-browserissues.html';
+		window.disqus_identifier = 'posts-2008-05-dataURI-browserissues';
+		window.disqus_title = 'data URI browser issues';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     
 </body>
 </html>

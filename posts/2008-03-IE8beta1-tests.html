@@ -3,8 +3,9 @@
 <head>
     <title>Some IE8b1 test results:</title>
     <meta name="generator" content="DocPad v6.59.6" />
-    
+    <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
 </head>
 <body>
     <h1>Some IE8b1 test results:</h1>
@@ -109,6 +110,33 @@ elements in CSS and you can&#39;t query them using <strong>Selectors</strong>.</
 <p>Also in IE8b1 expressions are not reevaluated on <var>mouseover</var> event (see <a href="http://sharovatov.ru/testcases/exps_recalc.html">testcase</a>), but <var>onscroll</var> still fires <code>document.recalc</code> (this again seems to be left intentionally in order to support all cludges that were invented to implement for example non-existent position: fixed CSS rule).</p>
 <p>Bottom line, if you have expressions used in your CSS code, don&#39;t wait - separate all the stuff you do there to JS functions and just call these functions from your expressions.</p>
 </div>
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2008-03-IE8beta1-tests.html';
+		window.disqus_identifier = 'posts-2008-03-IE8beta1-tests';
+		window.disqus_title = 'Some IE8b1 test results:';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     
 </body>
 </html>

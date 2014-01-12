@@ -3,8 +3,9 @@
 <head>
     <title>Useful JS tips - getBoundingClientRect()</title>
     <meta name="generator" content="DocPad v6.59.6" />
-    
+    <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
 </head>
 <body>
     <h1>Useful JS tips - getBoundingClientRect()</h1>
@@ -14,6 +15,33 @@
 <p><code>element.getBoundingClientRect()</code> basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.</p>
 <p>Extremely useful, thanks Microsoft IETeam!</p>
 </div>
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2009-06-getboundingrect.html';
+		window.disqus_identifier = 'posts-2009-06-getboundingrect';
+		window.disqus_title = 'Useful JS tips - getBoundingClientRect()';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     
 </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
     <title>разные стили при js on/off</title>
     <meta name="generator" content="DocPad v6.59.6" />
-    
+    <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
 </head>
 <body>
     <h1>разные стили при js on/off</h1>
@@ -55,6 +56,33 @@
 </code></pre><p>К сожалению, IE4 и FF не понимают иной нотации, кроме <var>@import url(someurl)</var>, причём если написать в кавычках, FF начинает кидаться эксепшнами странными, даже если всё нормально сэкранировать. Если же писать относительный урл, то опять же FF не подгружает почему-то, но как мне кажется, это всё настолько недокументировано, что можно простить странное поведение :)</p>
 <p>В общем, получается такая ситуация: если правил немного и в них мало что нужно экранировать (да-да, весь css-код в этом случае суть строка), например, если мало правил с <var>content</var>, то удобнее прописать правила прямо в такой таблице стилей. Если же правил много или не хочется ничего экранировать, то проще написать последним методом, правда, придётся писать абсолютный адрес внешней таблицы стилей.</p>
 </div>
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2006-08-jsonoff.html';
+		window.disqus_identifier = 'posts-2006-08-jsonoff';
+		window.disqus_title = 'разные стили при js on/off';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     
 </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
     <title>Кэширование и сжатие: теория</title>
     <meta name="generator" content="DocPad v6.59.6" />
-    
+    <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
 </head>
 <body>
     <h1>Кэширование и сжатие: теория</h1>
@@ -231,6 +232,33 @@ Sun Nov  6 08:49:37 1994
 придётся отказаться; или же слать сжатое содержимое только тем браузерам, которые не забывают про <var>Etag</var>. Если же (x)html-код находится в статических файлах, можно и для IE6 использовать сжатие совместно с кэшированием на основе <var>Last-Modified</var>.</p>
 <p>Также, как и в случае с кэшированием таблиц стилей и скриптов, статические файлы можно заранее сжать, чтобы потом не тратить ресурсы на сжатие на лету.</p>
 </div>
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2006-08-http-caching.html';
+		window.disqus_identifier = 'posts-2006-08-http-caching';
+		window.disqus_title = 'Кэширование и сжатие: теория';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     
 </body>
 </html>
