@@ -13,7 +13,8 @@ body {
     list-style-position: inside;
 }
 .date {
-    color: #ccc;
+    color: #ddd;
+    font-size: 76%;
 }
 
 h1 {
