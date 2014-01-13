@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>Javascript on XHTML pages</h1>
-<div><p>There are lots of rumours about Javascript in XHTML served as different MIME types. I&#39;ll try to explain what&#39;s really going on. Shortly, <var>innerHTML</var> works everywhere (even for XHTML served as <var>text/xml</var>); <var>document.*</var> collections work identically for <var>application/xhtml+xml</var> and <var>text/html</var>.</p>
+    <div class="post">
+ <h1>Javascript on XHTML pages</h1>
+ <div><p>There are lots of rumours about Javascript in XHTML served as different MIME types. I&#39;ll try to explain what&#39;s really going on. Shortly, <var>innerHTML</var> works everywhere (even for XHTML served as <var>text/xml</var>); <var>document.*</var> collections work identically for <var>application/xhtml+xml</var> and <var>text/html</var>.</p>
 <h3 id="xhtml-served-as-var-text-html-var-">XHTML served as <var>text/html</var></h3>
 <p>There are two main differences in DOM between <strong>valid</strong> HTML and XHTML served as <var>text/html</var> - in XHTML all elements are in lowercase and UAs don&#39;t create implicit elements such as <var>tbody</var> in XHTML. That&#39;s all! You don&#39;t need to put inline styles and scripts in <var>CDATA</var> sections. UAs handle these XHTML pages practically the same as they handle HTML ones, xml well-formedness is not checked. And of course, all <var>document.*</var> collections work, innerHTML works either. And yes, <var>document.all</var> works even in Firefox (since version 1.5).</p>
 <p>Yes, there&#39;s also a problem of marking inline scripts and style as CDATA sections, but with well-coded unobtrusive javascript there&#39;s no need for inline scripts, and there&#39;s definately no need for inline styles except rare cases (even LJ allows using external CSS
@@ -43,7 +45,7 @@ files).</p>
 of all those scary stories of not working <var>innerHTML</var> or <var>document.forms</var> - it&#39;s all a lie.</p>
 <h3 id="-a-href-http-nix-vlz-ru-test-for-those-who-don-t-believe-me-a-"><a href="http://nix.vlz.ru/test/">For those who don&#39;t believe me.</a></h3>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -70,6 +72,7 @@ of all those scary stories of not working <var>innerHTML</var> or <var>document.
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

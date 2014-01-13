@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>Skype blocking 80 and 443 ports</h1>
-<div><p>When trying to start an IIS7 website, you can get the following message: “The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0&#215;80070020)”:</p>
+    <div class="post">
+ <h1>Skype blocking 80 and 443 ports</h1>
+ <div><p>When trying to start an IIS7 website, you can get the following message: “The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0&#215;80070020)”:</p>
 <p><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image2.png?w=491&#038;h=173" width="491" height="173"></p>
 <p>It’s saying it can’t access the file, but actually IIS can’t bind the ports you’ve configured in Bindings configuration. But which port?</p>
 <p>Usually I use the following procedure to find out which application occupies the port:</p>
@@ -23,7 +25,7 @@
 <p><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&#038;h=579" width="661" height="579"></p>
 <p>Hope this saves somebody some time :)</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -50,6 +52,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

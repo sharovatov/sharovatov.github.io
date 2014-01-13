@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>data URI theory and practice</h1>
-<div><h1 id="theory">Theory</h1>
+    <div class="post">
+ <h1>data URI theory and practice</h1>
+ <div><h1 id="theory">Theory</h1>
 <p>Data URI&#39;es is an <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC 2397</a> published in 1998. It&#39;s a URL scheme which is used to embed small resources right into the (X)HTML page.</p>
 <p>Syntax is quite simple: <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code></p>
 <p>To see how it works let&#39;s take the following code (<a href="http://sharovatov.ru/testcases/dataURI_extCSS.html">testcase</a>):</p>
@@ -111,7 +113,7 @@ div.menu {
 </li>
 </ul>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -138,6 +140,7 @@ div.menu {
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

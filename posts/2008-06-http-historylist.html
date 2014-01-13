@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>HTTP History Lists and Back Button</h1>
-<div><p>While writing the post about forms values persistence, I noticed that browsers handle back button in different HTTP <em>situations</em> differently.</p>
+    <div class="post">
+ <h1>HTTP History Lists and Back Button</h1>
+ <div><p>While writing the post about forms values persistence, I noticed that browsers handle back button in different HTTP <em>situations</em> differently.</p>
 <p><a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP 1.1 spec</a> says the following:</p>
 <blockquote>
 <p>13.13 History Lists</p>
@@ -101,7 +103,7 @@ href="http://sharovatov.ru/testcases/samples/noStoreAndExpiresPast.txt">Cache-Co
 <p>Obviously IE and FF don&#39;t produce a request when HTTP caching is not explicitly prohibited which is against the HTTP spec recommendation, but this was done intentionally as authors usually prohibit caching for a reason and don&#39;t want users to view those pages without revalidating.</p>
 <p>And Safari just does the full request whenever the page is not cached explicitly.</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -128,6 +130,7 @@ href="http://sharovatov.ru/testcases/samples/noStoreAndExpiresPast.txt">Cache-Co
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

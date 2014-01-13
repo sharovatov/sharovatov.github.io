@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>Some IE8b1 test results:</h1>
-<div><h1 id="ie8b1-intitial-tests">IE8b1 intitial tests</h1>
+    <div class="post">
+ <h1>Some IE8b1 test results:</h1>
+ <div><h1 id="ie8b1-intitial-tests">IE8b1 intitial tests</h1>
 <ul>
 <li><p>As earlier,<code>alert([1,2,3,].length)</code> shows <strong>4</strong> and 4<sup>th</sup> element has <code>undefined</code> value.</p>
 </li>
@@ -110,7 +112,7 @@ elements in CSS and you can&#39;t query them using <strong>Selectors</strong>.</
 <p>Also in IE8b1 expressions are not reevaluated on <var>mouseover</var> event (see <a href="http://sharovatov.ru/testcases/exps_recalc.html">testcase</a>), but <var>onscroll</var> still fires <code>document.recalc</code> (this again seems to be left intentionally in order to support all cludges that were invented to implement for example non-existent position: fixed CSS rule).</p>
 <p>Bottom line, if you have expressions used in your CSS code, don&#39;t wait - separate all the stuff you do there to JS functions and just call these functions from your expressions.</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -137,6 +139,7 @@ elements in CSS and you can&#39;t query them using <strong>Selectors</strong>.</
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

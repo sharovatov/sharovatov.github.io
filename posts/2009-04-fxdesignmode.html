@@ -6,15 +6,17 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>designMode and Firefox</h1>
-<div><p>Another weird bug reported back in 2004 and unfortunately still not resolved – <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=232791">bug 232791</a>, marked as a dup for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=474255">bug 474255</a> (testcase <a href="https://bug232791.bugzilla.mozilla.org/attachment.cgi?id=187018">here</a> – if you click on the editable window, neither delete nor backspace button works, and if you add a character, it springs back to life). When you work with wysiwyg editor in Firefox (<a href="http://kb.mozillazine.org/Firefox_:_Midas">MIDAS</a>), and programmatically add a text node to the end of the editable document, Firefox creates a dumb BR node of type <code>_moz</code> with <code>_moz_editor_bogus_node</code> attribute.</p>
+    <div class="post">
+ <h1>designMode and Firefox</h1>
+ <div><p>Another weird bug reported back in 2004 and unfortunately still not resolved – <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=232791">bug 232791</a>, marked as a dup for <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=474255">bug 474255</a> (testcase <a href="https://bug232791.bugzilla.mozilla.org/attachment.cgi?id=187018">here</a> – if you click on the editable window, neither delete nor backspace button works, and if you add a character, it springs back to life). When you work with wysiwyg editor in Firefox (<a href="http://kb.mozillazine.org/Firefox_:_Midas">MIDAS</a>), and programmatically add a text node to the end of the editable document, Firefox creates a dumb BR node of type <code>_moz</code> with <code>_moz_editor_bogus_node</code> attribute.</p>
 <p><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=232791#c8">Yuh-Ruey Chen proposed</a> a workaround – you set designMode to &#39;off&#39; and then back to &#39;on&#39; and it works, and this approach is used in YUI library (see <a href="http://yuilibrary.com/projects/yui2/ticket/1946017">ticket 1946017</a>).</p>
 <p>The weird thing I noticed now in FF 3.0.8 is that while the bug is still not fixed, the bogus BR node is not visible through Firebug for some reason! And that’s strange – node’s invisible, but still there.</p>
 <p>However, workaround still works so nothing to worry about, just interesting.</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -41,6 +43,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

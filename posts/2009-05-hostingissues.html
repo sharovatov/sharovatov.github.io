@@ -6,15 +6,17 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>Hosting issues</h1>
-<div><p>I’ve been trying to prepare some test cases for HTTP Chunked Encoding support, but noticed that something went weird when I was requesting data from my host (<a href="http://sharovatov.ru/">sharovatov.ru</a>).</p>
+    <div class="post">
+ <h1>Hosting issues</h1>
+ <div><p>I’ve been trying to prepare some test cases for HTTP Chunked Encoding support, but noticed that something went weird when I was requesting data from my host (<a href="http://sharovatov.ru/">sharovatov.ru</a>).</p>
 <p>I’ve got a basic LAMP virtual hosting at <a href="http://naunet.ru">naunet.ru</a> which worked fine when I was hosting static content. But when I started doing the testcase, I found out all the weird and wonderful issues – mainly because they have SQUID installed before apache, so every single request goes to squid, and it’s a caching proxy that serves all my request from its cache – so I can’t test chunked encoding properly, can’t test ranges support properly… Crap. Seems that they just use squid to reduce load on their web servers.</p>
 <p>But the worst thing is bad techsupport – it works 8 hours a day and there’s nobody there on the weekends or bank holidays. I ask a question and nobody answers it in 3 days. It just drives me insane.</p>
 <p>Will have to move to somewhere else where sysadmins know how to do load-balancing without installing front-end proxies.</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -41,6 +43,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

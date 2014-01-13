@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>Common Internet Scheme Syntax</h1>
-<div><p>I&#39;ve recently read an <a href="http://bolknote.ru/2009/04/04/~2074">extremely interesting post</a> on <a href="http://bolknote.ru/">bolknote.ru</a> about &quot;Common Internet Scheme Syntax&quot;.</p>
+    <div class="post">
+ <h1>Common Internet Scheme Syntax</h1>
+ <div><p>I&#39;ve recently read an <a href="http://bolknote.ru/2009/04/04/~2074">extremely interesting post</a> on <a href="http://bolknote.ru/">bolknote.ru</a> about &quot;Common Internet Scheme Syntax&quot;.</p>
 <p>You may have already faced quite a common problem of setting absolute URIs to a resource on a page that must be accessed by both HTTPS and HTTP schemes.</p>
 <p><a href="http://tools.ietf.org/html/rfc1738">RFC 1738</a> Common Internet Scheme Syntax section states the following:</p>
 <blockquote>
@@ -100,7 +102,7 @@ content:</p>
 <p>So – use this approach if you have a page which is accessed by both HTTP and HTTPS and whenever you need to reference any resource from a different host on this page. Plus this host must support both HTTP and HTTPS :)</p>
 <p>McAffee SiteScan button uses this in their image - <strong>check!</strong></p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -127,6 +129,7 @@ content:</p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

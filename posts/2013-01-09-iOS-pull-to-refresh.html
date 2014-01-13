@@ -6,15 +6,17 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>proper iOS pull-to-refresh</h1>
-<div><p>Most of the pull-to-refresh plugins or concepts I saw had drawbacks - some emulated native scroll with JS (seems slower and non-native to me), others (mobile gmail) hid scrollbar altogether, <a href="http://cubiq.org/dropbox/iscroll4/examples/pull-to-refresh/">others</a> made scrollbar appear as if some content is already scrolled. </p>
+    <div class="post">
+ <h1>proper iOS pull-to-refresh</h1>
+ <div><p>Most of the pull-to-refresh plugins or concepts I saw had drawbacks - some emulated native scroll with JS (seems slower and non-native to me), others (mobile gmail) hid scrollbar altogether, <a href="http://cubiq.org/dropbox/iscroll4/examples/pull-to-refresh/">others</a> made scrollbar appear as if some content is already scrolled. </p>
 <p>As no available app seemed good enough for me and project requirements required iOS only, I drafted <a href="https://github.com/sharovatov/my/tree/master/js_experiments/ios_pull-to-refresh">this</a>.</p>
 <p>Basically, everything what needs to be hardware accelerated, is actually accelerated.</p>
 <p><a href="http://sharovatov.ru/ptr/ptr.html">The testcase</a> seems to perform quite well on all my target platforms - iPhone4, 4s and 5.</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -41,6 +43,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

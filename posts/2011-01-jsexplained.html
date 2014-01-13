@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>small piece of js code explained</h1>
-<div><p>Today a colleague showed me a piece of js code and asked to explain how it works.</p>
+    <div class="post">
+ <h1>small piece of js code explained</h1>
+ <div><p>Today a colleague showed me a piece of js code and asked to explain how it works.</p>
 <p>Here’s the code:</p>
 <pre><code>(function(x) {return x(x);})(function(z){ return function(y){ return z; } })(1)(2)(3) 
 </code></pre><p>For many from non-js background it would be easier if I rewrite first two function expressions as function declarations, turn third function expression into named function expression and break the execution into parts:</p>
@@ -40,7 +42,7 @@ var result4 = result3(3);
 <p>And when we execute <code>var result4 = result3(3)</code>,<strong> f3(3)</strong> is actually called and returns 2 as expected.</p>
 <p>I think, this again proves that javascript is syntactically very powerful language.</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -67,6 +69,7 @@ var result4 = result3(3);
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

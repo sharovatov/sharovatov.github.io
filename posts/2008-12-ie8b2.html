@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>Internet Explorer 8 beta 2 — new tests</h1>
-<div><p>Finally I had some time to test Internet Explorer 8 beta 2, so first of all I ran all the test I had previously done to check if bugs were fixed.</p>
+    <div class="post">
+ <h1>Internet Explorer 8 beta 2 — new tests</h1>
+ <div><p>Finally I had some time to test Internet Explorer 8 beta 2, so first of all I ran all the test I had previously done to check if bugs were fixed.</p>
 <p>Here&#39;s the list:</p>
 <ul>
 <li><p>applying <code>:first-child</code> selector to dynamically added element still doesn&#39;t work, see <a href="http://sharovatov.ru/testcases/addingFirstChild.html">the testcase</a>. When you click on &quot;Add first child&quot; button, a new paragraph is added which then becomes the actual first-child of the parent div and only this new paragraph should apply CSS rules defined for the corresponding <code>:first-child</code> selector. In IE8b2 new element gets the CSS applied, but the element that previously was first-child doesn&#39;t lose CSS as if it still was the first child (see <a href="http://sharovatov.ru/screenshots/addingFirstChild.jpg">IE8b2 screenshot</a> and <a href="http://sharovatov.ru/screenshots/addingFirstChild_proper.jpg">Google Chrome screenshot</a>).</p>
@@ -33,7 +35,7 @@
 </ul>
 <p>So I was really convinced by IE8b1 tests that some hidden javascript code was used to support generated content, but now I&#39;m absolutely sure that IE8b2 has decent native support for generated content and attribute selectors! Plus all the text-transform, text-align, text-indent issues are now fixed!</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -60,6 +62,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>

@@ -1,3 +1,29 @@
-.comments {
-    
+html {
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 10px 12px 12px 12px;
+    font: 16px Helvetica, sans-serif;
+    line-height: 160%;
+}
+.postslist {
+    margin: 0; padding: 0;
+    list-style-position: inside;
+}
+.date {
+    color: #ccc;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1.25em;
+}
+a {
+    color: rgb(32, 0, 127);
+}
+a:visited {
+    color: rgb(32, 0, 127);
 }

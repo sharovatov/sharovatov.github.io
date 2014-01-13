@@ -6,10 +6,12 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 <body>
-    <h1>startpanic.com and :visited links privacy issue</h1>
-<div><p>Back in April 2008 I was blogging about <a href="http://sharovatov.wordpress.com/2008/04/06/selectors-api-support-in-ie8b1/">Selectors API support in IE8 Beta 1</a> support and mentioned the security concern about <code>:visited</code> links – <strong>potential privacy theft</strong>.</p>
+    <div class="post">
+ <h1>startpanic.com and :visited links privacy issue</h1>
+ <div><p>Back in April 2008 I was blogging about <a href="http://sharovatov.wordpress.com/2008/04/06/selectors-api-support-in-ie8b1/">Selectors API support in IE8 Beta 1</a> support and mentioned the security concern about <code>:visited</code> links – <strong>potential privacy theft</strong>.</p>
 <h2 id="the-problem">The problem</h2>
 <p>This concern was risen long ago in <a href="http://www.w3.org/TR/CSS21/selector.html#link-pseudo-classes">CSS2.1 Spec</a> (and also mentioned then in the following specs - 
 <a href="http://www.w3.org/TR/css3-selectors/#link">CSS3 Selectors</a>, <a href="http://www.w3.org/TR/selectors-api/#privacy">Selectors API spec</a>):</p>
@@ -79,7 +81,7 @@ links in Incognito Mode. However, <a href="http://codereview.chromium.org/42114"
 <p>So I was wrong because I thought that no browser vendor would go and fix this technically, while it seems quite doable and thanks to David Baron, it will appear in Gecko. With careful integration, this approach will protect from most of the possible attacks and will still provide a way for authors to make visited and not visited links distinguishable in their designs.</p>
 <p>We’ll now see what other browser vendors will do, and this will become especially interesting if Firefox does a good marketing campaign from this feature.</p>
 </div>
-<div class="comments"><div id="disqus_thread"></div>
+ <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -106,6 +108,7 @@ links in Incognito Mode. However, <a href="http://codereview.chromium.org/42114"
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
     
 </body>
 </html>
