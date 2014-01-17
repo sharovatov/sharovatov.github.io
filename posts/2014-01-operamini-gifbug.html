@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opera Mini bug with an animated gif as a background</title>
+    <meta name="generator" content="DocPad v6.59.6" />
+    <link  rel="stylesheet" href="/styles/style.css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+    <div class="post">
+ <h1>Opera Mini bug with an animated gif as a background</h1>
+ <div><p>A strange thing was noticed in Opera Mini during a feature development – animated gifs were not showing when set as a background image for an element.</p>
+<p>As noted in <a href="http://sharovatov.github.io/posts/2013-10-operamini-review.html">the review</a>, Opera Mini usually displays animated gifs, but renders them statically, effectively showing only the very first frame. </p>
+<p>You can witness this behaviour by opening <a href="http://sharovatov.ru/operamini/gif-single.html">this link</a> in Opera Mini and any other browser: Opera Mini will render only the first frame while other browsers will animate the whole image.</p>
+<p>Note that if the first frame of your animated gif is transparent, Opera Mini will show the image rasterised to its background.</p>
+<p>However, if an animated gif is set as a background of some element, it will not be shown at all, which can be observed <a href="http://sharovatov.ru/operamini/gif-bg.html">here</a> – if you open this link in Opera Mini, all you see is three grayish rectangles. For some reason, Opera Mini does not render even the first frame of the images.</p>
+<p>This can be fixed either by switching to <code>&lt;img&gt;</code> elements in the markup, or by exploiting the fact that browsers download <code>&lt;img&gt;</code>-served images even if they are hidden with <code>display:none</code> rule. Here’s <a href="http://sharovatov.ru/operamini/gif-bg-fix.html">the testcase</a>.</p>
+<p>Unfortunately, if the html code containing animated gifs set as background is loaded dynamically (for example, with ajax or is constructed by a js templating engine), Opera Mini will refuse to render the images regardless of the fix presence, the background will be empty. The behaviour can be observed <a href="http://sharovatov.ru/operamini/gif-loading.html">here</a>.</p>
+<p>To summarise: if you are to fix the existing markup with animated gifs set as elements’ backgrounds and no elements are loaded dynamically, it’s perfectly safe to apply <code>img style=&#39;display:none&#39;</code> fix to force Opera Mini to load and render gifs’ first frame as backgrounds; but if your content is dynamically generated, there is no other choice but to change the markup to use plain <code>&lt;img&gt;</code> elements.</p>
+</div>
+ <div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-01-operamini-gifbug.html';
+		window.disqus_identifier = 'posts-2014-01-operamini-gifbug';
+		window.disqus_title = 'Opera Mini bug with an animated gif as a background';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+</div>
+    
+</body>
+</html>

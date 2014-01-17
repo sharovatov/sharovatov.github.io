@@ -4,7 +4,7 @@
     <subtitle></subtitle>
     <link href="http://sharovatov.github.io/atom.xml" rel="self" />
     <link href="http://sharovatov.github.io" />
-    <updated>2014-01-13T15:24:35.601Z</updated>
+    <updated>2014-01-17T09:01:16.048Z</updated>
     <id>http://sharovatov.github.io</id>
     <author>
         <name></name>
@@ -13,9 +13,25 @@
 
     
         <entry>
+            <title>Opera Mini bug with an animated gif as a background</title>
+            <link href="http://sharovatov.github.io/posts/2014-01-operamini-gifbug.html"/>
+            <updated>2014-01-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2014-01-operamini-gifbug.html</id>
+            <content type="html">&lt;p&gt;A strange thing was noticed in Opera Mini during a feature development – animated gifs were not showing when set as a background image for an element.&lt;/p&gt;
+&lt;p&gt;As noted in &lt;a href=&quot;http://sharovatov.github.io/posts/2013-10-operamini-review.html&quot;&gt;the review&lt;/a&gt;, Opera Mini usually displays animated gifs, but renders them statically, effectively showing only the very first frame. &lt;/p&gt;
+&lt;p&gt;You can witness this behaviour by opening &lt;a href=&quot;http://sharovatov.ru/operamini/gif-single.html&quot;&gt;this link&lt;/a&gt; in Opera Mini and any other browser: Opera Mini will render only the first frame while other browsers will animate the whole image.&lt;/p&gt;
+&lt;p&gt;Note that if the first frame of your animated gif is transparent, Opera Mini will show the image rasterised to its background.&lt;/p&gt;
+&lt;p&gt;However, if an animated gif is set as a background of some element, it will not be shown at all, which can be observed &lt;a href=&quot;http://sharovatov.ru/operamini/gif-bg.html&quot;&gt;here&lt;/a&gt; – if you open this link in Opera Mini, all you see is three grayish rectangles. For some reason, Opera Mini does not render even the first frame of the images.&lt;/p&gt;
+&lt;p&gt;This can be fixed either by switching to &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; elements in the markup, or by exploiting the fact that browsers download &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;-served images even if they are hidden with &lt;code&gt;display:none&lt;/code&gt; rule. Here’s &lt;a href=&quot;http://sharovatov.ru/operamini/gif-bg-fix.html&quot;&gt;the testcase&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Unfortunately, if the html code containing animated gifs set as background is loaded dynamically (for example, with ajax or is constructed by a js templating engine), Opera Mini will refuse to render the images regardless of the fix presence, the background will be empty. The behaviour can be observed &lt;a href=&quot;http://sharovatov.ru/operamini/gif-loading.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To summarise: if you are to fix the existing markup with animated gifs set as elements’ backgrounds and no elements are loaded dynamically, it’s perfectly safe to apply &lt;code&gt;img style=&amp;#39;display:none&amp;#39;&lt;/code&gt; fix to force Opera Mini to load and render gifs’ first frame as backgrounds; but if your content is dynamically generated, there is no other choice but to change the markup to use plain &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; elements.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Code comprehension performance and code style</title>
             <link href="http://sharovatov.github.io/posts/2013-12-code-comprehension.html"/>
-            <updated>2013-11-01T00:00:00.000Z</updated>
+            <updated>2013-12-01T00:00:00.000Z</updated>
             <id>http://sharovatov.github.io/posts/2013-12-code-comprehension.html</id>
             <content type="html">&lt;p&gt;I’ve recently come across an old but interesting &lt;a href=&quot;http://www.researchgate.net/publication/220071417_Empirical_Studies_of_Programming_Knowledge/file/d912f512cb2e91a8c1.pdf&quot;&gt;paper by Elliot Soloway and Kate Ehrlich on the code comprehension&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The main thing the paper concludes is that experienced programmers with time develop schematic comprehension, i.e. they tend to quickly “parse” and understand code by blocks, where each block seems to have certain meaning. Novice programmers don’t possess enough experience to be able to grasp the code meaning by blocks and therefore tend to parse code statement by statement, and perform much worse.&lt;/p&gt;
@@ -190,17 +206,6 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Opera Unite is dead</title>
-            <link href="http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html"/>
-            <updated>2012-10-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html</id>
-            <content type="html">&lt;p&gt;So it turns out I was right in &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/16/opera-revolution-fail/&quot;&gt;my earlier blogpost&lt;/a&gt; about Opera’s so-called “web revolution” and “reinventing the web” marketing bluff – it was a dead end right from the start.&lt;/p&gt;
-&lt;p&gt;As &lt;a href=&quot;http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-widgets&quot;&gt;officially noted on the Opera blog&lt;/a&gt;, Opera Unite has been discontinued from the 24&lt;sup&gt;th&lt;/sup&gt; April 2012 with Opera 12 release.&lt;/p&gt;
-&lt;p&gt;Not a big surprise at all.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Installing Opera Mini emulator locally</title>
             <link href="http://sharovatov.github.io/posts/2012-10-operaminiemul.html"/>
             <updated>2012-10-01T00:00:00.000Z</updated>
@@ -245,6 +250,38 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
+            <title>Opera Unite is dead</title>
+            <link href="http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html"/>
+            <updated>2012-10-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html</id>
+            <content type="html">&lt;p&gt;So it turns out I was right in &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/16/opera-revolution-fail/&quot;&gt;my earlier blogpost&lt;/a&gt; about Opera’s so-called “web revolution” and “reinventing the web” marketing bluff – it was a dead end right from the start.&lt;/p&gt;
+&lt;p&gt;As &lt;a href=&quot;http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-widgets&quot;&gt;officially noted on the Opera blog&lt;/a&gt;, Opera Unite has been discontinued from the 24&lt;sup&gt;th&lt;/sup&gt; April 2012 with Opera 12 release.&lt;/p&gt;
+&lt;p&gt;Not a big surprise at all.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>iframe height auto-resize</title>
+            <link href="http://sharovatov.github.io/posts/2012-01-iframe-autosize.html"/>
+            <updated>2012-01-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2012-01-iframe-autosize.html</id>
+            <content type="html">&lt;p&gt;If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.&lt;/p&gt;
+&lt;p&gt;Sometimes it’s ok, but when you need your iframe to “expand” automatically on the host page, you have to change the iframe object height style property. And it’s dead easy when both iframe and the host page are from same origin – you just talk to parent window from the iframe and make it set the object height.&lt;/p&gt;
+&lt;p&gt;However, when cross-origin security model applies, everything gets more interesting, and you’re pretty much limited to &lt;a href=&quot;http://dev.w3.org/html5/postmsg/&quot;&gt;CDM&lt;/a&gt;/&lt;a href=&quot;http://www.sitepen.com/blog/2008/07/22/windowname-transport/&quot;&gt;window.name&lt;/a&gt;/location.hash transports.&lt;/p&gt;
+&lt;p&gt;So the proper approach would be to use CDM with a fallback to location.hash – newer browsers (IE8+ and current Firefox, Opera, Safari and Chrome) support postMessage, older versions will fall back to setting parent page location.hash property and on the parent page – interval polling for changes.&lt;/p&gt;
+&lt;p&gt;Here’s &lt;a href=&quot;http://sharovatov.ru/iframe-autoheight/iframeHost.php&quot;&gt;a basic working sample&lt;/a&gt; implementing this approach and here’s the code for it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeChild.html&quot;&gt;child page&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php&quot;&gt;parent page&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to &lt;em&gt; origin. This might be a serious security breach since the parent page will process a message send from &lt;em&gt;*any&lt;/em&gt;&lt;/em&gt; page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.&lt;/p&gt;
+&lt;p&gt;I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>X-FRAME-OPTIONS</title>
             <link href="http://sharovatov.github.io/posts/2012-01-x-frame-options.html"/>
             <updated>2012-01-01T00:00:00.000Z</updated>
@@ -276,27 +313,6 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
 &lt;p&gt;In any case, study the security papers I linked to above to understand how the attack works and what it can do to your visitors or your business.&lt;/p&gt;
 &lt;p&gt;However, if you strongly believe no one should embed your page in an iframe – then your silver bullet is to add &lt;code&gt;X-FRAME-OPTIONS: DENY&lt;/code&gt; to all the pages you serve.&lt;/p&gt;
 &lt;p&gt;P.S. X-FRAME-OPTIONS is now proposed to IETF: &lt;a href=&quot;http://tools.ietf.org/html/draft-gondrom-frame-options-01&quot;&gt;http://tools.ietf.org/html/draft-gondrom-frame-options-01&lt;/a&gt;&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>iframe height auto-resize</title>
-            <link href="http://sharovatov.github.io/posts/2012-01-iframe-autosize.html"/>
-            <updated>2012-01-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2012-01-iframe-autosize.html</id>
-            <content type="html">&lt;p&gt;If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.&lt;/p&gt;
-&lt;p&gt;Sometimes it’s ok, but when you need your iframe to “expand” automatically on the host page, you have to change the iframe object height style property. And it’s dead easy when both iframe and the host page are from same origin – you just talk to parent window from the iframe and make it set the object height.&lt;/p&gt;
-&lt;p&gt;However, when cross-origin security model applies, everything gets more interesting, and you’re pretty much limited to &lt;a href=&quot;http://dev.w3.org/html5/postmsg/&quot;&gt;CDM&lt;/a&gt;/&lt;a href=&quot;http://www.sitepen.com/blog/2008/07/22/windowname-transport/&quot;&gt;window.name&lt;/a&gt;/location.hash transports.&lt;/p&gt;
-&lt;p&gt;So the proper approach would be to use CDM with a fallback to location.hash – newer browsers (IE8+ and current Firefox, Opera, Safari and Chrome) support postMessage, older versions will fall back to setting parent page location.hash property and on the parent page – interval polling for changes.&lt;/p&gt;
-&lt;p&gt;Here’s &lt;a href=&quot;http://sharovatov.ru/iframe-autoheight/iframeHost.php&quot;&gt;a basic working sample&lt;/a&gt; implementing this approach and here’s the code for it:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeChild.html&quot;&gt;child page&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php&quot;&gt;parent page&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to &lt;em&gt; origin. This might be a serious security breach since the parent page will process a message send from &lt;em&gt;*any&lt;/em&gt;&lt;/em&gt; page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.&lt;/p&gt;
-&lt;p&gt;I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.&lt;/p&gt;
 </content>
         </entry>
     
@@ -335,109 +351,6 @@ var result4 = result3(3);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;#39;s move on and execute &lt;code&gt;var result3 = result2(2);&lt;/code&gt;. We’ve just found out that &lt;strong&gt;result2&lt;/strong&gt; holds a reference to &lt;strong&gt;f2&lt;/strong&gt;, so it’s rather &lt;strong&gt;f2(2)&lt;/strong&gt; that we’re seeing here, which – as we remember – creates &lt;strong&gt;f3&lt;/strong&gt; function and stores &lt;strong&gt;z&lt;/strong&gt; in it’s context. This &lt;strong&gt;f3&lt;/strong&gt; will always return 2, &lt;strong&gt;result3&lt;/strong&gt; is a function will always return 2.&lt;/p&gt;
 &lt;p&gt;And when we execute &lt;code&gt;var result4 = result3(3)&lt;/code&gt;,&lt;strong&gt; f3(3)&lt;/strong&gt; is actually called and returns 2 as expected.&lt;/p&gt;
 &lt;p&gt;I think, this again proves that javascript is syntactically very powerful language.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>IE9 - sucks much less than other browsers</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
-            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
-&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
-&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
-&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
-&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
-&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
-&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
-&lt;p&gt;Some links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows Phone 7 emulator, updates and app blacklist</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
-            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
-&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
-&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
-&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
-src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
-&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
-&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
-&lt;p&gt;Useful links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </content>
         </entry>
     
@@ -554,6 +467,109 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&
         </entry>
     
         <entry>
+            <title>Windows Phone 7 emulator, updates and app blacklist</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
+            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
+&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
+&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
+&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
+src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
+&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
+&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
+&lt;p&gt;Useful links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>IE9 - sucks much less than other browsers</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
+            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
+&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
+&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
+&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
+&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
+&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
+&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
+&lt;p&gt;Some links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>link-to-QRCode IE8 accelerator</title>
             <link href="http://sharovatov.github.io/posts/2010-03-link-toqrcode.html"/>
             <updated>2010-03-01T00:00:00.000Z</updated>
@@ -637,6 +653,50 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
         </entry>
     
         <entry>
+            <title>HTTP persistent connections, pipelining and chunked encoding</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-http-pipeline.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-http-pipeline.html</id>
+            <content type="html">&lt;p&gt;When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.&lt;/p&gt;
+&lt;p&gt;And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)&lt;/p&gt;
+&lt;p&gt;So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
+encoding.&lt;/p&gt;
+&lt;p&gt;HTTP/1.0 said that for every request to a server you have to open a TCP/IP connection, write a request to the socket and get the data back.&lt;/p&gt;
+&lt;p&gt;But pages on the internet became more complex and authors started including more and more resources on their pages (images, scripts, stylesheets, objects — everything that browsers had to download from the server).&lt;/p&gt;
+&lt;p&gt;And for every resource request clients were opening separate connections, and it was taking time and CPU/memory resources to open a new connection, so from users prospective, resulting latency was becoming worse. Something could be done to improve the situation.&lt;/p&gt;
+&lt;p&gt;So HTTP IETF decided to implement a nice technique called “persistent connections”.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying &lt;code&gt;Connection: Close&lt;/code&gt; header.&lt;/p&gt;
+&lt;p&gt;Usually HTTP/1.1 client sends &lt;code&gt;Connection: Close&lt;/code&gt; header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends &lt;code&gt;Connection: Close&lt;/code&gt; with the 10&lt;sup&gt;th&lt;/sup&gt; image request and the server sends the last image and closes the connection after it’s done).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Persistent connections are the default for HTTP/1.1 clients and servers. &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And even more interestingly, HTTP/1.1 introduced &lt;strong&gt;pipelining&lt;/strong&gt; support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. &lt;/p&gt;
+&lt;p&gt;In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&amp;#39;t get a response back will be resubmitted through the new connection.&lt;/p&gt;
+&lt;p&gt;But as one connection is used to send multiple requests and receive responses, how does the client know when it has to finish reading the first request?&lt;/p&gt;
+&lt;p&gt;Obviously, &lt;code&gt;Content-Length&lt;/code&gt; header must be set for each response.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But what happens when the data is dynamic or the whole response’s content length can’t be determined by the time transmission starts?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In HTTP/1.0 everything’s easy — &lt;code&gt;Content-Length&lt;/code&gt; header can just be left out, so the transmission starts, client starts reading the data it’s getting from the connection, then when the server finishes sending the data, it just closes the TCP/IP connection, so client can’t read from the socket any more and considers the transmission completed.&lt;/p&gt;
+&lt;p&gt;However, as I’ve said, in HTTP/1.1 each transaction has to have correct &lt;code&gt;Content-Length&lt;/code&gt; header because client needs to know when each transmission is completed, so that the client can either start waiting for the next response (if requests were pipelined), or stop reading current response from the socket and send new request through this TCP/IP connection (if requests are sent in a normal sequential mode), or close the connection it if it was the last response he was to receive.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So as the connection is reused for multiple resources’ content transmission, the client needs to know exactly when each resource download is completed, i.e. it needs the exact number of bytes it has to read from the connection socket.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And it&amp;#39;s obvious that if &lt;code&gt;Content-Length&lt;/code&gt; can not be determined before the transmission starts, the whole persistent connections concept is useless.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;That is why HTTP/1.1 introduced chunked encoding concept.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The concept is quite simple — if exact &lt;code&gt;Content-Length&lt;/code&gt; for the resource is unknown at the time when transmission starts, server may send resource content piece by piece (so-called chunks) and provide &lt;code&gt;Content-Length&lt;/code&gt; for each chunk, plus sends an empty chunk with zero &lt;code&gt;Content-Length&lt;/code&gt; at the end of the whole response to notify client that this response transmission is complete.&lt;/p&gt;
+&lt;p&gt;To let HTTP/1.1 conforming clients know that chunked response is coming, server sends special header — &lt;code&gt;Transfer-Encoding: chunked&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Chunked encoding approach allows client to safely read the data — it knows the exact number of bytes that are to be read for each chunk and knows that if an empty chunk arrived, this resource transmission is completed.&lt;/p&gt;
+&lt;p&gt;It’s a little bit more complex than HTTP/1.0 scenario where server just closes the connection as soon as it’s finished, but truly worth it — persistent connections save server resources and reduce whole network latency, therefore improving overall user experience.&lt;/p&gt;
+&lt;p&gt;Links and resources:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html&quot;&gt;HTTP/1.1 Persistent connections&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_pipelining&quot;&gt;Wikipedia about HTTP Pipelining&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html&quot;&gt;HTTP/1.1 Chunked encoding&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Browsers' developer tools evolution</title>
             <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
             <updated>2009-11-01T00:00:00.000Z</updated>
@@ -708,50 +768,6 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
         </entry>
     
         <entry>
-            <title>HTTP persistent connections, pipelining and chunked encoding</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-http-pipeline.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-http-pipeline.html</id>
-            <content type="html">&lt;p&gt;When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.&lt;/p&gt;
-&lt;p&gt;And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)&lt;/p&gt;
-&lt;p&gt;So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
-encoding.&lt;/p&gt;
-&lt;p&gt;HTTP/1.0 said that for every request to a server you have to open a TCP/IP connection, write a request to the socket and get the data back.&lt;/p&gt;
-&lt;p&gt;But pages on the internet became more complex and authors started including more and more resources on their pages (images, scripts, stylesheets, objects — everything that browsers had to download from the server).&lt;/p&gt;
-&lt;p&gt;And for every resource request clients were opening separate connections, and it was taking time and CPU/memory resources to open a new connection, so from users prospective, resulting latency was becoming worse. Something could be done to improve the situation.&lt;/p&gt;
-&lt;p&gt;So HTTP IETF decided to implement a nice technique called “persistent connections”.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying &lt;code&gt;Connection: Close&lt;/code&gt; header.&lt;/p&gt;
-&lt;p&gt;Usually HTTP/1.1 client sends &lt;code&gt;Connection: Close&lt;/code&gt; header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends &lt;code&gt;Connection: Close&lt;/code&gt; with the 10&lt;sup&gt;th&lt;/sup&gt; image request and the server sends the last image and closes the connection after it’s done).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Persistent connections are the default for HTTP/1.1 clients and servers. &lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;And even more interestingly, HTTP/1.1 introduced &lt;strong&gt;pipelining&lt;/strong&gt; support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. &lt;/p&gt;
-&lt;p&gt;In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&amp;#39;t get a response back will be resubmitted through the new connection.&lt;/p&gt;
-&lt;p&gt;But as one connection is used to send multiple requests and receive responses, how does the client know when it has to finish reading the first request?&lt;/p&gt;
-&lt;p&gt;Obviously, &lt;code&gt;Content-Length&lt;/code&gt; header must be set for each response.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;But what happens when the data is dynamic or the whole response’s content length can’t be determined by the time transmission starts?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In HTTP/1.0 everything’s easy — &lt;code&gt;Content-Length&lt;/code&gt; header can just be left out, so the transmission starts, client starts reading the data it’s getting from the connection, then when the server finishes sending the data, it just closes the TCP/IP connection, so client can’t read from the socket any more and considers the transmission completed.&lt;/p&gt;
-&lt;p&gt;However, as I’ve said, in HTTP/1.1 each transaction has to have correct &lt;code&gt;Content-Length&lt;/code&gt; header because client needs to know when each transmission is completed, so that the client can either start waiting for the next response (if requests were pipelined), or stop reading current response from the socket and send new request through this TCP/IP connection (if requests are sent in a normal sequential mode), or close the connection it if it was the last response he was to receive.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So as the connection is reused for multiple resources’ content transmission, the client needs to know exactly when each resource download is completed, i.e. it needs the exact number of bytes it has to read from the connection socket.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;And it&amp;#39;s obvious that if &lt;code&gt;Content-Length&lt;/code&gt; can not be determined before the transmission starts, the whole persistent connections concept is useless.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;That is why HTTP/1.1 introduced chunked encoding concept.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The concept is quite simple — if exact &lt;code&gt;Content-Length&lt;/code&gt; for the resource is unknown at the time when transmission starts, server may send resource content piece by piece (so-called chunks) and provide &lt;code&gt;Content-Length&lt;/code&gt; for each chunk, plus sends an empty chunk with zero &lt;code&gt;Content-Length&lt;/code&gt; at the end of the whole response to notify client that this response transmission is complete.&lt;/p&gt;
-&lt;p&gt;To let HTTP/1.1 conforming clients know that chunked response is coming, server sends special header — &lt;code&gt;Transfer-Encoding: chunked&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Chunked encoding approach allows client to safely read the data — it knows the exact number of bytes that are to be read for each chunk and knows that if an empty chunk arrived, this resource transmission is completed.&lt;/p&gt;
-&lt;p&gt;It’s a little bit more complex than HTTP/1.0 scenario where server just closes the connection as soon as it’s finished, but truly worth it — persistent connections save server resources and reduce whole network latency, therefore improving overall user experience.&lt;/p&gt;
-&lt;p&gt;Links and resources:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html&quot;&gt;HTTP/1.1 Persistent connections&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_pipelining&quot;&gt;Wikipedia about HTTP Pipelining&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html&quot;&gt;HTTP/1.1 Chunked encoding&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Beanstalkapp, FogBugz and now Case Tracker</title>
             <link href="http://sharovatov.github.io/posts/2009-11-beanstalk.html"/>
             <updated>2009-11-01T00:00:00.000Z</updated>
@@ -782,82 +798,6 @@ encoding.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;So if you use fogbugz – this tool is definitely worth trying!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>HTML5 video tag and Internet Explorer</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-html5video.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-html5video.html</id>
-            <content type="html">&lt;p&gt;It’s interesting to see how popular &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.&lt;/p&gt;
-&lt;p&gt;The whole situation reminds me of AJAX where original concept was invented by Microsoft (actual ActiveX was shipped with IE5 in 1999), then it was standardised by W3C (in a different way), then implemented by other browsers, and then people started accusing IE for not supporting this new W3C standard.&lt;/p&gt;
-&lt;p&gt;The same thing is now happening with inline video/audio playback concept, which has been introduced in IE2 in 1995, almost 15 years ago. Yes, 15 years ago, when W3C has been just founded and was still asking &lt;a href=&quot;http://www.csail.mit.edu/&quot;&gt;MIT/CSAIL&lt;/a&gt; to join. And now this functionality is being spec’ed in HTML5 as &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags. Opera, Firefox, Safari and Google Chrome start supporting &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; and are making a loud marketing message of it.&lt;/p&gt;
-&lt;p&gt;The original concept that was introduced in IE2 (and supported in following versions) was adding a &lt;code&gt;DYNSRC&lt;/code&gt; attribute to &lt;code&gt;IMG&lt;/code&gt; element:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;cover.gif&amp;quot; dynsrc=&amp;quot;clock.avi&amp;quot; controls&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When IE saw dynsrc attribute, it tried loading the movie and playing it. “Controls” attribute made IE show simple playback controls.&lt;/p&gt;
-&lt;p&gt;This is how it looked like in IE3:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;ie3&quot; border=&quot;0&quot; alt=&quot;ie3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/ie3.gif?w=387&amp;#038;h=602&quot; width=&quot;387&quot; height=&quot;602&quot;&gt;&lt;/p&gt;
-&lt;p&gt;However, in future versions the support for DYNSRC was limited to make developers to switch to other ways (&lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;embed&amp;gt;&lt;/code&gt;/SMIL video). In IE5 no controls were shown, in IE7 &lt;code&gt;DYNSRC&lt;/code&gt; disappeared.&lt;/p&gt;
-&lt;p&gt;World changes, and now the functionality that nobody’s been using for a decade seems really new and interesting. It’s great that WHATWG is spending time on defining clear standard on how this should work and it’s really cool that Chrome, Firefox, Opera and Safari already support this draft. Of course, Silverlight supports greater level of RIA, but giving that IE Team is now really focused on following public standards, &lt;/p&gt;
-&lt;p&gt;I hope that in IE9 we’ll have native support for &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; as we had native support for XMLHttpRequest in IE7.&lt;/p&gt;
-&lt;p&gt;But my point is – credit for inline video playback functionality invention should be definitely given to IE2.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Opera revolution fail</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
-            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
-&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
-&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
-&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
-&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
-&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
-&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
-&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
-&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
-&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
-&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
-&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
-&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Useful JS tips - getBoundingClientRect()</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
-            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
-&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
-&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
-&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
 </content>
         </entry>
     
@@ -920,6 +860,105 @@ versions:&lt;/p&gt;
         </entry>
     
         <entry>
+            <title>Opera revolution fail</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
+            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
+&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
+&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
+&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
+&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
+&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
+&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
+&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
+&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
+&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
+&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
+&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
+&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Useful JS tips - getBoundingClientRect()</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
+            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
+&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
+&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
+&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Universal Internet Explorer 6 CSS</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-ie6-universal.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-ie6-universal.html</id>
+            <content type="html">&lt;p&gt;Today I’ve read an interesting article by Andy Clarke &lt;a href=&quot;http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here’s the author’s key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;IE6 is hard to support&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it’s so cool to write CSS for modern browsers only&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;sites shouldn’t look the same in different browsers&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;people come to websites for content&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So by throwing these thoughts in he’s making a conclusion that IE6 should be supported in a limited way – i.e. by giving it &lt;a href=&quot;http://forabeautifulweb.com/demo/2009/05/21/ie6.0.3.css&quot;&gt;a special “stripped” CSS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So let’s see.&lt;/p&gt;
+&lt;h2 id=&quot;ie6-is-hard-to-support&quot;&gt;IE6 is hard to support&lt;/h2&gt;
+&lt;p&gt;From technical side it’s not hard, period. The amount of effort depends on the project peculiarities (to a degree).&lt;/p&gt;
+&lt;h2 id=&quot;it-s-cool-to-write-css-for-modern-browsers-only&quot;&gt;It’s cool to write CSS for modern browsers only&lt;/h2&gt;
+&lt;p&gt;Doing your work is not always doing cool stuff.&lt;/p&gt;
+&lt;h2 id=&quot;sites-shouldn-t-look-the-same-in-different-browsers&quot;&gt;Sites shouldn’t look the same in different browsers&lt;/h2&gt;
+&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
+&lt;h2 id=&quot;people-come-to-websites-for-content&quot;&gt;People come to websites for content&lt;/h2&gt;
+&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
+&lt;h2 id=&quot;i-do-keep-saying-that-all-this-depends-on-the-project-peculiarities-&quot;&gt;I do keep saying that all this depends on the project peculiarities.&lt;/h2&gt;
+&lt;p&gt;And I can’t understand why it’s not obvious to Andy Clarke. When a project is planned, all the issues are taken into consideration. As websites are displayed in different browsers, three key factors matter:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;nature of the website&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;market share of the browser&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;cost of supporting a browser&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Do I need to explain in more detail?&lt;/p&gt;
+&lt;p&gt;P.S. Yes I think people should upgrade from IE6. But not because it has an outdated support for standards, but just because newer browsers provide much better user experience.&lt;/p&gt;
+&lt;p&gt;P.P.S. You know, Andy, I really appreciate what you’re doing. I urge you not to stop. I’ll be priced higher for the same skills that I have now just because you (and those whom you manage to convince) deliberately choose not to deliver what clients need :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Intel mini ITX D945GCLF2D motherboard</title>
             <link href="http://sharovatov.github.io/posts/2009-06-intelmb.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
@@ -934,6 +973,42 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
 &lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
 &lt;p&gt;Awesome, just awesome.&lt;/p&gt;
 &lt;p&gt;Thanks, Intel!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>HTML5 video tag and Internet Explorer</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-html5video.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-html5video.html</id>
+            <content type="html">&lt;p&gt;It’s interesting to see how popular &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.&lt;/p&gt;
+&lt;p&gt;The whole situation reminds me of AJAX where original concept was invented by Microsoft (actual ActiveX was shipped with IE5 in 1999), then it was standardised by W3C (in a different way), then implemented by other browsers, and then people started accusing IE for not supporting this new W3C standard.&lt;/p&gt;
+&lt;p&gt;The same thing is now happening with inline video/audio playback concept, which has been introduced in IE2 in 1995, almost 15 years ago. Yes, 15 years ago, when W3C has been just founded and was still asking &lt;a href=&quot;http://www.csail.mit.edu/&quot;&gt;MIT/CSAIL&lt;/a&gt; to join. And now this functionality is being spec’ed in HTML5 as &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags. Opera, Firefox, Safari and Google Chrome start supporting &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; and are making a loud marketing message of it.&lt;/p&gt;
+&lt;p&gt;The original concept that was introduced in IE2 (and supported in following versions) was adding a &lt;code&gt;DYNSRC&lt;/code&gt; attribute to &lt;code&gt;IMG&lt;/code&gt; element:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;cover.gif&amp;quot; dynsrc=&amp;quot;clock.avi&amp;quot; controls&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When IE saw dynsrc attribute, it tried loading the movie and playing it. “Controls” attribute made IE show simple playback controls.&lt;/p&gt;
+&lt;p&gt;This is how it looked like in IE3:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;ie3&quot; border=&quot;0&quot; alt=&quot;ie3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/ie3.gif?w=387&amp;#038;h=602&quot; width=&quot;387&quot; height=&quot;602&quot;&gt;&lt;/p&gt;
+&lt;p&gt;However, in future versions the support for DYNSRC was limited to make developers to switch to other ways (&lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;embed&amp;gt;&lt;/code&gt;/SMIL video). In IE5 no controls were shown, in IE7 &lt;code&gt;DYNSRC&lt;/code&gt; disappeared.&lt;/p&gt;
+&lt;p&gt;World changes, and now the functionality that nobody’s been using for a decade seems really new and interesting. It’s great that WHATWG is spending time on defining clear standard on how this should work and it’s really cool that Chrome, Firefox, Opera and Safari already support this draft. Of course, Silverlight supports greater level of RIA, but giving that IE Team is now really focused on following public standards, &lt;/p&gt;
+&lt;p&gt;I hope that in IE9 we’ll have native support for &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; as we had native support for XMLHttpRequest in IE7.&lt;/p&gt;
+&lt;p&gt;But my point is – credit for inline video playback functionality invention should be definitely given to IE2.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows 7 will be shipped without IE8 in Europe?</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-win7woie8.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-win7woie8.html</id>
+            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://news.cnet.com/8301-13860_3-10262630-56.html&quot;&gt;CNET states&lt;/a&gt;, Windows 7 will be shipped to Europe without IE8 because European antitrust regulators told them so. This clearly shows how rotten EU antitrust committee is and how easy it is for a well settled lobby to force the whole EU to accept absolutely stupid and nonsense act.&lt;/p&gt;
+&lt;p&gt;Who will gain any profit from this?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Users&lt;/strong&gt;? No, they will have to find a way to get &lt;em&gt;any&lt;/em&gt; browser on their new computer. And what if it’s their first computer? How are they supposed to download anything from the internet? Yes it’s a five minutes job for an IT specialist, but go teach your grandmother how to use ftp.exe to download anything ;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hardware vendors&lt;/strong&gt;? No, they were always able to install any browser on the computers they sell and make it the default one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Other browser vendors&lt;/strong&gt;? To a degree. Anyway Microsoft will provide hardware resellers with an IE8 pack – so they can install IE8 on all the computers they build.&lt;/p&gt;
+&lt;p&gt;Is there any sense at all in this decision? I can’t see it.&lt;/p&gt;
+&lt;p&gt;I just don’t get it, really. If I’m buying a car, I won’t argue that the tyres on this new car are from Pirelli (or any other vendor). I will just change them if I don’t really like Pirelli, or choose another car which doesn’t have Pirelly. I’m not prohibited to change them. I’m just given the default one.&lt;/p&gt;
+&lt;p&gt;And now compare this situation with Apple who clearly prohibits installing Opera on its iPhone. Because it would compete (and, obviously, win the competition) with their Safari browser. Why doesn’t EU antitrust committee look at this? Why don’t Opera take any action here?&lt;/p&gt;
 </content>
         </entry>
     
@@ -983,114 +1058,6 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
             <content type="html">&lt;p&gt;Opera promises to reinvent the web tomorrow. I mean, really, reinvent the web? Invent TCP/IP, HTTP, DNS, HTML/CSS/JS, CGI, all other stuff that web consists of? I doubt.&lt;/p&gt;
 &lt;p&gt;Different sources &lt;a href=&quot;http://www.geeksaresexy.net/2009/06/15/opera-to-reinvent-the-web-web-waits-for-fat-lady-to-sing/&quot;&gt;speculate&lt;/a&gt; that it’s going to be something cloud-related. Maybe it will be a p2p-based traffic sharing with some clever algorithm to determine where to download the data from? But then I wouldn’t like anybody to be able to sniff my data. Maybe they will install a CDN to make useless Opera Turbo giving at least some performance benefit to users. Don’t know, we’ll see very soon.&lt;/p&gt;
 &lt;p&gt;But because of the last &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/11/windows-7-will-be-shipped-without-ie8-in-europe/&quot;&gt;unfair actions&lt;/a&gt; that were taken by Opera against IE, I (from moral prospective) really hope that all the expenses they took for Opera 10 PR won’t significantly increase their market share. Competition should be fair, Firefox was able to get the same market share as IE in Germany without making users life harder. I really hope that lobbying expenses were higher than the income.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Universal Internet Explorer 6 CSS</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-ie6-universal.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-ie6-universal.html</id>
-            <content type="html">&lt;p&gt;Today I’ve read an interesting article by Andy Clarke &lt;a href=&quot;http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Here’s the author’s key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;IE6 is hard to support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it’s so cool to write CSS for modern browsers only&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;sites shouldn’t look the same in different browsers&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;people come to websites for content&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So by throwing these thoughts in he’s making a conclusion that IE6 should be supported in a limited way – i.e. by giving it &lt;a href=&quot;http://forabeautifulweb.com/demo/2009/05/21/ie6.0.3.css&quot;&gt;a special “stripped” CSS&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So let’s see.&lt;/p&gt;
-&lt;h2 id=&quot;ie6-is-hard-to-support&quot;&gt;IE6 is hard to support&lt;/h2&gt;
-&lt;p&gt;From technical side it’s not hard, period. The amount of effort depends on the project peculiarities (to a degree).&lt;/p&gt;
-&lt;h2 id=&quot;it-s-cool-to-write-css-for-modern-browsers-only&quot;&gt;It’s cool to write CSS for modern browsers only&lt;/h2&gt;
-&lt;p&gt;Doing your work is not always doing cool stuff.&lt;/p&gt;
-&lt;h2 id=&quot;sites-shouldn-t-look-the-same-in-different-browsers&quot;&gt;Sites shouldn’t look the same in different browsers&lt;/h2&gt;
-&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
-&lt;h2 id=&quot;people-come-to-websites-for-content&quot;&gt;People come to websites for content&lt;/h2&gt;
-&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
-&lt;h2 id=&quot;i-do-keep-saying-that-all-this-depends-on-the-project-peculiarities-&quot;&gt;I do keep saying that all this depends on the project peculiarities.&lt;/h2&gt;
-&lt;p&gt;And I can’t understand why it’s not obvious to Andy Clarke. When a project is planned, all the issues are taken into consideration. As websites are displayed in different browsers, three key factors matter:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;nature of the website&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;market share of the browser&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;cost of supporting a browser&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Do I need to explain in more detail?&lt;/p&gt;
-&lt;p&gt;P.S. Yes I think people should upgrade from IE6. But not because it has an outdated support for standards, but just because newer browsers provide much better user experience.&lt;/p&gt;
-&lt;p&gt;P.P.S. You know, Andy, I really appreciate what you’re doing. I urge you not to stop. I’ll be priced higher for the same skills that I have now just because you (and those whom you manage to convince) deliberately choose not to deliver what clients need :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows 7 will be shipped without IE8 in Europe?</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-win7woie8.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-win7woie8.html</id>
-            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://news.cnet.com/8301-13860_3-10262630-56.html&quot;&gt;CNET states&lt;/a&gt;, Windows 7 will be shipped to Europe without IE8 because European antitrust regulators told them so. This clearly shows how rotten EU antitrust committee is and how easy it is for a well settled lobby to force the whole EU to accept absolutely stupid and nonsense act.&lt;/p&gt;
-&lt;p&gt;Who will gain any profit from this?&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Users&lt;/strong&gt;? No, they will have to find a way to get &lt;em&gt;any&lt;/em&gt; browser on their new computer. And what if it’s their first computer? How are they supposed to download anything from the internet? Yes it’s a five minutes job for an IT specialist, but go teach your grandmother how to use ftp.exe to download anything ;)&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Hardware vendors&lt;/strong&gt;? No, they were always able to install any browser on the computers they sell and make it the default one.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Other browser vendors&lt;/strong&gt;? To a degree. Anyway Microsoft will provide hardware resellers with an IE8 pack – so they can install IE8 on all the computers they build.&lt;/p&gt;
-&lt;p&gt;Is there any sense at all in this decision? I can’t see it.&lt;/p&gt;
-&lt;p&gt;I just don’t get it, really. If I’m buying a car, I won’t argue that the tyres on this new car are from Pirelli (or any other vendor). I will just change them if I don’t really like Pirelli, or choose another car which doesn’t have Pirelly. I’m not prohibited to change them. I’m just given the default one.&lt;/p&gt;
-&lt;p&gt;And now compare this situation with Apple who clearly prohibits installing Opera on its iPhone. Because it would compete (and, obviously, win the competition) with their Safari browser. Why doesn’t EU antitrust committee look at this? Why don’t Opera take any action here?&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Beanstalkapp and Fogbugz - free online bugtracking and version control</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-beanstalkapp.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-beanstalkapp.html</id>
-            <content type="html">&lt;p&gt;Once I tried &lt;a href=&quot;http://www.fogcreek.com/fogbugz/learnmore.html&quot;&gt;Fogbugz&lt;/a&gt; bug tracking &lt;a href=&quot;http://www.fogcreek.com/FogBugz/IntrotoOnDemand.html&quot;&gt;on-demand service&lt;/a&gt; and was amazed how cool it was and how easy it was to use it – no problems with installing and managing anything – just register and start working. And it’s not only a bug tracking software, but a full-fledged project management solution, and as the support cost is zero, it’s almost invaluable for small projects or your own start-up. &lt;/p&gt;
-&lt;p&gt;It’s free for 2 users only, which is more than enough if you’re running a hobby project, but if you have a budget, you can easily afford $25 for each additional user.&lt;/p&gt;
-&lt;p&gt;But in proper development you also need &lt;a href=&quot;http://en.wikipedia.org/wiki/Revision_control&quot;&gt;source code management system&lt;/a&gt; (SCM). And &lt;a href=&quot;http://www.fogcreek.com/FogBugz/docs/60/topics/advanced/Sourcecontrolintegration.html?isl=130641&quot;&gt;Fogbugz allows for great level of integration&lt;/a&gt; with all popular SCM systems. But if you choose Fogbugz on-demand to avoid support costs of running it locally, does it sound logical to install SCM locally? Definitely not.&lt;/p&gt;
-&lt;p&gt;And here comes &lt;a href=&quot;http://beanstalkapp.com/&quot;&gt;beanstalk&lt;/a&gt; – great hosted hassle-free version control service. It’s free for 3 users and a repository of up to 100Mbytes, and you can easily upgrade at any time.&lt;/p&gt;
-&lt;p&gt;In most cases, free version should suit your hobby project or start up. Beanstalk runs &lt;a href=&quot;http://en.wikipedia.org/wiki/Subversion_(software)&quot;&gt;subversion&lt;/a&gt; SCM which is almost a de-facto standard in project development and has client software for all platforms.&lt;/p&gt;
-&lt;p&gt;But the best thing in Beanstalk for me is that it provides &lt;a href=&quot;http://help.beanstalkapp.com/faqs/integration-tools/integrating-with-fogbugz&quot;&gt;integration with Fogbugz on-demand&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So you can have bug tracking/PM and version control software at no cost!&lt;/strong&gt; It is just a dream for a hobby project or a small start-up.&lt;/p&gt;
-&lt;p&gt;The installation process is dead easy:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;register at fogbugz.com for on-demand service and get &lt;strong&gt;yourproject.fogbugz.com&lt;/strong&gt; address&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;register at beanstalkapp.com for a free account and get &lt;strong&gt;yourproject.beanstalkapp.com&lt;/strong&gt; address and login there. You will be prompted to set your first repository. I assume that you’re just starting and don’t have SCM system yet, so just zip your working directory (where all your project files are) and upload it. Your first repository will be created.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;go to your repository setup → integration → fogbugz. All you need to do is follow the instructions – but basically they will just need your fogbugz URL (yourproject.fogbugz.com) and username with password.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://help.beanstalkapp.com/faqs/getting-started-11/choosing-your-subversion-client&quot;&gt;choose your subversion client&lt;/a&gt;, download it and install. All you’ll have to configure in the client is a repository URL, it will look something like this: &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; http://yourproject.svn.beanstalkapp.com/myfirstrepo/ 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use &lt;a href=&quot;http://en.wikipedia.org/wiki/TortoiseSVN&quot;&gt;tortoiseSVN&lt;/a&gt; so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;in Fogbugz – set “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;” and “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;”. To do this, you need to go to your fogbugz account, to Settings → site → Main. Grab your repository URL from beanstalk, add “browse/^FILE” to it and set it as “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;”. It should look something like that:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepository/browse/^FILE
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; And “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;” will be&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepositroy/diff/path/^FILE?from=^R2&amp;amp;amp;to=^R1
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Voila! Everything should be working.&lt;/p&gt;
-&lt;p&gt;So the workflow will be like that:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;If you have a bug or a feature request, you enter it to Fogbugz, it will get a number assigned.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;When you (or someone else) start working on a bug, you just edit your code and then commit it. When committing, you can add tags to a commit message. For example, if you do a commit with the following message:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; [case:34 status:resolved] 
- fixed IE5.5 lack of .toFixed() support
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. &lt;a href=&quot;http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/&quot;&gt;See here&lt;/a&gt; for more commit tags.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Then in Fogbugz bug#34 you will see that it’s been just resolved and you will be able to check what files were changed and look at the diff of the changes.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So that’s it, you’ve got your bug tracking and version control software set up and integrated. It’s working online so support cost is zero, and it’s completely free :)&lt;/p&gt;
-&lt;p&gt;P.S. What’s also great about Beanstalk is that it supports twitter integration – so if you have an open-source project, your users can follow it on twitter and see what you’re committing! It also supports web-hooks API so integration is limited to your fantasy only :)&lt;/p&gt;
-&lt;p&gt;P.P.S. The only thing that’s left is database versioning control – we need something like RoR migrations, but that’s a topic for another post :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -1413,34 +1380,51 @@ System.Gadget.Flyout.show = true;
         </entry>
     
         <entry>
-            <title>Apple submitted HTTP Live Streaming spec to IETF</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-applelivestreaming.html"/>
+            <title>Beanstalkapp and Fogbugz - free online bugtracking and version control</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-beanstalkapp.html"/>
             <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-applelivestreaming.html</id>
-            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://sharovatov.wordpress.com/2009/04/28/silverlight-smooth-streaming-and-http/&quot;&gt;I’ve blogged recently&lt;/a&gt;, nearly a year ago Microsoft proposed an approach for adaptive video streaming over HTTP – Smooth Streaming. As Microsoft didn’t apply for a patent for this technology, I was hoping to see the same beautiful approach implemented in modules for other web-servers, or even as web-applications – as it’s really easy to implement.&lt;/p&gt;
-&lt;p&gt;The mistake Microsoft did was that they didn’t submit this technology standard to IETF to make it RFC – and that’s what Apple’s doing at the moment.&lt;/p&gt;
-&lt;p&gt;Yes, I’m not mistaken – Apple copied the whole idea, called it &lt;a href=&quot;http://www.ietf.org/internet-drafts/draft-pantos-http-live-streaming-00.txt&quot;&gt;HTTP Live Streaming and submitted to IETF&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Yes, there’re differences, but they are absolutely insignificant:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Apple spec suggests extending M3U format for a playlist – Microsoft uses &lt;a href=&quot;http://www.w3.org/TR/SMIL20/&quot;&gt;SMIL-compliant&lt;/a&gt; ISMC client-manifest file (i.e. playlist)&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-05-beanstalkapp.html</id>
+            <content type="html">&lt;p&gt;Once I tried &lt;a href=&quot;http://www.fogcreek.com/fogbugz/learnmore.html&quot;&gt;Fogbugz&lt;/a&gt; bug tracking &lt;a href=&quot;http://www.fogcreek.com/FogBugz/IntrotoOnDemand.html&quot;&gt;on-demand service&lt;/a&gt; and was amazed how cool it was and how easy it was to use it – no problems with installing and managing anything – just register and start working. And it’s not only a bug tracking software, but a full-fledged project management solution, and as the support cost is zero, it’s almost invaluable for small projects or your own start-up. &lt;/p&gt;
+&lt;p&gt;It’s free for 2 users only, which is more than enough if you’re running a hobby project, but if you have a budget, you can easily afford $25 for each additional user.&lt;/p&gt;
+&lt;p&gt;But in proper development you also need &lt;a href=&quot;http://en.wikipedia.org/wiki/Revision_control&quot;&gt;source code management system&lt;/a&gt; (SCM). And &lt;a href=&quot;http://www.fogcreek.com/FogBugz/docs/60/topics/advanced/Sourcecontrolintegration.html?isl=130641&quot;&gt;Fogbugz allows for great level of integration&lt;/a&gt; with all popular SCM systems. But if you choose Fogbugz on-demand to avoid support costs of running it locally, does it sound logical to install SCM locally? Definitely not.&lt;/p&gt;
+&lt;p&gt;And here comes &lt;a href=&quot;http://beanstalkapp.com/&quot;&gt;beanstalk&lt;/a&gt; – great hosted hassle-free version control service. It’s free for 3 users and a repository of up to 100Mbytes, and you can easily upgrade at any time.&lt;/p&gt;
+&lt;p&gt;In most cases, free version should suit your hobby project or start up. Beanstalk runs &lt;a href=&quot;http://en.wikipedia.org/wiki/Subversion_(software)&quot;&gt;subversion&lt;/a&gt; SCM which is almost a de-facto standard in project development and has client software for all platforms.&lt;/p&gt;
+&lt;p&gt;But the best thing in Beanstalk for me is that it provides &lt;a href=&quot;http://help.beanstalkapp.com/faqs/integration-tools/integrating-with-fogbugz&quot;&gt;integration with Fogbugz on-demand&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So you can have bug tracking/PM and version control software at no cost!&lt;/strong&gt; It is just a dream for a hobby project or a small start-up.&lt;/p&gt;
+&lt;p&gt;The installation process is dead easy:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;register at fogbugz.com for on-demand service and get &lt;strong&gt;yourproject.fogbugz.com&lt;/strong&gt; address&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Apple spec defines that the server creates the playlist – in Microsoft approach the encoder creates the playlist&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;register at beanstalkapp.com for a free account and get &lt;strong&gt;yourproject.beanstalkapp.com&lt;/strong&gt; address and login there. You will be prompted to set your first repository. I assume that you’re just starting and don’t have SCM system yet, so just zip your working directory (where all your project files are) and upload it. Your first repository will be created.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Apple spec defines encryption for media files – Microsoft doesn’t&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;go to your repository setup → integration → fogbugz. All you need to do is follow the instructions – but basically they will just need your fogbugz URL (yourproject.fogbugz.com) and username with password.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And the whole specification that’s been proposed is weird – I think they just wanted to submit it as soon as possible before Microsoft Smooth Streaming approach gets popularity and becomes de-facto standard.&lt;/p&gt;
-&lt;p&gt;Here’s what jumped at me when I was reading the spec:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;section 6.2.3. Reloading the Playlist file - why specify the expiration time of the playlist separately when HTTP 1.1 already has flexible methods for &lt;br&gt;setting expiration time of the resource?&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://help.beanstalkapp.com/faqs/getting-started-11/choosing-your-subversion-client&quot;&gt;choose your subversion client&lt;/a&gt;, download it and install. All you’ll have to configure in the client is a repository URL, it will look something like this: &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; http://yourproject.svn.beanstalkapp.com/myfirstrepo/ 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use &lt;a href=&quot;http://en.wikipedia.org/wiki/TortoiseSVN&quot;&gt;tortoiseSVN&lt;/a&gt; so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;encryption - what’s the purpose of encrypting media files when there’s HTTPS? And if there’s a purpose - HTTP already provides a place where encryption could be &amp;quot;plugged in&amp;quot; - Transfer-Encoding, why didn&amp;#39;t Apple just register another transfer-coding in IANA?&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;in Fogbugz – set “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;” and “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;”. To do this, you need to go to your fogbugz account, to Settings → site → Main. Grab your repository URL from beanstalk, add “browse/^FILE” to it and set it as “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;”. It should look something like that:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepository/browse/^FILE
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; And “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;” will be&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepositroy/diff/path/^FILE?from=^R2&amp;amp;amp;to=^R1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Voila! Everything should be working.&lt;/p&gt;
+&lt;p&gt;So the workflow will be like that:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you have a bug or a feature request, you enter it to Fogbugz, it will get a number assigned.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;EXT-X-ALLOW-CACHE - why add this if HTTP already gives flexible tools to control caching?&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;When you (or someone else) start working on a bug, you just edit your code and then commit it. When committing, you can add tags to a commit message. For example, if you do a commit with the following message:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; [case:34 status:resolved] 
+ fixed IE5.5 lack of .toFixed() support
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. &lt;a href=&quot;http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/&quot;&gt;See here&lt;/a&gt; for more commit tags.&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So as I see it – Apple was just a little bit in a hurry to propose this “standard” – looks like they took Microsoft idea, added some proprietary bits and bobs without thinking them through, didn’t use what HTTP natively provides but bravely called the draft “&lt;strong&gt;HTTP&lt;/strong&gt; Live Streaming”.&lt;/p&gt;
-&lt;p&gt;Awesome.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Then in Fogbugz bug#34 you will see that it’s been just resolved and you will be able to check what files were changed and look at the diff of the changes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So that’s it, you’ve got your bug tracking and version control software set up and integrated. It’s working online so support cost is zero, and it’s completely free :)&lt;/p&gt;
+&lt;p&gt;P.S. What’s also great about Beanstalk is that it supports twitter integration – so if you have an open-source project, your users can follow it on twitter and see what you’re committing! It also supports web-hooks API so integration is limited to your fantasy only :)&lt;/p&gt;
+&lt;p&gt;P.P.S. The only thing that’s left is database versioning control – we need something like RoR migrations, but that’s a topic for another post :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -1644,6 +1628,38 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
         </entry>
     
         <entry>
+            <title>Apple submitted HTTP Live Streaming spec to IETF</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-applelivestreaming.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-applelivestreaming.html</id>
+            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://sharovatov.wordpress.com/2009/04/28/silverlight-smooth-streaming-and-http/&quot;&gt;I’ve blogged recently&lt;/a&gt;, nearly a year ago Microsoft proposed an approach for adaptive video streaming over HTTP – Smooth Streaming. As Microsoft didn’t apply for a patent for this technology, I was hoping to see the same beautiful approach implemented in modules for other web-servers, or even as web-applications – as it’s really easy to implement.&lt;/p&gt;
+&lt;p&gt;The mistake Microsoft did was that they didn’t submit this technology standard to IETF to make it RFC – and that’s what Apple’s doing at the moment.&lt;/p&gt;
+&lt;p&gt;Yes, I’m not mistaken – Apple copied the whole idea, called it &lt;a href=&quot;http://www.ietf.org/internet-drafts/draft-pantos-http-live-streaming-00.txt&quot;&gt;HTTP Live Streaming and submitted to IETF&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Yes, there’re differences, but they are absolutely insignificant:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Apple spec suggests extending M3U format for a playlist – Microsoft uses &lt;a href=&quot;http://www.w3.org/TR/SMIL20/&quot;&gt;SMIL-compliant&lt;/a&gt; ISMC client-manifest file (i.e. playlist)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Apple spec defines that the server creates the playlist – in Microsoft approach the encoder creates the playlist&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Apple spec defines encryption for media files – Microsoft doesn’t&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And the whole specification that’s been proposed is weird – I think they just wanted to submit it as soon as possible before Microsoft Smooth Streaming approach gets popularity and becomes de-facto standard.&lt;/p&gt;
+&lt;p&gt;Here’s what jumped at me when I was reading the spec:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;section 6.2.3. Reloading the Playlist file - why specify the expiration time of the playlist separately when HTTP 1.1 already has flexible methods for &lt;br&gt;setting expiration time of the resource?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;encryption - what’s the purpose of encrypting media files when there’s HTTPS? And if there’s a purpose - HTTP already provides a place where encryption could be &amp;quot;plugged in&amp;quot; - Transfer-Encoding, why didn&amp;#39;t Apple just register another transfer-coding in IANA?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;EXT-X-ALLOW-CACHE - why add this if HTTP already gives flexible tools to control caching?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So as I see it – Apple was just a little bit in a hurry to propose this “standard” – looks like they took Microsoft idea, added some proprietary bits and bobs without thinking them through, didn’t use what HTTP natively provides but bravely called the draft “&lt;strong&gt;HTTP&lt;/strong&gt; Live Streaming”.&lt;/p&gt;
+&lt;p&gt;Awesome.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Common Internet Scheme Syntax</title>
             <link href="http://sharovatov.github.io/posts/2009-04-commoninternetscheme.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -1738,20 +1754,6 @@ content:&lt;/p&gt;
 &lt;p&gt;I also asked MSN Live Search Team about that – hope they reply soon – I’ll update the post.&lt;/p&gt;
 &lt;p&gt;So – use this approach if you have a page which is accessed by both HTTP and HTTPS and whenever you need to reference any resource from a different host on this page. Plus this host must support both HTTP and HTTPS :)&lt;/p&gt;
 &lt;p&gt;McAffee SiteScan button uses this in their image - &lt;strong&gt;check!&lt;/strong&gt;&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>rel=&quot;canonical&quot;</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-canonical.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-canonical.html</id>
-            <content type="html">&lt;p&gt;I recently found out a very useful SEO stuff supported by Google (&lt;a href=&quot;http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html&quot;&gt;here&lt;/a&gt;), Microsoft Live Search (&lt;a href=&quot;http://blogs.msdn.com/webmaster/archive/2009/02/12/partnering-to-help-solve-duplicate-content-issues.aspx&quot;&gt;here&lt;/a&gt;), Yahoo (&lt;a href=&quot;http://blog.ask.com/2009/02/ask-is-going-canonical.html&quot;&gt;here&lt;/a&gt;) and Ask.com ( &lt;a href=&quot;http://ysearchblog.com/2009/02/12/fighting-duplication-adding-more-arrows-to-your-quiver/&quot;&gt;here&lt;/a&gt;) – canonical links.&lt;/p&gt;
-&lt;p&gt;Basically, if you have a page accessible by multiple URLs, from search engine’s prospective you’re bloating its database by serving duplicate content. So to avoid this, you have to set &lt;code&gt;&amp;lt;link rel=&amp;quot;canonical&amp;quot; href=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt; with &lt;code&gt;href&lt;/code&gt; pointing to the original URL of this page. Search engines will check the url in href attr and won’t put a duplicate content penalty on your pages.&lt;/p&gt;
-&lt;p&gt;Useful thing to remember and use!&lt;/p&gt;
-&lt;p&gt;WordPress (&lt;a href=&quot;http://wordpress.org/extend/plugins/canonical/&quot;&gt;here&lt;/a&gt;) and RoR (
-&lt;a href=&quot;http://github.com/mbleigh/canonical-url/tree/master&quot;&gt;here&lt;/a&gt;) have already got plugins for canonical URL support. Hope to see support for this useful rel in other frameworks, forum and blog engines.&lt;/p&gt;
-&lt;p&gt;And I just found an &lt;a href=&quot;http://annevankesteren.nl/2009/04/rev-canonical&quot;&gt;interesting post on this topic&lt;/a&gt; by Anne van Kesteren with interesting discussion going in comments.&lt;/p&gt;
 </content>
         </entry>
     
@@ -2153,6 +2155,20 @@ h1 { font-family: myFont; }
         </entry>
     
         <entry>
+            <title>rel=&quot;canonical&quot;</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-canonical.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-canonical.html</id>
+            <content type="html">&lt;p&gt;I recently found out a very useful SEO stuff supported by Google (&lt;a href=&quot;http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html&quot;&gt;here&lt;/a&gt;), Microsoft Live Search (&lt;a href=&quot;http://blogs.msdn.com/webmaster/archive/2009/02/12/partnering-to-help-solve-duplicate-content-issues.aspx&quot;&gt;here&lt;/a&gt;), Yahoo (&lt;a href=&quot;http://blog.ask.com/2009/02/ask-is-going-canonical.html&quot;&gt;here&lt;/a&gt;) and Ask.com ( &lt;a href=&quot;http://ysearchblog.com/2009/02/12/fighting-duplication-adding-more-arrows-to-your-quiver/&quot;&gt;here&lt;/a&gt;) – canonical links.&lt;/p&gt;
+&lt;p&gt;Basically, if you have a page accessible by multiple URLs, from search engine’s prospective you’re bloating its database by serving duplicate content. So to avoid this, you have to set &lt;code&gt;&amp;lt;link rel=&amp;quot;canonical&amp;quot; href=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt; with &lt;code&gt;href&lt;/code&gt; pointing to the original URL of this page. Search engines will check the url in href attr and won’t put a duplicate content penalty on your pages.&lt;/p&gt;
+&lt;p&gt;Useful thing to remember and use!&lt;/p&gt;
+&lt;p&gt;WordPress (&lt;a href=&quot;http://wordpress.org/extend/plugins/canonical/&quot;&gt;here&lt;/a&gt;) and RoR (
+&lt;a href=&quot;http://github.com/mbleigh/canonical-url/tree/master&quot;&gt;here&lt;/a&gt;) have already got plugins for canonical URL support. Hope to see support for this useful rel in other frameworks, forum and blog engines.&lt;/p&gt;
+&lt;p&gt;And I just found an &lt;a href=&quot;http://annevankesteren.nl/2009/04/rev-canonical&quot;&gt;interesting post on this topic&lt;/a&gt; by Anne van Kesteren with interesting discussion going in comments.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>startpanic.com and :visited links privacy issue</title>
             <link href="http://sharovatov.github.io/posts/2009-04-visited.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -2226,6 +2242,37 @@ links in Incognito Mode. However, &lt;a href=&quot;http://codereview.chromium.or
 &lt;p&gt;This approach looks nice and will give users some protection, but as it was pointed by &lt;a href=&quot;http://lists.w3.org/Archives/Public/www-svg/2008Sep/0112.html&quot;&gt;Robert O’Callahan here&lt;/a&gt;, it will fail if it becomes possible to read the actual color of the link after actual styling is done. So this approach has to be applied very carefully – for example, if Canvas &lt;a href=&quot;http://mxr.mozilla.org/mozilla/source/content/canvas/src/nsCanvasRenderingContext2D.cpp#2352&quot;&gt;drawWindow object was available not only to Fx extensions&lt;/a&gt;, it would mean that attacker would still be able to get resulting color from the second styling context. I really hope this never happens.&lt;/p&gt;
 &lt;p&gt;So I was wrong because I thought that no browser vendor would go and fix this technically, while it seems quite doable and thanks to David Baron, it will appear in Gecko. With careful integration, this approach will protect from most of the possible attacks and will still provide a way for authors to make visited and not visited links distinguishable in their designs.&lt;/p&gt;
 &lt;p&gt;We’ll now see what other browser vendors will do, and this will become especially interesting if Firefox does a good marketing campaign from this feature.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Internet Explorer 8 beta 2 — new tests</title>
+            <link href="http://sharovatov.github.io/posts/2008-12-ie8b2.html"/>
+            <updated>2008-12-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2008-12-ie8b2.html</id>
+            <content type="html">&lt;p&gt;Finally I had some time to test Internet Explorer 8 beta 2, so first of all I ran all the test I had previously done to check if bugs were fixed.&lt;/p&gt;
+&lt;p&gt;Here&amp;#39;s the list:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;applying &lt;code&gt;:first-child&lt;/code&gt; selector to dynamically added element still doesn&amp;#39;t work, see &lt;a href=&quot;http://sharovatov.ru/testcases/addingFirstChild.html&quot;&gt;the testcase&lt;/a&gt;. When you click on &amp;quot;Add first child&amp;quot; button, a new paragraph is added which then becomes the actual first-child of the parent div and only this new paragraph should apply CSS rules defined for the corresponding &lt;code&gt;:first-child&lt;/code&gt; selector. In IE8b2 new element gets the CSS applied, but the element that previously was first-child doesn&amp;#39;t lose CSS as if it still was the first child (see &lt;a href=&quot;http://sharovatov.ru/screenshots/addingFirstChild.jpg&quot;&gt;IE8b2 screenshot&lt;/a&gt; and &lt;a href=&quot;http://sharovatov.ru/screenshots/addingFirstChild_proper.jpg&quot;&gt;Google Chrome screenshot&lt;/a&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;:last-child&lt;/code&gt; is still not supported. Of course, it&amp;#39;s CSS3, but it would be really handy to have this supported and most browsers already support &lt;code&gt;:last-child&lt;/code&gt;. See &lt;a href=&quot;http://sharovatov.ru/testcases/lastchild.html&quot;&gt;testcase&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Now about bugs that I blogged about &lt;a href=&quot;http://sharovatov.wordpress.com/2008/04/08/ie8b1-generated-content-support/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;http://sharovatov.wordpress.com/2008/05/06/ie8b1-attribute-selectors-generated-content/&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;position: relative for the generated content rule&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - now &lt;a href=&quot;http://sharovatov.ru/testcases/genPosition.html&quot;&gt;the testcase&lt;/a&gt; doesn&amp;#39;t kill the tab where it&amp;#39;s been opened.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;generated content is created after window.onload&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - now all the generated content is created right at the stage of applying CSS rules which can be &lt;a href=&quot;http://sharovatov.ru/testcases/textOnly.html&quot;&gt;clearly seen here&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;&lt;code&gt;content: attr(class)&lt;/code&gt; showing &lt;code&gt;null&lt;/code&gt;&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - now IE8b2 correctly shows the value of class attribute. &lt;code&gt;content: attr(className)&lt;/code&gt; results as an empty string, right as it&amp;#39;s defined in the CSS spec for non-existing attributes. Here&amp;#39;s &lt;a href=&quot;http://sharovatov.ru/testcases/classNameBug.html&quot;&gt;the testcase&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;expressions don&amp;#39;t work in generated content&lt;/em&gt; - &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2008/10/16/ending-expressions.aspx&quot;&gt;expressions don&amp;#39;t work in standards compliancy mode any more&lt;/a&gt; at all, so this bug is outdated&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;&lt;code&gt;text-transform&lt;/code&gt; doesn&amp;#39;t work for generated content&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - see &lt;a href=&quot;http://sharovatov.ru/testcases/genContTextTransform2.html&quot;&gt;testcase&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;&lt;code&gt;text-indent&lt;/code&gt; doesn&amp;#39;t work for generated content&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - see &lt;a href=&quot;http://sharovatov.ru/testcases/genContTextIndent2.html&quot;&gt;testcase&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So I was really convinced by IE8b1 tests that some hidden javascript code was used to support generated content, but now I&amp;#39;m absolutely sure that IE8b2 has decent native support for generated content and attribute selectors! Plus all the text-transform, text-align, text-indent issues are now fixed!&lt;/p&gt;
 </content>
         </entry>
     
@@ -2341,37 +2388,6 @@ links in Incognito Mode. However, &lt;a href=&quot;http://codereview.chromium.or
 &lt;li&gt;&lt;p&gt;Set MSSQL mirroring so that both SQL servers synchronise transparently, in which case we wouldn&amp;#39;t have a downtime of two hours when clients could&amp;#39;t place orders. This wasn&amp;#39;t possible with our old virtual hosting.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Internet Explorer 8 beta 2 — new tests</title>
-            <link href="http://sharovatov.github.io/posts/2008-12-ie8b2.html"/>
-            <updated>2008-12-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2008-12-ie8b2.html</id>
-            <content type="html">&lt;p&gt;Finally I had some time to test Internet Explorer 8 beta 2, so first of all I ran all the test I had previously done to check if bugs were fixed.&lt;/p&gt;
-&lt;p&gt;Here&amp;#39;s the list:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;applying &lt;code&gt;:first-child&lt;/code&gt; selector to dynamically added element still doesn&amp;#39;t work, see &lt;a href=&quot;http://sharovatov.ru/testcases/addingFirstChild.html&quot;&gt;the testcase&lt;/a&gt;. When you click on &amp;quot;Add first child&amp;quot; button, a new paragraph is added which then becomes the actual first-child of the parent div and only this new paragraph should apply CSS rules defined for the corresponding &lt;code&gt;:first-child&lt;/code&gt; selector. In IE8b2 new element gets the CSS applied, but the element that previously was first-child doesn&amp;#39;t lose CSS as if it still was the first child (see &lt;a href=&quot;http://sharovatov.ru/screenshots/addingFirstChild.jpg&quot;&gt;IE8b2 screenshot&lt;/a&gt; and &lt;a href=&quot;http://sharovatov.ru/screenshots/addingFirstChild_proper.jpg&quot;&gt;Google Chrome screenshot&lt;/a&gt;).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;:last-child&lt;/code&gt; is still not supported. Of course, it&amp;#39;s CSS3, but it would be really handy to have this supported and most browsers already support &lt;code&gt;:last-child&lt;/code&gt;. See &lt;a href=&quot;http://sharovatov.ru/testcases/lastchild.html&quot;&gt;testcase&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Now about bugs that I blogged about &lt;a href=&quot;http://sharovatov.wordpress.com/2008/04/08/ie8b1-generated-content-support/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;http://sharovatov.wordpress.com/2008/05/06/ie8b1-attribute-selectors-generated-content/&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;position: relative for the generated content rule&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - now &lt;a href=&quot;http://sharovatov.ru/testcases/genPosition.html&quot;&gt;the testcase&lt;/a&gt; doesn&amp;#39;t kill the tab where it&amp;#39;s been opened.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;generated content is created after window.onload&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - now all the generated content is created right at the stage of applying CSS rules which can be &lt;a href=&quot;http://sharovatov.ru/testcases/textOnly.html&quot;&gt;clearly seen here&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;&lt;code&gt;content: attr(class)&lt;/code&gt; showing &lt;code&gt;null&lt;/code&gt;&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - now IE8b2 correctly shows the value of class attribute. &lt;code&gt;content: attr(className)&lt;/code&gt; results as an empty string, right as it&amp;#39;s defined in the CSS spec for non-existing attributes. Here&amp;#39;s &lt;a href=&quot;http://sharovatov.ru/testcases/classNameBug.html&quot;&gt;the testcase&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;expressions don&amp;#39;t work in generated content&lt;/em&gt; - &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2008/10/16/ending-expressions.aspx&quot;&gt;expressions don&amp;#39;t work in standards compliancy mode any more&lt;/a&gt; at all, so this bug is outdated&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;&lt;code&gt;text-transform&lt;/code&gt; doesn&amp;#39;t work for generated content&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - see &lt;a href=&quot;http://sharovatov.ru/testcases/genContTextTransform2.html&quot;&gt;testcase&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;em&gt;&lt;code&gt;text-indent&lt;/code&gt; doesn&amp;#39;t work for generated content&lt;/em&gt; - &lt;strong&gt;fixed&lt;/strong&gt; - see &lt;a href=&quot;http://sharovatov.ru/testcases/genContTextIndent2.html&quot;&gt;testcase&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So I was really convinced by IE8b1 tests that some hidden javascript code was used to support generated content, but now I&amp;#39;m absolutely sure that IE8b2 has decent native support for generated content and attribute selectors! Plus all the text-transform, text-align, text-indent issues are now fixed!&lt;/p&gt;
 </content>
         </entry>
     
