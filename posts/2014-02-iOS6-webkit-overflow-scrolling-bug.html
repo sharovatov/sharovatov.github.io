@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iOS6 Safari &quot;scroll to top&quot; doesn’t work when -webkit-overflow-scrolling: touch is set</title>
+    <meta name="generator" content="DocPad v6.60.3" />
+    <link  rel="stylesheet" href="/styles/style.css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+</head>
+<body>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>iOS6 Safari &quot;scroll to top&quot; doesn’t work when -webkit-overflow-scrolling: touch is set</h1>
+<p>iOS5 introduced a useful CSS property that brings overflow’ed elements native scrolling animation: <code>-webkit-overflow-scroll: touch</code>. However, recently I noticed that in iOS6 if this property is set on at least one element on the page, the whole page stops scrolling to top when user taps the top of the page.</p>
+<p>Here&#39;s a <a href="http://sharovatov.ru/ios6/index.html">testpage</a>, when it&#39;s initially loaded, the horizontal list of square icons is scrollable but doesn&#39;t have <code>-webkit-overflow-scroll: touch</code> set, so the horizontal list scrolling looks more like dragging the elements rather than proper native scrolling. But if you scroll down and tap the top of the screen, the page gets scrolled to top, rightly as intended.</p>
+<p>And when &quot;set -webkit-overflow-scrolling: touch&quot; button is clicked, scrolling experience in the horizontal list gets accelerated and native scrolling experience is enabled. However, tap-on-top suddenly stops working.</p>
+<p>I could not find any quick hack to get both <code>-webkit-overflow-scroll: touch</code> and tap-on-top working, so if both features are required for your design and you have to support iOS6, I suggest replacing <code>-webkit-overflow-scroll: touch</code> with <a href="http://ariya.ofilabs.com/2013/08/javascript-kinetic-scrolling-part-1.html">natural kinetic scrolling</a> only for iOS6. </p>
+<p>iOS7 has this bug fixed, and <a href="https://developer.apple.com/support/appstore/">according to Apple</a>, iOS7 adoption is 87% already, so there&#39;s less and less sense in spending resources on supporting iOS6, especially with such minor issues.</p>
+
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-02-iOS6-webkit-overflow-scrolling-bug.html';
+		window.disqus_identifier = 'posts-2014-02-iOS6-webkit-overflow-scrolling-bug';
+		window.disqus_title = 'iOS6 Safari "scroll to top" doesn’t work when -webkit-overflow-scrolling: touch is set';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+    </div>
+    
+</body>
+</html>
