@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>data URI browser issues</h1>
- <div><h2 id="length-limit">Length limit</h2>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>data URI browser issues</h1>
+<h2 id="length-limit">Length limit</h2>
 <h3 id="theory">Theory</h3>
 <p><a href="http://www.ietf.org/rfc/rfc2397.txt">data URI specification</a> says the following:</p>
 <blockquote>
@@ -82,8 +92,8 @@ string values. </p>
 </li>
 </ul>
 <p>P.S. And here’s a great tool from Nicholas C. Zakas – <a href="http://www.nczonline.net/blog/2009/11/03/automatic-data-uri-embedding-in-css-files/">CSSEmbed</a> – it reads the CSS file you want, finds all the images references, converts images to dataURIes and saves resulting CSS file. So if you have small presentational images referenced in your CSS file, feed CSSEmbed with your CSS file and you’ll get them all converted in one go! Nice and simple! This tool can be also easily integrated into your publishing process if required.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -110,7 +120,7 @@ string values. </p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

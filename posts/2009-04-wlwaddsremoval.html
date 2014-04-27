@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Windows Live Messenger adds removal</h1>
- <div><p>If you use Windows Live Messenger 2009 and you don’t want to watch adds – there’re two simple ways to disable them:</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Windows Live Messenger adds removal</h1>
+<p>If you use Windows Live Messenger 2009 and you don’t want to watch adds – there’re two simple ways to disable them:</p>
 <ul>
 <li><p>add rad.msn.com to a list of Restricted Sites in your Internet Explorer</p>
 </li>
@@ -21,8 +31,8 @@
 <p>Both ways will stop Live Messenger from downloading advertisement. I don’t know if these ways are legal, but we’re not touching Live Messenger, not disassembling it or doing anything specifically prohibited.</p>
 <p>As always, there’s a patch (<a href="http://apatch.org/">apatch</a>), but as it modifies Live Messenger dlls, it certainly breaches the EULA.</p>
 <p>The same approach can be used for blocking ads in all kinds of messengers – you just need to find out which host adds are served from and if your messenger uses IE settings, add it to restricted zone list, or to the hosts file with 0.0.0.0 address.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -49,7 +59,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

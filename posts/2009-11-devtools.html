@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Browsers' developer tools evolution</h1>
- <div><p>It’s great to see that better tools for developer start to appear.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Browsers' developer tools evolution</h1>
+<p>It’s great to see that better tools for developer start to appear.</p>
 <p>As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome <a href="http://ajax.dynatrace.com/pages/">dynaTrace Ajax</a>!</p>
 <p><a href="http://ajax.dynatrace.com/pages/">dynaTrace Ajax</a> supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.</p>
 <p>Here’s what John Resig, creator of JQuery library says about the tool:</p>
@@ -28,8 +38,8 @@
 <a href="http://www.youtube.com/watch?v=OxW1dCjOstE">has its own CPU &amp; heap profilers now</a> on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.</p>
 <p>Come on, Opera team!</p>
 <p>P.S. and by the way, Opera, can we get inPrivate browsing mode please?</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -56,7 +66,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

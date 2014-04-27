@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>IE8 Rendering Modes theory and practice</h1>
- <div><p>Many web-developers moan about the Rendering Modes switch that’s been introduced in IE8. I’ve got some thoughts on this.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>IE8 Rendering Modes theory and practice</h1>
+<p>Many web-developers moan about the Rendering Modes switch that’s been introduced in IE8. I’ve got some thoughts on this.</p>
 <h2 id="rendering-modes-switches-history">Rendering modes switches history</h2>
 <p>As you may know, IE5 on Mac (followed by IE6 on Windows) introduced Quirks and Standards compliancy modes with a DOCTYPE switcher. All other browsers followed the move and introduced similar approach – they tried to mimic IE behaviour in quirks mode and tried supporting CSS as close to the W3C standard as they could</p>
 <p>DOCTYPE switch approach was really straight forward – if you put a valid DOCTYPE for your HTML page, browser switches to the standards compliancy mode; if DOCTYPE is omitted, quirks mode is used.</p>
@@ -139,8 +149,8 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 <p>With great set of developer tools that Microsoft provided for IE8 you can also view what rendering is being used and change it if required. This is useful for developers only and overrides any other settings. It’s very useful for testing – you don’t need IE7 in a virtual machine to test how a page looks in IE7 – just press F12 to get the developer tools and play with Browser modes or Document modes :)</p>
 <p>Hope I managed to cover all the modes. In future posts I’ll write more on this topic.</p>
 <p>P.S. As SelenIT pointed in comments, it’s very important that X-UA-Compatible meta tag must be put <strong>before</strong> any other elements in the head section, otherwise it might not work!</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -167,7 +177,7 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

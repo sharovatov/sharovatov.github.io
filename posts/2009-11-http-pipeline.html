@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>HTTP persistent connections, pipelining and chunked encoding</h1>
- <div><p>When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>HTTP persistent connections, pipelining and chunked encoding</h1>
+<p>When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.</p>
 <p>And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)</p>
 <p>So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
 encoding.</p>
@@ -47,8 +57,8 @@ encoding.</p>
 <li><p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html">HTTP/1.1 Chunked encoding</a></p>
 </li>
 </ul>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -75,7 +85,7 @@ encoding.</p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

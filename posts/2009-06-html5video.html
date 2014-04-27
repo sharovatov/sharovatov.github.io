@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>HTML5 video tag and Internet Explorer</h1>
- <div><p>It’s interesting to see how popular <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>HTML5 video tag and Internet Explorer</h1>
+<p>It’s interesting to see how popular <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.</p>
 <p>The whole situation reminds me of AJAX where original concept was invented by Microsoft (actual ActiveX was shipped with IE5 in 1999), then it was standardised by W3C (in a different way), then implemented by other browsers, and then people started accusing IE for not supporting this new W3C standard.</p>
 <p>The same thing is now happening with inline video/audio playback concept, which has been introduced in IE2 in 1995, almost 15 years ago. Yes, 15 years ago, when W3C has been just founded and was still asking <a href="http://www.csail.mit.edu/">MIT/CSAIL</a> to join. And now this functionality is being spec’ed in HTML5 as <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> tags. Opera, Firefox, Safari and Google Chrome start supporting <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> and are making a loud marketing message of it.</p>
 <p>The original concept that was introduced in IE2 (and supported in following versions) was adding a <code>DYNSRC</code> attribute to <code>IMG</code> element:</p>
@@ -23,8 +33,8 @@
 <p>World changes, and now the functionality that nobody’s been using for a decade seems really new and interesting. It’s great that WHATWG is spending time on defining clear standard on how this should work and it’s really cool that Chrome, Firefox, Opera and Safari already support this draft. Of course, Silverlight supports greater level of RIA, but giving that IE Team is now really focused on following public standards, </p>
 <p>I hope that in IE9 we’ll have native support for <code>&lt;video&gt;</code>/<code>&lt;audio&gt;</code> as we had native support for XMLHttpRequest in IE7.</p>
 <p>But my point is – credit for inline video playback functionality invention should be definitely given to IE2.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -51,7 +61,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

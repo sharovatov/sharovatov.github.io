@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>X-FRAME-OPTIONS</h1>
- <div><p>This X-FRAME-OPTIONS HTTP header invented by Microsoft for IE8 provides an easy way to work around <a href="http://en.wikipedia.org/wiki/Clickjacking">Clickjacking</a> security issue (see <a href="http://w2spconf.com/2010/papers/p27.pdf">this great paper</a> for even more details). The main article explaining how X-FRAME-OPTION works is this: <a href="http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx">http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx</a></p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>X-FRAME-OPTIONS</h1>
+<p>This X-FRAME-OPTIONS HTTP header invented by Microsoft for IE8 provides an easy way to work around <a href="http://en.wikipedia.org/wiki/Clickjacking">Clickjacking</a> security issue (see <a href="http://w2spconf.com/2010/papers/p27.pdf">this great paper</a> for even more details). The main article explaining how X-FRAME-OPTION works is this: <a href="http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx">http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx</a></p>
 <p>Basically, here’s what behaviour you get with different X-FRAME-OPTIONS values:</p>
 <table border="0" cellspacing="0" cellpadding="5" width="703">
     <tbody>
@@ -38,8 +48,8 @@
 <p>In any case, study the security papers I linked to above to understand how the attack works and what it can do to your visitors or your business.</p>
 <p>However, if you strongly believe no one should embed your page in an iframe – then your silver bullet is to add <code>X-FRAME-OPTIONS: DENY</code> to all the pages you serve.</p>
 <p>P.S. X-FRAME-OPTIONS is now proposed to IETF: <a href="http://tools.ietf.org/html/draft-gondrom-frame-options-01">http://tools.ietf.org/html/draft-gondrom-frame-options-01</a></p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -66,7 +76,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

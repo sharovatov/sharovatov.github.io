@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Javascript Events</h1>
- <div><p>Пожалуй, события (а точнее, обработчики событий) в javascript играют чуть ли не самую важную роль - именно благодаря обработке событий возможно интерактивное общение веб-приложения с пользователем. Изначально обработчики событий начал поддерживать браузер Netscape 2, следом IE3, и затем уже все остальные браузеры.
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Javascript Events</h1>
+<p>Пожалуй, события (а точнее, обработчики событий) в javascript играют чуть ли не самую важную роль - именно благодаря обработке событий возможно интерактивное общение веб-приложения с пользователем. Изначально обработчики событий начал поддерживать браузер Netscape 2, следом IE3, и затем уже все остальные браузеры.
 В этом посте я начну рассказывать про события в js, в течение месяца постараюсь &quot;добить&quot; тему событий и приступить к более интересным вещам.</p>
 <h3 id="-">Способы установки обработчиков</h3>
 <p>Существуют четыре варианта &quot;навешивания&quot; обработчиков на определенное событие:</p>
@@ -257,8 +267,8 @@ window.onload = function(e) {
 </li>
 </ol>
 <p><strong>test</strong></p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -285,7 +295,7 @@ window.onload = function(e) {
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

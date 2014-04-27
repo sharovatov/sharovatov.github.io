@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>HTTP Chunked Encoding</h1>
- <div><p>Did you notice that some pages on the internet start rendering in your browser incrementally, block after block, and on some sites you have to sit and look at the white screen and then get the full page in one second?</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>HTTP Chunked Encoding</h1>
+<p>Did you notice that some pages on the internet start rendering in your browser incrementally, block after block, and on some sites you have to sit and look at the white screen and then get the full page in one second?</p>
 <p>There’re two main problems that can make your browser wait for the whole page to load before it starts parsing it:</p>
 <ul>
 <li><p>if you’re using IE6 and the page you’re viewing has table-based layout without COLGROUPs/COLs specifying width or <code>table-layout: fixed</code> CSS rule.</p>
@@ -54,8 +64,8 @@
 <p>Before the widespread popularization of AJAX (another Microsoft-invented technology) – Chunked Encoding was used as a core for so-called “<a href="http://en.wikipedia.org/wiki/Push_technology">Server Push</a>” approach for building web-chats and other <em>streaming</em> purposes. The idea was simple – server didn’t close the HTTP connection and kept on sending chunk after chunk with new messages or other data. This approach had serious drawbacks – e.g. for each new client server had to instantiate a new connection (which eats resources), browsers had a limit on waiting time, so the page had to be reloaded once in a while and so on. But anyway, Chunked Encoding was widely used.</p>
 <p>In my company we use Chunked Encoding to show loading progressbar in our <a href="http://www.realrussia.co.uk/main_train_screen.asp">online train tickets ordering system</a> – we
 serve the first chunk with nicely styled <code>&lt;div id=”loading”&gt;&lt;/div&gt;</code> and when the data for the main table is ready, we serve it in the second chunk. And after the document is fully loaded, javascript routine hides <code>&lt;div id=”loading”&gt;&lt;/div&gt;</code> :) Simple and nice.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -82,7 +92,7 @@ serve the first chunk with nicely styled <code>&lt;div id=”loading”&gt;&lt;/
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

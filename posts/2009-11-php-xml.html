@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>PHP loadHTMLFile and a html file without DOCTYPE</h1>
- <div><p>Just noticed that when you parse an html file with <code>DOMDocument</code>’s method <code>loadHTMLFile</code> and <strong>there&#39;s no DOCTYPE defined in your html, PHP will silently load an empty DOM document</strong>.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>PHP loadHTMLFile and a html file without DOCTYPE</h1>
+<p>Just noticed that when you parse an html file with <code>DOMDocument</code>’s method <code>loadHTMLFile</code> and <strong>there&#39;s no DOCTYPE defined in your html, PHP will silently load an empty DOM document</strong>.</p>
 <p>Just try saving the following in a test.html file:</p>
 <pre><code>&lt;html&gt;&lt;body&gt;&lt;div id=&quot;toc&quot;&gt;wtf&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
 </code></pre><p>And then run the following php code:</p>
@@ -49,8 +59,8 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
 </code></pre><p>And the only way to properly get rid of this warning is to add</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 </code></pre><p>to the first line of your html document and it finally worked without any warnings or issues. Awesome. XML header must be used for <code>load**HTML**File</code> to run properly. Way too buggy to use.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -77,7 +87,7 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

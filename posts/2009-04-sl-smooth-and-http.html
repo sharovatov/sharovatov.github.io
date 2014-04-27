@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Silverlight smooth streaming and HTTP</h1>
- <div><p>I’ve read about smooth streaming technology, and I must say, I just love the way it works. It automatically and smoothly adjusts video quality and allows clients to view smooth video online regardless of their bandwidth and without a need to sit and wait staring at “buffering” message for ages – what it does it dynamically changes the video quality based on network bandwidth, CPU load and other factors.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Silverlight smooth streaming and HTTP</h1>
+<p>I’ve read about smooth streaming technology, and I must say, I just love the way it works. It automatically and smoothly adjusts video quality and allows clients to view smooth video online regardless of their bandwidth and without a need to sit and wait staring at “buffering” message for ages – what it does it dynamically changes the video quality based on network bandwidth, CPU load and other factors.</p>
 <p>It’s idea and implementation are so simple and beautiful that I wonder why nobody didn’t invent it earlier.</p>
 <p>This is what steps you have to follow to make it work:</p>
 <ol>
@@ -70,8 +80,8 @@ always seamlessly switch to Akamai.</p>
 </li>
 </ul>
 <p>As soon as I get my IIS7, I’ll definitely try streaming something :)</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -98,7 +108,7 @@ always seamlessly switch to Akamai.</p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

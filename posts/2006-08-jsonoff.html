@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>разные стили при js on/off</h1>
- <div><p>Часто на сайтах некий функционал реализован целиком на js. Всё бы хорошо, но некоторые несознательные граждане отключают выполнение javascript в браузере, тем самым выключая весь этот замечательный функционал :). И остаются потом пустые контролы, нефункционирующие кнопки и прочая прочая. Поэтому всё сознательное человечество пользователям с выключенным js не показывает элементы, которые без js бессмысленны. Раньше это делалось двумя вариантами
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>разные стили при js on/off</h1>
+<p>Часто на сайтах некий функционал реализован целиком на js. Всё бы хорошо, но некоторые несознательные граждане отключают выполнение javascript в браузере, тем самым выключая весь этот замечательный функционал :). И остаются потом пустые контролы, нефункционирующие кнопки и прочая прочая. Поэтому всё сознательное человечество пользователям с выключенным js не показывает элементы, которые без js бессмысленны. Раньше это делалось двумя вариантами
 (с небольшими вариациями):</p>
 <ol>
 <li><p>генерируя зависящее от js содержимое в самом js, соответственно человек без js и не получит этого содержимого</p>
@@ -57,8 +67,8 @@
 <pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;javascript:&#39;@import url(http://host.com/js-enabled.css);&#39;&quot; /&gt;
 </code></pre><p>К сожалению, IE4 и FF не понимают иной нотации, кроме <var>@import url(someurl)</var>, причём если написать в кавычках, FF начинает кидаться эксепшнами странными, даже если всё нормально сэкранировать. Если же писать относительный урл, то опять же FF не подгружает почему-то, но как мне кажется, это всё настолько недокументировано, что можно простить странное поведение :)</p>
 <p>В общем, получается такая ситуация: если правил немного и в них мало что нужно экранировать (да-да, весь css-код в этом случае суть строка), например, если мало правил с <var>content</var>, то удобнее прописать правила прямо в такой таблице стилей. Если же правил много или не хочется ничего экранировать, то проще написать последним методом, правда, придётся писать абсолютный адрес внешней таблицы стилей.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -85,7 +95,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

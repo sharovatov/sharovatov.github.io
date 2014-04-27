@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Windows 7 Desktop Gadgets</h1>
- <div><p>I’ve been playing with Windows 7 Desktop Gadget technology and I must tell you – I just love it! And I’ll tell you why :)</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Windows 7 Desktop Gadgets</h1>
+<p>I’ve been playing with Windows 7 Desktop Gadget technology and I must tell you – I just love it! And I’ll tell you why :)</p>
 <h2 id="history">History</h2>
 <p>The approach of putting web-application right on a desktop was invented by Microsoft in 1994-95 (in <a href="http://en.wikipedia.org/wiki/Windows_Nashville">Windows Nashville</a> which was intended to be released in 1996) and was a part of Windows Desktop Update for Windows 95 and a core of Windows 98 <a href="http://en.wikipedia.org/wiki/Active_Desktop">Active Desktop</a>. You could set an HTML page (plus JS, of course) as your desktop background and it would be run in IE. Microsoft even <a href="http://web.archive.org/web/20040610054229/http://www.microsoft.com/windows/ie/previous/gallery/default.mspx">had a gallery of Active Desktop widgets</a>. So web-widgets-like functionality was around almost twelve years ago. As with many other Microsoft inventions, it was way too ahead of time.</p>
 <p>Another technology that played a role in inventing desktop gadgets is <a href="http://www.microsoft.com/technet/scriptcenter/hubs/htas.mspx">HTA</a> – short HTML applications that run in a standalone way. You had to put your scripts (VBScript or JScript) and styles in a single HTML file, add a special description and rename the file extension to .hta. Here’s a sample code:</p>
@@ -241,8 +251,8 @@ System.Gadget.Flyout.show = true;
 </ol>
 <p>Or read <a href="http://msdn.microsoft.com/en-us/library/dd370869%28VS.85%29.aspx">MSDN</a>.</p>
 <p>P.S. this gadget doesn’t have any settings or flyout or anything else – it’s very simple.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -269,7 +279,7 @@ System.Gadget.Flyout.show = true;
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

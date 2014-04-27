@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Efficient IE version targeting</h1>
- <div><p>When you’re writing a web page, you have to keep in mind that IE6 and IE7 have higher market share than all other browsers combined and IE8 has only started gaining popularity. So in most projects you have to support IE6 and IE7, even though IE6 support for CSS2.1 has a significant amount of bugs and issues. IE7 was slightly better and IE8 provides full CSS2.1 support, which is nice.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Efficient IE version targeting</h1>
+<p>When you’re writing a web page, you have to keep in mind that IE6 and IE7 have higher market share than all other browsers combined and IE8 has only started gaining popularity. So in most projects you have to support IE6 and IE7, even though IE6 support for CSS2.1 has a significant amount of bugs and issues. IE7 was slightly better and IE8 provides full CSS2.1 support, which is nice.</p>
 <p>Some web-developers whose fanatic hatred to IE blows out common sense, <a href="http://sharovatov.wordpress.com/2009/05/22/universal-internet-explorer-6-css/">propose really weird “solutions”</a>, while all sane people support all their target audience browsers with <a href="http://marketshare.hitslink.com/browser-market-share.aspx?qprid=2">significant market share</a>.</p>
 <p>So we have three IE versions with different level of CSS support. One of the most often mentioned issues is IE6’s lack of support for <a href="http://www.w3.org/TR/CSS2/selector.html#dynamic-pseudo-classes"><code>:hover</code>pseudo class</a> on elements other than links. IE7 and IE8 support <code>:hover</code> fully. Another sample is that IE8 supports <a href="http://msdn.microsoft.com/en-us/library/cc304082(VS.85).aspx#gen_content"><code>:after</code> and <code>:before</code> generated content elements</a> while IE6 and IE7 don’t. These are just two samples that spring to my mind just to show that level of CSS2.1 support really differs.</p>
 <p>The first thing that most web-developers would use to specify a CSS rule for different browsers would be CSS hacks. But this leads to problems. For example, when IE7 wasn’t yet published, and people were using IE6, many developers used star selector bug to fix CSS2.1 issues in IE. When IE7 was shipped, it fixed support for star hack, but didn’t fix all the CSS2.1 issues. So using CSS hacks is <strong>perfectly backwards compatible</strong> – you know in which already shipped browsers and their versions it works – but is <strong>not future-compatible</strong>. This is because CSS hacks do not provide an obvious mechanism for a version targeting.</p>
@@ -61,8 +71,8 @@ versions:</p>
         }
 @*/
 </code></pre><p>So even if Windows XP user installed Service Pack 3 which updated JScript compiler to version 5.7, IE6 own version will still be 6. And it’s perfectly safe to use userAgent sniffing inside a conditional comments block which will be run in IE only.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -89,7 +99,7 @@ versions:</p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>IE7, standalone, впечатления.</h1>
- <div><p>Выкачал. Сначала поставил целиком и по-нормальному, посмотреть на него :) Отличный браузер. С юзабилити поработали, сразу видно. Не понравилось только то, что поисковый движок дополнительный можно добавить только с сайта microsoft :) Ну да это всё мелочи. Читает
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>IE7, standalone, впечатления.</h1>
+<p>Выкачал. Сначала поставил целиком и по-нормальному, посмотреть на него :) Отличный браузер. С юзабилити поработали, сразу видно. Не понравилось только то, что поисковый движок дополнительный можно добавить только с сайта microsoft :) Ну да это всё мелочи. Читает
 фиды. Всяких секьюрных функций - не пересчесть. Но самое приятное в том, что он удобен, Maxthon становится просто не нужен. Но при установке он прописывает себя везде, где можно, и IE6 из компьютера пропадает... Мне это не подходит.</p>
 <p><a href="http://tredosoft.com/IE7_standalone">Выкачал</a> <i>запускалку</i>, очень удобная штука. Деинсталлировал IE7, сделал как в инструкции - распаковал содержимое установщика, положил в папку с распакованным файл ie7s.exe, запустил. Конечно, функционал не полный (фиды не работают и еще всякие вкусности), но для тестов вполне хватает. На conditional comments откликается верно, с IE6 сосуществует в таком виде ровно. Итого у меня на компьютере 5 разных версий IE %) Можно выпендриться и поставить еще и IE3.0, да только смысла нет - пользователи его либо в фидо, либо умерли.</p>
 <p>Первым делом посмотрел, как выглядит блог в IE7... Выглядит, надо сказать, неплохо, только съехал чуть-чуть вверх блок с большой картинкой и текст понизу. Самое обидное, что в IE7 у меня не вылазят алёрты. Это существенно принижает ценность IE7 как standalone-версии. Я уже думаю о vmware с winXP+ie7. Пока только думаю. Так вот, про съехавший блок. Посмотрел в свой css, ничего не увидел такого, оказалось, что собака порылась в подгружаемой блоггером автоматически своей таблице стилей:</p>
@@ -32,8 +42,8 @@
 body { padding-top: 50px !important;}
 body #header{ margin-top: 0;}
 </code></pre><p>Так правильнее, как мне кажется. И не нужны фильтры и хаки... Ещё бы blogger.com сам взял да поправил свои стили, а то уж больно много мусора в консолях FF/Opera после посещения какого-нибудь блога на блоггере. В общем, не знаю, приживётся ли IE7b3 на моей машине, надеюсь всё-таки, что скоро дождемся релиза, и что наконец-то поправят кучищу глюков.</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -60,7 +70,7 @@ body #header{ margin-top: 0;}
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

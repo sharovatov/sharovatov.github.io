@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Windows 7 Accelerators Platform</h1>
- <div><p>Cool, I just found out that great <a href="http://www.microsoft.com/windows/internet-explorer/features/accelerators.aspx?tabid=1&amp;catid=1">accelerators feature</a> that’s been introduced in IE8 is a part of Windows 7 API as <a href="http://msdn.microsoft.com/en-us/library/dd565720(VS.85).aspx">Accelerators Platform</a>.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Windows 7 Accelerators Platform</h1>
+<p>Cool, I just found out that great <a href="http://www.microsoft.com/windows/internet-explorer/features/accelerators.aspx?tabid=1&amp;catid=1">accelerators feature</a> that’s been introduced in IE8 is a part of Windows 7 API as <a href="http://msdn.microsoft.com/en-us/library/dd565720(VS.85).aspx">Accelerators Platform</a>.</p>
 <p>The whole concept is really useful – Accelerators Platform provides a unified way to enhance an text-operating application with cross-application plug-ins.</p>
 <p>Accelerators Platform provides an abstraction layer between applications and accelerators:</p>
 <ul>
@@ -40,8 +50,8 @@
 <p><a href="http://sharovatov.files.wordpress.com/2009/05/dd565720_ie8_win7_word_accelenusvs_85.jpg"><img title="Dd565720_ie8_win7_word_accel(en-us,VS_85)" border="0" alt="Dd565720_ie8_win7_word_accel(en-us,VS_85)" src="http://sharovatov.files.wordpress.com/2009/05/dd565720_ie8_win7_word_accelenusvs_85_thumb.jpg?w=340&#038;h=447" width="340" height="447"></a></p>
 <p>For more details and technical description of Accelerators Platform please visit <a href="http://msdn.microsoft.com/en-us/library/dd565720(VS.85).aspx">this MDSN article</a> and <a href="http://blogs.msdn.com/ie/archive/2009/05/07/accelerator-platform-on-windows-7.aspx">this IE Team Blog entry</a>.</p>
 <p>So go and support Accelerators Platform in your app!</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -68,7 +78,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

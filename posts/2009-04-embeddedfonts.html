@@ -6,12 +6,22 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Embedded fonts</h1>
- <div><p>Long long ago (before IE4, yes, IE4) Microsoft  proposed a standard called EOT (<a href="http://en.wikipedia.org/wiki/Embedded_OpenType">Embedded OpenType</a>) which allowed you to embed any font on your website – all you had to do was to prepare eot fonts in a free <a href="http://www.microsoft.com/typography/web/embedding/weft3/overview.aspx">WEFT tool</a> (see <a href="http://www.sean.co.uk/a/webdesign/embedding_fonts_in_webpages.shtm">nice how-to</a>) and then reference them in your CSS:</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Embedded fonts</h1>
+<p>Long long ago (before IE4, yes, IE4) Microsoft  proposed a standard called EOT (<a href="http://en.wikipedia.org/wiki/Embedded_OpenType">Embedded OpenType</a>) which allowed you to embed any font on your website – all you had to do was to prepare eot fonts in a free <a href="http://www.microsoft.com/typography/web/embedding/weft3/overview.aspx">WEFT tool</a> (see <a href="http://www.sean.co.uk/a/webdesign/embedding_fonts_in_webpages.shtm">nice how-to</a>) and then reference them in your CSS:</p>
 <pre><code>@font-face {
     font-family: myFont;
     src: url(myfont.eot);
@@ -53,8 +63,8 @@ h1 { font-family: myFont; }
 <li><p><a href="http://novemberborn.net/sifr3/web-fonts-eot">Excellent article by Mark Wubben (novemberborn) discussing license issues</a></p>
 </li>
 </ul>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -81,7 +91,7 @@ h1 { font-family: myFont; }
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>

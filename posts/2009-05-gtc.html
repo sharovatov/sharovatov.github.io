@@ -6,17 +6,27 @@
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <div class="post">
- <h1>Googletranslateclient.com and Windows Accelerator Platform</h1>
- <div><p>Yesterday <a href="http://sharovatov.wordpress.com/2009/05/20/windows-7-accelerators-platform/">I’ve blogged about Accelerators Platform</a> and now I’m looking at a website <a href="http://googletranslateclient.com">googletranslateclient.com</a> which offers to download a standalone VB6 win32 application that uses <a href="http://translate.google.com">google translate service</a> to dynamically translate a selected text.</p>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Googletranslateclient.com and Windows Accelerator Platform</h1>
+<p>Yesterday <a href="http://sharovatov.wordpress.com/2009/05/20/windows-7-accelerators-platform/">I’ve blogged about Accelerators Platform</a> and now I’m looking at a website <a href="http://googletranslateclient.com">googletranslateclient.com</a> which offers to download a standalone VB6 win32 application that uses <a href="http://translate.google.com">google translate service</a> to dynamically translate a selected text.</p>
 <p>Funny thing is that this program implements what Accelerator Platform is invented for, but in a very limited and counter-productive way – its functionality is limited to only one service so nobody can enhance it!</p>
 <p>I think the best thing Microsoft could do would be to create a program that would capture text select event in any window and <strong>add</strong> Accelerators group to the context menu of that program!</p>
 <p>Or alternatively, if this is too much work, just show Accelerators icon (<a href="http://sharovatov.files.wordpress.com/2009/05/acceleratorsicon.gif"><img title="accelerators-icon" border="0" alt="accelerators-icon" src="http://sharovatov.files.wordpress.com/2009/05/acceleratorsicon_thumb.gif?w=32&#038;h=32" width="32" height="32"></a>) when any text is selected. I’m not much of a system application developer, so I’m not sure this is easy to do, but I’m sure people would benefit from it and developers wouldn’t need to add Accelerators API support in their apps!</p>
-</div>
- <div class="comments"><div id="disqus_thread"></div>
+
+<div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
@@ -43,7 +53,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
-</div>
+    </div>
     
 </body>
 </html>
