@@ -4,13 +4,32 @@
     <subtitle></subtitle>
     <link href="http://sharovatov.github.io/atom.xml" rel="self" />
     <link href="http://sharovatov.github.io" />
-    <updated>2014-04-27T15:21:34.036Z</updated>
+    <updated>2014-05-18T14:51:35.606Z</updated>
     <id>http://sharovatov.github.io</id>
     <author>
         <name></name>
         <email></email>
     </author>
 
+    
+        <entry>
+            <title>Android native browsers scrolling bug when gif animation is present</title>
+            <link href="http://sharovatov.github.io/posts/2014-03-android-scrolling-gif.html"/>
+            <updated>2014-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2014-03-android-scrolling-gif.html</id>
+            <content type="html">&lt;p&gt;Android standard browser (up to kitkat 4.4) is usually more expensive to support than iOS Safari or Android Chrome, partly because it’s buggy and mostly because of the lack of tooling — Android webkit doesn’t expose a javascript debbuging API and hence the only way to remotely debug javascript is from within the page — using what’s available — putting debug data into a DOM element or even plainly alerting some intermediate results. &lt;em&gt;rant mode on&lt;/em&gt; Even IE5.5 allowed javascript debugging with MS Office Script Debugger but who at Google cares about what’s considered a common sense for at least 12 years already? &lt;em&gt;rant mode off&lt;/em&gt;. For browsers that don’t expose a JS debugging API (and having no developer tools) the only tool worthy of note is &lt;a href=&quot;http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html&quot;&gt;weinre&lt;/a&gt; which can be of help for basic CSS and DOM inspection, but it still uses current page DOM and therefore will never be able to provide any access to the javascript engine internals (e.g. provide breakpoints capability).&lt;/p&gt;
+&lt;p&gt;And that’s why sharing bugs (and corresponding workarounds) found in native Android webkit browser is even more valuable. &lt;/p&gt;
+&lt;p&gt;The bug I found recently is simple yet impressively stupid: when you have a horizontally scrolled (&lt;code&gt;overflow-x: auto; overflow-y: hidden;&lt;/code&gt;) block that has an animated gif element in it, and you set scroll handler on the scrolling element and try scrolling, scroll events will never stop firing.&lt;/p&gt;
+&lt;p&gt;The way I came across this issue was simple: it’s a well-known fact that both iOS Safari and Android Chrome fire the scroll event only when scrolling is finished, but Android webkit does something extremely stupid — it fires scroll event multiple times during scrolling, making its already bad javascript performance even worse. So if a developer wants to handle scrolling events properly and universally detect when scrolling is finished in iOS Safari, Android Chrome and Android webkit, the simplest option is to wrap scrolling event handler in a debouncing function with a reasonable timeout (which basically allows the actual handler to run only if enough time passed from the last call).&lt;/p&gt;
+&lt;p&gt;However, when I wanted to do an AJAX infinite scrolling with some animated gif preloader at the end of the elements’ list, I witnessed an amusing behaviour — debounced scrolling event handler was never called, which in turn was caused by the fact that scrolling event never stopped firing!&lt;/p&gt;
+&lt;p&gt;To get the idea of how it looks — check the &lt;a href=&quot;http://sharovatov.ru/ios6/gif.html&quot;&gt;testcase link&lt;/a&gt; in the standard Android webkit browser that you have.&lt;/p&gt;
+&lt;p&gt;The initial behaviour is correct, if you scroll the horizontal block with coloured rectangles, you will see dashes filling the line in the textarea while scrolling is occuring (a dash is added for every onscroll event fired), and when the scrolling stops and debounce function is called, a message ”debounced scroll fired” is added to the textarea. &lt;/p&gt;
+&lt;p&gt;However, if an animated gif image is added inside the last element or set as its background, scrolling event handler will never stop firing. This can be observed by clicking ”gif animation” button — it will add a small animated gif (spinner) to the background of the last element, and dashes (visualising onscroll event firing) will never stop appearing. Hence, debounced wrapper will never be called. &lt;/p&gt;
+&lt;p&gt;The simplest workaround is just forgetting animated gifs that confuse Android webkit so much and using CSS3 animations, which work correctly (as can be checked in the same testcase by clicking on ”CSS3 animation” button).&lt;/p&gt;
+&lt;p&gt;And what’s even more fascinating — the bug is not reproduced on every Android device, for example, HTC One V doesn’t have it for some reason. &lt;/p&gt;
+&lt;p&gt;I still struggle to understand what can cause the bug internally and why it’s reproducing on some devices and not other. Maybe it’s a certain gif library version, or manufacturer settings of some sort. I searched for animated gif issues in the &lt;a href=&quot;https://code.google.com/p/android/&quot;&gt;Android bug tracker&lt;/a&gt; and could find a few: &lt;a href=&quot;https://code.google.com/p/android/issues/detail?id=3422&quot;&gt;https://code.google.com/p/android/issues/detail?id=3422&lt;/a&gt; &lt;a href=&quot;https://code.google.com/p/android/issues/detail?id=35544&quot;&gt;https://code.google.com/p/android/issues/detail?id=35544&lt;/a&gt; and &lt;a href=&quot;https://code.google.com/p/android/issues/detail?id=29732&quot;&gt;https://code.google.com/p/android/issues/detail?id=29732&lt;/a&gt; — seems that Google didn’t pay enough attention to GIF support in their standard browser, probably due to the intention to move to Chrome Android soon. In any case, until &lt;a href=&quot;https://developer.android.com/about/dashboards/index.html&quot;&gt;Google Dashboard&lt;/a&gt; shows that Kitkat takes 95% of the market and older versions’ market share is negligible, web-developers will have to know how to find workarounds for all the Android webkit issues and managers will have to understand that the additional amount of effort is required to support this platform.&lt;/p&gt;
+</content>
+        </entry>
     
         <entry>
             <title>iOS6 Safari &quot;scroll to top&quot; doesn’t work when -webkit-overflow-scrolling: touch is set</title>
@@ -193,6 +212,20 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
+            <title>shaky lines drawing tool for browser and nodejs</title>
+            <link href="http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html"/>
+            <updated>2013-01-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html</id>
+            <content type="html">&lt;p&gt;&lt;a href=&quot;http://mrale.ph/&quot;&gt;Vyacheslav Egorov&lt;/a&gt; recently &lt;a href=&quot;http://mrale.ph/blog/2012/11/25/shaky-diagramming.html&quot;&gt;showed his useful helper tool that converts handwritten ASCII-based diagrams into images&lt;/a&gt; - he wrote it in Dart, adding around 450 kbytes overhead to the code that could perfectly fit in 18 kbytes of heavily commented non-minimized javascript code (or ~8 kbytes of minified code). &lt;/p&gt;
+&lt;p&gt;I thought this was a huge waste of resources and &lt;a href=&quot;https://github.com/sharovatov/my/tree/master/js_experiments/shaky&quot;&gt;rewrote the tool to pure js&lt;/a&gt;, I just didn&amp;#39;t see any reason for Dart here.&lt;/p&gt;
+&lt;p&gt;To use this in console, run &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;node shaky-node.js textfile imagefile.png
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please note that while &lt;a href=&quot;https://github.com/LearnBoost/node-canvas/pull/231&quot;&gt;this pull request&lt;/a&gt; is not merged, there&amp;#39;s no way to make node-canvas use custom font, so please install the ttf font locally. &lt;/p&gt;
+&lt;p&gt;And please use the &lt;code&gt;shaky.html&lt;/code&gt; file as a sample of in-browser use.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>proper iOS pull-to-refresh</title>
             <link href="http://sharovatov.github.io/posts/2013-01-09-iOS-pull-to-refresh.html"/>
             <updated>2013-01-01T00:00:00.000Z</updated>
@@ -205,16 +238,13 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>shaky lines drawing tool for browser and nodejs</title>
-            <link href="http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html"/>
-            <updated>2013-01-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html</id>
-            <content type="html">&lt;p&gt;&lt;a href=&quot;http://mrale.ph/&quot;&gt;Vyacheslav Egorov&lt;/a&gt; recently &lt;a href=&quot;http://mrale.ph/blog/2012/11/25/shaky-diagramming.html&quot;&gt;showed his useful helper tool that converts handwritten ASCII-based diagrams into images&lt;/a&gt; - he wrote it in Dart, adding around 450 kbytes overhead to the code that could perfectly fit in 18 kbytes of heavily commented non-minimized javascript code (or ~8 kbytes of minified code). &lt;/p&gt;
-&lt;p&gt;I thought this was a huge waste of resources and &lt;a href=&quot;https://github.com/sharovatov/my/tree/master/js_experiments/shaky&quot;&gt;rewrote the tool to pure js&lt;/a&gt;, I just didn&amp;#39;t see any reason for Dart here.&lt;/p&gt;
-&lt;p&gt;To use this in console, run &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;node shaky-node.js textfile imagefile.png
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please note that while &lt;a href=&quot;https://github.com/LearnBoost/node-canvas/pull/231&quot;&gt;this pull request&lt;/a&gt; is not merged, there&amp;#39;s no way to make node-canvas use custom font, so please install the ttf font locally. &lt;/p&gt;
-&lt;p&gt;And please use the &lt;code&gt;shaky.html&lt;/code&gt; file as a sample of in-browser use.&lt;/p&gt;
+            <title>Opera Unite is dead</title>
+            <link href="http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html"/>
+            <updated>2012-10-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html</id>
+            <content type="html">&lt;p&gt;So it turns out I was right in &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/16/opera-revolution-fail/&quot;&gt;my earlier blogpost&lt;/a&gt; about Opera’s so-called “web revolution” and “reinventing the web” marketing bluff – it was a dead end right from the start.&lt;/p&gt;
+&lt;p&gt;As &lt;a href=&quot;http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-widgets&quot;&gt;officially noted on the Opera blog&lt;/a&gt;, Opera Unite has been discontinued from the 24&lt;sup&gt;th&lt;/sup&gt; April 2012 with Opera 12 release.&lt;/p&gt;
+&lt;p&gt;Not a big surprise at all.&lt;/p&gt;
 </content>
         </entry>
     
@@ -259,17 +289,6 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
 &lt;li&gt;&lt;p&gt;URL – the URL that was fetched&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Opera Unite is dead</title>
-            <link href="http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html"/>
-            <updated>2012-10-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html</id>
-            <content type="html">&lt;p&gt;So it turns out I was right in &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/16/opera-revolution-fail/&quot;&gt;my earlier blogpost&lt;/a&gt; about Opera’s so-called “web revolution” and “reinventing the web” marketing bluff – it was a dead end right from the start.&lt;/p&gt;
-&lt;p&gt;As &lt;a href=&quot;http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-widgets&quot;&gt;officially noted on the Opera blog&lt;/a&gt;, Opera Unite has been discontinued from the 24&lt;sup&gt;th&lt;/sup&gt; April 2012 with Opera 12 release.&lt;/p&gt;
-&lt;p&gt;Not a big surprise at all.&lt;/p&gt;
 </content>
         </entry>
     
@@ -471,6 +490,57 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&
         </entry>
     
         <entry>
+            <title>link-to-QRCode IE8 accelerator</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-link-toqrcode.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-link-toqrcode.html</id>
+            <content type="html">&lt;p&gt;I have Nokia N78 phone and use it a lot for surfing web (with beautiful &lt;a href=&quot;http://www.opera.com/mobile/&quot;&gt;Opera Mobile 10&lt;/a&gt;), reading RSS (with internal webkit-based browser), tweeting (with &lt;a href=&quot;http://mobileways.de/products/gravity/gravity/&quot;&gt;awesome Gravity client&lt;/a&gt;), reading CHMs (with &lt;a href=&quot;http://www.hugematrix.com/modules/news/article.php?storyid=8&quot;&gt;great mobiCHM tool&lt;/a&gt;) or using &lt;a href=&quot;http://www.skype.com/intl/en/download/skype/symbian/&quot;&gt;Skype&lt;/a&gt;, or doing many other tasks.&lt;/p&gt;
+&lt;p&gt;But mostly I use the phone to read something on the internet when I’m on the way to some place (as it takes at least an hour to get somewhere in Moscow using public transport). And usually when I’m browsing web on a PC and find something worthy to save to mobile, I type its URL  on the phone and save it to bookmarks. &lt;/p&gt;
+&lt;p&gt;Which, even with &lt;a href=&quot;http://bit.ly/&quot;&gt;bit.ly&lt;/a&gt; or any other url-shortening service, is a kerfuffle, and T9 doesn’t really help here.&lt;/p&gt;
+&lt;p&gt;So I was trying to find an easier way to get URLs transferred from my PC onto the mobile. Opera 10 Mobile comes with &lt;a href=&quot;http://link.opera.com/&quot;&gt;Opera Link&lt;/a&gt; bookmarks synchronisation service, but I don’t surf internet in Opera on a PC. There’re some social bookmarking sites, but I’m not adding every link that I want to read on mobile to my bookmarks, be it a web-service or browser bookmarks.&lt;/p&gt;
+&lt;p&gt;And here comes &lt;a href=&quot;http://en.wikipedia.org/wiki/QR_Code&quot;&gt;QRCode&lt;/a&gt; scanning to the rescue. I knew that Nokia &lt;a href=&quot;http://mobilecodes.nokia.com/scan.htm&quot;&gt;provided a nice free easy-to-use QRCode scanner&lt;/a&gt; for their smartphones, and I gave it a go. Downloaded, installed, tried with some QRCodes I had, everything was fine, scanning and recognition speed was really high – I just pointed the phone camera onto my computer’s screen and the encoded text was momentarily recognised. I decided to try encoding links in QRCodes using Nokia service, and it worked fine as well – the scanner made them active so I could either copy them to use in Opera Mobile or open with default web-browser (handy if it’s a link to RSS feed).&lt;/p&gt;
+&lt;p&gt;Of course, encoding each link manually and then scanning resulting QRCode is taking much more time than just typing the link in the phone, so the idea of making the browser show QRCode for any link made more sense to me.&lt;/p&gt;
+&lt;p&gt;The easiest way to integrate some web-service to IE8 is its beautiful &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc289775(VS.85).aspx&quot;&gt;Accelerators platform&lt;/a&gt;. I did 10 lines of PHP code which shortens any URL with bit.ly service, and then echoes the IMG tag pointing to &lt;a href=&quot;http://mobilecodes.nokia.com/create.jsp&quot;&gt;Nokia QR Code creation service&lt;/a&gt; URL. Here’s the code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+require_once(&amp;#39;bitly.php&amp;#39;);
+$sUrl = make_bitly_url($_GET[&amp;#39;url&amp;#39;]); //shorten the original URL first
+echo &amp;#39;&amp;lt;img src=&amp;quot;http://mobilecodes.nokia.com/qr?DATA=&amp;#39;.$sUrl.&amp;#39;&amp;amp;amp;MODULE_SIZE=4&amp;amp;amp;name=&amp;amp;amp;MARGIN=2&amp;amp;amp;ENCODING=BYTE&amp;amp;amp;type=link&amp;amp;amp;MODE=TEXT&amp;amp;amp;a=view&amp;quot;&amp;gt;&amp;#39;;
+?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Bit.ly is used to make QRCode creation faster and easier as only small chunk of data is encoded.&lt;/p&gt;
+&lt;p&gt;Then I created a very simple XML file which instructs IE8 what to do with the link:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;!-- author: Vitaly Sharovatov (http://sharovatov.ru) --&amp;gt;
+&amp;lt;openServiceDescription xmlns=&amp;quot;http://www.microsoft.com/schemas/openservicedescription/1.0&amp;quot;&amp;gt;
+    &amp;lt;homepageUrl&amp;gt;http://sharovatov.ru&amp;lt;/homepageUrl&amp;gt;
+    &amp;lt;display&amp;gt;
+        &amp;lt;name&amp;gt;link QRCode&amp;lt;/name&amp;gt;
+        &amp;lt;icon&amp;gt;http://sharovatov.ru/qrcode/favicon.ico&amp;lt;/icon&amp;gt;
+    &amp;lt;/display&amp;gt;
+    &amp;lt;description&amp;gt;Get the QRCode for selected link&amp;lt;/description&amp;gt;
+    &amp;lt;activity category=&amp;quot;mobile&amp;quot;&amp;gt;
+        &amp;lt;activityAction context=&amp;quot;link&amp;quot;&amp;gt;
+            &amp;lt;preview action=&amp;quot;http://sharovatov.ru/qrcode/createCode.php?url={link}&amp;quot; /&amp;gt;
+            &amp;lt;execute method=&amp;quot;get&amp;quot; action=&amp;quot;http://sharovatov.ru/qrcode/createCode.php?url={link}&amp;quot; /&amp;gt;
+        &amp;lt;/activityAction&amp;gt;
+    &amp;lt;/activity&amp;gt;
+&amp;lt;/openServiceDescription&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then just uploaded the php script and my accelerator to my site. Dead easy, 10 minutes job.&lt;/p&gt;
+&lt;p&gt;As wordpress.com doesn’t allow javascript onclick handlers on the links (and accelerator gets added to IE by &lt;code&gt;window.external.addService&lt;/code&gt; call), I had to put the install page on my site. Please visit &lt;a href=&quot;http://sharovatov.ru/current.html&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/current.html&quot;&gt;http://sharovatov.ru/current.html&lt;/a&gt;&lt;/a&gt; for this and few other IE8 accelerators. To get this accelerator installed, just press on “Install now” link in its description.&lt;/p&gt;
+&lt;p&gt;Now if you right-click on any link, go to Accelerators, and just hover “link to QRCode” accelerator you’ll get the window with QRCode for the current link:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;qrcode-accelerator&quot; border=&quot;0&quot; alt=&quot;qrcode-accelerator&quot;
+src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1.gif?w=256&amp;#038;h=239&quot; width=&quot;256&quot; height=&quot;239&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Then you just run Barcode app on the mobile, get the QRCode scanned and then can do anything with the link – copy it to the clipboard, open right now in the default browser. Seems to be quite handy.&lt;/p&gt;
+&lt;p&gt;In order to get this accelerator in the main right-click menu, you need to go to Page &amp;rarr; All Accelerators &amp;rarr; Manage accelerators and in the window that appears select “link QRCode” accelerator and press on “Set as default” button.&lt;/p&gt;
+&lt;p&gt;Here’s some guiding screenshots:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaccels1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;manageaccels&quot; border=&quot;0&quot; alt=&quot;manageaccels&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaccels_thumb1.gif?w=209&amp;#038;h=256&quot; width=&quot;209&quot; height=&quot;256&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaddones1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;manageaddones&quot; border=&quot;0&quot; alt=&quot;manageaddones&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaddones_thumb1.gif?w=256&amp;#038;h=170&quot; width=&quot;256&quot; height=&quot;170&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Then your link QRCode accelerator will be in the default context menu:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/defaultmenu1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;defaultmenu&quot; border=&quot;0&quot; alt=&quot;defaultmenu&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/defaultmenu_thumb1.gif?w=232&amp;#038;h=256&quot; width=&quot;232&quot; height=&quot;256&quot;/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So now you can get a QRCode for any link, scan it and use it on your mobile.&lt;/p&gt;
+&lt;p&gt;P.S. There’re QRCode scanners for all mobile platforms, so if you want similar functionality on your phone, google for “QRCode scanner %yourphone%”.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Windows Phone 7 Internet Explorer IEMobile 7.0</title>
             <link href="http://sharovatov.github.io/posts/2010-03-wp7.html"/>
             <updated>2010-03-01T00:00:00.000Z</updated>
@@ -583,57 +653,6 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&
         </entry>
     
         <entry>
-            <title>link-to-QRCode IE8 accelerator</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-link-toqrcode.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-link-toqrcode.html</id>
-            <content type="html">&lt;p&gt;I have Nokia N78 phone and use it a lot for surfing web (with beautiful &lt;a href=&quot;http://www.opera.com/mobile/&quot;&gt;Opera Mobile 10&lt;/a&gt;), reading RSS (with internal webkit-based browser), tweeting (with &lt;a href=&quot;http://mobileways.de/products/gravity/gravity/&quot;&gt;awesome Gravity client&lt;/a&gt;), reading CHMs (with &lt;a href=&quot;http://www.hugematrix.com/modules/news/article.php?storyid=8&quot;&gt;great mobiCHM tool&lt;/a&gt;) or using &lt;a href=&quot;http://www.skype.com/intl/en/download/skype/symbian/&quot;&gt;Skype&lt;/a&gt;, or doing many other tasks.&lt;/p&gt;
-&lt;p&gt;But mostly I use the phone to read something on the internet when I’m on the way to some place (as it takes at least an hour to get somewhere in Moscow using public transport). And usually when I’m browsing web on a PC and find something worthy to save to mobile, I type its URL  on the phone and save it to bookmarks. &lt;/p&gt;
-&lt;p&gt;Which, even with &lt;a href=&quot;http://bit.ly/&quot;&gt;bit.ly&lt;/a&gt; or any other url-shortening service, is a kerfuffle, and T9 doesn’t really help here.&lt;/p&gt;
-&lt;p&gt;So I was trying to find an easier way to get URLs transferred from my PC onto the mobile. Opera 10 Mobile comes with &lt;a href=&quot;http://link.opera.com/&quot;&gt;Opera Link&lt;/a&gt; bookmarks synchronisation service, but I don’t surf internet in Opera on a PC. There’re some social bookmarking sites, but I’m not adding every link that I want to read on mobile to my bookmarks, be it a web-service or browser bookmarks.&lt;/p&gt;
-&lt;p&gt;And here comes &lt;a href=&quot;http://en.wikipedia.org/wiki/QR_Code&quot;&gt;QRCode&lt;/a&gt; scanning to the rescue. I knew that Nokia &lt;a href=&quot;http://mobilecodes.nokia.com/scan.htm&quot;&gt;provided a nice free easy-to-use QRCode scanner&lt;/a&gt; for their smartphones, and I gave it a go. Downloaded, installed, tried with some QRCodes I had, everything was fine, scanning and recognition speed was really high – I just pointed the phone camera onto my computer’s screen and the encoded text was momentarily recognised. I decided to try encoding links in QRCodes using Nokia service, and it worked fine as well – the scanner made them active so I could either copy them to use in Opera Mobile or open with default web-browser (handy if it’s a link to RSS feed).&lt;/p&gt;
-&lt;p&gt;Of course, encoding each link manually and then scanning resulting QRCode is taking much more time than just typing the link in the phone, so the idea of making the browser show QRCode for any link made more sense to me.&lt;/p&gt;
-&lt;p&gt;The easiest way to integrate some web-service to IE8 is its beautiful &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc289775(VS.85).aspx&quot;&gt;Accelerators platform&lt;/a&gt;. I did 10 lines of PHP code which shortens any URL with bit.ly service, and then echoes the IMG tag pointing to &lt;a href=&quot;http://mobilecodes.nokia.com/create.jsp&quot;&gt;Nokia QR Code creation service&lt;/a&gt; URL. Here’s the code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;?php
-require_once(&amp;#39;bitly.php&amp;#39;);
-$sUrl = make_bitly_url($_GET[&amp;#39;url&amp;#39;]); //shorten the original URL first
-echo &amp;#39;&amp;lt;img src=&amp;quot;http://mobilecodes.nokia.com/qr?DATA=&amp;#39;.$sUrl.&amp;#39;&amp;amp;amp;MODULE_SIZE=4&amp;amp;amp;name=&amp;amp;amp;MARGIN=2&amp;amp;amp;ENCODING=BYTE&amp;amp;amp;type=link&amp;amp;amp;MODE=TEXT&amp;amp;amp;a=view&amp;quot;&amp;gt;&amp;#39;;
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Bit.ly is used to make QRCode creation faster and easier as only small chunk of data is encoded.&lt;/p&gt;
-&lt;p&gt;Then I created a very simple XML file which instructs IE8 what to do with the link:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
-&amp;lt;!-- author: Vitaly Sharovatov (http://sharovatov.ru) --&amp;gt;
-&amp;lt;openServiceDescription xmlns=&amp;quot;http://www.microsoft.com/schemas/openservicedescription/1.0&amp;quot;&amp;gt;
-    &amp;lt;homepageUrl&amp;gt;http://sharovatov.ru&amp;lt;/homepageUrl&amp;gt;
-    &amp;lt;display&amp;gt;
-        &amp;lt;name&amp;gt;link QRCode&amp;lt;/name&amp;gt;
-        &amp;lt;icon&amp;gt;http://sharovatov.ru/qrcode/favicon.ico&amp;lt;/icon&amp;gt;
-    &amp;lt;/display&amp;gt;
-    &amp;lt;description&amp;gt;Get the QRCode for selected link&amp;lt;/description&amp;gt;
-    &amp;lt;activity category=&amp;quot;mobile&amp;quot;&amp;gt;
-        &amp;lt;activityAction context=&amp;quot;link&amp;quot;&amp;gt;
-            &amp;lt;preview action=&amp;quot;http://sharovatov.ru/qrcode/createCode.php?url={link}&amp;quot; /&amp;gt;
-            &amp;lt;execute method=&amp;quot;get&amp;quot; action=&amp;quot;http://sharovatov.ru/qrcode/createCode.php?url={link}&amp;quot; /&amp;gt;
-        &amp;lt;/activityAction&amp;gt;
-    &amp;lt;/activity&amp;gt;
-&amp;lt;/openServiceDescription&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then just uploaded the php script and my accelerator to my site. Dead easy, 10 minutes job.&lt;/p&gt;
-&lt;p&gt;As wordpress.com doesn’t allow javascript onclick handlers on the links (and accelerator gets added to IE by &lt;code&gt;window.external.addService&lt;/code&gt; call), I had to put the install page on my site. Please visit &lt;a href=&quot;http://sharovatov.ru/current.html&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/current.html&quot;&gt;http://sharovatov.ru/current.html&lt;/a&gt;&lt;/a&gt; for this and few other IE8 accelerators. To get this accelerator installed, just press on “Install now” link in its description.&lt;/p&gt;
-&lt;p&gt;Now if you right-click on any link, go to Accelerators, and just hover “link to QRCode” accelerator you’ll get the window with QRCode for the current link:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;qrcode-accelerator&quot; border=&quot;0&quot; alt=&quot;qrcode-accelerator&quot;
-src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1.gif?w=256&amp;#038;h=239&quot; width=&quot;256&quot; height=&quot;239&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Then you just run Barcode app on the mobile, get the QRCode scanned and then can do anything with the link – copy it to the clipboard, open right now in the default browser. Seems to be quite handy.&lt;/p&gt;
-&lt;p&gt;In order to get this accelerator in the main right-click menu, you need to go to Page &amp;rarr; All Accelerators &amp;rarr; Manage accelerators and in the window that appears select “link QRCode” accelerator and press on “Set as default” button.&lt;/p&gt;
-&lt;p&gt;Here’s some guiding screenshots:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaccels1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;manageaccels&quot; border=&quot;0&quot; alt=&quot;manageaccels&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaccels_thumb1.gif?w=209&amp;#038;h=256&quot; width=&quot;209&quot; height=&quot;256&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaddones1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;manageaddones&quot; border=&quot;0&quot; alt=&quot;manageaddones&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/manageaddones_thumb1.gif?w=256&amp;#038;h=170&quot; width=&quot;256&quot; height=&quot;170&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Then your link QRCode accelerator will be in the default context menu:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/defaultmenu1.gif&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;defaultmenu&quot; border=&quot;0&quot; alt=&quot;defaultmenu&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/defaultmenu_thumb1.gif?w=232&amp;#038;h=256&quot; width=&quot;232&quot; height=&quot;256&quot;/&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;So now you can get a QRCode for any link, scan it and use it on your mobile.&lt;/p&gt;
-&lt;p&gt;P.S. There’re QRCode scanners for all mobile platforms, so if you want similar functionality on your phone, google for “QRCode scanner %yourphone%”.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>critical IIS vulnerability</title>
             <link href="http://sharovatov.github.io/posts/2009-12-iisvuln.html"/>
             <updated>2009-12-01T00:00:00.000Z</updated>
@@ -712,6 +731,40 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
         </entry>
     
         <entry>
+            <title>Beanstalkapp, FogBugz and now Case Tracker</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-beanstalk.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-beanstalk.html</id>
+            <content type="html">&lt;p&gt;As a follow-up to &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/23/beanstalkapp-and-fogbugz-free-online-bugtracking-and-version-control/&quot;&gt;my post about free hosted integrated solution for bugtracking and version-control&lt;/a&gt;, I’d like to introduce a great tool I accidentally found and then installed – &lt;a href=&quot;http://code.google.com/p/visionmap/wiki/CaseTracker&quot;&gt;Case Tracker&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It’s a free desktop application which allows you to easily view a list of current bugs, gives you a way to “start working” on the bug – so the time you actually spend on fixing the bug or implementing the feature is carefully calculated. So it’s basically a time-tracking application for a fogbugz – it takes the list of bugs&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image.png?w=717&amp;#038;h=165&quot; width=&quot;717&quot; height=&quot;165&quot;&gt;&lt;/p&gt;
+&lt;p&gt;To start working, you need to enter your fogbugz username, password and the URL where you have it installed:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image1.png?w=505&amp;#038;h=184&quot; width=&quot;505&quot; height=&quot;184&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Case Tracker supports both FogBugz On-demand and hosted versions – it simulates all required POST requests as if you’re working with Fogbugz through your browser. As soon as you entered correct username and password, it will show you the list of active bugs:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image2.png?w=639&amp;#038;h=339&quot; width=&quot;639&quot; height=&quot;339&quot;&gt;&lt;/p&gt;
+&lt;p&gt;However, by default it shows bugs assigned to anybody, which may be not always desirable. To address this issue, Case Tracker provides a search filter (funnel on the right-hand side of the pause button). For example, I need only those bugs that are assigned to me, so I add &lt;code&gt;assignedto:&amp;quot;Vitaly Sharovatov&amp;quot;&lt;/code&gt; as a search filter:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image3.png?w=687&amp;#038;h=131&quot; width=&quot;687&quot; height=&quot;131&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Then I press “Go” and get my list populated with only those bugs that I need! Awesome!&lt;/p&gt;
+&lt;p&gt;For more detailed instructions on the allowed syntax read &lt;a href=&quot;http://www.fogcreek.com/fogbugz/docs/60/topics/basics/Searchingforcases.html&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;What’s really great in Case Tracker – it can automatically stop measuring time when you’re away from keyboard for a certain period of time:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image4.png?w=452&amp;#038;h=278&quot; width=&quot;452&quot; height=&quot;278&quot;&gt;&lt;/p&gt;
+&lt;p&gt;However, Case Tracker doesn’t allow creating new cases – it opens your fogbugz URL in your default browser so you can enter new case there. But Case Tracker is not a replacement for Fogbugz UI – it’s goal is to simplify time tracking.&lt;/p&gt;
+&lt;p&gt;So the general flow is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;you choose a bug from a drop-down list&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if the estimate hasn’t been set for this bug, Case Tracker prompts you to enter the estimate (using the same syntax rules as in Fogbugz in the browser)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;the work is started and time is measured – if you’re afk or just press pause button, it stops measuring the time&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;when you’re finished – you commit the bug and mark it resolved either by specifying status:resolved in svn comments or using Case Tracker – I prefer to specify it in a submit comment – just got used to it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So if you use fogbugz – this tool is definitely worth trying!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>HTTP persistent connections, pipelining and chunked encoding</title>
             <link href="http://sharovatov.github.io/posts/2009-11-http-pipeline.html"/>
             <updated>2009-11-01T00:00:00.000Z</updated>
@@ -781,122 +834,6 @@ encoding.&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Beanstalkapp, FogBugz and now Case Tracker</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-beanstalk.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-beanstalk.html</id>
-            <content type="html">&lt;p&gt;As a follow-up to &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/23/beanstalkapp-and-fogbugz-free-online-bugtracking-and-version-control/&quot;&gt;my post about free hosted integrated solution for bugtracking and version-control&lt;/a&gt;, I’d like to introduce a great tool I accidentally found and then installed – &lt;a href=&quot;http://code.google.com/p/visionmap/wiki/CaseTracker&quot;&gt;Case Tracker&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;It’s a free desktop application which allows you to easily view a list of current bugs, gives you a way to “start working” on the bug – so the time you actually spend on fixing the bug or implementing the feature is carefully calculated. So it’s basically a time-tracking application for a fogbugz – it takes the list of bugs&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image.png?w=717&amp;#038;h=165&quot; width=&quot;717&quot; height=&quot;165&quot;&gt;&lt;/p&gt;
-&lt;p&gt;To start working, you need to enter your fogbugz username, password and the URL where you have it installed:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image1.png?w=505&amp;#038;h=184&quot; width=&quot;505&quot; height=&quot;184&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Case Tracker supports both FogBugz On-demand and hosted versions – it simulates all required POST requests as if you’re working with Fogbugz through your browser. As soon as you entered correct username and password, it will show you the list of active bugs:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image2.png?w=639&amp;#038;h=339&quot; width=&quot;639&quot; height=&quot;339&quot;&gt;&lt;/p&gt;
-&lt;p&gt;However, by default it shows bugs assigned to anybody, which may be not always desirable. To address this issue, Case Tracker provides a search filter (funnel on the right-hand side of the pause button). For example, I need only those bugs that are assigned to me, so I add &lt;code&gt;assignedto:&amp;quot;Vitaly Sharovatov&amp;quot;&lt;/code&gt; as a search filter:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image3.png?w=687&amp;#038;h=131&quot; width=&quot;687&quot; height=&quot;131&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Then I press “Go” and get my list populated with only those bugs that I need! Awesome!&lt;/p&gt;
-&lt;p&gt;For more detailed instructions on the allowed syntax read &lt;a href=&quot;http://www.fogcreek.com/fogbugz/docs/60/topics/basics/Searchingforcases.html&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;What’s really great in Case Tracker – it can automatically stop measuring time when you’re away from keyboard for a certain period of time:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image4.png?w=452&amp;#038;h=278&quot; width=&quot;452&quot; height=&quot;278&quot;&gt;&lt;/p&gt;
-&lt;p&gt;However, Case Tracker doesn’t allow creating new cases – it opens your fogbugz URL in your default browser so you can enter new case there. But Case Tracker is not a replacement for Fogbugz UI – it’s goal is to simplify time tracking.&lt;/p&gt;
-&lt;p&gt;So the general flow is:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;you choose a bug from a drop-down list&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if the estimate hasn’t been set for this bug, Case Tracker prompts you to enter the estimate (using the same syntax rules as in Fogbugz in the browser)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;the work is started and time is measured – if you’re afk or just press pause button, it stops measuring the time&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;when you’re finished – you commit the bug and mark it resolved either by specifying status:resolved in svn comments or using Case Tracker – I prefer to specify it in a submit comment – just got used to it.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So if you use fogbugz – this tool is definitely worth trying!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Intel mini ITX D945GCLF2D motherboard</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-intelmb.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-intelmb.html</id>
-            <content type="html">&lt;p&gt;I always wanted to have a second computer where I could install Windows Web Server 2008 (or Win7) with IIS, SQL Express 2008 and run, develop and test my hobby projects locally. Well, you know what it’s like to have a second computer – you can do whatever you want on it and never be afraid that you do anything wrong with your work PC :)&lt;/p&gt;
-&lt;p&gt;My work PC is quite noisy and I just can’t find time to determine which one of 4 coolers is causing the trouble and replace it. So I wanted to  build a computer that would be really quiet (or silent at all) so it wouldn’t add any noise and that I could leave it working at night if required. Then I thought that I didn’t need this computer to be really powerful – I wasn’t going to encode video on it :) And I could save a fortune on buying something that wasn’t a cutting-edge most powerful Core 2 Duo Quad Extreme Mega Turbo Something with 64 gigs of RAM.&lt;/p&gt;
-&lt;p&gt;I’ve been reading a lot about &lt;a href=&quot;http://en.wikipedia.org/wiki/NVIDIA_ION&quot;&gt;nvidia ION platform&lt;/a&gt; recently and thought it would be the best solution for the task – extremely small and nearly silent platform with great specs: dual-core Atom 330 CPU, up to 4 gigs of RAM, good Nvidia graphics card. But then first motherboard with NVIDIA ION and Atom 330 was announced - &lt;a href=&quot;http://www.zotacusa.com/zotac-ionitx-a-u-atom-n330-1-6ghz-dual-core-mini-itx-intel-motherboard.html&quot;&gt;ZOTAC IONITX-A-U&lt;/a&gt;, which is great but according to different sources would cost $300, which is way too much for such a device.&lt;/p&gt;
-&lt;p&gt;So I had a look at Intel’s motherboard – &lt;a href=&quot;http://www.intel.com/products/desktop/motherboards/D945GCLF2-D945GCLF2D/D945GCLF2-D945GCLF2D-overview.htm&quot;&gt;D945GCLF2D&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Yes it has Intel GMA950 video chipset, but as this machine was considered to be used without a monitor, I didn’t care which video card it would have. It also doesn’t have a WI-FI, but at the moment I’ll just plug it in the network switch and if required will add a wi-fi card later. And the price was great – I was able to get the motherboard and a 2Gb memory card at $125 total. I already had a HDD but had to buy a power supply – and here it is, a computer for 160 dollars. 2 Gb RAM, integrated dual-core Atom 330 CPU, 80 Gb HDD
-and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/windows-vista/features/readyboost.aspx&quot;&gt;Ready Boost&lt;/a&gt; – a great local web and database server, NAS and download box.&lt;/p&gt;
-&lt;p&gt;The only noise I can hear from it is a small noise of power supply cooler – so I plan to measure what power consumption this system has and get a fanless power supply fitting this motherboard needs. And also I’m planning to build my own case for it – something that could be screwed to the wall near the network switch.&lt;/p&gt;
-&lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
-&lt;p&gt;Awesome, just awesome.&lt;/p&gt;
-&lt;p&gt;Thanks, Intel!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Skype blocking 80 and 443 ports</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-skype-blocking.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-skype-blocking.html</id>
-            <content type="html">&lt;p&gt;When trying to start an IIS7 website, you can get the following message: “The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0&amp;#215;80070020)”:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image2.png?w=491&amp;#038;h=173&quot; width=&quot;491&quot; height=&quot;173&quot;&gt;&lt;/p&gt;
-&lt;p&gt;It’s saying it can’t access the file, but actually IIS can’t bind the ports you’ve configured in Bindings configuration. But which port?&lt;/p&gt;
-&lt;p&gt;Usually I use the following procedure to find out which application occupies the port:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;run &lt;code&gt;netstat –ano –p tcp&lt;/code&gt; to get the list of opened ports, find the port that’s been taken and see which PID the port is bound to&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;run &lt;code&gt;tasklist /FI &amp;quot;PID eq XXX&amp;quot;&lt;/code&gt; where XXX is the found PID&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So in my case the 80 and 443 ports were taken by Skype. Whenever you start Skype, it tries to bind 80 and 443 ports, and so if you start your web server later, it won’t be able to work as ports are occupied. This Skype behaviour can be turned off by deselecting “Use port 80 and 443 as alternatives for incoming connections” here:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&amp;#038;h=579&quot; width=&quot;661&quot; height=&quot;579&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Hope this saves somebody some time :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Opera revolution fail</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
-            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
-&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
-&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
-&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
-&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
-&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
-&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
-&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
-&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
-&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
-&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
-&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
-&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Universal Internet Explorer 6 CSS</title>
             <link href="http://sharovatov.github.io/posts/2009-06-ie6-universal.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
@@ -940,6 +877,27 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
         </entry>
     
         <entry>
+            <title>Skype blocking 80 and 443 ports</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-skype-blocking.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-skype-blocking.html</id>
+            <content type="html">&lt;p&gt;When trying to start an IIS7 website, you can get the following message: “The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0&amp;#215;80070020)”:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image2.png?w=491&amp;#038;h=173&quot; width=&quot;491&quot; height=&quot;173&quot;&gt;&lt;/p&gt;
+&lt;p&gt;It’s saying it can’t access the file, but actually IIS can’t bind the ports you’ve configured in Bindings configuration. But which port?&lt;/p&gt;
+&lt;p&gt;Usually I use the following procedure to find out which application occupies the port:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;run &lt;code&gt;netstat –ano –p tcp&lt;/code&gt; to get the list of opened ports, find the port that’s been taken and see which PID the port is bound to&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;run &lt;code&gt;tasklist /FI &amp;quot;PID eq XXX&amp;quot;&lt;/code&gt; where XXX is the found PID&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So in my case the 80 and 443 ports were taken by Skype. Whenever you start Skype, it tries to bind 80 and 443 ports, and so if you start your web server later, it won’t be able to work as ports are occupied. This Skype behaviour can be turned off by deselecting “Use port 80 and 443 as alternatives for incoming connections” here:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&amp;#038;h=579&quot; width=&quot;661&quot; height=&quot;579&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Hope this saves somebody some time :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Useful JS tips - getBoundingClientRect()</title>
             <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
@@ -964,22 +922,20 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
         </entry>
     
         <entry>
-            <title>HTML5 video tag and Internet Explorer</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-html5video.html"/>
+            <title>Intel mini ITX D945GCLF2D motherboard</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-intelmb.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-html5video.html</id>
-            <content type="html">&lt;p&gt;It’s interesting to see how popular &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.&lt;/p&gt;
-&lt;p&gt;The whole situation reminds me of AJAX where original concept was invented by Microsoft (actual ActiveX was shipped with IE5 in 1999), then it was standardised by W3C (in a different way), then implemented by other browsers, and then people started accusing IE for not supporting this new W3C standard.&lt;/p&gt;
-&lt;p&gt;The same thing is now happening with inline video/audio playback concept, which has been introduced in IE2 in 1995, almost 15 years ago. Yes, 15 years ago, when W3C has been just founded and was still asking &lt;a href=&quot;http://www.csail.mit.edu/&quot;&gt;MIT/CSAIL&lt;/a&gt; to join. And now this functionality is being spec’ed in HTML5 as &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags. Opera, Firefox, Safari and Google Chrome start supporting &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; and are making a loud marketing message of it.&lt;/p&gt;
-&lt;p&gt;The original concept that was introduced in IE2 (and supported in following versions) was adding a &lt;code&gt;DYNSRC&lt;/code&gt; attribute to &lt;code&gt;IMG&lt;/code&gt; element:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;cover.gif&amp;quot; dynsrc=&amp;quot;clock.avi&amp;quot; controls&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When IE saw dynsrc attribute, it tried loading the movie and playing it. “Controls” attribute made IE show simple playback controls.&lt;/p&gt;
-&lt;p&gt;This is how it looked like in IE3:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;ie3&quot; border=&quot;0&quot; alt=&quot;ie3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/ie3.gif?w=387&amp;#038;h=602&quot; width=&quot;387&quot; height=&quot;602&quot;&gt;&lt;/p&gt;
-&lt;p&gt;However, in future versions the support for DYNSRC was limited to make developers to switch to other ways (&lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;embed&amp;gt;&lt;/code&gt;/SMIL video). In IE5 no controls were shown, in IE7 &lt;code&gt;DYNSRC&lt;/code&gt; disappeared.&lt;/p&gt;
-&lt;p&gt;World changes, and now the functionality that nobody’s been using for a decade seems really new and interesting. It’s great that WHATWG is spending time on defining clear standard on how this should work and it’s really cool that Chrome, Firefox, Opera and Safari already support this draft. Of course, Silverlight supports greater level of RIA, but giving that IE Team is now really focused on following public standards, &lt;/p&gt;
-&lt;p&gt;I hope that in IE9 we’ll have native support for &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; as we had native support for XMLHttpRequest in IE7.&lt;/p&gt;
-&lt;p&gt;But my point is – credit for inline video playback functionality invention should be definitely given to IE2.&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-06-intelmb.html</id>
+            <content type="html">&lt;p&gt;I always wanted to have a second computer where I could install Windows Web Server 2008 (or Win7) with IIS, SQL Express 2008 and run, develop and test my hobby projects locally. Well, you know what it’s like to have a second computer – you can do whatever you want on it and never be afraid that you do anything wrong with your work PC :)&lt;/p&gt;
+&lt;p&gt;My work PC is quite noisy and I just can’t find time to determine which one of 4 coolers is causing the trouble and replace it. So I wanted to  build a computer that would be really quiet (or silent at all) so it wouldn’t add any noise and that I could leave it working at night if required. Then I thought that I didn’t need this computer to be really powerful – I wasn’t going to encode video on it :) And I could save a fortune on buying something that wasn’t a cutting-edge most powerful Core 2 Duo Quad Extreme Mega Turbo Something with 64 gigs of RAM.&lt;/p&gt;
+&lt;p&gt;I’ve been reading a lot about &lt;a href=&quot;http://en.wikipedia.org/wiki/NVIDIA_ION&quot;&gt;nvidia ION platform&lt;/a&gt; recently and thought it would be the best solution for the task – extremely small and nearly silent platform with great specs: dual-core Atom 330 CPU, up to 4 gigs of RAM, good Nvidia graphics card. But then first motherboard with NVIDIA ION and Atom 330 was announced - &lt;a href=&quot;http://www.zotacusa.com/zotac-ionitx-a-u-atom-n330-1-6ghz-dual-core-mini-itx-intel-motherboard.html&quot;&gt;ZOTAC IONITX-A-U&lt;/a&gt;, which is great but according to different sources would cost $300, which is way too much for such a device.&lt;/p&gt;
+&lt;p&gt;So I had a look at Intel’s motherboard – &lt;a href=&quot;http://www.intel.com/products/desktop/motherboards/D945GCLF2-D945GCLF2D/D945GCLF2-D945GCLF2D-overview.htm&quot;&gt;D945GCLF2D&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Yes it has Intel GMA950 video chipset, but as this machine was considered to be used without a monitor, I didn’t care which video card it would have. It also doesn’t have a WI-FI, but at the moment I’ll just plug it in the network switch and if required will add a wi-fi card later. And the price was great – I was able to get the motherboard and a 2Gb memory card at $125 total. I already had a HDD but had to buy a power supply – and here it is, a computer for 160 dollars. 2 Gb RAM, integrated dual-core Atom 330 CPU, 80 Gb HDD
+and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/windows-vista/features/readyboost.aspx&quot;&gt;Ready Boost&lt;/a&gt; – a great local web and database server, NAS and download box.&lt;/p&gt;
+&lt;p&gt;The only noise I can hear from it is a small noise of power supply cooler – so I plan to measure what power consumption this system has and get a fanless power supply fitting this motherboard needs. And also I’m planning to build my own case for it – something that could be screwed to the wall near the network switch.&lt;/p&gt;
+&lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
+&lt;p&gt;Awesome, just awesome.&lt;/p&gt;
+&lt;p&gt;Thanks, Intel!&lt;/p&gt;
 </content>
         </entry>
     
@@ -1071,6 +1027,149 @@ versions:&lt;/p&gt;
 &lt;p&gt;There’re a few reasons, Mike, why IE is so wide-spread in corporations. First reason is that it supports &lt;strong&gt;proper&lt;/strong&gt; customisation through &lt;a href=&quot;http://technet.microsoft.com/en-us/ie/bb219517.aspx&quot;&gt;IEAK&lt;/a&gt;, second - if IEAK is not enough, IE can be fully configured through Group Policy, third – it supports ActiveX which is a must-have for building real intranet applications. Passport scanners, barcode readers, label printers, CCTV – all this hardware automation is done through ActiveX.&lt;/p&gt;
 &lt;p&gt;So until Firefox becomes a real platform for building intranet web-applications and gains a proper customisation and integration with AD, it’s not going to be on the corporate market.&lt;/p&gt;
 &lt;p&gt;For reference, read &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2006/02/21/536353.aspx&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Opera revolution fail</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
+            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
+&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
+&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
+&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
+&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
+&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
+&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
+&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
+&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
+&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
+&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
+&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
+&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>HTML5 video tag and Internet Explorer</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-html5video.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-html5video.html</id>
+            <content type="html">&lt;p&gt;It’s interesting to see how popular &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.&lt;/p&gt;
+&lt;p&gt;The whole situation reminds me of AJAX where original concept was invented by Microsoft (actual ActiveX was shipped with IE5 in 1999), then it was standardised by W3C (in a different way), then implemented by other browsers, and then people started accusing IE for not supporting this new W3C standard.&lt;/p&gt;
+&lt;p&gt;The same thing is now happening with inline video/audio playback concept, which has been introduced in IE2 in 1995, almost 15 years ago. Yes, 15 years ago, when W3C has been just founded and was still asking &lt;a href=&quot;http://www.csail.mit.edu/&quot;&gt;MIT/CSAIL&lt;/a&gt; to join. And now this functionality is being spec’ed in HTML5 as &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags. Opera, Firefox, Safari and Google Chrome start supporting &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; and are making a loud marketing message of it.&lt;/p&gt;
+&lt;p&gt;The original concept that was introduced in IE2 (and supported in following versions) was adding a &lt;code&gt;DYNSRC&lt;/code&gt; attribute to &lt;code&gt;IMG&lt;/code&gt; element:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;cover.gif&amp;quot; dynsrc=&amp;quot;clock.avi&amp;quot; controls&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When IE saw dynsrc attribute, it tried loading the movie and playing it. “Controls” attribute made IE show simple playback controls.&lt;/p&gt;
+&lt;p&gt;This is how it looked like in IE3:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;ie3&quot; border=&quot;0&quot; alt=&quot;ie3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/ie3.gif?w=387&amp;#038;h=602&quot; width=&quot;387&quot; height=&quot;602&quot;&gt;&lt;/p&gt;
+&lt;p&gt;However, in future versions the support for DYNSRC was limited to make developers to switch to other ways (&lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;embed&amp;gt;&lt;/code&gt;/SMIL video). In IE5 no controls were shown, in IE7 &lt;code&gt;DYNSRC&lt;/code&gt; disappeared.&lt;/p&gt;
+&lt;p&gt;World changes, and now the functionality that nobody’s been using for a decade seems really new and interesting. It’s great that WHATWG is spending time on defining clear standard on how this should work and it’s really cool that Chrome, Firefox, Opera and Safari already support this draft. Of course, Silverlight supports greater level of RIA, but giving that IE Team is now really focused on following public standards, &lt;/p&gt;
+&lt;p&gt;I hope that in IE9 we’ll have native support for &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; as we had native support for XMLHttpRequest in IE7.&lt;/p&gt;
+&lt;p&gt;But my point is – credit for inline video playback functionality invention should be definitely given to IE2.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows 7 taskbar - new approach</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-win7taskbar.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-win7taskbar.html</id>
+            <content type="html">&lt;p&gt;I just love the way programs are organised on new Windows 7 taskbar.&lt;/p&gt;
+&lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
+&lt;p&gt;In earlier Windows versions to get the program window shown you had to do two things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;check if the program is running by looking at the taskbar and maximise it window if it’s there&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if it’s not running, you had to launch it from quick launch or other place&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This approach has some major flows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;when you just need a program window to be shown, you have to do a cognitive effort to find where to get it from – either launch the program from quicklaunch (or somewhere else) or maximise its window from the taskbar&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if you have, say, ten commonly used programs and put them on a quicklaunch and then open all them up, you’ve suddenly got quicklaunch icons just taking space and doing nothing as the programs are already opened. And you’ve got your programs’ icons in the taskbar – so you effectively have two icons for every program – one for launching a program and one for controlling its window state.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;nowadays&quot;&gt;Nowadays&lt;/h2&gt;
+&lt;p&gt;In windows 7 the new approach is taken.&lt;/p&gt;
+&lt;p&gt;Basically, taskbar and quick launch are combined in one place and then enhanced a lot.&lt;/p&gt;
+&lt;p&gt;The concept is just great - you don’t need to check if a program is running or not to get it shown – you just click on its icon and if its running, you’ll get its window, otherwise it will launch and you will still get its window. Less cognitive effort, better usability.&lt;/p&gt;
+&lt;p&gt;One of the implications of this approach is that the space on the taskbar is saved by having “program-launching” and “window-managing” controls combined.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot.jpg&quot;&gt;&lt;img title=&quot;sidebar_screenshot&quot; border=&quot;0&quot; alt=&quot;sidebar_screenshot&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot_thumb.jpg?w=640&amp;#038;h=306&quot; width=&quot;640&quot; height=&quot;306&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, Far, Explorer and Microsoft Word are not launched, Outlook, Messenger, Sticky Notes, Live Writer and IE8 are running.&lt;/p&gt;
+&lt;p&gt;As you can also notice on the screenshot, multiple instances of IE8 are grouped and if you hover them, that’s what you’ll see:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot2&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot2&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2_thumb.jpg?w=619&amp;#038;h=500&quot; width=&quot;619&quot; height=&quot;500&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So managing multiple program instances is really easy – when you hover on an item, its window appears on the screen so you can preview if this window is what you were looking for and click on it to open. You can also close any window from the group right from the taskbar.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot when there’s many IE8 tabs opened:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot3&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3_thumb.jpg?w=628&amp;#038;h=538&quot; width=&quot;628&quot; height=&quot;538&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Again, when you hover on an item, its window is shown, so you either click on it to make it active or close it down.&lt;/p&gt;
+&lt;p&gt;Another great interface solution is displaying progress bars directly on the taskbar. For example, here’s how IE8 displays download progress bar:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot4&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot4&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4_thumb.jpg?w=499&amp;#038;h=144&quot; width=&quot;499&quot; height=&quot;144&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And all the features I showed is just a part of all the goodness Windows 7 taskbar introduces.&lt;/p&gt;
+&lt;p&gt;So yes, I agree with Gizmodo that &lt;a href=&quot;http://gizmodo.com/5131933/giz-explains-why-the-windows-7-taskbar-beats-mac-os-xs-dock&quot;&gt;Windows 7 Taskbar is much better than MAC OS X dock&lt;/a&gt;.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Googletranslateclient.com and Windows Accelerator Platform</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-gtc.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-gtc.html</id>
+            <content type="html">&lt;p&gt;Yesterday &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/20/windows-7-accelerators-platform/&quot;&gt;I’ve blogged about Accelerators Platform&lt;/a&gt; and now I’m looking at a website &lt;a href=&quot;http://googletranslateclient.com&quot;&gt;googletranslateclient.com&lt;/a&gt; which offers to download a standalone VB6 win32 application that uses &lt;a href=&quot;http://translate.google.com&quot;&gt;google translate service&lt;/a&gt; to dynamically translate a selected text.&lt;/p&gt;
+&lt;p&gt;Funny thing is that this program implements what Accelerator Platform is invented for, but in a very limited and counter-productive way – its functionality is limited to only one service so nobody can enhance it!&lt;/p&gt;
+&lt;p&gt;I think the best thing Microsoft could do would be to create a program that would capture text select event in any window and &lt;strong&gt;add&lt;/strong&gt; Accelerators group to the context menu of that program!&lt;/p&gt;
+&lt;p&gt;Or alternatively, if this is too much work, just show Accelerators icon (&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/acceleratorsicon.gif&quot;&gt;&lt;img title=&quot;accelerators-icon&quot; border=&quot;0&quot; alt=&quot;accelerators-icon&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/acceleratorsicon_thumb.gif?w=32&amp;#038;h=32&quot; width=&quot;32&quot; height=&quot;32&quot;&gt;&lt;/a&gt;) when any text is selected. I’m not much of a system application developer, so I’m not sure this is easy to do, but I’m sure people would benefit from it and developers wouldn’t need to add Accelerators API support in their apps!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>HTML+CSS+JS Widgets - future cross-platform environment</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html</id>
+            <content type="html">&lt;p&gt;Yesterday I installed Windows 7 on both my laptop (MSI Wind U100) and work PC (Core2Duo with 2Gb RAM). Both machines had XP – Home on laptop and Pro on work PC. One of the first things I’ve noticed right after installation was Gadgets technology that Windows 7 supports (actually, support for Sidebar Gadgets appeared in Vista, but as I didn’t have Vista installed, I couldn’t check it out). The technology is very simple – you create a manifest file with your gadget settings and HTML file with your gadget code, styles and scripting (of course, you’d better put styles and js in separate files); then zip everything in one archive and rename its extension to .gadget. That’s it, then you can install it on your sidebar in Vista or Windows 7.&lt;/p&gt;
+&lt;p&gt;Technical details of how gadgets work are for one of next blog posts, but I feel the tendency that all small applications soon will be written in HTML/JS/CSS (especially those that use web-services!).&lt;/p&gt;
+&lt;p&gt;Look, Opera has proposed a &lt;a href=&quot;http://www.w3.org/TR/widgets-apis/&quot;&gt;draft to W3C called Widgets&lt;/a&gt; – the same concept of small HTML/CSS/JS application but running inside a browser. Vodafone &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2009/03/testing_mobile.html&quot;&gt;hired PPK&lt;/a&gt; to spec Mobile Widgets technology and test thoroughly (and Peter-Paul is famous for his great tests and compatibility tables!). Nokia already supports
+&lt;a href=&quot;http://www.s60.com/life/thisiss60/s60indetail/technologiesandfeatures/webruntime&quot;&gt;Web Widgets&lt;/a&gt; on S60 phones.&lt;/p&gt;
+&lt;p&gt;So instead of multiple environments we have one common environment for building applications for almost any platform – be it a browser, a mobile phone or Windows desktop. Yes, there’re API and DOM differences, for example, Windows Gadgets allow access to WMI so that you can build an application leveraging all the system functionality provided by WMI, on the phones and in Opera you will be limited to web-service based development and some pretty basic DOM, but even so it’s great that html/js/css is becoming a standard for writing cross-platform applications.&lt;/p&gt;
+&lt;p&gt;Front-end developers – our skills will become even more valuable :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>IE8 news - MUI packs, compatibility view for intranet</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-ie8news.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-ie8news.html</id>
+            <content type="html">&lt;p&gt;First of all, as guys at IEBLOG reported, IE8 MUI packs for Windows XP (and also Windows Server 2003) are now available and have the following languages: Arabic, Chinese (Traditional), Chinese (Hong Kong), Czech, Danish, Dutch, Finnish, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Portugal), Portuguese (Brazil), Russian, Spanish, Swedish, Turkish, Bulgarian, Croatian, Estonian, Latvian, Lithuanian, Romanian, Slovenian, Slovakian, Thai. This is great for those who use localised versions.&lt;/p&gt;
+&lt;p&gt;Another interesting thing is that IE8 renders sites from Intranet security zone in compatibility view by default, unless the page specifically indicates that it should be rendered in standards-compliant mode (either by corresponding META or HTTP header). &lt;/p&gt;
+&lt;p&gt;However, this behaviour can be controlled from Group Policy. This is one of the most valuable benefits of using Microsoft technologies – you get great level of
+integration out-of-the-box.&lt;/p&gt;
 </content>
         </entry>
     
@@ -1309,100 +1408,6 @@ System.Gadget.Flyout.show = true;
 &lt;/ol&gt;
 &lt;p&gt;Or read &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd370869%28VS.85%29.aspx&quot;&gt;MSDN&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;P.S. this gadget doesn’t have any settings or flyout or anything else – it’s very simple.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows 7 taskbar - new approach</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-win7taskbar.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-win7taskbar.html</id>
-            <content type="html">&lt;p&gt;I just love the way programs are organised on new Windows 7 taskbar.&lt;/p&gt;
-&lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
-&lt;p&gt;In earlier Windows versions to get the program window shown you had to do two things:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;check if the program is running by looking at the taskbar and maximise it window if it’s there&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if it’s not running, you had to launch it from quick launch or other place&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This approach has some major flows:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;when you just need a program window to be shown, you have to do a cognitive effort to find where to get it from – either launch the program from quicklaunch (or somewhere else) or maximise its window from the taskbar&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if you have, say, ten commonly used programs and put them on a quicklaunch and then open all them up, you’ve suddenly got quicklaunch icons just taking space and doing nothing as the programs are already opened. And you’ve got your programs’ icons in the taskbar – so you effectively have two icons for every program – one for launching a program and one for controlling its window state.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;nowadays&quot;&gt;Nowadays&lt;/h2&gt;
-&lt;p&gt;In windows 7 the new approach is taken.&lt;/p&gt;
-&lt;p&gt;Basically, taskbar and quick launch are combined in one place and then enhanced a lot.&lt;/p&gt;
-&lt;p&gt;The concept is just great - you don’t need to check if a program is running or not to get it shown – you just click on its icon and if its running, you’ll get its window, otherwise it will launch and you will still get its window. Less cognitive effort, better usability.&lt;/p&gt;
-&lt;p&gt;One of the implications of this approach is that the space on the taskbar is saved by having “program-launching” and “window-managing” controls combined.&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot.jpg&quot;&gt;&lt;img title=&quot;sidebar_screenshot&quot; border=&quot;0&quot; alt=&quot;sidebar_screenshot&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot_thumb.jpg?w=640&amp;#038;h=306&quot; width=&quot;640&quot; height=&quot;306&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As you can see, Far, Explorer and Microsoft Word are not launched, Outlook, Messenger, Sticky Notes, Live Writer and IE8 are running.&lt;/p&gt;
-&lt;p&gt;As you can also notice on the screenshot, multiple instances of IE8 are grouped and if you hover them, that’s what you’ll see:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot2&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot2&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2_thumb.jpg?w=619&amp;#038;h=500&quot; width=&quot;619&quot; height=&quot;500&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;So managing multiple program instances is really easy – when you hover on an item, its window appears on the screen so you can preview if this window is what you were looking for and click on it to open. You can also close any window from the group right from the taskbar.&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot when there’s many IE8 tabs opened:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot3&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3_thumb.jpg?w=628&amp;#038;h=538&quot; width=&quot;628&quot; height=&quot;538&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Again, when you hover on an item, its window is shown, so you either click on it to make it active or close it down.&lt;/p&gt;
-&lt;p&gt;Another great interface solution is displaying progress bars directly on the taskbar. For example, here’s how IE8 displays download progress bar:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot4&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot4&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4_thumb.jpg?w=499&amp;#038;h=144&quot; width=&quot;499&quot; height=&quot;144&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;And all the features I showed is just a part of all the goodness Windows 7 taskbar introduces.&lt;/p&gt;
-&lt;p&gt;So yes, I agree with Gizmodo that &lt;a href=&quot;http://gizmodo.com/5131933/giz-explains-why-the-windows-7-taskbar-beats-mac-os-xs-dock&quot;&gt;Windows 7 Taskbar is much better than MAC OS X dock&lt;/a&gt;.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Googletranslateclient.com and Windows Accelerator Platform</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-gtc.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-gtc.html</id>
-            <content type="html">&lt;p&gt;Yesterday &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/20/windows-7-accelerators-platform/&quot;&gt;I’ve blogged about Accelerators Platform&lt;/a&gt; and now I’m looking at a website &lt;a href=&quot;http://googletranslateclient.com&quot;&gt;googletranslateclient.com&lt;/a&gt; which offers to download a standalone VB6 win32 application that uses &lt;a href=&quot;http://translate.google.com&quot;&gt;google translate service&lt;/a&gt; to dynamically translate a selected text.&lt;/p&gt;
-&lt;p&gt;Funny thing is that this program implements what Accelerator Platform is invented for, but in a very limited and counter-productive way – its functionality is limited to only one service so nobody can enhance it!&lt;/p&gt;
-&lt;p&gt;I think the best thing Microsoft could do would be to create a program that would capture text select event in any window and &lt;strong&gt;add&lt;/strong&gt; Accelerators group to the context menu of that program!&lt;/p&gt;
-&lt;p&gt;Or alternatively, if this is too much work, just show Accelerators icon (&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/acceleratorsicon.gif&quot;&gt;&lt;img title=&quot;accelerators-icon&quot; border=&quot;0&quot; alt=&quot;accelerators-icon&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/acceleratorsicon_thumb.gif?w=32&amp;#038;h=32&quot; width=&quot;32&quot; height=&quot;32&quot;&gt;&lt;/a&gt;) when any text is selected. I’m not much of a system application developer, so I’m not sure this is easy to do, but I’m sure people would benefit from it and developers wouldn’t need to add Accelerators API support in their apps!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>HTML+CSS+JS Widgets - future cross-platform environment</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html</id>
-            <content type="html">&lt;p&gt;Yesterday I installed Windows 7 on both my laptop (MSI Wind U100) and work PC (Core2Duo with 2Gb RAM). Both machines had XP – Home on laptop and Pro on work PC. One of the first things I’ve noticed right after installation was Gadgets technology that Windows 7 supports (actually, support for Sidebar Gadgets appeared in Vista, but as I didn’t have Vista installed, I couldn’t check it out). The technology is very simple – you create a manifest file with your gadget settings and HTML file with your gadget code, styles and scripting (of course, you’d better put styles and js in separate files); then zip everything in one archive and rename its extension to .gadget. That’s it, then you can install it on your sidebar in Vista or Windows 7.&lt;/p&gt;
-&lt;p&gt;Technical details of how gadgets work are for one of next blog posts, but I feel the tendency that all small applications soon will be written in HTML/JS/CSS (especially those that use web-services!).&lt;/p&gt;
-&lt;p&gt;Look, Opera has proposed a &lt;a href=&quot;http://www.w3.org/TR/widgets-apis/&quot;&gt;draft to W3C called Widgets&lt;/a&gt; – the same concept of small HTML/CSS/JS application but running inside a browser. Vodafone &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2009/03/testing_mobile.html&quot;&gt;hired PPK&lt;/a&gt; to spec Mobile Widgets technology and test thoroughly (and Peter-Paul is famous for his great tests and compatibility tables!). Nokia already supports
-&lt;a href=&quot;http://www.s60.com/life/thisiss60/s60indetail/technologiesandfeatures/webruntime&quot;&gt;Web Widgets&lt;/a&gt; on S60 phones.&lt;/p&gt;
-&lt;p&gt;So instead of multiple environments we have one common environment for building applications for almost any platform – be it a browser, a mobile phone or Windows desktop. Yes, there’re API and DOM differences, for example, Windows Gadgets allow access to WMI so that you can build an application leveraging all the system functionality provided by WMI, on the phones and in Opera you will be limited to web-service based development and some pretty basic DOM, but even so it’s great that html/js/css is becoming a standard for writing cross-platform applications.&lt;/p&gt;
-&lt;p&gt;Front-end developers – our skills will become even more valuable :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>IE8 news - MUI packs, compatibility view for intranet</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-ie8news.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-ie8news.html</id>
-            <content type="html">&lt;p&gt;First of all, as guys at IEBLOG reported, IE8 MUI packs for Windows XP (and also Windows Server 2003) are now available and have the following languages: Arabic, Chinese (Traditional), Chinese (Hong Kong), Czech, Danish, Dutch, Finnish, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Portugal), Portuguese (Brazil), Russian, Spanish, Swedish, Turkish, Bulgarian, Croatian, Estonian, Latvian, Lithuanian, Romanian, Slovenian, Slovakian, Thai. This is great for those who use localised versions.&lt;/p&gt;
-&lt;p&gt;Another interesting thing is that IE8 renders sites from Intranet security zone in compatibility view by default, unless the page specifically indicates that it should be rendered in standards-compliant mode (either by corresponding META or HTTP header). &lt;/p&gt;
-&lt;p&gt;However, this behaviour can be controlled from Group Policy. This is one of the most valuable benefits of using Microsoft technologies – you get great level of
-integration out-of-the-box.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>ITIL Conference</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-itil.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-itil.html</id>
-            <content type="html">&lt;p&gt;I&amp;#39;ve recently visited &lt;a href=&quot;http://www.osp.ru/conf/2007/0529/3903142&quot;&gt;OSPConf&lt;/a&gt; on business processes automation and ITIL. Was held at &lt;a href=&quot;http://www.radissonsas.com/cs/Satellite/Page/RadissonSAS/Page/rsasHotelDescription/1053502961507/en/hotelCode--mowzh/&quot;&gt;Radisson SAS hotel&lt;/a&gt; – quite a nice hotel, the launch was brilliant, the loos were not better than &lt;em&gt;*&lt;/em&gt;. But the conference was brilliant – there were top IT guys from HP, IBS, Megafon, Naumen, InlineGroup, IT Expert. Was really interesting to listen about the ITSM implementation in current investments-greedy crisis world. What I found out for myself was that if in your company and IT dept management is done properly, crisis won’t
-affect you or even if it does, you’ll be able to easily explain to business what value it will lose if they cut investments or stop projects. So all the management practices and tools are for making all the work really transparent so that managers and CEO can focus and spend more time on strategic decisions rather than on operational routines. I had all these thoughts flying in my head, but when I listened to speech of &lt;a href=&quot;http://www.cbr.ru/eng/&quot;&gt;CBR&lt;/a&gt; IT chief, all the thoughts got sorted in a proper way.&lt;/p&gt;
-&lt;p&gt;And I also have to note that ITSM software is not that expensive for SME – excellent
-&lt;a href=&quot;http://www.omninet.biz/index.php?id=138&quot;&gt;Omnitracker&lt;/a&gt; costs from €12000 and it’s got everything your company might need, plus API for integration, plus additional templates – it will automate everything. &lt;/p&gt;
-&lt;p&gt;However, the consultancy will be around 10 times more expensive. But again – nothing stops your company to send your own IT guys for training and save a fortune :)&lt;/p&gt;
-&lt;p&gt;So thanks for all the interesting stuff, OSP! The conference was really worthy to visit! Will probably write a couple more blog posts on the topic as soon as I get all my thoughts in order :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -1673,6 +1678,20 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
         </entry>
     
         <entry>
+            <title>ITIL Conference</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-itil.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-itil.html</id>
+            <content type="html">&lt;p&gt;I&amp;#39;ve recently visited &lt;a href=&quot;http://www.osp.ru/conf/2007/0529/3903142&quot;&gt;OSPConf&lt;/a&gt; on business processes automation and ITIL. Was held at &lt;a href=&quot;http://www.radissonsas.com/cs/Satellite/Page/RadissonSAS/Page/rsasHotelDescription/1053502961507/en/hotelCode--mowzh/&quot;&gt;Radisson SAS hotel&lt;/a&gt; – quite a nice hotel, the launch was brilliant, the loos were not better than &lt;em&gt;*&lt;/em&gt;. But the conference was brilliant – there were top IT guys from HP, IBS, Megafon, Naumen, InlineGroup, IT Expert. Was really interesting to listen about the ITSM implementation in current investments-greedy crisis world. What I found out for myself was that if in your company and IT dept management is done properly, crisis won’t
+affect you or even if it does, you’ll be able to easily explain to business what value it will lose if they cut investments or stop projects. So all the management practices and tools are for making all the work really transparent so that managers and CEO can focus and spend more time on strategic decisions rather than on operational routines. I had all these thoughts flying in my head, but when I listened to speech of &lt;a href=&quot;http://www.cbr.ru/eng/&quot;&gt;CBR&lt;/a&gt; IT chief, all the thoughts got sorted in a proper way.&lt;/p&gt;
+&lt;p&gt;And I also have to note that ITSM software is not that expensive for SME – excellent
+&lt;a href=&quot;http://www.omninet.biz/index.php?id=138&quot;&gt;Omnitracker&lt;/a&gt; costs from €12000 and it’s got everything your company might need, plus API for integration, plus additional templates – it will automate everything. &lt;/p&gt;
+&lt;p&gt;However, the consultancy will be around 10 times more expensive. But again – nothing stops your company to send your own IT guys for training and save a fortune :)&lt;/p&gt;
+&lt;p&gt;So thanks for all the interesting stuff, OSP! The conference was really worthy to visit! Will probably write a couple more blog posts on the topic as soon as I get all my thoughts in order :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Common Internet Scheme Syntax</title>
             <link href="http://sharovatov.github.io/posts/2009-04-commoninternetscheme.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -1767,43 +1786,6 @@ content:&lt;/p&gt;
 &lt;p&gt;I also asked MSN Live Search Team about that – hope they reply soon – I’ll update the post.&lt;/p&gt;
 &lt;p&gt;So – use this approach if you have a page which is accessed by both HTTP and HTTPS and whenever you need to reference any resource from a different host on this page. Plus this host must support both HTTP and HTTPS :)&lt;/p&gt;
 &lt;p&gt;McAffee SiteScan button uses this in their image - &lt;strong&gt;check!&lt;/strong&gt;&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows Live</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-wl.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-wl.html</id>
-            <content type="html">&lt;p&gt;I’ve just updated &lt;a href=&quot;http://download.live.com/?sku=messenger&quot;&gt;Windows Live Messenger&lt;/a&gt; to version 2009. It also offered to install other Windows Live tools, which I did. And you know what – &lt;a href=&quot;http://windowslivewriter.spaces.live.com/&quot;&gt;Windows Live Writer&lt;/a&gt; rocks! Before I was using Microsoft Office 2007 Word for writing and publishing blogposts and it was doing it job, but now I’ve got a lightweight and really easy-to-use tool to manage my blog. And it’s free so I can install it on my laptop (which has got only Outlook 2007 on it). It can save any post as a draft, edit it later, it’s got live preview tool (which works amazingly fast), you can either work with wysiwyg or with plain html code – and I bet this is the cleanest wysiwyg I’ve ever seen. I really mean it – it generates absolutely clean HTML, and it uses my blog visual theme!&lt;/p&gt;
-&lt;p&gt;And the configuration process was great as well – I just entered my blog url, username and password, it fetched the theme information and that’s all – I’m writing, previewing and publishing posts!&lt;/p&gt;
-&lt;p&gt;So, the key features of Windows Live Writer (for me) are:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;it’s kerfuffle-free:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it works fine with my wordpress blog&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;wysiwyg generates really clean code so I don’t have to edit the code manually after I finished writing the blogpost&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it’s got good spellchecking mechanism&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it has a &lt;a href=&quot;http://gallery.live.com/liveItemDetail.aspx?li=6b2b5ffe-936a-4cb3-869c-c01de29de176&amp;amp;bt=9&quot;&gt;nice twitter plugin&lt;/a&gt; that puts a twit with a link to the new blogpost&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it contains most often used photo editing functions – so I don’t need to install anything else on my netbook to post to my blog when I’m travelling.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it automatically fetches all the categories from the blog – you just need to set them, plus you can add categories if you want&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it can save drafts both to local storage and to the blog – so if I’m writing a huge blogpost, I can proceed editing it when I’m travelling or finish it at home.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it’s lightweight and really fast&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it’s completely free&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;and it’s got plugin architecture so we’ll see more interesting stuff coming!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Good stuff, Live Team, thanks!&lt;/p&gt;
-&lt;p&gt;P.S. for more information, read &lt;a href=&quot;http://windowslivewriter.spaces.live.com/blog/cns!D85741BB5E0BE8AA!1650.entry&quot;&gt;this blogpost&lt;/a&gt;.&lt;/p&gt;
 </content>
         </entry>
     
@@ -2178,6 +2160,43 @@ h1 { font-family: myFont; }
 &lt;p&gt;Both ways will stop Live Messenger from downloading advertisement. I don’t know if these ways are legal, but we’re not touching Live Messenger, not disassembling it or doing anything specifically prohibited.&lt;/p&gt;
 &lt;p&gt;As always, there’s a patch (&lt;a href=&quot;http://apatch.org/&quot;&gt;apatch&lt;/a&gt;), but as it modifies Live Messenger dlls, it certainly breaches the EULA.&lt;/p&gt;
 &lt;p&gt;The same approach can be used for blocking ads in all kinds of messengers – you just need to find out which host adds are served from and if your messenger uses IE settings, add it to restricted zone list, or to the hosts file with 0.0.0.0 address.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows Live</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-wl.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-wl.html</id>
+            <content type="html">&lt;p&gt;I’ve just updated &lt;a href=&quot;http://download.live.com/?sku=messenger&quot;&gt;Windows Live Messenger&lt;/a&gt; to version 2009. It also offered to install other Windows Live tools, which I did. And you know what – &lt;a href=&quot;http://windowslivewriter.spaces.live.com/&quot;&gt;Windows Live Writer&lt;/a&gt; rocks! Before I was using Microsoft Office 2007 Word for writing and publishing blogposts and it was doing it job, but now I’ve got a lightweight and really easy-to-use tool to manage my blog. And it’s free so I can install it on my laptop (which has got only Outlook 2007 on it). It can save any post as a draft, edit it later, it’s got live preview tool (which works amazingly fast), you can either work with wysiwyg or with plain html code – and I bet this is the cleanest wysiwyg I’ve ever seen. I really mean it – it generates absolutely clean HTML, and it uses my blog visual theme!&lt;/p&gt;
+&lt;p&gt;And the configuration process was great as well – I just entered my blog url, username and password, it fetched the theme information and that’s all – I’m writing, previewing and publishing posts!&lt;/p&gt;
+&lt;p&gt;So, the key features of Windows Live Writer (for me) are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;it’s kerfuffle-free:&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it works fine with my wordpress blog&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;wysiwyg generates really clean code so I don’t have to edit the code manually after I finished writing the blogpost&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it’s got good spellchecking mechanism&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it has a &lt;a href=&quot;http://gallery.live.com/liveItemDetail.aspx?li=6b2b5ffe-936a-4cb3-869c-c01de29de176&amp;amp;bt=9&quot;&gt;nice twitter plugin&lt;/a&gt; that puts a twit with a link to the new blogpost&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it contains most often used photo editing functions – so I don’t need to install anything else on my netbook to post to my blog when I’m travelling.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it automatically fetches all the categories from the blog – you just need to set them, plus you can add categories if you want&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it can save drafts both to local storage and to the blog – so if I’m writing a huge blogpost, I can proceed editing it when I’m travelling or finish it at home.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it’s lightweight and really fast&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it’s completely free&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;and it’s got plugin architecture so we’ll see more interesting stuff coming!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Good stuff, Live Team, thanks!&lt;/p&gt;
+&lt;p&gt;P.S. for more information, read &lt;a href=&quot;http://windowslivewriter.spaces.live.com/blog/cns!D85741BB5E0BE8AA!1650.entry&quot;&gt;this blogpost&lt;/a&gt;.&lt;/p&gt;
 </content>
         </entry>
     

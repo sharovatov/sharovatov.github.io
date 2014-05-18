@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Android native browsers scrolling bug when gif animation is present</title>
+    <meta name="generator" content="DocPad v6.60.3" />
+    <link  rel="stylesheet" href="/styles/style.css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+</head>
+<body>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>Android native browsers scrolling bug when gif animation is present</h1>
+<p>Android standard browser (up to kitkat 4.4) is usually more expensive to support than iOS Safari or Android Chrome, partly because it’s buggy and mostly because of the lack of tooling — Android webkit doesn’t expose a javascript debbuging API and hence the only way to remotely debug javascript is from within the page — using what’s available — putting debug data into a DOM element or even plainly alerting some intermediate results. <em>rant mode on</em> Even IE5.5 allowed javascript debugging with MS Office Script Debugger but who at Google cares about what’s considered a common sense for at least 12 years already? <em>rant mode off</em>. For browsers that don’t expose a JS debugging API (and having no developer tools) the only tool worthy of note is <a href="http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html">weinre</a> which can be of help for basic CSS and DOM inspection, but it still uses current page DOM and therefore will never be able to provide any access to the javascript engine internals (e.g. provide breakpoints capability).</p>
+<p>And that’s why sharing bugs (and corresponding workarounds) found in native Android webkit browser is even more valuable. </p>
+<p>The bug I found recently is simple yet impressively stupid: when you have a horizontally scrolled (<code>overflow-x: auto; overflow-y: hidden;</code>) block that has an animated gif element in it, and you set scroll handler on the scrolling element and try scrolling, scroll events will never stop firing.</p>
+<p>The way I came across this issue was simple: it’s a well-known fact that both iOS Safari and Android Chrome fire the scroll event only when scrolling is finished, but Android webkit does something extremely stupid — it fires scroll event multiple times during scrolling, making its already bad javascript performance even worse. So if a developer wants to handle scrolling events properly and universally detect when scrolling is finished in iOS Safari, Android Chrome and Android webkit, the simplest option is to wrap scrolling event handler in a debouncing function with a reasonable timeout (which basically allows the actual handler to run only if enough time passed from the last call).</p>
+<p>However, when I wanted to do an AJAX infinite scrolling with some animated gif preloader at the end of the elements’ list, I witnessed an amusing behaviour — debounced scrolling event handler was never called, which in turn was caused by the fact that scrolling event never stopped firing!</p>
+<p>To get the idea of how it looks — check the <a href="http://sharovatov.ru/ios6/gif.html">testcase link</a> in the standard Android webkit browser that you have.</p>
+<p>The initial behaviour is correct, if you scroll the horizontal block with coloured rectangles, you will see dashes filling the line in the textarea while scrolling is occuring (a dash is added for every onscroll event fired), and when the scrolling stops and debounce function is called, a message ”debounced scroll fired” is added to the textarea. </p>
+<p>However, if an animated gif image is added inside the last element or set as its background, scrolling event handler will never stop firing. This can be observed by clicking ”gif animation” button — it will add a small animated gif (spinner) to the background of the last element, and dashes (visualising onscroll event firing) will never stop appearing. Hence, debounced wrapper will never be called. </p>
+<p>The simplest workaround is just forgetting animated gifs that confuse Android webkit so much and using CSS3 animations, which work correctly (as can be checked in the same testcase by clicking on ”CSS3 animation” button).</p>
+<p>And what’s even more fascinating — the bug is not reproduced on every Android device, for example, HTC One V doesn’t have it for some reason. </p>
+<p>I still struggle to understand what can cause the bug internally and why it’s reproducing on some devices and not other. Maybe it’s a certain gif library version, or manufacturer settings of some sort. I searched for animated gif issues in the <a href="https://code.google.com/p/android/">Android bug tracker</a> and could find a few: <a href="https://code.google.com/p/android/issues/detail?id=3422">https://code.google.com/p/android/issues/detail?id=3422</a> <a href="https://code.google.com/p/android/issues/detail?id=35544">https://code.google.com/p/android/issues/detail?id=35544</a> and <a href="https://code.google.com/p/android/issues/detail?id=29732">https://code.google.com/p/android/issues/detail?id=29732</a> — seems that Google didn’t pay enough attention to GIF support in their standard browser, probably due to the intention to move to Chrome Android soon. In any case, until <a href="https://developer.android.com/about/dashboards/index.html">Google Dashboard</a> shows that Kitkat takes 95% of the market and older versions’ market share is negligible, web-developers will have to know how to find workarounds for all the Android webkit issues and managers will have to understand that the additional amount of effort is required to support this platform.</p>
+
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-03-android-scrolling-gif.html';
+		window.disqus_identifier = 'posts-2014-03-android-scrolling-gif';
+		window.disqus_title = 'Android native browsers scrolling bug when gif animation is present';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+    </div>
+    
+</body>
+</html>
