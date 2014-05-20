@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>iframe height auto-resize</title>
+    <title>iOS 7 minimal ui with position:fixed and smart app banners</title>
     <meta name="generator" content="DocPad v6.60.3" />
     <style >html.wait {
 	cursor: wait !important;
@@ -24,29 +24,24 @@
         </ol>
     </nav>
     <div class="wrapper">
-        <h1>iframe height auto-resize</h1>
-<p>If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.</p>
-<p>Sometimes it’s ok, but when you need your iframe to “expand” automatically on the host page, you have to change the iframe object height style property. And it’s dead easy when both iframe and the host page are from same origin – you just talk to parent window from the iframe and make it set the object height.</p>
-<p>However, when cross-origin security model applies, everything gets more interesting, and you’re pretty much limited to <a href="http://dev.w3.org/html5/postmsg/">CDM</a>/<a href="http://www.sitepen.com/blog/2008/07/22/windowname-transport/">window.name</a>/location.hash transports.</p>
-<p>So the proper approach would be to use CDM with a fallback to location.hash – newer browsers (IE8+ and current Firefox, Opera, Safari and Chrome) support postMessage, older versions will fall back to setting parent page location.hash property and on the parent page – interval polling for changes.</p>
-<p>Here’s <a href="http://sharovatov.ru/iframe-autoheight/iframeHost.php">a basic working sample</a> implementing this approach and here’s the code for it:</p>
-<ul>
-<li><p><a href="https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeChild.html">child page</a></p>
-</li>
-<li><p><a href="https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php">parent page</a></p>
-</li>
-</ul>
-<p>Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to <em> origin. This might be a serious security breach since the parent page will process a message send from <em>*any</em></em> page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.</p>
-<p>I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.</p>
+        <h1>iOS 7 minimal ui with position:fixed and smart app banners</h1>
+<p>With iOS6 release Apple <a href="https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html">introduced a nice way to promote a native app on a webpage opened in Safari</a> and this approach is widely used across the industry.</p>
+<p>And in iOS7 Apple introduced a new meta viewport value — <a href="http://www.mobilexweb.com/blog/ios-7-1-safari-minimal-ui-bugs">minimal-ui</a> which was hugely welcomed by web-developers as it provided a much nicer browser UX (by making browser controls look modal rather than just a part of the page), more available real screen size and removed the untouchable area in the bottom of the page that was reserved for the browser UI. Which with decent support for position:fixed in iOS7 made using position:fixed header quite tempting. And all is well until a ”smart app banner” is added to the page — then the smart app banner suddenly gets a noticeable margin-top and the fixed header gets almost hidden under the banner.</p>
+<p>Here’s a screenshot of the issue: </p>
+<p><img src="http://sharovatov.ru/ios6/ios7-fixed.png" alt="ios7 fixed header with minimal-ui and smart app banner"></p>
+<p>(small blue line is actually a normal fixed menu of 30px height)</p>
+<p>And <a href="http://sharovatov.ru/ios6/smart.php?minimal=1">here’s the testcase with minimal-ui</a> and <a href="http://sharovatov.ru/ios6/smart.php">here’s without</a>.</p>
+<p>It seems that the smart banner is just a piece of html/css/js dynamically injected by Safari — that seems the only logical explanation why the smart app banner has this margin on the top added when there’s a fixed header element.</p>
+<p>I couldn’t find any workaround for this issue, so I had to turn off minimal-ui with fixed header for the page that has the smart app banner, at least until Apple fixes this.</p>
 
 <div class="comments"><div id="disqus_thread"></div>
 <script>
 	(function(){
 		window.disqus_shortname = 'sharovatov';
 		window.disqus_developer = '1';
-		window.disqus_url = 'http://sharovatov.github.io/posts/2012-01-iframe-autosize.html';
-		window.disqus_identifier = 'posts-2012-01-iframe-autosize';
-		window.disqus_title = 'iframe height auto-resize';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-04-ios-minimal-ui-fixed.html';
+		window.disqus_identifier = 'posts-2014-04-ios-minimal-ui-fixed';
+		window.disqus_title = 'iOS 7 minimal ui with position:fixed and smart app banners';
 		if ( window.DISQUS ) {
 			return DISQUS.reset({
 				reload: true,

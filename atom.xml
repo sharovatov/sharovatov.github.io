@@ -4,13 +4,29 @@
     <subtitle></subtitle>
     <link href="http://sharovatov.github.io/atom.xml" rel="self" />
     <link href="http://sharovatov.github.io" />
-    <updated>2014-05-18T14:51:35.606Z</updated>
+    <updated>2014-05-20T08:26:04.490Z</updated>
     <id>http://sharovatov.github.io</id>
     <author>
         <name></name>
         <email></email>
     </author>
 
+    
+        <entry>
+            <title>iOS 7 minimal ui with position:fixed and smart app banners</title>
+            <link href="http://sharovatov.github.io/posts/2014-04-ios-minimal-ui-fixed.html"/>
+            <updated>2014-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2014-04-ios-minimal-ui-fixed.html</id>
+            <content type="html">&lt;p&gt;With iOS6 release Apple &lt;a href=&quot;https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html&quot;&gt;introduced a nice way to promote a native app on a webpage opened in Safari&lt;/a&gt; and this approach is widely used across the industry.&lt;/p&gt;
+&lt;p&gt;And in iOS7 Apple introduced a new meta viewport value — &lt;a href=&quot;http://www.mobilexweb.com/blog/ios-7-1-safari-minimal-ui-bugs&quot;&gt;minimal-ui&lt;/a&gt; which was hugely welcomed by web-developers as it provided a much nicer browser UX (by making browser controls look modal rather than just a part of the page), more available real screen size and removed the untouchable area in the bottom of the page that was reserved for the browser UI. Which with decent support for position:fixed in iOS7 made using position:fixed header quite tempting. And all is well until a ”smart app banner” is added to the page — then the smart app banner suddenly gets a noticeable margin-top and the fixed header gets almost hidden under the banner.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot of the issue: &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/ios6/ios7-fixed.png&quot; alt=&quot;ios7 fixed header with minimal-ui and smart app banner&quot;&gt;&lt;/p&gt;
+&lt;p&gt;(small blue line is actually a normal fixed menu of 30px height)&lt;/p&gt;
+&lt;p&gt;And &lt;a href=&quot;http://sharovatov.ru/ios6/smart.php?minimal=1&quot;&gt;here’s the testcase with minimal-ui&lt;/a&gt; and &lt;a href=&quot;http://sharovatov.ru/ios6/smart.php&quot;&gt;here’s without&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It seems that the smart banner is just a piece of html/css/js dynamically injected by Safari — that seems the only logical explanation why the smart app banner has this margin on the top added when there’s a fixed header element.&lt;/p&gt;
+&lt;p&gt;I couldn’t find any workaround for this issue, so I had to turn off minimal-ui with fixed header for the page that has the smart app banner, at least until Apple fixes this.&lt;/p&gt;
+</content>
+        </entry>
     
         <entry>
             <title>Android native browsers scrolling bug when gif animation is present</title>
@@ -212,20 +228,6 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>shaky lines drawing tool for browser and nodejs</title>
-            <link href="http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html"/>
-            <updated>2013-01-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html</id>
-            <content type="html">&lt;p&gt;&lt;a href=&quot;http://mrale.ph/&quot;&gt;Vyacheslav Egorov&lt;/a&gt; recently &lt;a href=&quot;http://mrale.ph/blog/2012/11/25/shaky-diagramming.html&quot;&gt;showed his useful helper tool that converts handwritten ASCII-based diagrams into images&lt;/a&gt; - he wrote it in Dart, adding around 450 kbytes overhead to the code that could perfectly fit in 18 kbytes of heavily commented non-minimized javascript code (or ~8 kbytes of minified code). &lt;/p&gt;
-&lt;p&gt;I thought this was a huge waste of resources and &lt;a href=&quot;https://github.com/sharovatov/my/tree/master/js_experiments/shaky&quot;&gt;rewrote the tool to pure js&lt;/a&gt;, I just didn&amp;#39;t see any reason for Dart here.&lt;/p&gt;
-&lt;p&gt;To use this in console, run &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;node shaky-node.js textfile imagefile.png
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please note that while &lt;a href=&quot;https://github.com/LearnBoost/node-canvas/pull/231&quot;&gt;this pull request&lt;/a&gt; is not merged, there&amp;#39;s no way to make node-canvas use custom font, so please install the ttf font locally. &lt;/p&gt;
-&lt;p&gt;And please use the &lt;code&gt;shaky.html&lt;/code&gt; file as a sample of in-browser use.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>proper iOS pull-to-refresh</title>
             <link href="http://sharovatov.github.io/posts/2013-01-09-iOS-pull-to-refresh.html"/>
             <updated>2013-01-01T00:00:00.000Z</updated>
@@ -238,13 +240,16 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Opera Unite is dead</title>
-            <link href="http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html"/>
-            <updated>2012-10-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html</id>
-            <content type="html">&lt;p&gt;So it turns out I was right in &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/16/opera-revolution-fail/&quot;&gt;my earlier blogpost&lt;/a&gt; about Opera’s so-called “web revolution” and “reinventing the web” marketing bluff – it was a dead end right from the start.&lt;/p&gt;
-&lt;p&gt;As &lt;a href=&quot;http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-widgets&quot;&gt;officially noted on the Opera blog&lt;/a&gt;, Opera Unite has been discontinued from the 24&lt;sup&gt;th&lt;/sup&gt; April 2012 with Opera 12 release.&lt;/p&gt;
-&lt;p&gt;Not a big surprise at all.&lt;/p&gt;
+            <title>shaky lines drawing tool for browser and nodejs</title>
+            <link href="http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html"/>
+            <updated>2013-01-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html</id>
+            <content type="html">&lt;p&gt;&lt;a href=&quot;http://mrale.ph/&quot;&gt;Vyacheslav Egorov&lt;/a&gt; recently &lt;a href=&quot;http://mrale.ph/blog/2012/11/25/shaky-diagramming.html&quot;&gt;showed his useful helper tool that converts handwritten ASCII-based diagrams into images&lt;/a&gt; - he wrote it in Dart, adding around 450 kbytes overhead to the code that could perfectly fit in 18 kbytes of heavily commented non-minimized javascript code (or ~8 kbytes of minified code). &lt;/p&gt;
+&lt;p&gt;I thought this was a huge waste of resources and &lt;a href=&quot;https://github.com/sharovatov/my/tree/master/js_experiments/shaky&quot;&gt;rewrote the tool to pure js&lt;/a&gt;, I just didn&amp;#39;t see any reason for Dart here.&lt;/p&gt;
+&lt;p&gt;To use this in console, run &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;node shaky-node.js textfile imagefile.png
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please note that while &lt;a href=&quot;https://github.com/LearnBoost/node-canvas/pull/231&quot;&gt;this pull request&lt;/a&gt; is not merged, there&amp;#39;s no way to make node-canvas use custom font, so please install the ttf font locally. &lt;/p&gt;
+&lt;p&gt;And please use the &lt;code&gt;shaky.html&lt;/code&gt; file as a sample of in-browser use.&lt;/p&gt;
 </content>
         </entry>
     
@@ -293,6 +298,38 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
+            <title>Opera Unite is dead</title>
+            <link href="http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html"/>
+            <updated>2012-10-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2012-10-opera-unite-dead.html</id>
+            <content type="html">&lt;p&gt;So it turns out I was right in &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/16/opera-revolution-fail/&quot;&gt;my earlier blogpost&lt;/a&gt; about Opera’s so-called “web revolution” and “reinventing the web” marketing bluff – it was a dead end right from the start.&lt;/p&gt;
+&lt;p&gt;As &lt;a href=&quot;http://my.opera.com/addons/blog/2012/04/24/sunsetting-unite-and-widgets&quot;&gt;officially noted on the Opera blog&lt;/a&gt;, Opera Unite has been discontinued from the 24&lt;sup&gt;th&lt;/sup&gt; April 2012 with Opera 12 release.&lt;/p&gt;
+&lt;p&gt;Not a big surprise at all.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>iframe height auto-resize</title>
+            <link href="http://sharovatov.github.io/posts/2012-01-iframe-autosize.html"/>
+            <updated>2012-01-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2012-01-iframe-autosize.html</id>
+            <content type="html">&lt;p&gt;If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.&lt;/p&gt;
+&lt;p&gt;Sometimes it’s ok, but when you need your iframe to “expand” automatically on the host page, you have to change the iframe object height style property. And it’s dead easy when both iframe and the host page are from same origin – you just talk to parent window from the iframe and make it set the object height.&lt;/p&gt;
+&lt;p&gt;However, when cross-origin security model applies, everything gets more interesting, and you’re pretty much limited to &lt;a href=&quot;http://dev.w3.org/html5/postmsg/&quot;&gt;CDM&lt;/a&gt;/&lt;a href=&quot;http://www.sitepen.com/blog/2008/07/22/windowname-transport/&quot;&gt;window.name&lt;/a&gt;/location.hash transports.&lt;/p&gt;
+&lt;p&gt;So the proper approach would be to use CDM with a fallback to location.hash – newer browsers (IE8+ and current Firefox, Opera, Safari and Chrome) support postMessage, older versions will fall back to setting parent page location.hash property and on the parent page – interval polling for changes.&lt;/p&gt;
+&lt;p&gt;Here’s &lt;a href=&quot;http://sharovatov.ru/iframe-autoheight/iframeHost.php&quot;&gt;a basic working sample&lt;/a&gt; implementing this approach and here’s the code for it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeChild.html&quot;&gt;child page&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php&quot;&gt;parent page&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to &lt;em&gt; origin. This might be a serious security breach since the parent page will process a message send from &lt;em&gt;*any&lt;/em&gt;&lt;/em&gt; page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.&lt;/p&gt;
+&lt;p&gt;I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>X-FRAME-OPTIONS</title>
             <link href="http://sharovatov.github.io/posts/2012-01-x-frame-options.html"/>
             <updated>2012-01-01T00:00:00.000Z</updated>
@@ -324,27 +361,6 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
 &lt;p&gt;In any case, study the security papers I linked to above to understand how the attack works and what it can do to your visitors or your business.&lt;/p&gt;
 &lt;p&gt;However, if you strongly believe no one should embed your page in an iframe – then your silver bullet is to add &lt;code&gt;X-FRAME-OPTIONS: DENY&lt;/code&gt; to all the pages you serve.&lt;/p&gt;
 &lt;p&gt;P.S. X-FRAME-OPTIONS is now proposed to IETF: &lt;a href=&quot;http://tools.ietf.org/html/draft-gondrom-frame-options-01&quot;&gt;http://tools.ietf.org/html/draft-gondrom-frame-options-01&lt;/a&gt;&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>iframe height auto-resize</title>
-            <link href="http://sharovatov.github.io/posts/2012-01-iframe-autosize.html"/>
-            <updated>2012-01-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2012-01-iframe-autosize.html</id>
-            <content type="html">&lt;p&gt;If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.&lt;/p&gt;
-&lt;p&gt;Sometimes it’s ok, but when you need your iframe to “expand” automatically on the host page, you have to change the iframe object height style property. And it’s dead easy when both iframe and the host page are from same origin – you just talk to parent window from the iframe and make it set the object height.&lt;/p&gt;
-&lt;p&gt;However, when cross-origin security model applies, everything gets more interesting, and you’re pretty much limited to &lt;a href=&quot;http://dev.w3.org/html5/postmsg/&quot;&gt;CDM&lt;/a&gt;/&lt;a href=&quot;http://www.sitepen.com/blog/2008/07/22/windowname-transport/&quot;&gt;window.name&lt;/a&gt;/location.hash transports.&lt;/p&gt;
-&lt;p&gt;So the proper approach would be to use CDM with a fallback to location.hash – newer browsers (IE8+ and current Firefox, Opera, Safari and Chrome) support postMessage, older versions will fall back to setting parent page location.hash property and on the parent page – interval polling for changes.&lt;/p&gt;
-&lt;p&gt;Here’s &lt;a href=&quot;http://sharovatov.ru/iframe-autoheight/iframeHost.php&quot;&gt;a basic working sample&lt;/a&gt; implementing this approach and here’s the code for it:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeChild.html&quot;&gt;child page&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php&quot;&gt;parent page&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to &lt;em&gt; origin. This might be a serious security breach since the parent page will process a message send from &lt;em&gt;*any&lt;/em&gt;&lt;/em&gt; page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.&lt;/p&gt;
-&lt;p&gt;I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.&lt;/p&gt;
 </content>
         </entry>
     
@@ -383,109 +399,6 @@ var result4 = result3(3);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;#39;s move on and execute &lt;code&gt;var result3 = result2(2);&lt;/code&gt;. We’ve just found out that &lt;strong&gt;result2&lt;/strong&gt; holds a reference to &lt;strong&gt;f2&lt;/strong&gt;, so it’s rather &lt;strong&gt;f2(2)&lt;/strong&gt; that we’re seeing here, which – as we remember – creates &lt;strong&gt;f3&lt;/strong&gt; function and stores &lt;strong&gt;z&lt;/strong&gt; in it’s context. This &lt;strong&gt;f3&lt;/strong&gt; will always return 2, &lt;strong&gt;result3&lt;/strong&gt; is a function will always return 2.&lt;/p&gt;
 &lt;p&gt;And when we execute &lt;code&gt;var result4 = result3(3)&lt;/code&gt;,&lt;strong&gt; f3(3)&lt;/strong&gt; is actually called and returns 2 as expected.&lt;/p&gt;
 &lt;p&gt;I think, this again proves that javascript is syntactically very powerful language.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>IE9 - sucks much less than other browsers</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
-            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
-&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
-&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
-&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
-&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
-&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
-&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
-&lt;p&gt;Some links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows Phone 7 emulator, updates and app blacklist</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
-            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
-&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
-&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
-&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
-src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
-&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
-&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
-&lt;p&gt;Useful links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </content>
         </entry>
     
@@ -653,20 +566,105 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
         </entry>
     
         <entry>
-            <title>critical IIS vulnerability</title>
-            <link href="http://sharovatov.github.io/posts/2009-12-iisvuln.html"/>
-            <updated>2009-12-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-12-iisvuln.html</id>
-            <content type="html">&lt;p&gt;Just got a link from our &lt;a href=&quot;http://trukhanov.wordpress.com&quot;&gt;system administrator&lt;/a&gt; &amp;#8211; &lt;a title=&quot;http://securityvulns.ru/Wdocument993.html&quot; href=&quot;http://securityvulns.ru/Wdocument993.html&quot;&gt;&lt;a href=&quot;http://securityvulns.ru/Wdocument993.html&quot;&gt;http://securityvulns.ru/Wdocument993.html&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Go read the vulnerability description now!&lt;/p&gt;
-&lt;p&gt;Basically – if your users upload files to your site and THEY specify file names, you’re vulnerable:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Vulnerability/Risk Description&lt;/strong&gt;:&lt;/p&gt;
-&lt;p&gt;IIS can execute any extension as an Active Server Page or any other executable extension.&lt;/p&gt;
-&lt;p&gt;For instance “malicious.asp;.jpg” is executed as an ASP file on the server. Many file uploaders protect the system by checking only the last section of the filename as its extension. And by using this vulnerability, an attacker can bypass this protection and upload a dangerous executable file on the server.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;There’s an unchecked &lt;a href=&quot;http://securityvulns.ru/files/iissemi1.cpp&quot;&gt;patch&lt;/a&gt; for this vulnerability, but again this shows that you just can’t allow any user input saved to your system without filtering.&lt;/p&gt;
-&lt;p&gt;So, if you allow file uploads – your script has to specify filenames, not users.&lt;/p&gt;
+            <title>IE9 - sucks much less than other browsers</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
+            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
+&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
+&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
+&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
+&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
+&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
+&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
+&lt;p&gt;Some links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows Phone 7 emulator, updates and app blacklist</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
+            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
+&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
+&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
+&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
+src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
+&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
+&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
+&lt;p&gt;Useful links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </content>
         </entry>
     
@@ -681,6 +679,24 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
 &lt;p&gt;Needless to say, Firefox 3 decided to change the value as well, so &lt;a href=&quot;http://kb.mozillazine.org/Network.http.max-persistent-connections-per-server&quot;&gt;now Firefox 3 has 6 as a default value for network.http.max-persistent-connections-per-server&lt;/a&gt; configuration setting. Good for Mozilla for copying stuff from IE again!&lt;/p&gt;
 &lt;p&gt;And now HTTPBis team (Julian Reschke) &lt;a href=&quot;http://trac.tools.ietf.org/wg/httpbis/trac/changeset/715&quot;&gt;commits the change&lt;/a&gt; which states that in the forthcoming HTTP standard the maximum amount of concurrent requests is not limited even with “SHOULD NOT” clause :)&lt;/p&gt;
 &lt;p&gt;Thanks HTTPBis team!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>critical IIS vulnerability</title>
+            <link href="http://sharovatov.github.io/posts/2009-12-iisvuln.html"/>
+            <updated>2009-12-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-12-iisvuln.html</id>
+            <content type="html">&lt;p&gt;Just got a link from our &lt;a href=&quot;http://trukhanov.wordpress.com&quot;&gt;system administrator&lt;/a&gt; &amp;#8211; &lt;a title=&quot;http://securityvulns.ru/Wdocument993.html&quot; href=&quot;http://securityvulns.ru/Wdocument993.html&quot;&gt;&lt;a href=&quot;http://securityvulns.ru/Wdocument993.html&quot;&gt;http://securityvulns.ru/Wdocument993.html&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Go read the vulnerability description now!&lt;/p&gt;
+&lt;p&gt;Basically – if your users upload files to your site and THEY specify file names, you’re vulnerable:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Vulnerability/Risk Description&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;IIS can execute any extension as an Active Server Page or any other executable extension.&lt;/p&gt;
+&lt;p&gt;For instance “malicious.asp;.jpg” is executed as an ASP file on the server. Many file uploaders protect the system by checking only the last section of the filename as its extension. And by using this vulnerability, an attacker can bypass this protection and upload a dangerous executable file on the server.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There’s an unchecked &lt;a href=&quot;http://securityvulns.ru/files/iissemi1.cpp&quot;&gt;patch&lt;/a&gt; for this vulnerability, but again this shows that you just can’t allow any user input saved to your system without filtering.&lt;/p&gt;
+&lt;p&gt;So, if you allow file uploads – your script has to specify filenames, not users.&lt;/p&gt;
 </content>
         </entry>
     
@@ -727,6 +743,31 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And the only way to properly get rid of this warning is to add&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to the first line of your html document and it finally worked without any warnings or issues. Awesome. XML header must be used for &lt;code&gt;load**HTML**File&lt;/code&gt; to run properly. Way too buggy to use.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Browsers' developer tools evolution</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
+            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
+&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
+&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
+&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
+&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
+&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
+&lt;p&gt;Come on, Opera team!&lt;/p&gt;
+&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
 </content>
         </entry>
     
@@ -809,74 +850,6 @@ encoding.&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Browsers' developer tools evolution</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
-            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
-&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
-&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
-&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
-&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
-&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
-&lt;p&gt;Come on, Opera team!&lt;/p&gt;
-&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Universal Internet Explorer 6 CSS</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-ie6-universal.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-ie6-universal.html</id>
-            <content type="html">&lt;p&gt;Today I’ve read an interesting article by Andy Clarke &lt;a href=&quot;http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Here’s the author’s key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;IE6 is hard to support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it’s so cool to write CSS for modern browsers only&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;sites shouldn’t look the same in different browsers&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;people come to websites for content&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So by throwing these thoughts in he’s making a conclusion that IE6 should be supported in a limited way – i.e. by giving it &lt;a href=&quot;http://forabeautifulweb.com/demo/2009/05/21/ie6.0.3.css&quot;&gt;a special “stripped” CSS&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So let’s see.&lt;/p&gt;
-&lt;h2 id=&quot;ie6-is-hard-to-support&quot;&gt;IE6 is hard to support&lt;/h2&gt;
-&lt;p&gt;From technical side it’s not hard, period. The amount of effort depends on the project peculiarities (to a degree).&lt;/p&gt;
-&lt;h2 id=&quot;it-s-cool-to-write-css-for-modern-browsers-only&quot;&gt;It’s cool to write CSS for modern browsers only&lt;/h2&gt;
-&lt;p&gt;Doing your work is not always doing cool stuff.&lt;/p&gt;
-&lt;h2 id=&quot;sites-shouldn-t-look-the-same-in-different-browsers&quot;&gt;Sites shouldn’t look the same in different browsers&lt;/h2&gt;
-&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
-&lt;h2 id=&quot;people-come-to-websites-for-content&quot;&gt;People come to websites for content&lt;/h2&gt;
-&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
-&lt;h2 id=&quot;i-do-keep-saying-that-all-this-depends-on-the-project-peculiarities-&quot;&gt;I do keep saying that all this depends on the project peculiarities.&lt;/h2&gt;
-&lt;p&gt;And I can’t understand why it’s not obvious to Andy Clarke. When a project is planned, all the issues are taken into consideration. As websites are displayed in different browsers, three key factors matter:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;nature of the website&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;market share of the browser&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;cost of supporting a browser&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Do I need to explain in more detail?&lt;/p&gt;
-&lt;p&gt;P.S. Yes I think people should upgrade from IE6. But not because it has an outdated support for standards, but just because newer browsers provide much better user experience.&lt;/p&gt;
-&lt;p&gt;P.P.S. You know, Andy, I really appreciate what you’re doing. I urge you not to stop. I’ll be priced higher for the same skills that I have now just because you (and those whom you manage to convince) deliberately choose not to deliver what clients need :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Skype blocking 80 and 443 ports</title>
             <link href="http://sharovatov.github.io/posts/2009-06-skype-blocking.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
@@ -894,19 +867,6 @@ encoding.&lt;/p&gt;
 &lt;p&gt;So in my case the 80 and 443 ports were taken by Skype. Whenever you start Skype, it tries to bind 80 and 443 ports, and so if you start your web server later, it won’t be able to work as ports are occupied. This Skype behaviour can be turned off by deselecting “Use port 80 and 443 as alternatives for incoming connections” here:&lt;/p&gt;
 &lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&amp;#038;h=579&quot; width=&quot;661&quot; height=&quot;579&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Hope this saves somebody some time :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Useful JS tips - getBoundingClientRect()</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
-            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
-&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
-&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
-&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
 </content>
         </entry>
     
@@ -936,22 +896,6 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
 &lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
 &lt;p&gt;Awesome, just awesome.&lt;/p&gt;
 &lt;p&gt;Thanks, Intel!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows 7 will be shipped without IE8 in Europe?</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-win7woie8.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-win7woie8.html</id>
-            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://news.cnet.com/8301-13860_3-10262630-56.html&quot;&gt;CNET states&lt;/a&gt;, Windows 7 will be shipped to Europe without IE8 because European antitrust regulators told them so. This clearly shows how rotten EU antitrust committee is and how easy it is for a well settled lobby to force the whole EU to accept absolutely stupid and nonsense act.&lt;/p&gt;
-&lt;p&gt;Who will gain any profit from this?&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Users&lt;/strong&gt;? No, they will have to find a way to get &lt;em&gt;any&lt;/em&gt; browser on their new computer. And what if it’s their first computer? How are they supposed to download anything from the internet? Yes it’s a five minutes job for an IT specialist, but go teach your grandmother how to use ftp.exe to download anything ;)&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Hardware vendors&lt;/strong&gt;? No, they were always able to install any browser on the computers they sell and make it the default one.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Other browser vendors&lt;/strong&gt;? To a degree. Anyway Microsoft will provide hardware resellers with an IE8 pack – so they can install IE8 on all the computers they build.&lt;/p&gt;
-&lt;p&gt;Is there any sense at all in this decision? I can’t see it.&lt;/p&gt;
-&lt;p&gt;I just don’t get it, really. If I’m buying a car, I won’t argue that the tyres on this new car are from Pirelli (or any other vendor). I will just change them if I don’t really like Pirelli, or choose another car which doesn’t have Pirelly. I’m not prohibited to change them. I’m just given the default one.&lt;/p&gt;
-&lt;p&gt;And now compare this situation with Apple who clearly prohibits installing Opera on its iPhone. Because it would compete (and, obviously, win the competition) with their Safari browser. Why doesn’t EU antitrust committee look at this? Why don’t Opera take any action here?&lt;/p&gt;
 </content>
         </entry>
     
@@ -1010,6 +954,35 @@ versions:&lt;/p&gt;
         }
 @*/
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So even if Windows XP user installed Service Pack 3 which updated JScript compiler to version 5.7, IE6 own version will still be 6. And it’s perfectly safe to use userAgent sniffing inside a conditional comments block which will be run in IE only.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows 7 will be shipped without IE8 in Europe?</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-win7woie8.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-win7woie8.html</id>
+            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://news.cnet.com/8301-13860_3-10262630-56.html&quot;&gt;CNET states&lt;/a&gt;, Windows 7 will be shipped to Europe without IE8 because European antitrust regulators told them so. This clearly shows how rotten EU antitrust committee is and how easy it is for a well settled lobby to force the whole EU to accept absolutely stupid and nonsense act.&lt;/p&gt;
+&lt;p&gt;Who will gain any profit from this?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Users&lt;/strong&gt;? No, they will have to find a way to get &lt;em&gt;any&lt;/em&gt; browser on their new computer. And what if it’s their first computer? How are they supposed to download anything from the internet? Yes it’s a five minutes job for an IT specialist, but go teach your grandmother how to use ftp.exe to download anything ;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hardware vendors&lt;/strong&gt;? No, they were always able to install any browser on the computers they sell and make it the default one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Other browser vendors&lt;/strong&gt;? To a degree. Anyway Microsoft will provide hardware resellers with an IE8 pack – so they can install IE8 on all the computers they build.&lt;/p&gt;
+&lt;p&gt;Is there any sense at all in this decision? I can’t see it.&lt;/p&gt;
+&lt;p&gt;I just don’t get it, really. If I’m buying a car, I won’t argue that the tyres on this new car are from Pirelli (or any other vendor). I will just change them if I don’t really like Pirelli, or choose another car which doesn’t have Pirelly. I’m not prohibited to change them. I’m just given the default one.&lt;/p&gt;
+&lt;p&gt;And now compare this situation with Apple who clearly prohibits installing Opera on its iPhone. Because it would compete (and, obviously, win the competition) with their Safari browser. Why doesn’t EU antitrust committee look at this? Why don’t Opera take any action here?&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Useful JS tips - getBoundingClientRect()</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
+            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
+&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
+&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
+&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
 </content>
         </entry>
     
@@ -1094,44 +1067,45 @@ versions:&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Windows 7 taskbar - new approach</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-win7taskbar.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-win7taskbar.html</id>
-            <content type="html">&lt;p&gt;I just love the way programs are organised on new Windows 7 taskbar.&lt;/p&gt;
-&lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
-&lt;p&gt;In earlier Windows versions to get the program window shown you had to do two things:&lt;/p&gt;
+            <title>Universal Internet Explorer 6 CSS</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-ie6-universal.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-ie6-universal.html</id>
+            <content type="html">&lt;p&gt;Today I’ve read an interesting article by Andy Clarke &lt;a href=&quot;http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here’s the author’s key points:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;check if the program is running by looking at the taskbar and maximise it window if it’s there&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;IE6 is hard to support&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if it’s not running, you had to launch it from quick launch or other place&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;it’s so cool to write CSS for modern browsers only&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;sites shouldn’t look the same in different browsers&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;people come to websites for content&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;This approach has some major flows:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;when you just need a program window to be shown, you have to do a cognitive effort to find where to get it from – either launch the program from quicklaunch (or somewhere else) or maximise its window from the taskbar&lt;/p&gt;
+&lt;p&gt;So by throwing these thoughts in he’s making a conclusion that IE6 should be supported in a limited way – i.e. by giving it &lt;a href=&quot;http://forabeautifulweb.com/demo/2009/05/21/ie6.0.3.css&quot;&gt;a special “stripped” CSS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So let’s see.&lt;/p&gt;
+&lt;h2 id=&quot;ie6-is-hard-to-support&quot;&gt;IE6 is hard to support&lt;/h2&gt;
+&lt;p&gt;From technical side it’s not hard, period. The amount of effort depends on the project peculiarities (to a degree).&lt;/p&gt;
+&lt;h2 id=&quot;it-s-cool-to-write-css-for-modern-browsers-only&quot;&gt;It’s cool to write CSS for modern browsers only&lt;/h2&gt;
+&lt;p&gt;Doing your work is not always doing cool stuff.&lt;/p&gt;
+&lt;h2 id=&quot;sites-shouldn-t-look-the-same-in-different-browsers&quot;&gt;Sites shouldn’t look the same in different browsers&lt;/h2&gt;
+&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
+&lt;h2 id=&quot;people-come-to-websites-for-content&quot;&gt;People come to websites for content&lt;/h2&gt;
+&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
+&lt;h2 id=&quot;i-do-keep-saying-that-all-this-depends-on-the-project-peculiarities-&quot;&gt;I do keep saying that all this depends on the project peculiarities.&lt;/h2&gt;
+&lt;p&gt;And I can’t understand why it’s not obvious to Andy Clarke. When a project is planned, all the issues are taken into consideration. As websites are displayed in different browsers, three key factors matter:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;nature of the website&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if you have, say, ten commonly used programs and put them on a quicklaunch and then open all them up, you’ve suddenly got quicklaunch icons just taking space and doing nothing as the programs are already opened. And you’ve got your programs’ icons in the taskbar – so you effectively have two icons for every program – one for launching a program and one for controlling its window state.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;market share of the browser&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;nowadays&quot;&gt;Nowadays&lt;/h2&gt;
-&lt;p&gt;In windows 7 the new approach is taken.&lt;/p&gt;
-&lt;p&gt;Basically, taskbar and quick launch are combined in one place and then enhanced a lot.&lt;/p&gt;
-&lt;p&gt;The concept is just great - you don’t need to check if a program is running or not to get it shown – you just click on its icon and if its running, you’ll get its window, otherwise it will launch and you will still get its window. Less cognitive effort, better usability.&lt;/p&gt;
-&lt;p&gt;One of the implications of this approach is that the space on the taskbar is saved by having “program-launching” and “window-managing” controls combined.&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot.jpg&quot;&gt;&lt;img title=&quot;sidebar_screenshot&quot; border=&quot;0&quot; alt=&quot;sidebar_screenshot&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot_thumb.jpg?w=640&amp;#038;h=306&quot; width=&quot;640&quot; height=&quot;306&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As you can see, Far, Explorer and Microsoft Word are not launched, Outlook, Messenger, Sticky Notes, Live Writer and IE8 are running.&lt;/p&gt;
-&lt;p&gt;As you can also notice on the screenshot, multiple instances of IE8 are grouped and if you hover them, that’s what you’ll see:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot2&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot2&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2_thumb.jpg?w=619&amp;#038;h=500&quot; width=&quot;619&quot; height=&quot;500&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;So managing multiple program instances is really easy – when you hover on an item, its window appears on the screen so you can preview if this window is what you were looking for and click on it to open. You can also close any window from the group right from the taskbar.&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot when there’s many IE8 tabs opened:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot3&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3_thumb.jpg?w=628&amp;#038;h=538&quot; width=&quot;628&quot; height=&quot;538&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Again, when you hover on an item, its window is shown, so you either click on it to make it active or close it down.&lt;/p&gt;
-&lt;p&gt;Another great interface solution is displaying progress bars directly on the taskbar. For example, here’s how IE8 displays download progress bar:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot4&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot4&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4_thumb.jpg?w=499&amp;#038;h=144&quot; width=&quot;499&quot; height=&quot;144&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;And all the features I showed is just a part of all the goodness Windows 7 taskbar introduces.&lt;/p&gt;
-&lt;p&gt;So yes, I agree with Gizmodo that &lt;a href=&quot;http://gizmodo.com/5131933/giz-explains-why-the-windows-7-taskbar-beats-mac-os-xs-dock&quot;&gt;Windows 7 Taskbar is much better than MAC OS X dock&lt;/a&gt;.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;cost of supporting a browser&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Do I need to explain in more detail?&lt;/p&gt;
+&lt;p&gt;P.S. Yes I think people should upgrade from IE6. But not because it has an outdated support for standards, but just because newer browsers provide much better user experience.&lt;/p&gt;
+&lt;p&gt;P.P.S. You know, Andy, I really appreciate what you’re doing. I urge you not to stop. I’ll be priced higher for the same skills that I have now just because you (and those whom you manage to convince) deliberately choose not to deliver what clients need :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -1174,240 +1148,44 @@ integration out-of-the-box.&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Windows 7 Desktop Gadgets</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-wdg.html"/>
+            <title>Windows 7 taskbar - new approach</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-win7taskbar.html"/>
             <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-wdg.html</id>
-            <content type="html">&lt;p&gt;I’ve been playing with Windows 7 Desktop Gadget technology and I must tell you – I just love it! And I’ll tell you why :)&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-05-win7taskbar.html</id>
+            <content type="html">&lt;p&gt;I just love the way programs are organised on new Windows 7 taskbar.&lt;/p&gt;
 &lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
-&lt;p&gt;The approach of putting web-application right on a desktop was invented by Microsoft in 1994-95 (in &lt;a href=&quot;http://en.wikipedia.org/wiki/Windows_Nashville&quot;&gt;Windows Nashville&lt;/a&gt; which was intended to be released in 1996) and was a part of Windows Desktop Update for Windows 95 and a core of Windows 98 &lt;a href=&quot;http://en.wikipedia.org/wiki/Active_Desktop&quot;&gt;Active Desktop&lt;/a&gt;. You could set an HTML page (plus JS, of course) as your desktop background and it would be run in IE. Microsoft even &lt;a href=&quot;http://web.archive.org/web/20040610054229/http://www.microsoft.com/windows/ie/previous/gallery/default.mspx&quot;&gt;had a gallery of Active Desktop widgets&lt;/a&gt;. So web-widgets-like functionality was around almost twelve years ago. As with many other Microsoft inventions, it was way too ahead of time.&lt;/p&gt;
-&lt;p&gt;Another technology that played a role in inventing desktop gadgets is &lt;a href=&quot;http://www.microsoft.com/technet/scriptcenter/hubs/htas.mspx&quot;&gt;HTA&lt;/a&gt; – short HTML applications that run in a standalone way. You had to put your scripts (VBScript or JScript) and styles in a single HTML file, add a special description and rename the file extension to .hta. Here’s a sample code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
-    &amp;lt;head&amp;gt;
-        &amp;lt;title&amp;gt;HTA Test&amp;lt;/title&amp;gt;
-        &amp;lt;HTA:APPLICATION ID=&amp;quot;objTest&amp;quot; APPLICATIONNAME=&amp;quot;HTA Test&amp;quot; SCROLL=&amp;quot;yes&amp;quot; SINGLEINSTANCE=&amp;quot;yes&amp;quot;&amp;gt;
-        &amp;lt;SCRIPT type=&amp;quot;text/javascript&amp;quot;&amp;gt;
-            //some javascript code
-        &amp;lt;/SCRIPT&amp;gt;
-    &amp;lt;/head&amp;gt;
-    &amp;lt;body&amp;gt;
-        &amp;lt;!-- some html --&amp;gt;
-    &amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You could access all ActiveX objects that your system provided – Scripting FileSystemObject, UserAccounts, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa393260(VS.85).aspx&quot;&gt;WMI&lt;/a&gt; etc. – basically everything that was supported in &lt;a href=&quot;http://en.wikipedia.org/wiki/Windows_Script_Host&quot;&gt;WSH&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bstcxhf7(VS.85).aspx&quot;&gt;Script Runtime&lt;/a&gt;. If you were using classic ASP on the server, you could switch to writing HTAs with zero effort – language and all the objects would be the same. While any web-development IDEs could be used, there even was a special IDE for building HTAs – &lt;a href=&quot;http://www.htaedit.com/&quot;&gt;HTAEDIT&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So Microsoft had two nice technologies that weren’t actively used &amp;#8211; Active Desktop as a way to integrate web-application with desktop and HTA as a core for writing standalone client-side web applications. Both technologies combined both to create &lt;strong&gt;Microsoft Desktop Gadgets&lt;/strong&gt; - small standalone client-side web applications that run as dockable widgets on your desktop – pure HTML,CSS and JS packed with manifest file in an archive.&lt;/p&gt;
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-&lt;p&gt;If you double-click on this archive, gadget will get installed and can be moved to any place of your desktop. IE8 core is used to run them, so you get full support for CSS2.1, great level of javascript and other IE8 goodness.&lt;/p&gt;
-&lt;p&gt;The gadgets concept was introduced In Windows Vista – but gadgets had to be positioned inside a special sidebar area – which is not very flexible. In Windows 7 you can put your gadgets wherever you want them to be.&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot how gadgets look like on my desktop:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot1.png&quot;&gt;&lt;img title=&quot;gadgets-screenshot[1]&quot; border=&quot;0&quot; alt=&quot;gadgets-screenshot[1]&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot1_thumb.png?w=354&amp;#038;h=775&quot; width=&quot;354&quot; height=&quot;775&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Gadgets are especially useful when you have a widescreen monitor or two monitors configuration so that you’ve got much horizontal space, but even if you’ve got a normal monitor as gadgets can be freely positioned, you will find them useful.&lt;/p&gt;
-&lt;p&gt;I use &lt;a href=&quot;http://www.arsecandle.org/twadget/&quot;&gt;Twitter&lt;/a&gt;, weather (standard), &lt;a href=&quot;http://gallery.live.com/liveItemDetail.aspx?li=aa4a0946-eee3-4af3-914d-ed0c66242523&quot;&gt;network traffic&lt;/a&gt; and &lt;a href=&quot;http://gallery.live.com/liveItemDetail.aspx?li=45c58820-e955-4802-9c2d-867b8b925c0a&quot;&gt;cpu meter&lt;/a&gt; gadgets.&lt;/p&gt;
-&lt;p&gt;Awesome technology! I’m planning to build couple of my own gadgets and will definitely prepare a blog post on this :)&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: It looks like Windows Mobile 6.5 will have support for similar gadgets
-functionality!&lt;/p&gt;
-&lt;h1 id=&quot;exploring-windows-desktop-gadgets&quot;&gt;Exploring Windows Desktop Gadgets&lt;/h1&gt;
-&lt;p&gt;First of all, let’s get our hands dirty and create a simple gadget.&lt;/p&gt;
-&lt;h2 id=&quot;creating-a-simple-gadget&quot;&gt;Creating a simple gadget&lt;/h2&gt;
-&lt;p&gt;One of the things that was always bothering me was checking comments to my blog entries. There’re usually two ways to check for new comments on your blog – either by subscribing to comments RSS feed or by going to admin web-interface of the blog and checking for comments there. I don’t like first option because I’m subscribed to more than a hundred feeds in my Outlook so I only read them at the weekends when I’ve got enough free time. And I don’t particularly fancy logging to my blog every three-four hours to check for new
-comments. So Windows 7 Desktop Gadget with my blog comments feed would perfectly suit my needs.&lt;/p&gt;
-&lt;p&gt;Although this might not sound as a killer app to you, but it does its job and also perfectly shows how simple it is to build a gadget.&lt;/p&gt;
-&lt;p&gt;First of all, as I’ve already said, Windows 7 Gadget is nothing more than just a HTML page with Javascript and CSS. So I use the same approach as if I had to parse my blog comments on a website – a simple HTML, a bit of CSS and a bit of AJAX. So gadget building comes down to building a client-side web-app and packing it.&lt;/p&gt;
-&lt;h2 id=&quot;creating-a-web-app&quot;&gt;Creating a web-app&lt;/h2&gt;
-&lt;p&gt;I created a &lt;a href=&quot;http://sharovatov.ru/gadgets/main.html&quot;&gt;simple page&lt;/a&gt; with a pretty &lt;a href=&quot;http://sharovatov.ru/gadgets/rss.js&quot;&gt;straight-forward javascript&lt;/a&gt;. If you take a look at window.onload js code, you’ll see the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;window.setInterval( function(){ getRSS(url); }, 5*60*1000); 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;meaning that every five minutes getRSS function is called.&lt;/p&gt;
-&lt;p&gt;This is the “main loop” of our program. As our gadget is a desktop program written in javascript and since Javascript blocks UI when being executed, setInterval/setTimeout is the only one way to set the “main loop”.&lt;/p&gt;
-&lt;p&gt;That’s how the javascript in this web-app works:&lt;/p&gt;
+&lt;p&gt;In earlier Windows versions to get the program window shown you had to do two things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;check if the program is running by looking at the taskbar and maximise it window if it’s there&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if it’s not running, you had to launch it from quick launch or other place&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This approach has some major flows:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;getRSS function creates XMLHTTPRequest object and sends HTTP GET request to a href=&amp;quot;&lt;a href=&quot;http://sharovatov.wordpress.com/comments/feed/&amp;quot;&amp;gt;http://sharovatov.wordpress.com/comments/feed/&quot;&gt;http://sharovatov.wordpress.com/comments/feed/&amp;quot;&amp;gt;http://sharovatov.wordpress.com/comments/feed/&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;when you just need a program window to be shown, you have to do a cognitive effort to find where to get it from – either launch the program from quicklaunch (or somewhere else) or maximise its window from the taskbar&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;wordpress responds with XML file containing last ten comments from my blog&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;parseRSS function parses the XML and passes the resulting object to displayRSS which just dumps it to document.body&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;if you have, say, ten commonly used programs and put them on a quicklaunch and then open all them up, you’ve suddenly got quicklaunch icons just taking space and doing nothing as the programs are already opened. And you’ve got your programs’ icons in the taskbar – so you effectively have two icons for every program – one for launching a program and one for controlling its window state.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;It takes 15-20 minutes to write such a tiny piece of code. So now we’ve got a small web-application which is a very basic version of RSS reader.&lt;/p&gt;
-&lt;p&gt;As you may notice, the script doesn’t work on sharovatov.ru. Cross-domain security restrictions is a reason for that – the script is located on one domain (sharovatov.ru) and it tries to request data from another domain (sharovatov.wordpress.com). However, if you save &lt;a href=&quot;http://sharovatov.ru/gadgets/main.html&quot;&gt;main.html&lt;/a&gt; page and &lt;a href=&quot;http://sharovatov.ru/gadgets/rss.js&quot;&gt;rss.js&lt;/a&gt; file to your machine, run main.html from
-IE8 and confirm JS execution, you will see the comments feed displayed.&lt;/p&gt;
-&lt;p&gt;As we’re done with functionality, it’s time to convert our small client-side web-app to a gadget.&lt;/p&gt;
-&lt;h2 id=&quot;converting-to-a-gadget&quot;&gt;Converting to a gadget&lt;/h2&gt;
-&lt;p&gt;All we need to do now is to add a special &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa965879(VS.85).aspx&quot;&gt;manifest&lt;/a&gt; file. It’s just an XML file with your gadget description. &lt;a href=&quot;http://sharovatov.ru/gadgets/gadget.xml&quot;&gt;Here’s mine&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;That’s all. Now we pack these three files into a zip archive and rename its extension to &lt;code&gt;.gadget&lt;/code&gt;. Here’s &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.2.gadget&quot;&gt;a link to what I came up with&lt;/a&gt;. Save it as test.gadget and double-click on it. If you then confirm gadget installation prompt, it will appear on the screen and the feed is downloaded and displayed.&lt;/p&gt;
-&lt;p&gt;That’s the basics of creating a gadget, if you feel interested, read &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa965850(VS.85).aspx&quot;&gt;MSDN&lt;/a&gt; or follow my posts – I will
-keep on writing about gadgets and in the next post I’ll show what my comments reader gadget will look like eventually :)&lt;/p&gt;
-&lt;p&gt;This is the screenshot of a 20-minutes job:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image1.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb1.png?w=193&amp;#038;h=318&quot; width=&quot;193&quot; height=&quot;318&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image2.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot;
-src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb2.png?w=186&amp;#038;h=331&quot; width=&quot;186&quot; height=&quot;331&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Every five minutes the gadget is updated so I can clearly see whose comment is the last one and reply if needed. Very handy :)&lt;/p&gt;
-&lt;h1 id=&quot;exploring-windows-desktop-gadgets-2-security-and-limitations&quot;&gt;Exploring Windows Desktop Gadgets #2 - security and limitations&lt;/h1&gt;
-&lt;p&gt;First of all, let me repeat that gadget is a client-side web-application running in chromeless mode on your desktop. It’s similar to &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536496(VS.85).aspx&quot;&gt;HTA&lt;/a&gt; but provides a whole new set of functionality and also has some restrictions compared to HTA.&lt;/p&gt;
-&lt;h2 id=&quot;gadgets-security-model&quot;&gt;Gadgets security model&lt;/h2&gt;
-&lt;p&gt;IE has always been the de-facto-standard platform for building powerful applications that require access to file system, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa380245.aspx&quot;&gt;Cryptographic Service Provider&lt;/a&gt;, WMI and other OS functionality. This functionality is achieved by using ActiveX controls.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;But ActiveX can’t run without a user permission&lt;/strong&gt;! So by default javascript in a web-applications has quite strong security limitations. This security model can only be weaken by users choice - by allowing ActiveX controls to run or by adding a website to a trusted zone.&lt;/p&gt;
-&lt;p&gt;But as gadgets are installed by user, so it’s his choice to run them, all functionality that MSHTML can provide is enabled (*). &lt;a href=&quot;http://msdn.microsoft.com/en-gb/library/bb508510(VS.85).aspx&quot;&gt;MSDN says&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The MSHTML runtime is configured with the set of permissions given to HTAs or the Local Machine Zone security configuration.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;This rises a very important point – &lt;strong&gt;don’t install gadgets from non trusted sources&lt;/strong&gt;. Or if you do, please inspect the code before you install the gadget. As Gadget runs under current user account, it won’t be able to delete system32 directory or do any other critical damage to the system. But it will surely succeed in deleting your documents or photos.&lt;/p&gt;
-&lt;p&gt;And of course, as any other Microsoft technology, Gadgets can be fully controlled by Group Policy.&lt;/p&gt;
-&lt;p&gt;For more information on Gadgets security please read &lt;a href=&quot;http://msdn.microsoft.com/en-gb/library/bb508510(VS.85).aspx&quot;&gt;this&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bb498012.aspx&quot;&gt;this&lt;/a&gt; MSDN article.&lt;/p&gt;
-&lt;h2 id=&quot;gadgets-limitations&quot;&gt;Gadgets limitations&lt;/h2&gt;
-&lt;p&gt;The main limitation to me is that &lt;strong&gt;there’re no modal dialogs. &lt;/strong&gt;No alerts, no window.confirm, nothing. So if you want to do a quick debug, you have to dump data to the document itself or use a script debugger.&lt;/p&gt;
-&lt;h1 id=&quot;exploring-windows-desktop-gadgets-3-settings-storage&quot;&gt;Exploring Windows Desktop Gadgets #3 - settings storage&lt;/h1&gt;
-&lt;p&gt;This is the third post in Exploring Windows Desktop Gadgets series and it will be devoted to improving our comments feed reader gadget by adding settings storage functionality.&lt;/p&gt;
-&lt;h2 id=&quot;settings-storage-theory&quot;&gt;Settings storage theory&lt;/h2&gt;
-&lt;p&gt;Any desktop program has its own settings storage (ini files, xml files, etc.) or uses a global OS storage (registry).&lt;/p&gt;
-&lt;p&gt;But in web-applications everything’s different – part of the functionality is provided by client (browser) and another part - by the server. Although it’s dead easy to store data on the server, on the client-side you can’t get access neither to file system nor to registry. (You actually can in IE, but this will require ActiveX scripting and therefore will ask user for an explicit permission.)&lt;/p&gt;
-&lt;p&gt;Until very recent &lt;a href=&quot;http://dev.w3.org/html5/webstorage/&quot;&gt;DOM Storage specification draft&lt;/a&gt;, in most browsers you could only use cookies for storing some data on client side. However, IE5 introduced support for true client-side only storage – DOM Storage predecessor - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms531424.aspx&quot;&gt;userData&lt;/a&gt;. So it took almost eight years for the whole browsers industry to define and support similar client-side storage approach. And right at the time as DOM Storage is being drafted by W3C, it gets support in IE8.&lt;/p&gt;
-&lt;p&gt;The reason I’m telling you about DOM Storage in IE8 is that I have a strong feeling that this DOM Storage is used by Gadgets Platform to allow storing settings data for each gadget.&lt;/p&gt;
-&lt;h2 id=&quot;settings-storage-practice&quot;&gt;Settings storage practice&lt;/h2&gt;
-&lt;p&gt;Settings dialog is a modal window which opens on top of your gadget. As it’s modal, the only way you can close it is to press OK or CANCEL button in its UI. Similarly to the gadget itself, settings dialog is a HTML page displayed by MSHTML.&lt;/p&gt;
-&lt;p&gt;As it would be useful to have comments feed URL and refresh frequency configurable, this is what I’ll add to my gadget:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image3.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb3.png?w=317&amp;#038;h=345&quot; width=&quot;317&quot; height=&quot;345&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;In the settings dialog only area outlined in red is actually a HTML file, title and OK/CANCEL buttons are provided by Gadgets Platform:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image4.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb4.png?w=315&amp;#038;h=343&quot; width=&quot;315&quot; height=&quot;343&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;To add the settings dialog to our gadget we’ll have to create a HTML file, let’s call it “settings.html”. To save comments feed URL and refresh frequency, we only need two fields and couple of labels. &lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.ru/gadgets/v0.3/settings.html&quot;&gt;This is what I came up with&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;If  you look at the JS code, you’ll see that it does two things:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;calls &lt;strong&gt;System.Gadget.Settings.read&lt;/strong&gt; function to retrieve data from the Gadget settings storage&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;defines a handler for &lt;strong&gt;System.Gadget.onSettingsClosing&lt;/strong&gt; event&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;There’s a &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bb508511(VS.85).aspx&quot;&gt;complete reference of Gadget platform events and properties on MSDN&lt;/a&gt;, but for our simple case it’s enough to say that &lt;strong&gt;System.Gadget.Settings.read&lt;/strong&gt; reads object from the storage by its name, &lt;strong&gt;System.Gadget.Settings.write&lt;/strong&gt; writes object to the storage with its name and &lt;strong&gt;System.Gadget.onSettingsClosing&lt;/strong&gt; event fires when the settings dialog is closing. Settings store is separate for each gadget so don’t be afraid that your settings names can be accessed from other gadgets.&lt;/p&gt;
-&lt;p&gt;So in the &lt;strong&gt;window.onload&lt;/strong&gt; handler of settings.html I try to get the data from the storage and set inputs values accordingly, and when the gadget is closing, I check if OK was pressed (&lt;strong&gt;e.closeAction == e.Action.commit&lt;/strong&gt;) and if so, save inputs values into the storage. Dead easy.&lt;/p&gt;
-&lt;p&gt;Now we have to attach settings.html page to our gadget. This is done by adding the following javascript code to main.html file:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;System.Gadget.settingsUI = &amp;quot;settings.html&amp;quot;;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now our Gadget will show this button in the control area:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image5.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb5.png?w=211&amp;#038;h=321&quot; width=&quot;211&quot; height=&quot;321&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;And if you click on it, you’ll see your settings.html page rendered in a nice UI:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image3.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb3.png?w=317&amp;#038;h=345&quot; width=&quot;317&quot; height=&quot;345&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;So now we have a settings dialog that reads and writes data from the Gadget settings store.&lt;/p&gt;
-&lt;p&gt;What we also need to do is to make our main.html read comments feed URL and refresh frequency from settings store as well. If you look at &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.3/rss.js&quot;&gt;this javascript&lt;/a&gt;, you’ll see how it’s changed from &lt;a href=&quot;http://sharovatov.ru/gadgets/rss.js&quot;&gt;the previous version&lt;/a&gt;. Basically, I just
-did the following:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;rss.js now doens’t have blog comments feed URL and refresh frequency hardcoded, instead, it reads these values from settings store:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; window.onload = function(){
-     //read data from storage
-     var data = getDataFromStorage();
-
-     if (&amp;quot;&amp;quot; != data.url &amp;amp;amp;&amp;amp;amp;
-     &amp;quot;&amp;quot; != data.frequency &amp;amp;amp;&amp;amp;amp;
-     /^(\d*)(\.?)(\d*)$/.match(data.frequency)) startLoop(data);
-     else document.body.innerHTML = &amp;quot;&amp;lt;b&amp;gt;Please make sure you&amp;quot;+
-     &amp;quot;configured everything properly&amp;lt;/b&amp;gt;&amp;quot;;
-
- };
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;System.Gadget.onSettingsClosed &lt;/strong&gt;event handler is used to restart main loop with new settings:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; System.Gadget.onSettingsClosed = function(){
-     var data = getDataFromStorage();
-     startLoop(data);
- };
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;And startLoop function has been rewritten to allow only one main loop (but that&amp;#39;s pretty irrelevant to Gadgets platform):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; var startLoop = function(data){
-     //clear existing interval (if present)
-     if (&amp;quot;undefined&amp;quot; != typeof arguments.callee.intervalHandler)
-         window.clearInterval(arguments.callee.intervalHandler);
-     //retrieve feed again
-     getRSS(data.url);
-     //set new main loop
-     arguments.callee.intervalHandler = window.setInterval(
-         function(){ getRSS(data.url); }, data.frequency * 1000
-     );
- };
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;And here we go – &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.3/rss-comments.gadget&quot;&gt;gadget’s ready&lt;/a&gt; :)&lt;/p&gt;
-&lt;p&gt;Save it as &lt;strong&gt;rss-comments.gadget&lt;/strong&gt; to your computer and install it – you will be able to set comments feed URL (so you can start using it to watch comments on your own blog) and refresh frequency in seconds.&lt;/p&gt;
-&lt;p&gt;In the next posts of this series I will cover flyouts, make the gadget look really slick with UI enhancements Gadget platform provides, show how debugging gadgets can be really effective and dive into more details of the Gadgets platform. Stay tuned for more interesting stuff!&lt;/p&gt;
-&lt;h1 id=&quot;best-windows-7-gadgets&quot;&gt;Best Windows 7 gadgets&lt;/h1&gt;
-&lt;p&gt;Found the best blog with windows 7 gadgets &amp;#8211; &lt;a title=&quot;http://blog.orbmu2k.de/&quot;
-href=&quot;http://blog.orbmu2k.de/&quot;&gt;&lt;a href=&quot;http://blog.orbmu2k.de/&quot;&gt;http://blog.orbmu2k.de/&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I installed Memory usage gadget, updated version of CPU Usage, Network traffic, Volume control and Top 5 processes gadgets. Really great!&lt;/p&gt;
-&lt;p&gt;I also downloaded all Windows 7 themes from &lt;a title=&quot;http://windows.microsoft.com/en-US/Windows7/Personalize&quot; href=&quot;http://windows.microsoft.com/en-US/Windows7/Personalize&quot;&gt;&lt;a href=&quot;http://windows.microsoft.com/en-US/Windows7/Personalize&quot;&gt;http://windows.microsoft.com/en-US/Windows7/Personalize&lt;/a&gt;&lt;/a&gt; page – they are just awesome :)&lt;/p&gt;
-&lt;p&gt;Now the right side of my 2nd monitor looks like that:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot21.jpg&quot;&gt;&lt;img title=&quot;gadgets-screenshot2[1]&quot; border=&quot;0&quot; alt=&quot;gadgets-screenshot2[1]&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot21_thumb.jpg?w=444&amp;#038;h=1025&quot; width=&quot;444&quot; height=&quot;1025&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;pomodoro-windows-7-gadget&quot;&gt;Pomodoro Windows 7 gadget&lt;/h1&gt;
-&lt;p&gt;I was really inspired by &lt;a href=&quot;http://tomatoi.st/&quot;&gt;&lt;a href=&quot;http://tomatoi.st/&quot;&gt;http://tomatoi.st/&lt;/a&gt;&lt;/a&gt; web service which provides an easy to use web interface for &lt;a href=&quot;http://www.pomodorotechnique.com/&quot;&gt;Pomodoro time management technique&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;But unfortunately, tomatoi.st is down due to overload too often, so I spent 20 minutes and prepared a &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;simple Windows 7 pomodoro gadget&lt;/a&gt;. It does just what’s needed – showing timers:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/12/image.png?w=188&amp;#038;h=158&quot; width=&quot;188&quot; height=&quot;158&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Click on “Work” button to start 25 minutes work interval, “short br” – to get 5 minutes short break timeout, “long br” for a 15 minutes long break.&lt;/p&gt;
-&lt;p&gt;It’s dead easy to download and install – just click &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Or you can inspect the code if you want to – gadget is just a zip file with html, css and js inside.&lt;/p&gt;
-&lt;p&gt;Ah, and I have to warn you – when a period of time is over, it starts playing Alert.wav every second until you set a new period.&lt;/p&gt;
-&lt;p&gt;For more information about Windows 7 gadgets you read the following posts on my blog:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/14/windows-7-desktop-gadgets/&quot;&gt;introduction to the gadgets platform&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/27/exploring-windows-desktop-gadgets/&quot;&gt;Exploring Windows Desktop Gadgets&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/28/exploring-windows-desktop-gadgets-2-security-and-limitations/&quot;&gt;Exploring Windows Desktop Gadgets #2 – security and limitations&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/&quot;&gt;Exploring Windows Desktop Gadgets #3 – settings storage&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/01/exploring-windows-desktop-gadgets-4-flyouts/&quot;&gt;Exploring Windows Desktop Gadgets #4 – flyouts&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Or read &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd370869%28VS.85%29.aspx&quot;&gt;MSDN&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;P.S. this gadget doesn’t have any settings or flyout or anything else – it’s very simple.&lt;/p&gt;
-&lt;h1 id=&quot;gadgets-flyouts&quot;&gt;Gadgets Flyouts&lt;/h1&gt;
-&lt;p&gt;As it’s practical to have small gadgets which don’t take much of screen space, it’s not possible to display much information on them. That’s why Gadget Platform provides a way to add a &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms723669%28VS.85%29.aspx&quot;&gt;flyout&lt;/a&gt; object to your gadget.&lt;/p&gt;
-&lt;h2 id=&quot;flyout-theory&quot;&gt;Flyout theory&lt;/h2&gt;
-&lt;p&gt;In theory, flyout is supposed to present additional or detailed information about anything you choose.&lt;/p&gt;
-&lt;p&gt;The great example of flyout use case is standard Windows 7 Stocks gadget – it shows basic stocks rates information in the main window and the if you click on the stock rate you’re interested, MSN Money chart for this stock rate is shown in a flyout. Here’s how it looks:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/06/image.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image_thumb.png?w=415&amp;#038;h=170&quot; width=&quot;415&quot; height=&quot;170&quot;/&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Flyout is a separate HTML page which you attach to your gadget similarly to &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/&quot;&gt;settings window&lt;/a&gt; – by specifying the following:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;System.Gadget.Flyout.file = &amp;#39;flyout.html&amp;#39;; 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Another difference from settings dialog is that settings dialog is only accessible by clicking on a options button:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/06/image1.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image_thumb1.png?w=162&amp;#038;h=151&quot; width=&quot;162&quot; height=&quot;151&quot;&gt;&lt;/a&gt; and flyout is shown/hidden programmatically by setting its &lt;strong&gt;show&lt;/strong&gt; property to &lt;strong&gt;true&lt;/strong&gt;/&lt;strong&gt;false&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;//show flyout
-System.Gadget.Flyout.show = true;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When you set &lt;strong&gt;show&lt;/strong&gt; to &lt;strong&gt;true&lt;/strong&gt;, flyout html will be rendered and its window will be automatically positioned depending on the content size and gadget’s position.&lt;/p&gt;
-&lt;p&gt;Flyout provides two events - &lt;strong&gt;System.Gadget.Flyout.onShow&lt;/strong&gt; which is fired when the flyout is shown and &lt;strong&gt;System.Gadget.Flyout.onHide&lt;/strong&gt; which is fired when the flyout is closed.&lt;/p&gt;
-&lt;p&gt;To set flyout content to something meaningful, you have to get access to flyout’s document from your gadget main window javascript. This is achieved by using &lt;strong&gt;System.Gadget.Flyout.document&lt;/strong&gt; property – but the call to it will throw an exception if flyout is hidden, so make sure you either check &lt;strong&gt;System.Gadget.Flyout.show&lt;/strong&gt; property for &lt;strong&gt;true&lt;/strong&gt; or wrap the code which uses &lt;strong&gt;System.Gadget.Flyout.document&lt;/strong&gt; in try-catch block.&lt;/p&gt;
-&lt;p&gt;Note that you can also access main gadget page from the flyout by using &lt;strong&gt;System.Gadget.document&lt;/strong&gt; property which is always available.&lt;/p&gt;
-&lt;p&gt;Enough theory, let’s modify our Gadget to show only comments titles on the main page and render a flyout with comment’s content when title is clicked.&lt;/p&gt;
-&lt;h2 id=&quot;practice&quot;&gt;Practice&lt;/h2&gt;
-&lt;p&gt;So here’s what I did:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;created &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/flyout.html&quot;&gt;flyout.html&lt;/a&gt; file&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;referenced it as &lt;code&gt;System.Gadget.Flyout.file = &amp;#39;flyout.html&amp;#39;;&lt;/code&gt; in &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/rss.js&quot;&gt;rss.js&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;modified &lt;strong&gt;displayRSS&lt;/strong&gt; function to store current comment object in paragraph’s expando property&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;added &lt;strong&gt;toggleFlyout&lt;/strong&gt; function to the &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/rss.js&quot;&gt;rss.js&lt;/a&gt; file which passes the comment object from the &lt;strong&gt;&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;&lt;/strong&gt;’s expando property to &lt;code&gt;System.Gadget.Flyout.document&lt;/code&gt; and displays the flyout&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The resulting files and the compressed gadget are &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In the next posts I’ll show what styling options we’ve got in Gadgets Platform, will proceed talking about gadgets security and talk about advanced javascript techniques that can be used in gadgets.&lt;/p&gt;
-&lt;h1 id=&quot;pomodoro-windows-7-gadget&quot;&gt;Pomodoro Windows 7 gadget&lt;/h1&gt;
-&lt;p&gt;I was really inspired by &lt;a href=&quot;http://tomatoi.st/&quot;&gt;&lt;a href=&quot;http://tomatoi.st/&quot;&gt;http://tomatoi.st/&lt;/a&gt;&lt;/a&gt; web service which provides an easy to use web interface for &lt;a href=&quot;http://www.pomodorotechnique.com/&quot;&gt;Pomodoro time management technique&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;But unfortunately, tomatoi.st is down due to overload too often, so I spent 20 minutes and prepared a &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;simple Windows 7 pomodoro gadget&lt;/a&gt;. It does just what’s needed – showing timers:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/12/image.png?w=188&amp;#038;h=158&quot; width=&quot;188&quot; height=&quot;158&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Click on “Work” button to start 25 minutes work interval, “short br” – to get 5 minutes short break timeout, “long br” for a 15 minutes long break.&lt;/p&gt;
-&lt;p&gt;It’s dead easy to download and install – just click &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Or you can inspect the code if you want to – gadget is just a zip file with html, css and js inside.&lt;/p&gt;
-&lt;p&gt;Ah, and I have to warn you – when a period of time is over, it starts playing Alert.wav every second until you set a new period.&lt;/p&gt;
-&lt;p&gt;For more information about Windows 7 gadgets you read the following posts on my blog:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/14/windows-7-desktop-gadgets/&quot;&gt;introduction to the gadgets platform&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/27/exploring-windows-desktop-gadgets/&quot;&gt;Exploring Windows Desktop Gadgets&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/28/exploring-windows-desktop-gadgets-2-security-and-limitations/&quot;&gt;Exploring Windows Desktop Gadgets #2 – security and limitations&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/&quot;&gt;Exploring Windows Desktop Gadgets #3 – settings storage&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/01/exploring-windows-desktop-gadgets-4-flyouts/&quot;&gt;Exploring Windows Desktop Gadgets #4 – flyouts&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Or read &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd370869%28VS.85%29.aspx&quot;&gt;MSDN&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;P.S. this gadget doesn’t have any settings or flyout or anything else – it’s very simple.&lt;/p&gt;
+&lt;h2 id=&quot;nowadays&quot;&gt;Nowadays&lt;/h2&gt;
+&lt;p&gt;In windows 7 the new approach is taken.&lt;/p&gt;
+&lt;p&gt;Basically, taskbar and quick launch are combined in one place and then enhanced a lot.&lt;/p&gt;
+&lt;p&gt;The concept is just great - you don’t need to check if a program is running or not to get it shown – you just click on its icon and if its running, you’ll get its window, otherwise it will launch and you will still get its window. Less cognitive effort, better usability.&lt;/p&gt;
+&lt;p&gt;One of the implications of this approach is that the space on the taskbar is saved by having “program-launching” and “window-managing” controls combined.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot.jpg&quot;&gt;&lt;img title=&quot;sidebar_screenshot&quot; border=&quot;0&quot; alt=&quot;sidebar_screenshot&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot_thumb.jpg?w=640&amp;#038;h=306&quot; width=&quot;640&quot; height=&quot;306&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, Far, Explorer and Microsoft Word are not launched, Outlook, Messenger, Sticky Notes, Live Writer and IE8 are running.&lt;/p&gt;
+&lt;p&gt;As you can also notice on the screenshot, multiple instances of IE8 are grouped and if you hover them, that’s what you’ll see:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot2&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot2&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2_thumb.jpg?w=619&amp;#038;h=500&quot; width=&quot;619&quot; height=&quot;500&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So managing multiple program instances is really easy – when you hover on an item, its window appears on the screen so you can preview if this window is what you were looking for and click on it to open. You can also close any window from the group right from the taskbar.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot when there’s many IE8 tabs opened:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot3&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3_thumb.jpg?w=628&amp;#038;h=538&quot; width=&quot;628&quot; height=&quot;538&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Again, when you hover on an item, its window is shown, so you either click on it to make it active or close it down.&lt;/p&gt;
+&lt;p&gt;Another great interface solution is displaying progress bars directly on the taskbar. For example, here’s how IE8 displays download progress bar:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot4&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot4&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4_thumb.jpg?w=499&amp;#038;h=144&quot; width=&quot;499&quot; height=&quot;144&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And all the features I showed is just a part of all the goodness Windows 7 taskbar introduces.&lt;/p&gt;
+&lt;p&gt;So yes, I agree with Gizmodo that &lt;a href=&quot;http://gizmodo.com/5131933/giz-explains-why-the-windows-7-taskbar-beats-mac-os-xs-dock&quot;&gt;Windows 7 Taskbar is much better than MAC OS X dock&lt;/a&gt;.&lt;/p&gt;
 </content>
         </entry>
     
@@ -1692,6 +1470,244 @@ affect you or even if it does, you’ll be able to easily explain to business wh
         </entry>
     
         <entry>
+            <title>Windows 7 Desktop Gadgets</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-wdg.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-wdg.html</id>
+            <content type="html">&lt;p&gt;I’ve been playing with Windows 7 Desktop Gadget technology and I must tell you – I just love it! And I’ll tell you why :)&lt;/p&gt;
+&lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
+&lt;p&gt;The approach of putting web-application right on a desktop was invented by Microsoft in 1994-95 (in &lt;a href=&quot;http://en.wikipedia.org/wiki/Windows_Nashville&quot;&gt;Windows Nashville&lt;/a&gt; which was intended to be released in 1996) and was a part of Windows Desktop Update for Windows 95 and a core of Windows 98 &lt;a href=&quot;http://en.wikipedia.org/wiki/Active_Desktop&quot;&gt;Active Desktop&lt;/a&gt;. You could set an HTML page (plus JS, of course) as your desktop background and it would be run in IE. Microsoft even &lt;a href=&quot;http://web.archive.org/web/20040610054229/http://www.microsoft.com/windows/ie/previous/gallery/default.mspx&quot;&gt;had a gallery of Active Desktop widgets&lt;/a&gt;. So web-widgets-like functionality was around almost twelve years ago. As with many other Microsoft inventions, it was way too ahead of time.&lt;/p&gt;
+&lt;p&gt;Another technology that played a role in inventing desktop gadgets is &lt;a href=&quot;http://www.microsoft.com/technet/scriptcenter/hubs/htas.mspx&quot;&gt;HTA&lt;/a&gt; – short HTML applications that run in a standalone way. You had to put your scripts (VBScript or JScript) and styles in a single HTML file, add a special description and rename the file extension to .hta. Here’s a sample code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+        &amp;lt;title&amp;gt;HTA Test&amp;lt;/title&amp;gt;
+        &amp;lt;HTA:APPLICATION ID=&amp;quot;objTest&amp;quot; APPLICATIONNAME=&amp;quot;HTA Test&amp;quot; SCROLL=&amp;quot;yes&amp;quot; SINGLEINSTANCE=&amp;quot;yes&amp;quot;&amp;gt;
+        &amp;lt;SCRIPT type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+            //some javascript code
+        &amp;lt;/SCRIPT&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+        &amp;lt;!-- some html --&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You could access all ActiveX objects that your system provided – Scripting FileSystemObject, UserAccounts, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa393260(VS.85).aspx&quot;&gt;WMI&lt;/a&gt; etc. – basically everything that was supported in &lt;a href=&quot;http://en.wikipedia.org/wiki/Windows_Script_Host&quot;&gt;WSH&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bstcxhf7(VS.85).aspx&quot;&gt;Script Runtime&lt;/a&gt;. If you were using classic ASP on the server, you could switch to writing HTAs with zero effort – language and all the objects would be the same. While any web-development IDEs could be used, there even was a special IDE for building HTAs – &lt;a href=&quot;http://www.htaedit.com/&quot;&gt;HTAEDIT&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So Microsoft had two nice technologies that weren’t actively used &amp;#8211; Active Desktop as a way to integrate web-application with desktop and HTA as a core for writing standalone client-side web applications. Both technologies combined both to create &lt;strong&gt;Microsoft Desktop Gadgets&lt;/strong&gt; - small standalone client-side web applications that run as dockable widgets on your desktop – pure HTML,CSS and JS packed with manifest file in an archive.&lt;/p&gt;
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;If you double-click on this archive, gadget will get installed and can be moved to any place of your desktop. IE8 core is used to run them, so you get full support for CSS2.1, great level of javascript and other IE8 goodness.&lt;/p&gt;
+&lt;p&gt;The gadgets concept was introduced In Windows Vista – but gadgets had to be positioned inside a special sidebar area – which is not very flexible. In Windows 7 you can put your gadgets wherever you want them to be.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot how gadgets look like on my desktop:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot1.png&quot;&gt;&lt;img title=&quot;gadgets-screenshot[1]&quot; border=&quot;0&quot; alt=&quot;gadgets-screenshot[1]&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot1_thumb.png?w=354&amp;#038;h=775&quot; width=&quot;354&quot; height=&quot;775&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Gadgets are especially useful when you have a widescreen monitor or two monitors configuration so that you’ve got much horizontal space, but even if you’ve got a normal monitor as gadgets can be freely positioned, you will find them useful.&lt;/p&gt;
+&lt;p&gt;I use &lt;a href=&quot;http://www.arsecandle.org/twadget/&quot;&gt;Twitter&lt;/a&gt;, weather (standard), &lt;a href=&quot;http://gallery.live.com/liveItemDetail.aspx?li=aa4a0946-eee3-4af3-914d-ed0c66242523&quot;&gt;network traffic&lt;/a&gt; and &lt;a href=&quot;http://gallery.live.com/liveItemDetail.aspx?li=45c58820-e955-4802-9c2d-867b8b925c0a&quot;&gt;cpu meter&lt;/a&gt; gadgets.&lt;/p&gt;
+&lt;p&gt;Awesome technology! I’m planning to build couple of my own gadgets and will definitely prepare a blog post on this :)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: It looks like Windows Mobile 6.5 will have support for similar gadgets
+functionality!&lt;/p&gt;
+&lt;h1 id=&quot;exploring-windows-desktop-gadgets&quot;&gt;Exploring Windows Desktop Gadgets&lt;/h1&gt;
+&lt;p&gt;First of all, let’s get our hands dirty and create a simple gadget.&lt;/p&gt;
+&lt;h2 id=&quot;creating-a-simple-gadget&quot;&gt;Creating a simple gadget&lt;/h2&gt;
+&lt;p&gt;One of the things that was always bothering me was checking comments to my blog entries. There’re usually two ways to check for new comments on your blog – either by subscribing to comments RSS feed or by going to admin web-interface of the blog and checking for comments there. I don’t like first option because I’m subscribed to more than a hundred feeds in my Outlook so I only read them at the weekends when I’ve got enough free time. And I don’t particularly fancy logging to my blog every three-four hours to check for new
+comments. So Windows 7 Desktop Gadget with my blog comments feed would perfectly suit my needs.&lt;/p&gt;
+&lt;p&gt;Although this might not sound as a killer app to you, but it does its job and also perfectly shows how simple it is to build a gadget.&lt;/p&gt;
+&lt;p&gt;First of all, as I’ve already said, Windows 7 Gadget is nothing more than just a HTML page with Javascript and CSS. So I use the same approach as if I had to parse my blog comments on a website – a simple HTML, a bit of CSS and a bit of AJAX. So gadget building comes down to building a client-side web-app and packing it.&lt;/p&gt;
+&lt;h2 id=&quot;creating-a-web-app&quot;&gt;Creating a web-app&lt;/h2&gt;
+&lt;p&gt;I created a &lt;a href=&quot;http://sharovatov.ru/gadgets/main.html&quot;&gt;simple page&lt;/a&gt; with a pretty &lt;a href=&quot;http://sharovatov.ru/gadgets/rss.js&quot;&gt;straight-forward javascript&lt;/a&gt;. If you take a look at window.onload js code, you’ll see the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;window.setInterval( function(){ getRSS(url); }, 5*60*1000); 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;meaning that every five minutes getRSS function is called.&lt;/p&gt;
+&lt;p&gt;This is the “main loop” of our program. As our gadget is a desktop program written in javascript and since Javascript blocks UI when being executed, setInterval/setTimeout is the only one way to set the “main loop”.&lt;/p&gt;
+&lt;p&gt;That’s how the javascript in this web-app works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;getRSS function creates XMLHTTPRequest object and sends HTTP GET request to a href=&amp;quot;&lt;a href=&quot;http://sharovatov.wordpress.com/comments/feed/&amp;quot;&amp;gt;http://sharovatov.wordpress.com/comments/feed/&quot;&gt;http://sharovatov.wordpress.com/comments/feed/&amp;quot;&amp;gt;http://sharovatov.wordpress.com/comments/feed/&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;wordpress responds with XML file containing last ten comments from my blog&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;parseRSS function parses the XML and passes the resulting object to displayRSS which just dumps it to document.body&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It takes 15-20 minutes to write such a tiny piece of code. So now we’ve got a small web-application which is a very basic version of RSS reader.&lt;/p&gt;
+&lt;p&gt;As you may notice, the script doesn’t work on sharovatov.ru. Cross-domain security restrictions is a reason for that – the script is located on one domain (sharovatov.ru) and it tries to request data from another domain (sharovatov.wordpress.com). However, if you save &lt;a href=&quot;http://sharovatov.ru/gadgets/main.html&quot;&gt;main.html&lt;/a&gt; page and &lt;a href=&quot;http://sharovatov.ru/gadgets/rss.js&quot;&gt;rss.js&lt;/a&gt; file to your machine, run main.html from
+IE8 and confirm JS execution, you will see the comments feed displayed.&lt;/p&gt;
+&lt;p&gt;As we’re done with functionality, it’s time to convert our small client-side web-app to a gadget.&lt;/p&gt;
+&lt;h2 id=&quot;converting-to-a-gadget&quot;&gt;Converting to a gadget&lt;/h2&gt;
+&lt;p&gt;All we need to do now is to add a special &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa965879(VS.85).aspx&quot;&gt;manifest&lt;/a&gt; file. It’s just an XML file with your gadget description. &lt;a href=&quot;http://sharovatov.ru/gadgets/gadget.xml&quot;&gt;Here’s mine&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;That’s all. Now we pack these three files into a zip archive and rename its extension to &lt;code&gt;.gadget&lt;/code&gt;. Here’s &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.2.gadget&quot;&gt;a link to what I came up with&lt;/a&gt;. Save it as test.gadget and double-click on it. If you then confirm gadget installation prompt, it will appear on the screen and the feed is downloaded and displayed.&lt;/p&gt;
+&lt;p&gt;That’s the basics of creating a gadget, if you feel interested, read &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa965850(VS.85).aspx&quot;&gt;MSDN&lt;/a&gt; or follow my posts – I will
+keep on writing about gadgets and in the next post I’ll show what my comments reader gadget will look like eventually :)&lt;/p&gt;
+&lt;p&gt;This is the screenshot of a 20-minutes job:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image1.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb1.png?w=193&amp;#038;h=318&quot; width=&quot;193&quot; height=&quot;318&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image2.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot;
+src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb2.png?w=186&amp;#038;h=331&quot; width=&quot;186&quot; height=&quot;331&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Every five minutes the gadget is updated so I can clearly see whose comment is the last one and reply if needed. Very handy :)&lt;/p&gt;
+&lt;h1 id=&quot;exploring-windows-desktop-gadgets-2-security-and-limitations&quot;&gt;Exploring Windows Desktop Gadgets #2 - security and limitations&lt;/h1&gt;
+&lt;p&gt;First of all, let me repeat that gadget is a client-side web-application running in chromeless mode on your desktop. It’s similar to &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536496(VS.85).aspx&quot;&gt;HTA&lt;/a&gt; but provides a whole new set of functionality and also has some restrictions compared to HTA.&lt;/p&gt;
+&lt;h2 id=&quot;gadgets-security-model&quot;&gt;Gadgets security model&lt;/h2&gt;
+&lt;p&gt;IE has always been the de-facto-standard platform for building powerful applications that require access to file system, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/aa380245.aspx&quot;&gt;Cryptographic Service Provider&lt;/a&gt;, WMI and other OS functionality. This functionality is achieved by using ActiveX controls.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But ActiveX can’t run without a user permission&lt;/strong&gt;! So by default javascript in a web-applications has quite strong security limitations. This security model can only be weaken by users choice - by allowing ActiveX controls to run or by adding a website to a trusted zone.&lt;/p&gt;
+&lt;p&gt;But as gadgets are installed by user, so it’s his choice to run them, all functionality that MSHTML can provide is enabled (*). &lt;a href=&quot;http://msdn.microsoft.com/en-gb/library/bb508510(VS.85).aspx&quot;&gt;MSDN says&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The MSHTML runtime is configured with the set of permissions given to HTAs or the Local Machine Zone security configuration.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This rises a very important point – &lt;strong&gt;don’t install gadgets from non trusted sources&lt;/strong&gt;. Or if you do, please inspect the code before you install the gadget. As Gadget runs under current user account, it won’t be able to delete system32 directory or do any other critical damage to the system. But it will surely succeed in deleting your documents or photos.&lt;/p&gt;
+&lt;p&gt;And of course, as any other Microsoft technology, Gadgets can be fully controlled by Group Policy.&lt;/p&gt;
+&lt;p&gt;For more information on Gadgets security please read &lt;a href=&quot;http://msdn.microsoft.com/en-gb/library/bb508510(VS.85).aspx&quot;&gt;this&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bb498012.aspx&quot;&gt;this&lt;/a&gt; MSDN article.&lt;/p&gt;
+&lt;h2 id=&quot;gadgets-limitations&quot;&gt;Gadgets limitations&lt;/h2&gt;
+&lt;p&gt;The main limitation to me is that &lt;strong&gt;there’re no modal dialogs. &lt;/strong&gt;No alerts, no window.confirm, nothing. So if you want to do a quick debug, you have to dump data to the document itself or use a script debugger.&lt;/p&gt;
+&lt;h1 id=&quot;exploring-windows-desktop-gadgets-3-settings-storage&quot;&gt;Exploring Windows Desktop Gadgets #3 - settings storage&lt;/h1&gt;
+&lt;p&gt;This is the third post in Exploring Windows Desktop Gadgets series and it will be devoted to improving our comments feed reader gadget by adding settings storage functionality.&lt;/p&gt;
+&lt;h2 id=&quot;settings-storage-theory&quot;&gt;Settings storage theory&lt;/h2&gt;
+&lt;p&gt;Any desktop program has its own settings storage (ini files, xml files, etc.) or uses a global OS storage (registry).&lt;/p&gt;
+&lt;p&gt;But in web-applications everything’s different – part of the functionality is provided by client (browser) and another part - by the server. Although it’s dead easy to store data on the server, on the client-side you can’t get access neither to file system nor to registry. (You actually can in IE, but this will require ActiveX scripting and therefore will ask user for an explicit permission.)&lt;/p&gt;
+&lt;p&gt;Until very recent &lt;a href=&quot;http://dev.w3.org/html5/webstorage/&quot;&gt;DOM Storage specification draft&lt;/a&gt;, in most browsers you could only use cookies for storing some data on client side. However, IE5 introduced support for true client-side only storage – DOM Storage predecessor - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms531424.aspx&quot;&gt;userData&lt;/a&gt;. So it took almost eight years for the whole browsers industry to define and support similar client-side storage approach. And right at the time as DOM Storage is being drafted by W3C, it gets support in IE8.&lt;/p&gt;
+&lt;p&gt;The reason I’m telling you about DOM Storage in IE8 is that I have a strong feeling that this DOM Storage is used by Gadgets Platform to allow storing settings data for each gadget.&lt;/p&gt;
+&lt;h2 id=&quot;settings-storage-practice&quot;&gt;Settings storage practice&lt;/h2&gt;
+&lt;p&gt;Settings dialog is a modal window which opens on top of your gadget. As it’s modal, the only way you can close it is to press OK or CANCEL button in its UI. Similarly to the gadget itself, settings dialog is a HTML page displayed by MSHTML.&lt;/p&gt;
+&lt;p&gt;As it would be useful to have comments feed URL and refresh frequency configurable, this is what I’ll add to my gadget:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image3.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb3.png?w=317&amp;#038;h=345&quot; width=&quot;317&quot; height=&quot;345&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In the settings dialog only area outlined in red is actually a HTML file, title and OK/CANCEL buttons are provided by Gadgets Platform:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image4.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb4.png?w=315&amp;#038;h=343&quot; width=&quot;315&quot; height=&quot;343&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To add the settings dialog to our gadget we’ll have to create a HTML file, let’s call it “settings.html”. To save comments feed URL and refresh frequency, we only need two fields and couple of labels. &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.ru/gadgets/v0.3/settings.html&quot;&gt;This is what I came up with&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If  you look at the JS code, you’ll see that it does two things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;calls &lt;strong&gt;System.Gadget.Settings.read&lt;/strong&gt; function to retrieve data from the Gadget settings storage&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;defines a handler for &lt;strong&gt;System.Gadget.onSettingsClosing&lt;/strong&gt; event&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;There’s a &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bb508511(VS.85).aspx&quot;&gt;complete reference of Gadget platform events and properties on MSDN&lt;/a&gt;, but for our simple case it’s enough to say that &lt;strong&gt;System.Gadget.Settings.read&lt;/strong&gt; reads object from the storage by its name, &lt;strong&gt;System.Gadget.Settings.write&lt;/strong&gt; writes object to the storage with its name and &lt;strong&gt;System.Gadget.onSettingsClosing&lt;/strong&gt; event fires when the settings dialog is closing. Settings store is separate for each gadget so don’t be afraid that your settings names can be accessed from other gadgets.&lt;/p&gt;
+&lt;p&gt;So in the &lt;strong&gt;window.onload&lt;/strong&gt; handler of settings.html I try to get the data from the storage and set inputs values accordingly, and when the gadget is closing, I check if OK was pressed (&lt;strong&gt;e.closeAction == e.Action.commit&lt;/strong&gt;) and if so, save inputs values into the storage. Dead easy.&lt;/p&gt;
+&lt;p&gt;Now we have to attach settings.html page to our gadget. This is done by adding the following javascript code to main.html file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;System.Gadget.settingsUI = &amp;quot;settings.html&amp;quot;;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now our Gadget will show this button in the control area:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image5.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb5.png?w=211&amp;#038;h=321&quot; width=&quot;211&quot; height=&quot;321&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And if you click on it, you’ll see your settings.html page rendered in a nice UI:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/image3.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/image_thumb3.png?w=317&amp;#038;h=345&quot; width=&quot;317&quot; height=&quot;345&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So now we have a settings dialog that reads and writes data from the Gadget settings store.&lt;/p&gt;
+&lt;p&gt;What we also need to do is to make our main.html read comments feed URL and refresh frequency from settings store as well. If you look at &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.3/rss.js&quot;&gt;this javascript&lt;/a&gt;, you’ll see how it’s changed from &lt;a href=&quot;http://sharovatov.ru/gadgets/rss.js&quot;&gt;the previous version&lt;/a&gt;. Basically, I just
+did the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;rss.js now doens’t have blog comments feed URL and refresh frequency hardcoded, instead, it reads these values from settings store:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; window.onload = function(){
+     //read data from storage
+     var data = getDataFromStorage();
+
+     if (&amp;quot;&amp;quot; != data.url &amp;amp;amp;&amp;amp;amp;
+     &amp;quot;&amp;quot; != data.frequency &amp;amp;amp;&amp;amp;amp;
+     /^(\d*)(\.?)(\d*)$/.match(data.frequency)) startLoop(data);
+     else document.body.innerHTML = &amp;quot;&amp;lt;b&amp;gt;Please make sure you&amp;quot;+
+     &amp;quot;configured everything properly&amp;lt;/b&amp;gt;&amp;quot;;
+
+ };
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;System.Gadget.onSettingsClosed &lt;/strong&gt;event handler is used to restart main loop with new settings:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; System.Gadget.onSettingsClosed = function(){
+     var data = getDataFromStorage();
+     startLoop(data);
+ };
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;And startLoop function has been rewritten to allow only one main loop (but that&amp;#39;s pretty irrelevant to Gadgets platform):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; var startLoop = function(data){
+     //clear existing interval (if present)
+     if (&amp;quot;undefined&amp;quot; != typeof arguments.callee.intervalHandler)
+         window.clearInterval(arguments.callee.intervalHandler);
+     //retrieve feed again
+     getRSS(data.url);
+     //set new main loop
+     arguments.callee.intervalHandler = window.setInterval(
+         function(){ getRSS(data.url); }, data.frequency * 1000
+     );
+ };
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;And here we go – &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.3/rss-comments.gadget&quot;&gt;gadget’s ready&lt;/a&gt; :)&lt;/p&gt;
+&lt;p&gt;Save it as &lt;strong&gt;rss-comments.gadget&lt;/strong&gt; to your computer and install it – you will be able to set comments feed URL (so you can start using it to watch comments on your own blog) and refresh frequency in seconds.&lt;/p&gt;
+&lt;p&gt;In the next posts of this series I will cover flyouts, make the gadget look really slick with UI enhancements Gadget platform provides, show how debugging gadgets can be really effective and dive into more details of the Gadgets platform. Stay tuned for more interesting stuff!&lt;/p&gt;
+&lt;h1 id=&quot;best-windows-7-gadgets&quot;&gt;Best Windows 7 gadgets&lt;/h1&gt;
+&lt;p&gt;Found the best blog with windows 7 gadgets &amp;#8211; &lt;a title=&quot;http://blog.orbmu2k.de/&quot;
+href=&quot;http://blog.orbmu2k.de/&quot;&gt;&lt;a href=&quot;http://blog.orbmu2k.de/&quot;&gt;http://blog.orbmu2k.de/&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I installed Memory usage gadget, updated version of CPU Usage, Network traffic, Volume control and Top 5 processes gadgets. Really great!&lt;/p&gt;
+&lt;p&gt;I also downloaded all Windows 7 themes from &lt;a title=&quot;http://windows.microsoft.com/en-US/Windows7/Personalize&quot; href=&quot;http://windows.microsoft.com/en-US/Windows7/Personalize&quot;&gt;&lt;a href=&quot;http://windows.microsoft.com/en-US/Windows7/Personalize&quot;&gt;http://windows.microsoft.com/en-US/Windows7/Personalize&lt;/a&gt;&lt;/a&gt; page – they are just awesome :)&lt;/p&gt;
+&lt;p&gt;Now the right side of my 2nd monitor looks like that:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot21.jpg&quot;&gt;&lt;img title=&quot;gadgets-screenshot2[1]&quot; border=&quot;0&quot; alt=&quot;gadgets-screenshot2[1]&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/gadgetsscreenshot21_thumb.jpg?w=444&amp;#038;h=1025&quot; width=&quot;444&quot; height=&quot;1025&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;pomodoro-windows-7-gadget&quot;&gt;Pomodoro Windows 7 gadget&lt;/h1&gt;
+&lt;p&gt;I was really inspired by &lt;a href=&quot;http://tomatoi.st/&quot;&gt;&lt;a href=&quot;http://tomatoi.st/&quot;&gt;http://tomatoi.st/&lt;/a&gt;&lt;/a&gt; web service which provides an easy to use web interface for &lt;a href=&quot;http://www.pomodorotechnique.com/&quot;&gt;Pomodoro time management technique&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But unfortunately, tomatoi.st is down due to overload too often, so I spent 20 minutes and prepared a &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;simple Windows 7 pomodoro gadget&lt;/a&gt;. It does just what’s needed – showing timers:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/12/image.png?w=188&amp;#038;h=158&quot; width=&quot;188&quot; height=&quot;158&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Click on “Work” button to start 25 minutes work interval, “short br” – to get 5 minutes short break timeout, “long br” for a 15 minutes long break.&lt;/p&gt;
+&lt;p&gt;It’s dead easy to download and install – just click &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Or you can inspect the code if you want to – gadget is just a zip file with html, css and js inside.&lt;/p&gt;
+&lt;p&gt;Ah, and I have to warn you – when a period of time is over, it starts playing Alert.wav every second until you set a new period.&lt;/p&gt;
+&lt;p&gt;For more information about Windows 7 gadgets you read the following posts on my blog:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/14/windows-7-desktop-gadgets/&quot;&gt;introduction to the gadgets platform&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/27/exploring-windows-desktop-gadgets/&quot;&gt;Exploring Windows Desktop Gadgets&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/28/exploring-windows-desktop-gadgets-2-security-and-limitations/&quot;&gt;Exploring Windows Desktop Gadgets #2 – security and limitations&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/&quot;&gt;Exploring Windows Desktop Gadgets #3 – settings storage&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/01/exploring-windows-desktop-gadgets-4-flyouts/&quot;&gt;Exploring Windows Desktop Gadgets #4 – flyouts&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Or read &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd370869%28VS.85%29.aspx&quot;&gt;MSDN&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;P.S. this gadget doesn’t have any settings or flyout or anything else – it’s very simple.&lt;/p&gt;
+&lt;h1 id=&quot;gadgets-flyouts&quot;&gt;Gadgets Flyouts&lt;/h1&gt;
+&lt;p&gt;As it’s practical to have small gadgets which don’t take much of screen space, it’s not possible to display much information on them. That’s why Gadget Platform provides a way to add a &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms723669%28VS.85%29.aspx&quot;&gt;flyout&lt;/a&gt; object to your gadget.&lt;/p&gt;
+&lt;h2 id=&quot;flyout-theory&quot;&gt;Flyout theory&lt;/h2&gt;
+&lt;p&gt;In theory, flyout is supposed to present additional or detailed information about anything you choose.&lt;/p&gt;
+&lt;p&gt;The great example of flyout use case is standard Windows 7 Stocks gadget – it shows basic stocks rates information in the main window and the if you click on the stock rate you’re interested, MSN Money chart for this stock rate is shown in a flyout. Here’s how it looks:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/06/image.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image_thumb.png?w=415&amp;#038;h=170&quot; width=&quot;415&quot; height=&quot;170&quot;/&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Flyout is a separate HTML page which you attach to your gadget similarly to &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/&quot;&gt;settings window&lt;/a&gt; – by specifying the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;System.Gadget.Flyout.file = &amp;#39;flyout.html&amp;#39;; 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Another difference from settings dialog is that settings dialog is only accessible by clicking on a options button:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/06/image1.png&quot;&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image_thumb1.png?w=162&amp;#038;h=151&quot; width=&quot;162&quot; height=&quot;151&quot;&gt;&lt;/a&gt; and flyout is shown/hidden programmatically by setting its &lt;strong&gt;show&lt;/strong&gt; property to &lt;strong&gt;true&lt;/strong&gt;/&lt;strong&gt;false&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//show flyout
+System.Gadget.Flyout.show = true;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When you set &lt;strong&gt;show&lt;/strong&gt; to &lt;strong&gt;true&lt;/strong&gt;, flyout html will be rendered and its window will be automatically positioned depending on the content size and gadget’s position.&lt;/p&gt;
+&lt;p&gt;Flyout provides two events - &lt;strong&gt;System.Gadget.Flyout.onShow&lt;/strong&gt; which is fired when the flyout is shown and &lt;strong&gt;System.Gadget.Flyout.onHide&lt;/strong&gt; which is fired when the flyout is closed.&lt;/p&gt;
+&lt;p&gt;To set flyout content to something meaningful, you have to get access to flyout’s document from your gadget main window javascript. This is achieved by using &lt;strong&gt;System.Gadget.Flyout.document&lt;/strong&gt; property – but the call to it will throw an exception if flyout is hidden, so make sure you either check &lt;strong&gt;System.Gadget.Flyout.show&lt;/strong&gt; property for &lt;strong&gt;true&lt;/strong&gt; or wrap the code which uses &lt;strong&gt;System.Gadget.Flyout.document&lt;/strong&gt; in try-catch block.&lt;/p&gt;
+&lt;p&gt;Note that you can also access main gadget page from the flyout by using &lt;strong&gt;System.Gadget.document&lt;/strong&gt; property which is always available.&lt;/p&gt;
+&lt;p&gt;Enough theory, let’s modify our Gadget to show only comments titles on the main page and render a flyout with comment’s content when title is clicked.&lt;/p&gt;
+&lt;h2 id=&quot;practice&quot;&gt;Practice&lt;/h2&gt;
+&lt;p&gt;So here’s what I did:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;created &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/flyout.html&quot;&gt;flyout.html&lt;/a&gt; file&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;referenced it as &lt;code&gt;System.Gadget.Flyout.file = &amp;#39;flyout.html&amp;#39;;&lt;/code&gt; in &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/rss.js&quot;&gt;rss.js&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;modified &lt;strong&gt;displayRSS&lt;/strong&gt; function to store current comment object in paragraph’s expando property&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;added &lt;strong&gt;toggleFlyout&lt;/strong&gt; function to the &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/rss.js&quot;&gt;rss.js&lt;/a&gt; file which passes the comment object from the &lt;strong&gt;&lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt;&lt;/strong&gt;’s expando property to &lt;code&gt;System.Gadget.Flyout.document&lt;/code&gt; and displays the flyout&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resulting files and the compressed gadget are &lt;a href=&quot;http://sharovatov.ru/gadgets/v0.4/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the next posts I’ll show what styling options we’ve got in Gadgets Platform, will proceed talking about gadgets security and talk about advanced javascript techniques that can be used in gadgets.&lt;/p&gt;
+&lt;h1 id=&quot;pomodoro-windows-7-gadget&quot;&gt;Pomodoro Windows 7 gadget&lt;/h1&gt;
+&lt;p&gt;I was really inspired by &lt;a href=&quot;http://tomatoi.st/&quot;&gt;&lt;a href=&quot;http://tomatoi.st/&quot;&gt;http://tomatoi.st/&lt;/a&gt;&lt;/a&gt; web service which provides an easy to use web interface for &lt;a href=&quot;http://www.pomodorotechnique.com/&quot;&gt;Pomodoro time management technique&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But unfortunately, tomatoi.st is down due to overload too often, so I spent 20 minutes and prepared a &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;simple Windows 7 pomodoro gadget&lt;/a&gt;. It does just what’s needed – showing timers:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/12/image.png?w=188&amp;#038;h=158&quot; width=&quot;188&quot; height=&quot;158&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Click on “Work” button to start 25 minutes work interval, “short br” – to get 5 minutes short break timeout, “long br” for a 15 minutes long break.&lt;/p&gt;
+&lt;p&gt;It’s dead easy to download and install – just click &lt;a href=&quot;http://sharovatov.ru/pomodoro.gadget&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Or you can inspect the code if you want to – gadget is just a zip file with html, css and js inside.&lt;/p&gt;
+&lt;p&gt;Ah, and I have to warn you – when a period of time is over, it starts playing Alert.wav every second until you set a new period.&lt;/p&gt;
+&lt;p&gt;For more information about Windows 7 gadgets you read the following posts on my blog:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/14/windows-7-desktop-gadgets/&quot;&gt;introduction to the gadgets platform&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/27/exploring-windows-desktop-gadgets/&quot;&gt;Exploring Windows Desktop Gadgets&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/28/exploring-windows-desktop-gadgets-2-security-and-limitations/&quot;&gt;Exploring Windows Desktop Gadgets #2 – security and limitations&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/&quot;&gt;Exploring Windows Desktop Gadgets #3 – settings storage&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/01/exploring-windows-desktop-gadgets-4-flyouts/&quot;&gt;Exploring Windows Desktop Gadgets #4 – flyouts&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Or read &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/dd370869%28VS.85%29.aspx&quot;&gt;MSDN&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;P.S. this gadget doesn’t have any settings or flyout or anything else – it’s very simple.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Common Internet Scheme Syntax</title>
             <link href="http://sharovatov.github.io/posts/2009-04-commoninternetscheme.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -1786,57 +1802,6 @@ content:&lt;/p&gt;
 &lt;p&gt;I also asked MSN Live Search Team about that – hope they reply soon – I’ll update the post.&lt;/p&gt;
 &lt;p&gt;So – use this approach if you have a page which is accessed by both HTTP and HTTPS and whenever you need to reference any resource from a different host on this page. Plus this host must support both HTTP and HTTPS :)&lt;/p&gt;
 &lt;p&gt;McAffee SiteScan button uses this in their image - &lt;strong&gt;check!&lt;/strong&gt;&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>HTTP Chunked Encoding</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-httpchunked.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-httpchunked.html</id>
-            <content type="html">&lt;p&gt;Did you notice that some pages on the internet start rendering in your browser incrementally, block after block, and on some sites you have to sit and look at the white screen and then get the full page in one second?&lt;/p&gt;
-&lt;p&gt;There’re two main problems that can make your browser wait for the whole page to load before it starts parsing it:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;if you’re using IE6 and the page you’re viewing has table-based layout without COLGROUPs/COLs specifying width or &lt;code&gt;table-layout: fixed&lt;/code&gt; CSS rule.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if the page’s not being served from server using chunked encoding.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The first issue is really simple – IE6 has to know the exact width of the columns before it starts displaying the table, and if you have &lt;code&gt;table-layout: fixed&lt;/code&gt; rule for the table or COLs with specified width – it will wait for the whole content to load, calculate the width and only then display the table. Other browsers (such as Opera, Firefox, Google Chrome) and newer versions of IE don’t have this issue and start displaying content right after they get at least a piece of it.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ietf.org/rfc/rfc2616.txt&quot;&gt;So while the first issue is really simple, the second is definitely more interesting!&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Normally when HTTP client receives a response, it parses HTTP headers and then tries to read from the input the exact amount of bytes as specified in Content-Length header. So if it takes 3 seconds for the server-side script to prepare the page, HTTP client (and the user!) will be just waiting with opened connection for these seconds.&lt;/p&gt;
-&lt;p&gt;What was OK at the time when HTTP1.0 was invented and the web had almost only static content, authors of HTTP1.1 thought was inacceptable for era of web applications.&lt;/p&gt;
-&lt;p&gt;And &lt;a href=&quot;http://www.ietf.org/rfc/rfc2616.txt&quot;&gt;HTTP 1.1 Spec&lt;/a&gt; introduces a concept of &amp;quot;Chunked&amp;quot; transfer encoding:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The chunked encoding modifies the body of a message in order to transfer it as a series of chunks, each with its own size indicator, followed by an OPTIONAL trailer containing entity-header fields.&lt;/p&gt;
-&lt;p&gt;This allows dynamically produced content to be transferred along with the information necessary for the recipient to verify that it has received the full message&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The main goal of HTTP Chunked Encoding is to allow clients to parse and display data immediately after the first chunk is read!&lt;/p&gt;
-&lt;p&gt;Here&amp;#39;s a sample of HTTP response with chunked encoding:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    HTTP/1.1 200 OK
-    Transfer-Encoding: chunked
-    Content-Type: text/html
-
-    c
-    &amp;lt;h1&amp;gt;go!&amp;lt;/h1&amp;gt;
-
-    1b
-    &amp;lt;h1&amp;gt;first chunk loaded&amp;lt;/h1&amp;gt;
-
-    2a
-    &amp;lt;h1&amp;gt;second chunk loaded and displayed&amp;lt;/h1&amp;gt;
-
-    29
-    &amp;lt;h1&amp;gt;third chunk loaded and displayed&amp;lt;/h1&amp;gt;
-
-    0
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you may see, there’s no Content-Length field in the beginning of the message, but there’s a hexadecimal chunk-size before every chunk. And 0 with two CRLFs specifies the end of the payload.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So the server doesn’t need to calculate Content-Length before it starts serving data to client. &lt;/strong&gt;This is an amazing functionality! It means that the server can start sending the first part of the response while still processing the other parts of it.&lt;/p&gt;
-&lt;p&gt;Say, you have a dynamic page with two elements, both of which are queried from the database.&lt;/p&gt;
-&lt;p&gt;So you can either wait for both queries to finish, populate your template with results and send the whole page to client, or you can get first query result, send it in one chunk to the client, then do the next query and send its results in another chunk. You may not notice the difference between chunked and normal serving mode in most of the cases – but if the page is created from different sources or it takes significant time to prepare the data – user experience may be seriously improved.&lt;/p&gt;
-&lt;p&gt;Before the widespread popularization of AJAX (another Microsoft-invented technology) – Chunked Encoding was used as a core for so-called “&lt;a href=&quot;http://en.wikipedia.org/wiki/Push_technology&quot;&gt;Server Push&lt;/a&gt;” approach for building web-chats and other &lt;em&gt;streaming&lt;/em&gt; purposes. The idea was simple – server didn’t close the HTTP connection and kept on sending chunk after chunk with new messages or other data. This approach had serious drawbacks – e.g. for each new client server had to instantiate a new connection (which eats resources), browsers had a limit on waiting time, so the page had to be reloaded once in a while and so on. But anyway, Chunked Encoding was widely used.&lt;/p&gt;
-&lt;p&gt;In my company we use Chunked Encoding to show loading progressbar in our &lt;a href=&quot;http://www.realrussia.co.uk/main_train_screen.asp&quot;&gt;online train tickets ordering system&lt;/a&gt; – we
-serve the first chunk with nicely styled &lt;code&gt;&amp;lt;div id=”loading”&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt; and when the data for the main table is ready, we serve it in the second chunk. And after the document is fully loaded, javascript routine hides &lt;code&gt;&amp;lt;div id=”loading”&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt; :) Simple and nice.&lt;/p&gt;
 </content>
         </entry>
     
@@ -2197,6 +2162,57 @@ h1 { font-family: myFont; }
 &lt;/ul&gt;
 &lt;p&gt;Good stuff, Live Team, thanks!&lt;/p&gt;
 &lt;p&gt;P.S. for more information, read &lt;a href=&quot;http://windowslivewriter.spaces.live.com/blog/cns!D85741BB5E0BE8AA!1650.entry&quot;&gt;this blogpost&lt;/a&gt;.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>HTTP Chunked Encoding</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-httpchunked.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-httpchunked.html</id>
+            <content type="html">&lt;p&gt;Did you notice that some pages on the internet start rendering in your browser incrementally, block after block, and on some sites you have to sit and look at the white screen and then get the full page in one second?&lt;/p&gt;
+&lt;p&gt;There’re two main problems that can make your browser wait for the whole page to load before it starts parsing it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;if you’re using IE6 and the page you’re viewing has table-based layout without COLGROUPs/COLs specifying width or &lt;code&gt;table-layout: fixed&lt;/code&gt; CSS rule.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if the page’s not being served from server using chunked encoding.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first issue is really simple – IE6 has to know the exact width of the columns before it starts displaying the table, and if you have &lt;code&gt;table-layout: fixed&lt;/code&gt; rule for the table or COLs with specified width – it will wait for the whole content to load, calculate the width and only then display the table. Other browsers (such as Opera, Firefox, Google Chrome) and newer versions of IE don’t have this issue and start displaying content right after they get at least a piece of it.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ietf.org/rfc/rfc2616.txt&quot;&gt;So while the first issue is really simple, the second is definitely more interesting!&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Normally when HTTP client receives a response, it parses HTTP headers and then tries to read from the input the exact amount of bytes as specified in Content-Length header. So if it takes 3 seconds for the server-side script to prepare the page, HTTP client (and the user!) will be just waiting with opened connection for these seconds.&lt;/p&gt;
+&lt;p&gt;What was OK at the time when HTTP1.0 was invented and the web had almost only static content, authors of HTTP1.1 thought was inacceptable for era of web applications.&lt;/p&gt;
+&lt;p&gt;And &lt;a href=&quot;http://www.ietf.org/rfc/rfc2616.txt&quot;&gt;HTTP 1.1 Spec&lt;/a&gt; introduces a concept of &amp;quot;Chunked&amp;quot; transfer encoding:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The chunked encoding modifies the body of a message in order to transfer it as a series of chunks, each with its own size indicator, followed by an OPTIONAL trailer containing entity-header fields.&lt;/p&gt;
+&lt;p&gt;This allows dynamically produced content to be transferred along with the information necessary for the recipient to verify that it has received the full message&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The main goal of HTTP Chunked Encoding is to allow clients to parse and display data immediately after the first chunk is read!&lt;/p&gt;
+&lt;p&gt;Here&amp;#39;s a sample of HTTP response with chunked encoding:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    HTTP/1.1 200 OK
+    Transfer-Encoding: chunked
+    Content-Type: text/html
+
+    c
+    &amp;lt;h1&amp;gt;go!&amp;lt;/h1&amp;gt;
+
+    1b
+    &amp;lt;h1&amp;gt;first chunk loaded&amp;lt;/h1&amp;gt;
+
+    2a
+    &amp;lt;h1&amp;gt;second chunk loaded and displayed&amp;lt;/h1&amp;gt;
+
+    29
+    &amp;lt;h1&amp;gt;third chunk loaded and displayed&amp;lt;/h1&amp;gt;
+
+    0
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you may see, there’s no Content-Length field in the beginning of the message, but there’s a hexadecimal chunk-size before every chunk. And 0 with two CRLFs specifies the end of the payload.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So the server doesn’t need to calculate Content-Length before it starts serving data to client. &lt;/strong&gt;This is an amazing functionality! It means that the server can start sending the first part of the response while still processing the other parts of it.&lt;/p&gt;
+&lt;p&gt;Say, you have a dynamic page with two elements, both of which are queried from the database.&lt;/p&gt;
+&lt;p&gt;So you can either wait for both queries to finish, populate your template with results and send the whole page to client, or you can get first query result, send it in one chunk to the client, then do the next query and send its results in another chunk. You may not notice the difference between chunked and normal serving mode in most of the cases – but if the page is created from different sources or it takes significant time to prepare the data – user experience may be seriously improved.&lt;/p&gt;
+&lt;p&gt;Before the widespread popularization of AJAX (another Microsoft-invented technology) – Chunked Encoding was used as a core for so-called “&lt;a href=&quot;http://en.wikipedia.org/wiki/Push_technology&quot;&gt;Server Push&lt;/a&gt;” approach for building web-chats and other &lt;em&gt;streaming&lt;/em&gt; purposes. The idea was simple – server didn’t close the HTTP connection and kept on sending chunk after chunk with new messages or other data. This approach had serious drawbacks – e.g. for each new client server had to instantiate a new connection (which eats resources), browsers had a limit on waiting time, so the page had to be reloaded once in a while and so on. But anyway, Chunked Encoding was widely used.&lt;/p&gt;
+&lt;p&gt;In my company we use Chunked Encoding to show loading progressbar in our &lt;a href=&quot;http://www.realrussia.co.uk/main_train_screen.asp&quot;&gt;online train tickets ordering system&lt;/a&gt; – we
+serve the first chunk with nicely styled &lt;code&gt;&amp;lt;div id=”loading”&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt; and when the data for the main table is ready, we serve it in the second chunk. And after the document is fully loaded, javascript routine hides &lt;code&gt;&amp;lt;div id=”loading”&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt; :) Simple and nice.&lt;/p&gt;
 </content>
         </entry>
     
