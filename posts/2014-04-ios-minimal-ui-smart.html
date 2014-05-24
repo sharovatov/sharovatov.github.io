@@ -3,11 +3,7 @@
 <head>
     <title>iOS 7 minimal ui and smart app banners</title>
     <meta name="generator" content="DocPad v6.60.3" />
-    <style >html.wait {
-	cursor: wait !important;
-	opacity: 0;
-	transition: opacity 0.5s ease;
-}</style><link  rel="stylesheet" href="/styles/style.css" />
+    <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
@@ -28,7 +24,7 @@
 <p>With iOS6 release Apple <a href="https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html">introduced a nice way to promote a native app on a webpage opened in Safari</a> and this approach is widely used across the industry.</p>
 <p>And in iOS7 Apple introduced a new meta viewport value — <a href="http://www.mobilexweb.com/blog/ios-7-1-safari-minimal-ui-bugs">minimal-ui</a> which was hugely welcomed by web-developers as it provided a much nicer browser UX (by making browser controls look modal rather than just a part of the page), more available real screen size and removed the untouchable area in the bottom of the page that was reserved for the browser UI. And all is well until a ”smart app banner” is added to the page — then the smart app banner suddenly gets a noticeable margin-top and the header gets almost hidden under the banner.</p>
 <p>Here’s a screenshot of the issue: </p>
-<p><img src="http://sharovatov.ru/ios6/ios7-banner.png" alt="ios7 fixed header with minimal-ui and smart app banner"></p>
+<p><img src="http://sharovatov.ru/ios6/ios7-smart.png" alt="ios7 fixed header with minimal-ui and smart app banner"></p>
 <p>(small blue line is actually a normal element of 30px height)</p>
 <p>And <a href="http://sharovatov.ru/ios6/smart2.php?minimal=1">here’s the testcase with minimal-ui</a> and <a href="http://sharovatov.ru/ios6/smart2.php">here’s without</a>.</p>
 <p>I couldn’t find any workaround for this issue, so I had to turn off minimal-ui for the page that has the smart app banner, at least until Apple fixes this.</p>
@@ -38,8 +34,8 @@
 	(function(){
 		window.disqus_shortname = 'sharovatov';
 		window.disqus_developer = '1';
-		window.disqus_url = 'http://sharovatov.github.io/posts/2014-04-ios-minimal-ui-fixed.html';
-		window.disqus_identifier = 'posts-2014-04-ios-minimal-ui-fixed';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-04-ios-minimal-ui-smart.html';
+		window.disqus_identifier = 'posts-2014-04-ios-minimal-ui-smart';
 		window.disqus_title = 'iOS 7 minimal ui and smart app banners';
 		if ( window.DISQUS ) {
 			return DISQUS.reset({
@@ -61,51 +57,6 @@
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    <script >(function(){
-	/* Did we just livereload? */
-var log = !!(localStorage && console && console.log && true);
-if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
-	localStorage.removeItem('/docpad-livereload/reloaded');
-	console.log('LiveReload completed at', new Date())
-}
-
-/* Listen for the regenerated event and perform a reload of the page when the event occurs */
-var listen = function(){
-	var primus = new Primus('/docpad-livereload');
-	primus.on('data', function(data){
-		if ( data && data.message ) {
-			if ( data.message === 'generateBefore' ) {
-				if ( log ) {
-					console.log('LiveReload started at', new Date());
-				}
-				if ( typeof document.getElementsByTagName !== 'undefined' ) {
-	document.getElementsByTagName('html')[0].className += ' wait';
-}
-			}
-			else if ( data.message === 'generateAfter' ) {
-				if ( log ) {
-					localStorage.setItem('/docpad-livereload/reloaded', 'yes');
-				}
-				document.location.reload();
-			}
-		}
-	});
-};
-	/* Inject socket into our page */
-var inject = function(){
-	var t = document.createElement('script');
-	t.type = 'text/javascript';
-	t.async = 'async';
-	t.src = '/primus/primus.js';
-	t.onload = listen;
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(t, s);
-};
-	if ( typeof Primus !== 'undefined' ) {
-		listen();
-	} else {
-		inject();
-	}
-})();</script>
+    
 </body>
 </html>
