@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>правильный горизонтальный список</title>
+    <title>правильный горизонтальный список для blogger.com</title>
     <meta name="generator" content="DocPad v6.60.3" />
-    <link  rel="stylesheet" href="/styles/style.css" />
+    <style >html.wait {
+	cursor: wait !important;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+}</style><link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
@@ -20,7 +24,7 @@
         </ol>
     </nav>
     <div class="wrapper">
-        <h1>правильный горизонтальный список</h1>
+        <h1>правильный горизонтальный список для blogger.com</h1>
 <p>С установкой IE7 совсем забыл о том, что у меня блок с архивами необлагорожен.
 Точнее, облагорожен на скорую руку. Итак, попробую осветить процесс %) В общем, дизайнерская моя мысль была такова: если блок размером мал, то список там должен быть тоже малым, горизонтальным, да с запятой после каждого элемента. Просто перечисление
 месяцев.</p>
@@ -38,12 +42,12 @@
 <pre><code>/* отключаю маркеры, выставляю высоту и требую все содержимое, что выходит за пределы высоты, прокручивать скроллбаром */
 #archive ul { height: 65px; width: 200px; list-style: none; overflow: auto }
 </code></pre><p>И начинаю думать, как же быть с этими запятыми. Для начала, надо их поставить. Есть два
-варианта - ставить запятую <em>после</em> каждого list-item&#39;а или <em>до</em>.</p>
+варианта — ставить запятую <em>после</em> каждого list-item&#39;а или <em>до</em>.</p>
 <pre><code>/* до */
 #arhive li:before { content: &quot;, &quot; }
 /* или после */
 #archive li:after { content: &quot;, &quot; }
-</code></pre><p>В любом случае придётся избавиться от одной запятой - если ставить <em>до</em>,
+</code></pre><p>В любом случае придётся избавиться от одной запятой — если ставить <em>до</em>,
 то окажется лишняя запятая перед первым элементом, если ставить <em>после</em>, будет лишней запятая после самого последнего элемента. Избавляемся:</p>
 <p>вариант &quot;до&quot;:</p>
 <pre><code>#archive li:before { content: &quot;, &quot; }
@@ -56,7 +60,7 @@
 </code></pre><p>Но! Как бы это не казалось странным, но псевдокласс <var>:first-child</var> <a href="http://www.w3.org/TR/CSS21/selector.html#first-child">описан</a> в спецификации css2.1, а <var>:last-child</var> <a href="http://www.w3.org/TR/css3-selectors/#last-child-pseudo">описан</a> в CSS3 Selectors... В общем, <var>:last-child</var> поддерживает только Firefox, его авторы посчитали логичным реализовывать <var>:first-child</var> и <var>:last-child</var> oдновременно, пусть они и прописаны в разных спецификациях. Авторы же Operа так не посчитали. Потому вариант с установкой запятой <em>после</em> элемента отпадает -
 за неимением <var>:last-child</var> мы не сумеем убрать запятую после последнего элемента. </p>
 <p>Выбрали.</p>
-<p>Теперь возникает вопрос - а как же, собственно, укладывать наши list-item&#39;ы в один ряд :) Для этого есть всего два варианта: сделать элементы списка поплавками или инлайн-элементами.</p>
+<p>Теперь возникает вопрос — а как же, собственно, укладывать наши list-item&#39;ы в один ряд :) Для этого есть всего два варианта: сделать элементы списка поплавками или инлайн-элементами.</p>
 <p>&quot;поплавочное&quot; решение:</p>
 <pre><code>#archive ul { height: 65px; width: 200px; list-style: none; overflow: auto }
 #archive li { float: left; }
@@ -79,15 +83,15 @@
 <p>For compatability with previous levels of CSS, the &#39;::before&#39;, &#39;::after&#39;, &#39;::first-line&#39; and &#39;::first-letter&#39; pseudo-elements do not require two colons. This does not apply to any other pseudo-element. Authors are encouraged to use the new two-colon forms.</p>
 </blockquote>
 <p>В общем, Opera9 позволяет нам позиционировать генерированное содержимое как угодно.</p>
-<p>Но раз мы решили не пользоваться поплавочным вариантом, пойдём и другим путём - сделаем все
+<p>Но раз мы решили не пользоваться поплавочным вариантом, пойдём и другим путём — сделаем все
 list-item&#39;ы инлайн-элементами:</p>
 <pre><code>#archive ul { height: 65px; width: 200px; list-style: none; overflow: auto }
 #archive li { display: inline }
 #archive li:before { content: &quot;, &quot; }
 /* убираем запятую перед первым элементом */
 archive li:first-child:before { display: none }
-</code></pre><p>Таким образом, получилась куча инлайн-элементов, фактически - длинная строка, содержимое которой браузер вполне может переносить. Значение <var>display</var> у сгенерированного содержимого также inline...</p>
-<p>Но браузер переносит и по пробелам между месяцем и годом, но это уже совсем просто поправить - просто добавим <var>white-space: nowrap</var> для ссылок:</p>
+</code></pre><p>Таким образом, получилась куча инлайн-элементов, фактически — длинная строка, содержимое которой браузер вполне может переносить. Значение <var>display</var> у сгенерированного содержимого также inline...</p>
+<p>Но браузер переносит и по пробелам между месяцем и годом, но это уже совсем просто поправить — просто добавим <var>white-space: nowrap</var> для ссылок:</p>
 <pre><code>#archive ul { height: 65px; width: 200px; list-style: none; overflow: auto }
 #archive li { display: inline }
 #archive li:before { content: &quot;, &quot; }
@@ -129,7 +133,7 @@ archive li:first-child:before { display: none }
 		window.disqus_developer = '1';
 		window.disqus_url = 'http://sharovatov.github.io/posts/2006-08-hor.html';
 		window.disqus_identifier = 'posts-2006-08-hor';
-		window.disqus_title = 'правильный горизонтальный список';
+		window.disqus_title = 'правильный горизонтальный список для blogger.com';
 		if ( window.DISQUS ) {
 			return DISQUS.reset({
 				reload: true,
@@ -150,6 +154,51 @@ archive li:first-child:before { display: none }
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+    <script >(function(){
+	/* Did we just livereload? */
+var log = !!(localStorage && console && console.log && true);
+if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
+	localStorage.removeItem('/docpad-livereload/reloaded');
+	console.log('LiveReload completed at', new Date())
+}
+
+/* Listen for the regenerated event and perform a reload of the page when the event occurs */
+var listen = function(){
+	var primus = new Primus('/docpad-livereload');
+	primus.on('data', function(data){
+		if ( data && data.message ) {
+			if ( data.message === 'generateBefore' ) {
+				if ( log ) {
+					console.log('LiveReload started at', new Date());
+				}
+				if ( typeof document.getElementsByTagName !== 'undefined' ) {
+	document.getElementsByTagName('html')[0].className += ' wait';
+}
+			}
+			else if ( data.message === 'generateAfter' ) {
+				if ( log ) {
+					localStorage.setItem('/docpad-livereload/reloaded', 'yes');
+				}
+				document.location.reload();
+			}
+		}
+	});
+};
+	/* Inject socket into our page */
+var inject = function(){
+	var t = document.createElement('script');
+	t.type = 'text/javascript';
+	t.async = 'async';
+	t.src = '/primus/primus.js';
+	t.onload = listen;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(t, s);
+};
+	if ( typeof Primus !== 'undefined' ) {
+		listen();
+	} else {
+		inject();
+	}
+})();</script>
 </body>
 </html>
