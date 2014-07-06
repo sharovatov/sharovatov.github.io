@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>few HTTPS issues with wildcard certificates</title>
+    <meta name="generator" content="DocPad v6.60.3" />
+    <link  rel="stylesheet" href="/styles/style.css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+</head>
+<body>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>few HTTPS issues with wildcard certificates</h1>
+<p>While playing with an https issue I discovered a few things in current HTTPS state in modern browsers:</p>
+<ul>
+<li><p>support for <a href="http://en.wikipedia.org/wiki/Wildcard_certificate">wildcard certificates</a>, though <a href="http://tools.ietf.org/html/rfc6125#section-6.4.3">not obligatory</a> and even discouraged in RFC6125, is provided in all modern browsers; so that one certificate can cover multiple wildcard domains by putting them in SAN list: <em>.first.domain.com, </em>.second.domain.com, *.third.domain.com</p>
+</li>
+<li><p><a href="http://en.wikipedia.org/wiki/Extended_Validation_Certificate">EV</a> certificates <a href="http://www.networksolutions.com/support/why-can-t-i-get-a-wildcard-extended-validation-ev-ssl-certificate/">don’t support</a> quite useful wildcards in SANs (Subject Alternative Names) / CNs (Common Name) names at all</p>
+</li>
+<li><p>multi-level wildcards <a href="https://support.quovadisglobal.com/KB/a60/will-ssl-work-with-multilevel-wildcards.aspx">are not supported by browsers</a> are not sold by CAs </p>
+</li>
+<li><p>wildcard can only be used as the left-most label, *.sub.mydomain.com will do, sub.*.mydomain.com is not supported</p>
+</li>
+<li><p>Google Chrome violates the <a href="http://tools.ietf.org/html/rfc6125#section-6.6.2">RFC6125 requirement to trust a pinned certificate</a> and will only show a padlock icon (i.e. truly accept the certificate — “pin the certificate” in the <a href="http://tools.ietf.org/html/rfc6125">RFC</a> terms) if Common Name or one of SANs  matches the FQDN (wildcard will do).
+All other browsers follow the RFC and a user can manually pin an arbitrary certificate to the site he’s testing. Here’s a screenshot of a pinned self-signed certificate applied to a host not matching the certificate’s Common Name: 
+ <img src="http://sharovatov.ru/screenshots/ssl-chrome-selfsigned.png" alt="chrome self-signed certificate">
+ So if you use self-signed certificate on your test environment, be sure to generate it correctly and list all domain variations in certificate’s SAN list.</p>
+</li>
+<li><p>Only Firefox still supports OCSP Stapling, all other browsers have it disabled:</p>
+<p> <img src="http://sharovatov.ru/screenshots/ssl-oscp-stapling.png" alt="Firefox OSCP stapling"></p>
+</li>
+<li><p>A certificate can have an IP address in the Common Name / SAN list, and this could technically be leveraged to save clients DNS lookup time if static files are served from a separate server with this IP address. However, this approach would also require full control over the set IP address for the whole life of the website (if IP address control is lost, a huge security issue is created). And in any case, in HTTPS scenario it’s almost always better to reuse an existing connection than to create a separate one.</p>
+</li>
+</ul>
+
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-05-ssl-issues.html';
+		window.disqus_identifier = 'posts-2014-05-ssl-issues';
+		window.disqus_title = 'few HTTPS issues with wildcard certificates';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+    </div>
+    
+</body>
+</html>

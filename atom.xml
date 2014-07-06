@@ -4,13 +4,42 @@
     <subtitle></subtitle>
     <link href="http://sharovatov.github.io/atom.xml" rel="self" />
     <link href="http://sharovatov.github.io" />
-    <updated>2014-05-31T07:17:38.003Z</updated>
+    <updated>2014-07-06T07:21:31.335Z</updated>
     <id>http://sharovatov.github.io</id>
     <author>
         <name></name>
         <email></email>
     </author>
 
+    
+        <entry>
+            <title>few HTTPS issues with wildcard certificates</title>
+            <link href="http://sharovatov.github.io/posts/2014-05-ssl-issues.html"/>
+            <updated>2014-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2014-05-ssl-issues.html</id>
+            <content type="html">&lt;p&gt;While playing with an https issue I discovered a few things in current HTTPS state in modern browsers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;support for &lt;a href=&quot;http://en.wikipedia.org/wiki/Wildcard_certificate&quot;&gt;wildcard certificates&lt;/a&gt;, though &lt;a href=&quot;http://tools.ietf.org/html/rfc6125#section-6.4.3&quot;&gt;not obligatory&lt;/a&gt; and even discouraged in RFC6125, is provided in all modern browsers; so that one certificate can cover multiple wildcard domains by putting them in SAN list: &lt;em&gt;.first.domain.com, &lt;/em&gt;.second.domain.com, *.third.domain.com&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Extended_Validation_Certificate&quot;&gt;EV&lt;/a&gt; certificates &lt;a href=&quot;http://www.networksolutions.com/support/why-can-t-i-get-a-wildcard-extended-validation-ev-ssl-certificate/&quot;&gt;don’t support&lt;/a&gt; quite useful wildcards in SANs (Subject Alternative Names) / CNs (Common Name) names at all&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;multi-level wildcards &lt;a href=&quot;https://support.quovadisglobal.com/KB/a60/will-ssl-work-with-multilevel-wildcards.aspx&quot;&gt;are not supported by browsers&lt;/a&gt; are not sold by CAs &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;wildcard can only be used as the left-most label, *.sub.mydomain.com will do, sub.*.mydomain.com is not supported&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Google Chrome violates the &lt;a href=&quot;http://tools.ietf.org/html/rfc6125#section-6.6.2&quot;&gt;RFC6125 requirement to trust a pinned certificate&lt;/a&gt; and will only show a padlock icon (i.e. truly accept the certificate — “pin the certificate” in the &lt;a href=&quot;http://tools.ietf.org/html/rfc6125&quot;&gt;RFC&lt;/a&gt; terms) if Common Name or one of SANs  matches the FQDN (wildcard will do).
+All other browsers follow the RFC and a user can manually pin an arbitrary certificate to the site he’s testing. Here’s a screenshot of a pinned self-signed certificate applied to a host not matching the certificate’s Common Name: 
+ &lt;img src=&quot;http://sharovatov.ru/screenshots/ssl-chrome-selfsigned.png&quot; alt=&quot;chrome self-signed certificate&quot;&gt;
+ So if you use self-signed certificate on your test environment, be sure to generate it correctly and list all domain variations in certificate’s SAN list.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Only Firefox still supports OCSP Stapling, all other browsers have it disabled:&lt;/p&gt;
+&lt;p&gt; &lt;img src=&quot;http://sharovatov.ru/screenshots/ssl-oscp-stapling.png&quot; alt=&quot;Firefox OSCP stapling&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A certificate can have an IP address in the Common Name / SAN list, and this could technically be leveraged to save clients DNS lookup time if static files are served from a separate server with this IP address. However, this approach would also require full control over the set IP address for the whole life of the website (if IP address control is lost, a huge security issue is created). And in any case, in HTTPS scenario it’s almost always better to reuse an existing connection than to create a separate one.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
     
         <entry>
             <title>iOS 7 minimal ui and smart app banners</title>
@@ -227,18 +256,6 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>proper iOS pull-to-refresh</title>
-            <link href="http://sharovatov.github.io/posts/2013-01-09-iOS-pull-to-refresh.html"/>
-            <updated>2013-01-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2013-01-09-iOS-pull-to-refresh.html</id>
-            <content type="html">&lt;p&gt;Most of the pull-to-refresh plugins or concepts I saw had drawbacks - some emulated native scroll with JS (seems slower and non-native to me), others (mobile gmail) hid scrollbar altogether, &lt;a href=&quot;http://cubiq.org/dropbox/iscroll4/examples/pull-to-refresh/&quot;&gt;others&lt;/a&gt; made scrollbar appear as if some content is already scrolled. &lt;/p&gt;
-&lt;p&gt;As no available app seemed good enough for me and project requirements required iOS only, I drafted &lt;a href=&quot;https://github.com/sharovatov/my/tree/master/js_experiments/ios_pull-to-refresh&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Basically, everything what needs to be hardware accelerated, is actually accelerated.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.ru/ptr/ptr.html&quot;&gt;The testcase&lt;/a&gt; seems to perform quite well on all my target platforms - iPhone4, 4s and 5.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>shaky lines drawing tool for browser and nodejs</title>
             <link href="http://sharovatov.github.io/posts/2013-01-07-shakylines-js.html"/>
             <updated>2013-01-01T00:00:00.000Z</updated>
@@ -249,6 +266,18 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;node shaky-node.js textfile imagefile.png
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Please note that while &lt;a href=&quot;https://github.com/LearnBoost/node-canvas/pull/231&quot;&gt;this pull request&lt;/a&gt; is not merged, there&amp;#39;s no way to make node-canvas use custom font, so please install the ttf font locally. &lt;/p&gt;
 &lt;p&gt;And please use the &lt;code&gt;shaky.html&lt;/code&gt; file as a sample of in-browser use.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>proper iOS pull-to-refresh</title>
+            <link href="http://sharovatov.github.io/posts/2013-01-09-iOS-pull-to-refresh.html"/>
+            <updated>2013-01-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2013-01-09-iOS-pull-to-refresh.html</id>
+            <content type="html">&lt;p&gt;Most of the pull-to-refresh plugins or concepts I saw had drawbacks - some emulated native scroll with JS (seems slower and non-native to me), others (mobile gmail) hid scrollbar altogether, &lt;a href=&quot;http://cubiq.org/dropbox/iscroll4/examples/pull-to-refresh/&quot;&gt;others&lt;/a&gt; made scrollbar appear as if some content is already scrolled. &lt;/p&gt;
+&lt;p&gt;As no available app seemed good enough for me and project requirements required iOS only, I drafted &lt;a href=&quot;https://github.com/sharovatov/my/tree/master/js_experiments/ios_pull-to-refresh&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Basically, everything what needs to be hardware accelerated, is actually accelerated.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.ru/ptr/ptr.html&quot;&gt;The testcase&lt;/a&gt; seems to perform quite well on all my target platforms - iPhone4, 4s and 5.&lt;/p&gt;
 </content>
         </entry>
     
@@ -308,27 +337,6 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>iframe height auto-resize</title>
-            <link href="http://sharovatov.github.io/posts/2012-01-iframe-autosize.html"/>
-            <updated>2012-01-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2012-01-iframe-autosize.html</id>
-            <content type="html">&lt;p&gt;If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.&lt;/p&gt;
-&lt;p&gt;Sometimes it’s ok, but when you need your iframe to “expand” automatically on the host page, you have to change the iframe object height style property. And it’s dead easy when both iframe and the host page are from same origin – you just talk to parent window from the iframe and make it set the object height.&lt;/p&gt;
-&lt;p&gt;However, when cross-origin security model applies, everything gets more interesting, and you’re pretty much limited to &lt;a href=&quot;http://dev.w3.org/html5/postmsg/&quot;&gt;CDM&lt;/a&gt;/&lt;a href=&quot;http://www.sitepen.com/blog/2008/07/22/windowname-transport/&quot;&gt;window.name&lt;/a&gt;/location.hash transports.&lt;/p&gt;
-&lt;p&gt;So the proper approach would be to use CDM with a fallback to location.hash – newer browsers (IE8+ and current Firefox, Opera, Safari and Chrome) support postMessage, older versions will fall back to setting parent page location.hash property and on the parent page – interval polling for changes.&lt;/p&gt;
-&lt;p&gt;Here’s &lt;a href=&quot;http://sharovatov.ru/iframe-autoheight/iframeHost.php&quot;&gt;a basic working sample&lt;/a&gt; implementing this approach and here’s the code for it:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeChild.html&quot;&gt;child page&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php&quot;&gt;parent page&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to &lt;em&gt; origin. This might be a serious security breach since the parent page will process a message send from &lt;em&gt;*any&lt;/em&gt;&lt;/em&gt; page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.&lt;/p&gt;
-&lt;p&gt;I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>X-FRAME-OPTIONS</title>
             <link href="http://sharovatov.github.io/posts/2012-01-x-frame-options.html"/>
             <updated>2012-01-01T00:00:00.000Z</updated>
@@ -360,6 +368,27 @@ $SERVER_VERSION$;U; $LOCALE$) $PRESTO_VERSION$ $EQUIV_DESKTOP_VERSION$&lt;/p&gt;
 &lt;p&gt;In any case, study the security papers I linked to above to understand how the attack works and what it can do to your visitors or your business.&lt;/p&gt;
 &lt;p&gt;However, if you strongly believe no one should embed your page in an iframe – then your silver bullet is to add &lt;code&gt;X-FRAME-OPTIONS: DENY&lt;/code&gt; to all the pages you serve.&lt;/p&gt;
 &lt;p&gt;P.S. X-FRAME-OPTIONS is now proposed to IETF: &lt;a href=&quot;http://tools.ietf.org/html/draft-gondrom-frame-options-01&quot;&gt;http://tools.ietf.org/html/draft-gondrom-frame-options-01&lt;/a&gt;&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>iframe height auto-resize</title>
+            <link href="http://sharovatov.github.io/posts/2012-01-iframe-autosize.html"/>
+            <updated>2012-01-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2012-01-iframe-autosize.html</id>
+            <content type="html">&lt;p&gt;If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.&lt;/p&gt;
+&lt;p&gt;Sometimes it’s ok, but when you need your iframe to “expand” automatically on the host page, you have to change the iframe object height style property. And it’s dead easy when both iframe and the host page are from same origin – you just talk to parent window from the iframe and make it set the object height.&lt;/p&gt;
+&lt;p&gt;However, when cross-origin security model applies, everything gets more interesting, and you’re pretty much limited to &lt;a href=&quot;http://dev.w3.org/html5/postmsg/&quot;&gt;CDM&lt;/a&gt;/&lt;a href=&quot;http://www.sitepen.com/blog/2008/07/22/windowname-transport/&quot;&gt;window.name&lt;/a&gt;/location.hash transports.&lt;/p&gt;
+&lt;p&gt;So the proper approach would be to use CDM with a fallback to location.hash – newer browsers (IE8+ and current Firefox, Opera, Safari and Chrome) support postMessage, older versions will fall back to setting parent page location.hash property and on the parent page – interval polling for changes.&lt;/p&gt;
+&lt;p&gt;Here’s &lt;a href=&quot;http://sharovatov.ru/iframe-autoheight/iframeHost.php&quot;&gt;a basic working sample&lt;/a&gt; implementing this approach and here’s the code for it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeChild.html&quot;&gt;child page&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php&quot;&gt;parent page&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to &lt;em&gt; origin. This might be a serious security breach since the parent page will process a message send from &lt;em&gt;*any&lt;/em&gt;&lt;/em&gt; page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.&lt;/p&gt;
+&lt;p&gt;I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.&lt;/p&gt;
 </content>
         </entry>
     
@@ -398,109 +427,6 @@ var result4 = result3(3);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Let&amp;#39;s move on and execute &lt;code&gt;var result3 = result2(2);&lt;/code&gt;. We’ve just found out that &lt;strong&gt;result2&lt;/strong&gt; holds a reference to &lt;strong&gt;f2&lt;/strong&gt;, so it’s rather &lt;strong&gt;f2(2)&lt;/strong&gt; that we’re seeing here, which – as we remember – creates &lt;strong&gt;f3&lt;/strong&gt; function and stores &lt;strong&gt;z&lt;/strong&gt; in it’s context. This &lt;strong&gt;f3&lt;/strong&gt; will always return 2, &lt;strong&gt;result3&lt;/strong&gt; is a function will always return 2.&lt;/p&gt;
 &lt;p&gt;And when we execute &lt;code&gt;var result4 = result3(3)&lt;/code&gt;,&lt;strong&gt; f3(3)&lt;/strong&gt; is actually called and returns 2 as expected.&lt;/p&gt;
 &lt;p&gt;I think, this again proves that javascript is syntactically very powerful language.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>IE9 - sucks much less than other browsers</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
-            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
-&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
-&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
-&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
-&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
-&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
-&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
-&lt;p&gt;Some links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows Phone 7 emulator, updates and app blacklist</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
-            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
-&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
-&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
-&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
-src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
-&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
-&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
-&lt;p&gt;Useful links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </content>
         </entry>
     
@@ -668,16 +594,105 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
         </entry>
     
         <entry>
-            <title>HTTPBis group is awesome!</title>
-            <link href="http://sharovatov.github.io/posts/2009-12-httpbis.html"/>
-            <updated>2009-12-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-12-httpbis.html</id>
-            <content type="html">&lt;p&gt;As you know, HTTP/1.1 spec said that conforming clients SHOULD NOT open more than 2 concurrent connections to one host. This was defined back in 1997 and at that time it seemed reasonable to have 2 simultaneous connections for a client, and noting that HTTP/1.1 introduced persistent connections concept, people thought that 2 simultaneously opened reusable TCP/IP connections would be enough for general use.&lt;/p&gt;
-&lt;p&gt;However, everything changes. Broadband internet came to mass market and people started thinking that better parallel download could benefit the whole website or a webapp performance. The history started with IE5.01, which was opening two connections by default, but &lt;a href=&quot;http://blogs.msdn.com/nickmac/archive/2004/08/25/how-to-speed-up-http-requests-on-internet-explorer.aspx&quot;&gt;there was a way to configure the number&lt;/a&gt;. So if you had a really good internet connection, you could make websites load significantly faster.&lt;/p&gt;
-&lt;p&gt;By the time IE8 development started, broadband connections became a standard for home internet, so &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc304129(VS.85).aspx&quot;&gt;IE8 started opening 6 connections&lt;/a&gt; (if the bandwidth allowed – on the dialup or behind a proxy it will still open 2). So IE8 engineers did a smart move and introduced the world with a browser that seemed to load sites faster.&lt;/p&gt;
-&lt;p&gt;Needless to say, Firefox 3 decided to change the value as well, so &lt;a href=&quot;http://kb.mozillazine.org/Network.http.max-persistent-connections-per-server&quot;&gt;now Firefox 3 has 6 as a default value for network.http.max-persistent-connections-per-server&lt;/a&gt; configuration setting. Good for Mozilla for copying stuff from IE again!&lt;/p&gt;
-&lt;p&gt;And now HTTPBis team (Julian Reschke) &lt;a href=&quot;http://trac.tools.ietf.org/wg/httpbis/trac/changeset/715&quot;&gt;commits the change&lt;/a&gt; which states that in the forthcoming HTTP standard the maximum amount of concurrent requests is not limited even with “SHOULD NOT” clause :)&lt;/p&gt;
-&lt;p&gt;Thanks HTTPBis team!&lt;/p&gt;
+            <title>IE9 - sucks much less than other browsers</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
+            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
+&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
+&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
+&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
+&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
+&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
+&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
+&lt;p&gt;Some links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows Phone 7 emulator, updates and app blacklist</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
+            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
+&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
+&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
+&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
+src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
+&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
+&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
+&lt;p&gt;Useful links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </content>
         </entry>
     
@@ -700,73 +715,16 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
         </entry>
     
         <entry>
-            <title>PHP loadHTMLFile and a html file without DOCTYPE</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-php-xml.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-php-xml.html</id>
-            <content type="html">&lt;p&gt;Just noticed that when you parse an html file with &lt;code&gt;DOMDocument&lt;/code&gt;’s method &lt;code&gt;loadHTMLFile&lt;/code&gt; and &lt;strong&gt;there&amp;#39;s no DOCTYPE defined in your html, PHP will silently load an empty DOM document&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Just try saving the following in a test.html file:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;div id=&amp;quot;toc&amp;quot;&amp;gt;wtf&amp;lt;/div&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then run the following php code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$doc = new DOMDocument();
-if ($doc-&amp;gt;loadHTMLFile(&amp;#39;test.html&amp;#39;)) {
-    echo &amp;#39;loadHTMLFile was successfully executed&amp;lt;br&amp;gt;&amp;#39;;
-    $toc = $doc-&amp;gt;getElementById(&amp;#39;toc&amp;#39;);
-    echo &amp;#39;now trying to var_dump the $toc:&amp;lt;br&amp;gt;&amp;#39;;
-    var_dump($toc);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You’ll get NULL as a result of the &lt;code&gt;var_dump&lt;/code&gt; call. As if &lt;code&gt;getElementById&lt;/code&gt; couldn’t
-find the node.&lt;/p&gt;
-&lt;p&gt;Interesting?&lt;/p&gt;
-&lt;p&gt;Citing &lt;a href=&quot;http://ru.php.net/manual/en/domdocument.loadhtmlfile.php&quot;&gt;php.net&lt;/a&gt;,&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The function parses the HTML document in the file named filename. &lt;strong&gt;Unlike loading XML, HTML does not have to be well-formed to load&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Does this imply that DOCTYPE may be omitted? I think so. But then the abovementioned code wouldn’t show NULL as a dump of $toc. Unfortunately, experiment shows that DOCTYPE is required, even a HTML5-ish &lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/code&gt; will do the job.&lt;/p&gt;
-&lt;p&gt;But why on earth doesn’t &lt;code&gt;loadHTMLFile&lt;/code&gt; throw a warning or at least return false as it should according to the documentation? Nobody knows.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So if you notice that your DOM-based php script acts in a weird way, check if you have a DOCTYPE defined on the HTML document you’re trying to parse.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Hope this saves someone some time.&lt;/p&gt;
-&lt;p&gt;P.S. More bugs to come — if you have a HTML file saved in utf-8 codepage with &lt;a href=&quot;http://en.wikipedia.org/wiki/Byte_order_mark&quot;&gt;BOM&lt;/a&gt;, &lt;code&gt;loadHTMLFile&lt;/code&gt; will throw the
-following E_WARNING:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;**Warning**: DOMDocument::loadHTMLFile() [function.DOMDocument-loadHTMLFile]:
-Misplaced DOCTYPE declaration in test-BOM.html, line: 1 in /home/test/www/test-DOMDocument.php on line 3
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Remove the BOM and everything works fine. Apparently, &lt;code&gt;loadHTMLFile&lt;/code&gt; doesn’t know that BOM usually indicates that the document is saved in UTF8/16/32. Weird.&lt;/p&gt;
-&lt;p&gt;P.P.S. Another issue. Try pointing &lt;code&gt;loadHTMLFile&lt;/code&gt; to an HTML-document saved in UTF-8 with some international characters (Russian words, in my case). Then get a node with international characters and do &lt;code&gt;echo $node-&amp;gt;nodeValue&lt;/code&gt;. Are you getting corrupted symbols? I was. The whole project is in UTF-8, every single file is saved in UTF-8.&lt;/p&gt;
-&lt;p&gt;I added&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;Content-type&amp;quot; content=&amp;quot;text/html;charset=utf-8&amp;quot;/&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to the head section — characters started showing in a correct encoding, but the following
-WARNING appeared:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;**Warning**: DOMDocument::loadHTMLFile() [function.DOMDocument-loadHTMLFile]: Input is
-not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line: 65 in
-/home/test/www/test-DOMDocument.php on line 29
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And the only way to properly get rid of this warning is to add&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to the first line of your html document and it finally worked without any warnings or issues. Awesome. XML header must be used for &lt;code&gt;load**HTML**File&lt;/code&gt; to run properly. Way too buggy to use.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Browsers' developer tools evolution</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
-            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
-&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
-&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
-&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
-&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
-&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
-&lt;p&gt;Come on, Opera team!&lt;/p&gt;
-&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
+            <title>HTTPBis group is awesome!</title>
+            <link href="http://sharovatov.github.io/posts/2009-12-httpbis.html"/>
+            <updated>2009-12-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-12-httpbis.html</id>
+            <content type="html">&lt;p&gt;As you know, HTTP/1.1 spec said that conforming clients SHOULD NOT open more than 2 concurrent connections to one host. This was defined back in 1997 and at that time it seemed reasonable to have 2 simultaneous connections for a client, and noting that HTTP/1.1 introduced persistent connections concept, people thought that 2 simultaneously opened reusable TCP/IP connections would be enough for general use.&lt;/p&gt;
+&lt;p&gt;However, everything changes. Broadband internet came to mass market and people started thinking that better parallel download could benefit the whole website or a webapp performance. The history started with IE5.01, which was opening two connections by default, but &lt;a href=&quot;http://blogs.msdn.com/nickmac/archive/2004/08/25/how-to-speed-up-http-requests-on-internet-explorer.aspx&quot;&gt;there was a way to configure the number&lt;/a&gt;. So if you had a really good internet connection, you could make websites load significantly faster.&lt;/p&gt;
+&lt;p&gt;By the time IE8 development started, broadband connections became a standard for home internet, so &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc304129(VS.85).aspx&quot;&gt;IE8 started opening 6 connections&lt;/a&gt; (if the bandwidth allowed – on the dialup or behind a proxy it will still open 2). So IE8 engineers did a smart move and introduced the world with a browser that seemed to load sites faster.&lt;/p&gt;
+&lt;p&gt;Needless to say, Firefox 3 decided to change the value as well, so &lt;a href=&quot;http://kb.mozillazine.org/Network.http.max-persistent-connections-per-server&quot;&gt;now Firefox 3 has 6 as a default value for network.http.max-persistent-connections-per-server&lt;/a&gt; configuration setting. Good for Mozilla for copying stuff from IE again!&lt;/p&gt;
+&lt;p&gt;And now HTTPBis team (Julian Reschke) &lt;a href=&quot;http://trac.tools.ietf.org/wg/httpbis/trac/changeset/715&quot;&gt;commits the change&lt;/a&gt; which states that in the forthcoming HTTP standard the maximum amount of concurrent requests is not limited even with “SHOULD NOT” clause :)&lt;/p&gt;
+&lt;p&gt;Thanks HTTPBis team!&lt;/p&gt;
 </content>
         </entry>
     
@@ -849,45 +807,73 @@ encoding.&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Opera revolution fail</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
-            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
-&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
-&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
-&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
-&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
-&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
-&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
+            <title>PHP loadHTMLFile and a html file without DOCTYPE</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-php-xml.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-php-xml.html</id>
+            <content type="html">&lt;p&gt;Just noticed that when you parse an html file with &lt;code&gt;DOMDocument&lt;/code&gt;’s method &lt;code&gt;loadHTMLFile&lt;/code&gt; and &lt;strong&gt;there&amp;#39;s no DOCTYPE defined in your html, PHP will silently load an empty DOM document&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Just try saving the following in a test.html file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;div id=&amp;quot;toc&amp;quot;&amp;gt;wtf&amp;lt;/div&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And then run the following php code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$doc = new DOMDocument();
+if ($doc-&amp;gt;loadHTMLFile(&amp;#39;test.html&amp;#39;)) {
+    echo &amp;#39;loadHTMLFile was successfully executed&amp;lt;br&amp;gt;&amp;#39;;
+    $toc = $doc-&amp;gt;getElementById(&amp;#39;toc&amp;#39;);
+    echo &amp;#39;now trying to var_dump the $toc:&amp;lt;br&amp;gt;&amp;#39;;
+    var_dump($toc);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You’ll get NULL as a result of the &lt;code&gt;var_dump&lt;/code&gt; call. As if &lt;code&gt;getElementById&lt;/code&gt; couldn’t
+find the node.&lt;/p&gt;
+&lt;p&gt;Interesting?&lt;/p&gt;
+&lt;p&gt;Citing &lt;a href=&quot;http://ru.php.net/manual/en/domdocument.loadhtmlfile.php&quot;&gt;php.net&lt;/a&gt;,&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
+&lt;p&gt;The function parses the HTML document in the file named filename. &lt;strong&gt;Unlike loading XML, HTML does not have to be well-formed to load&lt;/strong&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
-&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
-&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
-&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
-&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
-&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
-&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
+&lt;p&gt;Does this imply that DOCTYPE may be omitted? I think so. But then the abovementioned code wouldn’t show NULL as a dump of $toc. Unfortunately, experiment shows that DOCTYPE is required, even a HTML5-ish &lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/code&gt; will do the job.&lt;/p&gt;
+&lt;p&gt;But why on earth doesn’t &lt;code&gt;loadHTMLFile&lt;/code&gt; throw a warning or at least return false as it should according to the documentation? Nobody knows.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So if you notice that your DOM-based php script acts in a weird way, check if you have a DOCTYPE defined on the HTML document you’re trying to parse.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Hope this saves someone some time.&lt;/p&gt;
+&lt;p&gt;P.S. More bugs to come — if you have a HTML file saved in utf-8 codepage with &lt;a href=&quot;http://en.wikipedia.org/wiki/Byte_order_mark&quot;&gt;BOM&lt;/a&gt;, &lt;code&gt;loadHTMLFile&lt;/code&gt; will throw the
+following E_WARNING:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;**Warning**: DOMDocument::loadHTMLFile() [function.DOMDocument-loadHTMLFile]:
+Misplaced DOCTYPE declaration in test-BOM.html, line: 1 in /home/test/www/test-DOMDocument.php on line 3
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Remove the BOM and everything works fine. Apparently, &lt;code&gt;loadHTMLFile&lt;/code&gt; doesn’t know that BOM usually indicates that the document is saved in UTF8/16/32. Weird.&lt;/p&gt;
+&lt;p&gt;P.P.S. Another issue. Try pointing &lt;code&gt;loadHTMLFile&lt;/code&gt; to an HTML-document saved in UTF-8 with some international characters (Russian words, in my case). Then get a node with international characters and do &lt;code&gt;echo $node-&amp;gt;nodeValue&lt;/code&gt;. Are you getting corrupted symbols? I was. The whole project is in UTF-8, every single file is saved in UTF-8.&lt;/p&gt;
+&lt;p&gt;I added&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;Content-type&amp;quot; content=&amp;quot;text/html;charset=utf-8&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to the head section — characters started showing in a correct encoding, but the following
+WARNING appeared:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;**Warning**: DOMDocument::loadHTMLFile() [function.DOMDocument-loadHTMLFile]: Input is
+not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line: 65 in
+/home/test/www/test-DOMDocument.php on line 29
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And the only way to properly get rid of this warning is to add&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to the first line of your html document and it finally worked without any warnings or issues. Awesome. XML header must be used for &lt;code&gt;load**HTML**File&lt;/code&gt; to run properly. Way too buggy to use.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Browsers' developer tools evolution</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
+            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
+&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
+&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
+&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
+&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
+&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
+&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
+&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
+&lt;p&gt;Come on, Opera team!&lt;/p&gt;
+&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
 </content>
         </entry>
     
@@ -899,24 +885,6 @@ encoding.&lt;/p&gt;
             <content type="html">&lt;p&gt;Opera promises to reinvent the web tomorrow. I mean, really, reinvent the web? Invent TCP/IP, HTTP, DNS, HTML/CSS/JS, CGI, all other stuff that web consists of? I doubt.&lt;/p&gt;
 &lt;p&gt;Different sources &lt;a href=&quot;http://www.geeksaresexy.net/2009/06/15/opera-to-reinvent-the-web-web-waits-for-fat-lady-to-sing/&quot;&gt;speculate&lt;/a&gt; that it’s going to be something cloud-related. Maybe it will be a p2p-based traffic sharing with some clever algorithm to determine where to download the data from? But then I wouldn’t like anybody to be able to sniff my data. Maybe they will install a CDN to make useless Opera Turbo giving at least some performance benefit to users. Don’t know, we’ll see very soon.&lt;/p&gt;
 &lt;p&gt;But because of the last &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/11/windows-7-will-be-shipped-without-ie8-in-europe/&quot;&gt;unfair actions&lt;/a&gt; that were taken by Opera against IE, I (from moral prospective) really hope that all the expenses they took for Opera 10 PR won’t significantly increase their market share. Competition should be fair, Firefox was able to get the same market share as IE in Germany without making users life harder. I really hope that lobbying expenses were higher than the income.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Intel mini ITX D945GCLF2D motherboard</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-intelmb.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-intelmb.html</id>
-            <content type="html">&lt;p&gt;I always wanted to have a second computer where I could install Windows Web Server 2008 (or Win7) with IIS, SQL Express 2008 and run, develop and test my hobby projects locally. Well, you know what it’s like to have a second computer – you can do whatever you want on it and never be afraid that you do anything wrong with your work PC :)&lt;/p&gt;
-&lt;p&gt;My work PC is quite noisy and I just can’t find time to determine which one of 4 coolers is causing the trouble and replace it. So I wanted to  build a computer that would be really quiet (or silent at all) so it wouldn’t add any noise and that I could leave it working at night if required. Then I thought that I didn’t need this computer to be really powerful – I wasn’t going to encode video on it :) And I could save a fortune on buying something that wasn’t a cutting-edge most powerful Core 2 Duo Quad Extreme Mega Turbo Something with 64 gigs of RAM.&lt;/p&gt;
-&lt;p&gt;I’ve been reading a lot about &lt;a href=&quot;http://en.wikipedia.org/wiki/NVIDIA_ION&quot;&gt;nvidia ION platform&lt;/a&gt; recently and thought it would be the best solution for the task – extremely small and nearly silent platform with great specs: dual-core Atom 330 CPU, up to 4 gigs of RAM, good Nvidia graphics card. But then first motherboard with NVIDIA ION and Atom 330 was announced - &lt;a href=&quot;http://www.zotacusa.com/zotac-ionitx-a-u-atom-n330-1-6ghz-dual-core-mini-itx-intel-motherboard.html&quot;&gt;ZOTAC IONITX-A-U&lt;/a&gt;, which is great but according to different sources would cost $300, which is way too much for such a device.&lt;/p&gt;
-&lt;p&gt;So I had a look at Intel’s motherboard – &lt;a href=&quot;http://www.intel.com/products/desktop/motherboards/D945GCLF2-D945GCLF2D/D945GCLF2-D945GCLF2D-overview.htm&quot;&gt;D945GCLF2D&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Yes it has Intel GMA950 video chipset, but as this machine was considered to be used without a monitor, I didn’t care which video card it would have. It also doesn’t have a WI-FI, but at the moment I’ll just plug it in the network switch and if required will add a wi-fi card later. And the price was great – I was able to get the motherboard and a 2Gb memory card at $125 total. I already had a HDD but had to buy a power supply – and here it is, a computer for 160 dollars. 2 Gb RAM, integrated dual-core Atom 330 CPU, 80 Gb HDD
-and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/windows-vista/features/readyboost.aspx&quot;&gt;Ready Boost&lt;/a&gt; – a great local web and database server, NAS and download box.&lt;/p&gt;
-&lt;p&gt;The only noise I can hear from it is a small noise of power supply cooler – so I plan to measure what power consumption this system has and get a fanless power supply fitting this motherboard needs. And also I’m planning to build my own case for it – something that could be screwed to the wall near the network switch.&lt;/p&gt;
-&lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
-&lt;p&gt;Awesome, just awesome.&lt;/p&gt;
-&lt;p&gt;Thanks, Intel!&lt;/p&gt;
 </content>
         </entry>
     
@@ -955,6 +923,23 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
         </entry>
     
         <entry>
+            <title>Firefox Build Your Own Browser – a poor copy of IEAK?</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html</id>
+            <content type="html">&lt;p&gt;Mozilla team recently announced that version 3.5 of Firefox browser will come with a bunch of features that will provide companies and individuals to build their own versions of Firefox.&lt;/p&gt;
+&lt;p&gt;According to &lt;a href=&quot;http://www.pcworld.com/businesscenter/article/166328/mozilla_to_let_enterprises_build_custom_firefox_browsers.html&quot;&gt;PCWORLD&lt;/a&gt;, Mike Beltzner, director of Firefox at Mozilla Corp. said:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Build Your Own Browser program is a good fit for enterprises that want to create a customized browser that can be easily installed across multiple corporate desktops&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I couldn’t find exact details what’s going to be available for customizers, but different sources say that it’s a &lt;a href=&quot;http://labs.mozilla.com/projects/firefox-personas/&quot;&gt;Personas&lt;/a&gt; project combined with &lt;a href=&quot;http://www.mozilla.org/projects/cck/firefox/&quot;&gt;CCK&lt;/a&gt;. So you can setup your company logo, bookmarks, home page, search engines and do other cosmetic changes to the browser. It’s obvious that Mozilla wants to gain some market share in corporations where IE is 100%. But if “Build Your Own Browser” campaignhas CCK as a core, than it’s just a usual marketing hype and nothing else. It can&amp;#39;t even be compared to IEAK&lt;/p&gt;
+&lt;p&gt;There’re a few reasons, Mike, why IE is so wide-spread in corporations. First reason is that it supports &lt;strong&gt;proper&lt;/strong&gt; customisation through &lt;a href=&quot;http://technet.microsoft.com/en-us/ie/bb219517.aspx&quot;&gt;IEAK&lt;/a&gt;, second - if IEAK is not enough, IE can be fully configured through Group Policy, third – it supports ActiveX which is a must-have for building real intranet applications. Passport scanners, barcode readers, label printers, CCTV – all this hardware automation is done through ActiveX.&lt;/p&gt;
+&lt;p&gt;So until Firefox becomes a real platform for building intranet web-applications and gains a proper customisation and integration with AD, it’s not going to be on the corporate market.&lt;/p&gt;
+&lt;p&gt;For reference, read &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2006/02/21/536353.aspx&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Windows 7 will be shipped without IE8 in Europe?</title>
             <link href="http://sharovatov.github.io/posts/2009-06-win7woie8.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
@@ -971,19 +956,20 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
         </entry>
     
         <entry>
-            <title>Firefox Build Your Own Browser – a poor copy of IEAK?</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html"/>
+            <title>Intel mini ITX D945GCLF2D motherboard</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-intelmb.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html</id>
-            <content type="html">&lt;p&gt;Mozilla team recently announced that version 3.5 of Firefox browser will come with a bunch of features that will provide companies and individuals to build their own versions of Firefox.&lt;/p&gt;
-&lt;p&gt;According to &lt;a href=&quot;http://www.pcworld.com/businesscenter/article/166328/mozilla_to_let_enterprises_build_custom_firefox_browsers.html&quot;&gt;PCWORLD&lt;/a&gt;, Mike Beltzner, director of Firefox at Mozilla Corp. said:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The Build Your Own Browser program is a good fit for enterprises that want to create a customized browser that can be easily installed across multiple corporate desktops&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I couldn’t find exact details what’s going to be available for customizers, but different sources say that it’s a &lt;a href=&quot;http://labs.mozilla.com/projects/firefox-personas/&quot;&gt;Personas&lt;/a&gt; project combined with &lt;a href=&quot;http://www.mozilla.org/projects/cck/firefox/&quot;&gt;CCK&lt;/a&gt;. So you can setup your company logo, bookmarks, home page, search engines and do other cosmetic changes to the browser. It’s obvious that Mozilla wants to gain some market share in corporations where IE is 100%. But if “Build Your Own Browser” campaignhas CCK as a core, than it’s just a usual marketing hype and nothing else. It can&amp;#39;t even be compared to IEAK&lt;/p&gt;
-&lt;p&gt;There’re a few reasons, Mike, why IE is so wide-spread in corporations. First reason is that it supports &lt;strong&gt;proper&lt;/strong&gt; customisation through &lt;a href=&quot;http://technet.microsoft.com/en-us/ie/bb219517.aspx&quot;&gt;IEAK&lt;/a&gt;, second - if IEAK is not enough, IE can be fully configured through Group Policy, third – it supports ActiveX which is a must-have for building real intranet applications. Passport scanners, barcode readers, label printers, CCTV – all this hardware automation is done through ActiveX.&lt;/p&gt;
-&lt;p&gt;So until Firefox becomes a real platform for building intranet web-applications and gains a proper customisation and integration with AD, it’s not going to be on the corporate market.&lt;/p&gt;
-&lt;p&gt;For reference, read &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2006/02/21/536353.aspx&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-06-intelmb.html</id>
+            <content type="html">&lt;p&gt;I always wanted to have a second computer where I could install Windows Web Server 2008 (or Win7) with IIS, SQL Express 2008 and run, develop and test my hobby projects locally. Well, you know what it’s like to have a second computer – you can do whatever you want on it and never be afraid that you do anything wrong with your work PC :)&lt;/p&gt;
+&lt;p&gt;My work PC is quite noisy and I just can’t find time to determine which one of 4 coolers is causing the trouble and replace it. So I wanted to  build a computer that would be really quiet (or silent at all) so it wouldn’t add any noise and that I could leave it working at night if required. Then I thought that I didn’t need this computer to be really powerful – I wasn’t going to encode video on it :) And I could save a fortune on buying something that wasn’t a cutting-edge most powerful Core 2 Duo Quad Extreme Mega Turbo Something with 64 gigs of RAM.&lt;/p&gt;
+&lt;p&gt;I’ve been reading a lot about &lt;a href=&quot;http://en.wikipedia.org/wiki/NVIDIA_ION&quot;&gt;nvidia ION platform&lt;/a&gt; recently and thought it would be the best solution for the task – extremely small and nearly silent platform with great specs: dual-core Atom 330 CPU, up to 4 gigs of RAM, good Nvidia graphics card. But then first motherboard with NVIDIA ION and Atom 330 was announced - &lt;a href=&quot;http://www.zotacusa.com/zotac-ionitx-a-u-atom-n330-1-6ghz-dual-core-mini-itx-intel-motherboard.html&quot;&gt;ZOTAC IONITX-A-U&lt;/a&gt;, which is great but according to different sources would cost $300, which is way too much for such a device.&lt;/p&gt;
+&lt;p&gt;So I had a look at Intel’s motherboard – &lt;a href=&quot;http://www.intel.com/products/desktop/motherboards/D945GCLF2-D945GCLF2D/D945GCLF2-D945GCLF2D-overview.htm&quot;&gt;D945GCLF2D&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Yes it has Intel GMA950 video chipset, but as this machine was considered to be used without a monitor, I didn’t care which video card it would have. It also doesn’t have a WI-FI, but at the moment I’ll just plug it in the network switch and if required will add a wi-fi card later. And the price was great – I was able to get the motherboard and a 2Gb memory card at $125 total. I already had a HDD but had to buy a power supply – and here it is, a computer for 160 dollars. 2 Gb RAM, integrated dual-core Atom 330 CPU, 80 Gb HDD
+and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/windows-vista/features/readyboost.aspx&quot;&gt;Ready Boost&lt;/a&gt; – a great local web and database server, NAS and download box.&lt;/p&gt;
+&lt;p&gt;The only noise I can hear from it is a small noise of power supply cooler – so I plan to measure what power consumption this system has and get a fanless power supply fitting this motherboard needs. And also I’m planning to build my own case for it – something that could be screwed to the wall near the network switch.&lt;/p&gt;
+&lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
+&lt;p&gt;Awesome, just awesome.&lt;/p&gt;
+&lt;p&gt;Thanks, Intel!&lt;/p&gt;
 </content>
         </entry>
     
@@ -1109,14 +1095,45 @@ versions:&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Hosting issues</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-hostingissues.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-hostingissues.html</id>
-            <content type="html">&lt;p&gt;I’ve been trying to prepare some test cases for HTTP Chunked Encoding support, but noticed that something went weird when I was requesting data from my host (&lt;a href=&quot;http://sharovatov.ru/&quot;&gt;sharovatov.ru&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;I’ve got a basic LAMP virtual hosting at &lt;a href=&quot;http://naunet.ru&quot;&gt;naunet.ru&lt;/a&gt; which worked fine when I was hosting static content. But when I started doing the testcase, I found out all the weird and wonderful issues – mainly because they have SQUID installed before apache, so every single request goes to squid, and it’s a caching proxy that serves all my request from its cache – so I can’t test chunked encoding properly, can’t test ranges support properly… Crap. Seems that they just use squid to reduce load on their web servers.&lt;/p&gt;
-&lt;p&gt;But the worst thing is bad techsupport – it works 8 hours a day and there’s nobody there on the weekends or bank holidays. I ask a question and nobody answers it in 3 days. It just drives me insane.&lt;/p&gt;
-&lt;p&gt;Will have to move to somewhere else where sysadmins know how to do load-balancing without installing front-end proxies.&lt;/p&gt;
+            <title>Opera revolution fail</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
+            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
+&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
+&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
+&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
+&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
+&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
+&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
+&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
+&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
+&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
+&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
+&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
+&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
 </content>
         </entry>
     
@@ -1147,51 +1164,14 @@ affect you or even if it does, you’ll be able to easily explain to business wh
         </entry>
     
         <entry>
-            <title>Beanstalkapp and Fogbugz - free online bugtracking and version control</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-beanstalkapp.html"/>
+            <title>Hosting issues</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-hostingissues.html"/>
             <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-beanstalkapp.html</id>
-            <content type="html">&lt;p&gt;Once I tried &lt;a href=&quot;http://www.fogcreek.com/fogbugz/learnmore.html&quot;&gt;Fogbugz&lt;/a&gt; bug tracking &lt;a href=&quot;http://www.fogcreek.com/FogBugz/IntrotoOnDemand.html&quot;&gt;on-demand service&lt;/a&gt; and was amazed how cool it was and how easy it was to use it – no problems with installing and managing anything – just register and start working. And it’s not only a bug tracking software, but a full-fledged project management solution, and as the support cost is zero, it’s almost invaluable for small projects or your own start-up. &lt;/p&gt;
-&lt;p&gt;It’s free for 2 users only, which is more than enough if you’re running a hobby project, but if you have a budget, you can easily afford $25 for each additional user.&lt;/p&gt;
-&lt;p&gt;But in proper development you also need &lt;a href=&quot;http://en.wikipedia.org/wiki/Revision_control&quot;&gt;source code management system&lt;/a&gt; (SCM). And &lt;a href=&quot;http://www.fogcreek.com/FogBugz/docs/60/topics/advanced/Sourcecontrolintegration.html?isl=130641&quot;&gt;Fogbugz allows for great level of integration&lt;/a&gt; with all popular SCM systems. But if you choose Fogbugz on-demand to avoid support costs of running it locally, does it sound logical to install SCM locally? Definitely not.&lt;/p&gt;
-&lt;p&gt;And here comes &lt;a href=&quot;http://beanstalkapp.com/&quot;&gt;beanstalk&lt;/a&gt; – great hosted hassle-free version control service. It’s free for 3 users and a repository of up to 100Mbytes, and you can easily upgrade at any time.&lt;/p&gt;
-&lt;p&gt;In most cases, free version should suit your hobby project or start up. Beanstalk runs &lt;a href=&quot;http://en.wikipedia.org/wiki/Subversion_(software)&quot;&gt;subversion&lt;/a&gt; SCM which is almost a de-facto standard in project development and has client software for all platforms.&lt;/p&gt;
-&lt;p&gt;But the best thing in Beanstalk for me is that it provides &lt;a href=&quot;http://help.beanstalkapp.com/faqs/integration-tools/integrating-with-fogbugz&quot;&gt;integration with Fogbugz on-demand&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So you can have bug tracking/PM and version control software at no cost!&lt;/strong&gt; It is just a dream for a hobby project or a small start-up.&lt;/p&gt;
-&lt;p&gt;The installation process is dead easy:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;register at fogbugz.com for on-demand service and get &lt;strong&gt;yourproject.fogbugz.com&lt;/strong&gt; address&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;register at beanstalkapp.com for a free account and get &lt;strong&gt;yourproject.beanstalkapp.com&lt;/strong&gt; address and login there. You will be prompted to set your first repository. I assume that you’re just starting and don’t have SCM system yet, so just zip your working directory (where all your project files are) and upload it. Your first repository will be created.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;go to your repository setup → integration → fogbugz. All you need to do is follow the instructions – but basically they will just need your fogbugz URL (yourproject.fogbugz.com) and username with password.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://help.beanstalkapp.com/faqs/getting-started-11/choosing-your-subversion-client&quot;&gt;choose your subversion client&lt;/a&gt;, download it and install. All you’ll have to configure in the client is a repository URL, it will look something like this: &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; http://yourproject.svn.beanstalkapp.com/myfirstrepo/ 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use &lt;a href=&quot;http://en.wikipedia.org/wiki/TortoiseSVN&quot;&gt;tortoiseSVN&lt;/a&gt; so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;in Fogbugz – set “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;” and “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;”. To do this, you need to go to your fogbugz account, to Settings → site → Main. Grab your repository URL from beanstalk, add “browse/^FILE” to it and set it as “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;”. It should look something like that:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepository/browse/^FILE
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; And “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;” will be&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepositroy/diff/path/^FILE?from=^R2&amp;amp;amp;to=^R1
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Voila! Everything should be working.&lt;/p&gt;
-&lt;p&gt;So the workflow will be like that:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;If you have a bug or a feature request, you enter it to Fogbugz, it will get a number assigned.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;When you (or someone else) start working on a bug, you just edit your code and then commit it. When committing, you can add tags to a commit message. For example, if you do a commit with the following message:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; [case:34 status:resolved] 
- fixed IE5.5 lack of .toFixed() support
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. &lt;a href=&quot;http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/&quot;&gt;See here&lt;/a&gt; for more commit tags.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Then in Fogbugz bug#34 you will see that it’s been just resolved and you will be able to check what files were changed and look at the diff of the changes.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So that’s it, you’ve got your bug tracking and version control software set up and integrated. It’s working online so support cost is zero, and it’s completely free :)&lt;/p&gt;
-&lt;p&gt;P.S. What’s also great about Beanstalk is that it supports twitter integration – so if you have an open-source project, your users can follow it on twitter and see what you’re committing! It also supports web-hooks API so integration is limited to your fantasy only :)&lt;/p&gt;
-&lt;p&gt;P.P.S. The only thing that’s left is database versioning control – we need something like RoR migrations, but that’s a topic for another post :)&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-05-hostingissues.html</id>
+            <content type="html">&lt;p&gt;I’ve been trying to prepare some test cases for HTTP Chunked Encoding support, but noticed that something went weird when I was requesting data from my host (&lt;a href=&quot;http://sharovatov.ru/&quot;&gt;sharovatov.ru&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;I’ve got a basic LAMP virtual hosting at &lt;a href=&quot;http://naunet.ru&quot;&gt;naunet.ru&lt;/a&gt; which worked fine when I was hosting static content. But when I started doing the testcase, I found out all the weird and wonderful issues – mainly because they have SQUID installed before apache, so every single request goes to squid, and it’s a caching proxy that serves all my request from its cache – so I can’t test chunked encoding properly, can’t test ranges support properly… Crap. Seems that they just use squid to reduce load on their web servers.&lt;/p&gt;
+&lt;p&gt;But the worst thing is bad techsupport – it works 8 hours a day and there’s nobody there on the weekends or bank holidays. I ask a question and nobody answers it in 3 days. It just drives me insane.&lt;/p&gt;
+&lt;p&gt;Will have to move to somewhere else where sysadmins know how to do load-balancing without installing front-end proxies.&lt;/p&gt;
 </content>
         </entry>
     
@@ -1707,6 +1687,55 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
         </entry>
     
         <entry>
+            <title>Beanstalkapp and Fogbugz - free online bugtracking and version control</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-beanstalkapp.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-beanstalkapp.html</id>
+            <content type="html">&lt;p&gt;Once I tried &lt;a href=&quot;http://www.fogcreek.com/fogbugz/learnmore.html&quot;&gt;Fogbugz&lt;/a&gt; bug tracking &lt;a href=&quot;http://www.fogcreek.com/FogBugz/IntrotoOnDemand.html&quot;&gt;on-demand service&lt;/a&gt; and was amazed how cool it was and how easy it was to use it – no problems with installing and managing anything – just register and start working. And it’s not only a bug tracking software, but a full-fledged project management solution, and as the support cost is zero, it’s almost invaluable for small projects or your own start-up. &lt;/p&gt;
+&lt;p&gt;It’s free for 2 users only, which is more than enough if you’re running a hobby project, but if you have a budget, you can easily afford $25 for each additional user.&lt;/p&gt;
+&lt;p&gt;But in proper development you also need &lt;a href=&quot;http://en.wikipedia.org/wiki/Revision_control&quot;&gt;source code management system&lt;/a&gt; (SCM). And &lt;a href=&quot;http://www.fogcreek.com/FogBugz/docs/60/topics/advanced/Sourcecontrolintegration.html?isl=130641&quot;&gt;Fogbugz allows for great level of integration&lt;/a&gt; with all popular SCM systems. But if you choose Fogbugz on-demand to avoid support costs of running it locally, does it sound logical to install SCM locally? Definitely not.&lt;/p&gt;
+&lt;p&gt;And here comes &lt;a href=&quot;http://beanstalkapp.com/&quot;&gt;beanstalk&lt;/a&gt; – great hosted hassle-free version control service. It’s free for 3 users and a repository of up to 100Mbytes, and you can easily upgrade at any time.&lt;/p&gt;
+&lt;p&gt;In most cases, free version should suit your hobby project or start up. Beanstalk runs &lt;a href=&quot;http://en.wikipedia.org/wiki/Subversion_(software)&quot;&gt;subversion&lt;/a&gt; SCM which is almost a de-facto standard in project development and has client software for all platforms.&lt;/p&gt;
+&lt;p&gt;But the best thing in Beanstalk for me is that it provides &lt;a href=&quot;http://help.beanstalkapp.com/faqs/integration-tools/integrating-with-fogbugz&quot;&gt;integration with Fogbugz on-demand&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So you can have bug tracking/PM and version control software at no cost!&lt;/strong&gt; It is just a dream for a hobby project or a small start-up.&lt;/p&gt;
+&lt;p&gt;The installation process is dead easy:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;register at fogbugz.com for on-demand service and get &lt;strong&gt;yourproject.fogbugz.com&lt;/strong&gt; address&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;register at beanstalkapp.com for a free account and get &lt;strong&gt;yourproject.beanstalkapp.com&lt;/strong&gt; address and login there. You will be prompted to set your first repository. I assume that you’re just starting and don’t have SCM system yet, so just zip your working directory (where all your project files are) and upload it. Your first repository will be created.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;go to your repository setup → integration → fogbugz. All you need to do is follow the instructions – but basically they will just need your fogbugz URL (yourproject.fogbugz.com) and username with password.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://help.beanstalkapp.com/faqs/getting-started-11/choosing-your-subversion-client&quot;&gt;choose your subversion client&lt;/a&gt;, download it and install. All you’ll have to configure in the client is a repository URL, it will look something like this: &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; http://yourproject.svn.beanstalkapp.com/myfirstrepo/ 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use &lt;a href=&quot;http://en.wikipedia.org/wiki/TortoiseSVN&quot;&gt;tortoiseSVN&lt;/a&gt; so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;in Fogbugz – set “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;” and “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;”. To do this, you need to go to your fogbugz account, to Settings → site → Main. Grab your repository URL from beanstalk, add “browse/^FILE” to it and set it as “&lt;strong&gt;Source Control URL for logs&lt;/strong&gt;”. It should look something like that:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepository/browse/^FILE
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; And “&lt;strong&gt;Source Control URL for diffs&lt;/strong&gt;” will be&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; http://yourProject.beanstalkapp.com/yourRepositroy/diff/path/^FILE?from=^R2&amp;amp;amp;to=^R1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Voila! Everything should be working.&lt;/p&gt;
+&lt;p&gt;So the workflow will be like that:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you have a bug or a feature request, you enter it to Fogbugz, it will get a number assigned.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;When you (or someone else) start working on a bug, you just edit your code and then commit it. When committing, you can add tags to a commit message. For example, if you do a commit with the following message:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; [case:34 status:resolved] 
+ fixed IE5.5 lack of .toFixed() support
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt; Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. &lt;a href=&quot;http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/&quot;&gt;See here&lt;/a&gt; for more commit tags.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Then in Fogbugz bug#34 you will see that it’s been just resolved and you will be able to check what files were changed and look at the diff of the changes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So that’s it, you’ve got your bug tracking and version control software set up and integrated. It’s working online so support cost is zero, and it’s completely free :)&lt;/p&gt;
+&lt;p&gt;P.S. What’s also great about Beanstalk is that it supports twitter integration – so if you have an open-source project, your users can follow it on twitter and see what you’re committing! It also supports web-hooks API so integration is limited to your fantasy only :)&lt;/p&gt;
+&lt;p&gt;P.P.S. The only thing that’s left is database versioning control – we need something like RoR migrations, but that’s a topic for another post :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Windows Live</title>
             <link href="http://sharovatov.github.io/posts/2009-04-wl.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -1740,104 +1769,6 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 &lt;/ul&gt;
 &lt;p&gt;Good stuff, Live Team, thanks!&lt;/p&gt;
 &lt;p&gt;P.S. for more information, read &lt;a href=&quot;http://windowslivewriter.spaces.live.com/blog/cns!D85741BB5E0BE8AA!1650.entry&quot;&gt;this blogpost&lt;/a&gt;.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Common Internet Scheme Syntax</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-commoninternetscheme.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-commoninternetscheme.html</id>
-            <content type="html">&lt;p&gt;I&amp;#39;ve recently read an &lt;a href=&quot;http://bolknote.ru/2009/04/04/~2074&quot;&gt;extremely interesting post&lt;/a&gt; on &lt;a href=&quot;http://bolknote.ru/&quot;&gt;bolknote.ru&lt;/a&gt; about &amp;quot;Common Internet Scheme Syntax&amp;quot;.&lt;/p&gt;
-&lt;p&gt;You may have already faced quite a common problem of setting absolute URIs to a resource on a page that must be accessed by both HTTPS and HTTP schemes.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://tools.ietf.org/html/rfc1738&quot;&gt;RFC 1738&lt;/a&gt; Common Internet Scheme Syntax section states the following:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;While the syntax for the rest of the URL may vary depending on the particular scheme selected, URL schemes that involve the direct use of an IP-based protocol to a specified host on the Internet use a common syntax for the scheme-specific data:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;**//&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;url-path&amp;gt;**&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;So you don’t actually have to specify HTTP or HTTPS scheme, you just put two slashes and browser adds the current scheme automatically!&lt;/p&gt;
-&lt;p&gt;I tested this URL notation in the following browsers – IE3, IE4, IE5.0, IE501, IE5.5, IE6, IE7, IE8, FF2, FF3.0.8, Opera 8.5, Opera 9, Opera 10, Google Chrome (current version) – and it works fine in all of them!&lt;/p&gt;
-&lt;p&gt;You can test it yourself – here’s &lt;a href=&quot;http://sharovatov.ru/testcases/schemeTest.html&quot;&gt;the testcase&lt;/a&gt;. &lt;/p&gt;
-&lt;p&gt;As you may see, the URL is set without a scheme and your browser silently adds the current scheme. If you change http to https in your address, you’ll see that the scheme in dummy.html page URL will change to https!&lt;/p&gt;
-&lt;p&gt;It’s interesting to note that &lt;a href=&quot;http://tools.ietf.org/html/rfc3986#section-3.1&quot;&gt;RFC 3986 (URI Generic Syntax)&lt;/a&gt; says that &lt;strong&gt;scheme&lt;/strong&gt; part is required:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Each URI begins with a scheme name that refers to a specification for assigning identifiers within that scheme. As such, the URI syntax is a federated and extensible naming system wherein each scheme&amp;#39;s specification may further restrict the syntax and semantics of identifiers using that scheme.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;but it also mentions Common Internet Syntax notation in the &lt;a href=&quot;http://tools.ietf.org/html/rfc3986#section-4.2&quot;&gt;Relative Reference&lt;/a&gt; section:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;A relative reference that begins with two slash characters is termed a network-path reference; such references are rarely used&lt;/strong&gt;. A relative reference that begins with a single slash character is termed an absolute-path reference. A relative reference that does not begin with a slash character is termed a relative-path reference.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;However, I don’t think that any browser vendor will stop support for this functionality as it’s quite useful and there’s no problem in supporting it.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt;: Google and Nigma.ru said their robots would follow and index such a link.&lt;/p&gt;
-&lt;h1 id=&quot;common-internet-scheme-syntax-detailed-post&quot;&gt;Common Internet Scheme Syntax – detailed post&lt;/h1&gt;
-&lt;p&gt;Now I’d like to describe in detail why and when abovementioned approach is extremely useful.&lt;/p&gt;
-&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
-&lt;p&gt;If you serve CSS/JS or images from a domain that’s different to the domain of your page, and the page must be accessed from both HTTP and HTTPS, you must’ve already been thinking about this – what protocol scheme to set for these links? HTTP or HTTPS?&lt;/p&gt;
-&lt;p&gt;If you set your links’ URLs with HTTP scheme, and the page is accessed over HTTPS, all the resources are suddenly in a non-secure zone. Browsers behave differently, but they warn user in some way that the page contains non-secure content. Here’s &lt;a href=&quot;https://www.allrussiantrains.com/schemeTestAdvanced.html&quot;&gt;the testcase&lt;/a&gt;. As you may see, testcase link points to HTTPS resource on allrussiantrains.com domain. This testcase has &lt;strong&gt;IMG&lt;/strong&gt;, &lt;strong&gt;LINK type=&amp;quot;text/css&amp;quot;&lt;/strong&gt;, &lt;strong&gt;SCRIPT&lt;/strong&gt; and &lt;strong&gt;A&lt;/strong&gt; elements pointing to a HTTP locations on &lt;strong&gt;sharovatov.ru&lt;/strong&gt; domain.&lt;/p&gt;
-&lt;p&gt;So if we have HTTP urls on the page that’s served through SSL, we face &lt;strong&gt;the problem of “mixed content security warnings”&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;IE7 shows a &lt;strong&gt;Security Information&lt;/strong&gt; warning asking user if he wants to display non-secure
-content:&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&quot;non-secure content security warning in IE&quot; src=&quot;http://sharovatov.ru/screenshots/securityWarning.gif&quot;&gt;&lt;/p&gt;
-&lt;p&gt;If user presses Yes, all the elements are loaded.&lt;/p&gt;
-&lt;p&gt;If user presses No, all the elements are not loaded at all.&lt;/p&gt;
-&lt;p&gt;Firefox 3.0.8 silently loads HTTP-referenced content, but shows a small icon in the right-hand corner:&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&quot;security warning in FF&quot; src=&quot;http://sharovatov.ru/screenshots/securityWarning-FF.gif&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Firefox also changes the address bar as if the connection isn’t secured by SSL, indicating user that the browser is displaying mixed content:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/securityWarningAddressBar-FF.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Compare it to normal address bar interface when secure page is shown:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-FF.jpg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Opera 9.62 silently loads HTTP-referenced content, but shows a question mark icon in the address bar:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/securityWarningAddressBar-OP.gif&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Compare it to the normal address bar when secure page is shown:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-OP.gif&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Google Chrome does a similar thing – displays non-secure content, but shows an icon in the address bar:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/securityWarningAddressBar-GG.gif&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Compare to the normal secure address bar:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-GG.gif&quot;&gt;&lt;/p&gt;
-&lt;p&gt;So all the browsers &lt;strong&gt;in a very obvious way&lt;/strong&gt; alert user that the page has mixed content, and IE even fires an alert. This is clearly not suitable for public websites.&lt;/p&gt;
-&lt;h1 id=&quot;popular-solutions&quot;&gt;Popular solutions&lt;/h1&gt;
-&lt;p&gt;Usually people solve this problem by setting all the links to be HTTPS. So whichever way the page is accessed – either by HTTP or HTTPS, all the content is served through HTTPS channel.&lt;/p&gt;
-&lt;p&gt;This is generally OK, but still couple of issues bother me:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;HTTPS loads server’s CPU as all the traffic must be encrypted&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;HTTPS content is not cached by default&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So though setting all links to HTTPS won’t cause clients any problems, it will increase server load.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Another way around is to change scheme in the URLs dynamically by a server-side language based on current scheme of the requested page&lt;/strong&gt;. But what if you have a static html file? Then you have to edit links’ URLs in javascript. Well, in any way, changing links schemes is right a kerfuffle! :)&lt;/p&gt;
-&lt;p&gt;And if you @import some CSS files or serve background images from a different domain, you’ll have to dynamically parse CSS in order to change URL scheme in all @import rules and background-image url’s. Which isn’t always a bad thing, but as your CSS file will be dumped into response stream by your favourite scripting language, default &lt;strong&gt;HTTP conditional GET caching mode &lt;/strong&gt;will stop working (while it’s supported and working perfectly fine for static files in all web servers). So you will have to either reinvent the wheel and support caching in your CSS-parsing script, or live with the fact that your CSS is going to be fetched every time your page’s loaded.&lt;/p&gt;
-&lt;h1 id=&quot;proposed-solution&quot;&gt;Proposed solution&lt;/h1&gt;
-&lt;p&gt;We’ve got a better option!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://tools.ietf.org/html/rfc1738&quot;&gt;RFC 1738&lt;/a&gt; Common Internet Scheme Syntax section states the following:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;While the syntax for the rest of the URL may vary depending on the particular scheme selected, URL schemes that involve the direct use of an IP-based protocol to a specified host on the Internet use a common syntax for the scheme-specific data:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;**//&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;url-path&amp;gt;**&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And &lt;a href=&quot;http://tools.ietf.org/html/rfc3986#section-4.2&quot;&gt;RFC 3986 follows&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;A relative reference that begins with two slash characters is termed a network-path reference; such references are rarely used&lt;/strong&gt;. A relative reference that begins with a single slash character is termed an absolute-path reference. A relative reference that does not begin with a slash character is termed a relative-path reference.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;So you don’t need to specify HTTP or HTTPS scheme, you just put two slashes and browser adds the current scheme automatically!&lt;/p&gt;
-&lt;p&gt;I tested this URL notation in the following browsers – IE3, IE4, IE5.0, IE501, IE5.5, IE6, IE7, IE8, FF2, FF3.0.8, Opera 8.5, Opera 9, Opera 10, Google Chrome (current version) – and it works fine in all of them!&lt;/p&gt;
-&lt;p&gt;You can test it yourself – here’s &lt;a href=&quot;http://sharovatov.ru/testcases/schemeTest.html&quot;&gt;the testcase&lt;/a&gt;. &lt;/p&gt;
-&lt;p&gt;As you may see, the URL is set without a scheme and your browser silently adds the current scheme of the loaded page, be it HTTP or HTTPS! If you change HTTP to HTTPS in your address, you’ll see that the scheme in dummy.html page URL will change to HTTPS!&lt;/p&gt;
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;So, if you use “&lt;strong&gt;General Internet Syntax Scheme&lt;/strong&gt;” URL syntax, you’ll achieve the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;you won’t have to care about URL schemes in CSS @import and background-image rules – you just put &lt;code&gt;@import &amp;quot;//externalsite.com/stylesheet.css&amp;quot;&lt;/code&gt; or &lt;code&gt;#someElement { background-image: url(//externalsite.com/someBG.jpg); }&lt;/code&gt; and your browser automatically puts current URL scheme and fetches the corresponding resource.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;you won’t have to parse CSS to change the URL scheme, and therefore you won’t break default HTTP Conditional GET caching mode, so your CSS will be perfectly cached as they remain static files&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;you won’t have to mess with URL scheme in your JS-files, so you won’t have to parse your js-files and change URLs in them&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;you won’t need to rewrite IMG URLs on all your pages!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Plus Google said their robot would happily parse, index and follow such links (of course, with HTTP scheme).&lt;/p&gt;
-&lt;p&gt;I also asked MSN Live Search Team about that – hope they reply soon – I’ll update the post.&lt;/p&gt;
-&lt;p&gt;So – use this approach if you have a page which is accessed by both HTTP and HTTPS and whenever you need to reference any resource from a different host on this page. Plus this host must support both HTTP and HTTPS :)&lt;/p&gt;
-&lt;p&gt;McAffee SiteScan button uses this in their image - &lt;strong&gt;check!&lt;/strong&gt;&lt;/p&gt;
 </content>
         </entry>
     
@@ -2251,6 +2182,118 @@ links in Incognito Mode. However, &lt;a href=&quot;http://codereview.chromium.or
         </entry>
     
         <entry>
+            <title>Common Internet Scheme Syntax</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-commoninternetscheme.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-commoninternetscheme.html</id>
+            <content type="html">&lt;p&gt;I&amp;#39;ve recently read an &lt;a href=&quot;http://bolknote.ru/2009/04/04/~2074&quot;&gt;extremely interesting post&lt;/a&gt; on &lt;a href=&quot;http://bolknote.ru/&quot;&gt;bolknote.ru&lt;/a&gt; about &amp;quot;Common Internet Scheme Syntax&amp;quot;.&lt;/p&gt;
+&lt;p&gt;You may have already faced quite a common problem of setting absolute URIs to a resource on a page that must be accessed by both HTTPS and HTTP schemes.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://tools.ietf.org/html/rfc1738&quot;&gt;RFC 1738&lt;/a&gt; Common Internet Scheme Syntax section states the following:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;While the syntax for the rest of the URL may vary depending on the particular scheme selected, URL schemes that involve the direct use of an IP-based protocol to a specified host on the Internet use a common syntax for the scheme-specific data:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;**//&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;url-path&amp;gt;**&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So you don’t actually have to specify HTTP or HTTPS scheme, you just put two slashes and browser adds the current scheme automatically!&lt;/p&gt;
+&lt;p&gt;I tested this URL notation in the following browsers – IE3, IE4, IE5.0, IE501, IE5.5, IE6, IE7, IE8, FF2, FF3.0.8, Opera 8.5, Opera 9, Opera 10, Google Chrome (current version) – and it works fine in all of them!&lt;/p&gt;
+&lt;p&gt;You can test it yourself – here’s &lt;a href=&quot;http://sharovatov.ru/testcases/schemeTest.html&quot;&gt;the testcase&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;As you may see, the URL is set without a scheme and your browser silently adds the current scheme. If you change http to https in your address, you’ll see that the scheme in dummy.html page URL will change to https!&lt;/p&gt;
+&lt;p&gt;It’s interesting to note that &lt;a href=&quot;http://tools.ietf.org/html/rfc3986#section-3.1&quot;&gt;RFC 3986 (URI Generic Syntax)&lt;/a&gt; says that &lt;strong&gt;scheme&lt;/strong&gt; part is required:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Each URI begins with a scheme name that refers to a specification for assigning identifiers within that scheme. As such, the URI syntax is a federated and extensible naming system wherein each scheme&amp;#39;s specification may further restrict the syntax and semantics of identifiers using that scheme.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;but it also mentions Common Internet Syntax notation in the &lt;a href=&quot;http://tools.ietf.org/html/rfc3986#section-4.2&quot;&gt;Relative Reference&lt;/a&gt; section:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;A relative reference that begins with two slash characters is termed a network-path reference; such references are rarely used&lt;/strong&gt;. A relative reference that begins with a single slash character is termed an absolute-path reference. A relative reference that does not begin with a slash character is termed a relative-path reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;However, I don’t think that any browser vendor will stop support for this functionality as it’s quite useful and there’s no problem in supporting it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt;: Google and Nigma.ru said their robots would follow and index such a link.&lt;/p&gt;
+&lt;h1 id=&quot;common-internet-scheme-syntax-detailed-post&quot;&gt;Common Internet Scheme Syntax – detailed post&lt;/h1&gt;
+&lt;p&gt;Now I’d like to describe in detail why and when abovementioned approach is extremely useful.&lt;/p&gt;
+&lt;h2 id=&quot;problem&quot;&gt;Problem&lt;/h2&gt;
+&lt;p&gt;If you serve CSS/JS or images from a domain that’s different to the domain of your page, and the page must be accessed from both HTTP and HTTPS, you must’ve already been thinking about this – what protocol scheme to set for these links? HTTP or HTTPS?&lt;/p&gt;
+&lt;p&gt;If you set your links’ URLs with HTTP scheme, and the page is accessed over HTTPS, all the resources are suddenly in a non-secure zone. Browsers behave differently, but they warn user in some way that the page contains non-secure content. Here’s &lt;a href=&quot;https://www.allrussiantrains.com/schemeTestAdvanced.html&quot;&gt;the testcase&lt;/a&gt;. As you may see, testcase link points to HTTPS resource on allrussiantrains.com domain. This testcase has &lt;strong&gt;IMG&lt;/strong&gt;, &lt;strong&gt;LINK type=&amp;quot;text/css&amp;quot;&lt;/strong&gt;, &lt;strong&gt;SCRIPT&lt;/strong&gt; and &lt;strong&gt;A&lt;/strong&gt; elements pointing to a HTTP locations on &lt;strong&gt;sharovatov.ru&lt;/strong&gt; domain.&lt;/p&gt;
+&lt;p&gt;So if we have HTTP urls on the page that’s served through SSL, we face &lt;strong&gt;the problem of “mixed content security warnings”&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;IE7 shows a &lt;strong&gt;Security Information&lt;/strong&gt; warning asking user if he wants to display non-secure
+content:&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;non-secure content security warning in IE&quot; src=&quot;http://sharovatov.ru/screenshots/securityWarning.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;If user presses Yes, all the elements are loaded.&lt;/p&gt;
+&lt;p&gt;If user presses No, all the elements are not loaded at all.&lt;/p&gt;
+&lt;p&gt;Firefox 3.0.8 silently loads HTTP-referenced content, but shows a small icon in the right-hand corner:&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;security warning in FF&quot; src=&quot;http://sharovatov.ru/screenshots/securityWarning-FF.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Firefox also changes the address bar as if the connection isn’t secured by SSL, indicating user that the browser is displaying mixed content:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/securityWarningAddressBar-FF.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Compare it to normal address bar interface when secure page is shown:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-FF.jpg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Opera 9.62 silently loads HTTP-referenced content, but shows a question mark icon in the address bar:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/securityWarningAddressBar-OP.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Compare it to the normal address bar when secure page is shown:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-OP.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Google Chrome does a similar thing – displays non-secure content, but shows an icon in the address bar:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/securityWarningAddressBar-GG.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Compare to the normal secure address bar:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-GG.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;So all the browsers &lt;strong&gt;in a very obvious way&lt;/strong&gt; alert user that the page has mixed content, and IE even fires an alert. This is clearly not suitable for public websites.&lt;/p&gt;
+&lt;h1 id=&quot;popular-solutions&quot;&gt;Popular solutions&lt;/h1&gt;
+&lt;p&gt;Usually people solve this problem by setting all the links to be HTTPS. So whichever way the page is accessed – either by HTTP or HTTPS, all the content is served through HTTPS channel.&lt;/p&gt;
+&lt;p&gt;This is generally OK, but still couple of issues bother me:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;HTTPS loads server’s CPU as all the traffic must be encrypted&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;HTTPS content is not cached by default&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So though setting all links to HTTPS won’t cause clients any problems, it will increase server load.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Another way around is to change scheme in the URLs dynamically by a server-side language based on current scheme of the requested page&lt;/strong&gt;. But what if you have a static html file? Then you have to edit links’ URLs in javascript. Well, in any way, changing links schemes is right a kerfuffle! :)&lt;/p&gt;
+&lt;p&gt;And if you @import some CSS files or serve background images from a different domain, you’ll have to dynamically parse CSS in order to change URL scheme in all @import rules and background-image url’s. Which isn’t always a bad thing, but as your CSS file will be dumped into response stream by your favourite scripting language, default &lt;strong&gt;HTTP conditional GET caching mode &lt;/strong&gt;will stop working (while it’s supported and working perfectly fine for static files in all web servers). So you will have to either reinvent the wheel and support caching in your CSS-parsing script, or live with the fact that your CSS is going to be fetched every time your page’s loaded.&lt;/p&gt;
+&lt;h1 id=&quot;proposed-solution&quot;&gt;Proposed solution&lt;/h1&gt;
+&lt;p&gt;We’ve got a better option!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://tools.ietf.org/html/rfc1738&quot;&gt;RFC 1738&lt;/a&gt; Common Internet Scheme Syntax section states the following:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;While the syntax for the rest of the URL may vary depending on the particular scheme selected, URL schemes that involve the direct use of an IP-based protocol to a specified host on the Internet use a common syntax for the scheme-specific data:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;**//&amp;lt;user&amp;gt;:&amp;lt;password&amp;gt;@&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/&amp;lt;url-path&amp;gt;**&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And &lt;a href=&quot;http://tools.ietf.org/html/rfc3986#section-4.2&quot;&gt;RFC 3986 follows&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;A relative reference that begins with two slash characters is termed a network-path reference; such references are rarely used&lt;/strong&gt;. A relative reference that begins with a single slash character is termed an absolute-path reference. A relative reference that does not begin with a slash character is termed a relative-path reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So you don’t need to specify HTTP or HTTPS scheme, you just put two slashes and browser adds the current scheme automatically!&lt;/p&gt;
+&lt;p&gt;I tested this URL notation in the following browsers – IE3, IE4, IE5.0, IE501, IE5.5, IE6, IE7, IE8, FF2, FF3.0.8, Opera 8.5, Opera 9, Opera 10, Google Chrome (current version) – and it works fine in all of them!&lt;/p&gt;
+&lt;p&gt;You can test it yourself – here’s &lt;a href=&quot;http://sharovatov.ru/testcases/schemeTest.html&quot;&gt;the testcase&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;As you may see, the URL is set without a scheme and your browser silently adds the current scheme of the loaded page, be it HTTP or HTTPS! If you change HTTP to HTTPS in your address, you’ll see that the scheme in dummy.html page URL will change to HTTPS!&lt;/p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;So, if you use “&lt;strong&gt;General Internet Syntax Scheme&lt;/strong&gt;” URL syntax, you’ll achieve the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;you won’t have to care about URL schemes in CSS @import and background-image rules – you just put &lt;code&gt;@import &amp;quot;//externalsite.com/stylesheet.css&amp;quot;&lt;/code&gt; or &lt;code&gt;#someElement { background-image: url(//externalsite.com/someBG.jpg); }&lt;/code&gt; and your browser automatically puts current URL scheme and fetches the corresponding resource.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;you won’t have to parse CSS to change the URL scheme, and therefore you won’t break default HTTP Conditional GET caching mode, so your CSS will be perfectly cached as they remain static files&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;you won’t have to mess with URL scheme in your JS-files, so you won’t have to parse your js-files and change URLs in them&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;you won’t need to rewrite IMG URLs on all your pages!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Plus Google said their robot would happily parse, index and follow such links (of course, with HTTP scheme).&lt;/p&gt;
+&lt;p&gt;I also asked MSN Live Search Team about that – hope they reply soon – I’ll update the post.&lt;/p&gt;
+&lt;p&gt;So – use this approach if you have a page which is accessed by both HTTP and HTTPS and whenever you need to reference any resource from a different host on this page. Plus this host must support both HTTP and HTTPS :)&lt;/p&gt;
+&lt;p&gt;McAffee SiteScan button uses this in their image - &lt;strong&gt;check!&lt;/strong&gt;&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>rel=&quot;canonical&quot;</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-canonical.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-canonical.html</id>
+            <content type="html">&lt;p&gt;I recently found out a very useful SEO stuff supported by Google (&lt;a href=&quot;http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html&quot;&gt;here&lt;/a&gt;), Microsoft Live Search (&lt;a href=&quot;http://blogs.msdn.com/webmaster/archive/2009/02/12/partnering-to-help-solve-duplicate-content-issues.aspx&quot;&gt;here&lt;/a&gt;), Yahoo (&lt;a href=&quot;http://blog.ask.com/2009/02/ask-is-going-canonical.html&quot;&gt;here&lt;/a&gt;) and Ask.com ( &lt;a href=&quot;http://ysearchblog.com/2009/02/12/fighting-duplication-adding-more-arrows-to-your-quiver/&quot;&gt;here&lt;/a&gt;) – canonical links.&lt;/p&gt;
+&lt;p&gt;Basically, if you have a page accessible by multiple URLs, from search engine’s prospective you’re bloating its database by serving duplicate content. So to avoid this, you have to set &lt;code&gt;&amp;lt;link rel=&amp;quot;canonical&amp;quot; href=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt; with &lt;code&gt;href&lt;/code&gt; pointing to the original URL of this page. Search engines will check the url in href attr and won’t put a duplicate content penalty on your pages.&lt;/p&gt;
+&lt;p&gt;Useful thing to remember and use!&lt;/p&gt;
+&lt;p&gt;WordPress (&lt;a href=&quot;http://wordpress.org/extend/plugins/canonical/&quot;&gt;here&lt;/a&gt;) and RoR (
+&lt;a href=&quot;http://github.com/mbleigh/canonical-url/tree/master&quot;&gt;here&lt;/a&gt;) have already got plugins for canonical URL support. Hope to see support for this useful rel in other frameworks, forum and blog engines.&lt;/p&gt;
+&lt;p&gt;And I just found an &lt;a href=&quot;http://annevankesteren.nl/2009/04/rev-canonical&quot;&gt;interesting post on this topic&lt;/a&gt; by Anne van Kesteren with interesting discussion going in comments.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Weird bug with hiding columns in IE7</title>
             <link href="http://sharovatov.github.io/posts/2009-04-ie7weirdcolbug.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -2275,20 +2318,6 @@ links in Incognito Mode. However, &lt;a href=&quot;http://codereview.chromium.or
 @*/
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to the toggling function. As you may know, js code within &lt;code&gt;/*@cc_on ... @*/&lt;/code&gt; block will be executed only by IE, and only IE8 has support for &lt;code&gt;document.querySelector&lt;/code&gt; interface, so chances are that this code will be executed only in IE with version earlier than 8, which is precisely what we need (as IE8 doesn&amp;#39;t have this problem).&lt;/p&gt;
 &lt;p&gt;It’s interesting to know, that YUI Team in their &lt;a href=&quot;http://developer.yahoo.com/yui/datatable/&quot;&gt;DataTable control&lt;/a&gt; in order to implement hiding/showing functionality choosed to loop through all the cells and set their display individually (see &lt;code&gt;hideColumn&lt;/code&gt;/&lt;code&gt;showColumn&lt;/code&gt; functions &lt;a href=&quot;http://yui.yahooapis.com/2.7.0/build/datatable/datatable.js&quot;&gt;here&lt;/a&gt;). I understand that this is the bulletproof approach ready to use in any environment, but it can be rather ineffective when your table has a significant amount of rows as it will have to go through all the TR’s. And it will do the loop twice if you choose to hide two columns :) Of course, using my approach requires setting classes for those cells that you were going to hide, so it’s not that flexible, but in the controlled environment it’s definitely the best option.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>rel=&quot;canonical&quot;</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-canonical.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-canonical.html</id>
-            <content type="html">&lt;p&gt;I recently found out a very useful SEO stuff supported by Google (&lt;a href=&quot;http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html&quot;&gt;here&lt;/a&gt;), Microsoft Live Search (&lt;a href=&quot;http://blogs.msdn.com/webmaster/archive/2009/02/12/partnering-to-help-solve-duplicate-content-issues.aspx&quot;&gt;here&lt;/a&gt;), Yahoo (&lt;a href=&quot;http://blog.ask.com/2009/02/ask-is-going-canonical.html&quot;&gt;here&lt;/a&gt;) and Ask.com ( &lt;a href=&quot;http://ysearchblog.com/2009/02/12/fighting-duplication-adding-more-arrows-to-your-quiver/&quot;&gt;here&lt;/a&gt;) – canonical links.&lt;/p&gt;
-&lt;p&gt;Basically, if you have a page accessible by multiple URLs, from search engine’s prospective you’re bloating its database by serving duplicate content. So to avoid this, you have to set &lt;code&gt;&amp;lt;link rel=&amp;quot;canonical&amp;quot; href=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt; with &lt;code&gt;href&lt;/code&gt; pointing to the original URL of this page. Search engines will check the url in href attr and won’t put a duplicate content penalty on your pages.&lt;/p&gt;
-&lt;p&gt;Useful thing to remember and use!&lt;/p&gt;
-&lt;p&gt;WordPress (&lt;a href=&quot;http://wordpress.org/extend/plugins/canonical/&quot;&gt;here&lt;/a&gt;) and RoR (
-&lt;a href=&quot;http://github.com/mbleigh/canonical-url/tree/master&quot;&gt;here&lt;/a&gt;) have already got plugins for canonical URL support. Hope to see support for this useful rel in other frameworks, forum and blog engines.&lt;/p&gt;
-&lt;p&gt;And I just found an &lt;a href=&quot;http://annevankesteren.nl/2009/04/rev-canonical&quot;&gt;interesting post on this topic&lt;/a&gt; by Anne van Kesteren with interesting discussion going in comments.&lt;/p&gt;
 </content>
         </entry>
     
