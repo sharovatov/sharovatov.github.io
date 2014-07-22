@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TLS mixed security content status</title>
+    <meta name="generator" content="DocPad v6.60.3" />
+    <link  rel="stylesheet" href="/styles/style.css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+</head>
+<body>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>TLS mixed security content status</h1>
+<p>Here’s a list of screenshots of all the relevant browsers displaying normal valid (DV) certificate-encrypted site:</p>
+<p><a href="http://sharovatov.ru/screenshots/secure-winXP-IE6.png">IE6</a>,
+<a href="http://sharovatov.ru/screenshots/secure-winXP-IE7.png">IE7</a>,
+<a href="http://sharovatov.ru/screenshots/secure-winXP-IE8.png">IE8</a>,
+<a href="http://sharovatov.ru/screenshots/secure-win7-IE9.png">IE9</a>,
+<a href="http://sharovatov.ru/screenshots/secure-win7-IE10.png">IE10</a>,
+<a href="http://sharovatov.ru/screenshots/secure-win7-IE11.png">IE11</a>,
+<a href="http://sharovatov.ru/screenshots/secure-win7-firefox.png">Win7 Firefox</a>,
+<a href="http://sharovatov.ru/screenshots/secure-win7-chrome.png">Win7 Chrome</a>,
+<a href="http://sharovatov.ru/screenshots/secure-OSX-chrome.png">OS X Chrome</a>,
+<a href="http://sharovatov.ru/screenshots/secure-OSX-safari.png">OS X Safari</a>,
+<a href="http://sharovatov.ru/screenshots/secure-OSX-firefox.png">OS X Firefox</a>,
+<a href="http://sharovatov.ru/screenshots/secure-iOS6.png">iOS6 Safari</a>,
+<a href="http://sharovatov.ru/screenshots/secure-iOS7.png">iOS7 Safari</a>,
+<a href="http://sharovatov.ru/screenshots/secure-android4-webkit.png">android 4 webkit</a>,
+<a href="http://sharovatov.ru/screenshots/secure-android4-chrome.png">android 4 chrome</a></p>
+<p>All of them have a padlock icon of some sort, which tech-savvy users associate with secure connection.</p>
+<p>But things change when a browser detects that some content on the https secure page is served from http. The situation when the page is loaded via a secured HTTPS connection but tries to load some resources from an unsecure connection has a special name — ”mixed security content”. </p>
+<p>There’s an <a href="https://w3c.github.io/webappsec/specs/mixedcontent/">in-progress spec explaining what should be considered mixed security content</a> and also a <a href="http://www.w3.org/TR/wsc-ui/">W3C recommendation</a> on how agents should behave when they see mixed security content appearing on the page.</p>
+<p>With regards to the certificate type, mixed security content case is handled differently for EV and DV (commonly used) certificates:</p>
+<ul>
+<li><p>EV — a page is considered not TLS-validated if it has an EV cert and the page tries loading <em>any</em> mixed content: images, scripts, iframes, video, objects; the EV green bar disappears.</p>
+</li>
+<li><p>non-EV — mixed security content is divided into two types: <strong>passive</strong> and <strong>active</strong>. <strong>Passive</strong> mixed security content usually includes images, video, objects (flash included), audio — everything that can’t change the DOM. Browsers <em>load</em> passive mixed security content though this fact is indicated to the user, usually by showing ”insecure mixed content” icon somewhere in the address bar or elsewhere in the UI. And the <strong>active</strong> mixed security content (usually all the content that can modify DOM — scripts, stylesheets, iframes, fonts) <em>is not</em> loaded by most of the browsers and a security warning is usually dumped to the console log.</p>
+</li>
+</ul>
+<p>To illustrate the behaviours of all the modern browsers I prepared a table of testcases and resulting screenshots (older IE6-7-8 behaviour is described below the table):</p>
+<style type="text/css">
+.not-loaded a {color: red;}
+.loaded a {color: green;}
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>resource</td>
+            <td>IE9</td>
+            <td>IE10</td>
+            <td>IE11</td>
+            <td>Firefox 30</td>
+            <td>Chrome 35</td>
+            <td>Safari 7</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rel="row">1</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/iframe.html">Iframe</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/iframe-IE9.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/iframe-IE10.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/iframe-IE11.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/iframe-firefox.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/iframe-chrome.png">No</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/iframe-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">2</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/script.html">Script</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/script-IE9.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/script-IE10.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/script-IE11.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/script-firefox.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/script-chrome.png">No</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/script-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">3</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/style.html">Stylesheet</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/style-IE9.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/style-IE10.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/style-IE11.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/style-firefox.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/style-chrome.png">No</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/style-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">4</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/font.html">Font</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/font-IE9.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/font-IE10.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/font-IE11.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/font-firefox.png">No</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/font-chrome.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/font-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">5</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/xhr.html">js XHR</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/xhr-IE9.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/xhr-IE10.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/xhr-IE11.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/xhr-firefox.png">No</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/xhr-chrome.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/xhr-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">6</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/flash.html">Flash</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/flash-IE10.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/flash-IE10.png">No</a></td>
+            <td class="not-loaded"><a href="http://sharovatov.ru/screenshots/flash-IE11.png">No</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-firefox.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-chrome.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">7</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/flash-xhr.html">https flash + http xhr</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-xhr-IE9.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-xhr-IE10.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-xhr-IE11.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-xhr-firefox.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-xhr-chrome.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/flash-xhr-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">8</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/video.html">Video</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/video-IE9.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/video-IE10.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/video-IE11.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/video-firefox.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/video-chrome.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/video-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">9</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/audio.html">Audio</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/audio-IE9.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/audio-IE10.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/audio-IE11.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/audio-firefox.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/audio-chrome.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/audio-safari.png">Yes</a></td>
+        </tr>
+        <tr>
+            <td rel="row">10</td>
+            <td rel="row"><a href="https://ssl.sharovatov.ru/mixed/image.html">Image</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/image-IE9.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/image-IE10.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/image-IE11.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/image-firefox.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/image-chrome.png">Yes</a></td>
+            <td class="loaded"><a href="http://sharovatov.ru/screenshots/image-safari.png">Yes</a></td>
+        </tr>
+
+    </tbody>
+    <tfoot></tfoot>
+</table>
+
+<p>General notes:</p>
+<ul>
+<li><p>Safari seems to not care about the type of mixed security content, it loads any mixed security content regardless of its type though it <em>removes</em> the padlock icon from the progress bar (almost always, see below for details)</p>
+</li>
+<li><p>similarly to Safari, IE up to version 8 (inclusive) <a href="http://blogs.msdn.com/b/askie/archive/2009/05/14/mixed-content-and-internet-explorer-8-0.aspx">does not differentiate between active and passive mixed security content</a>; it shows a modal dialog (asking if user wants to load only secure content or not) upon detecting <em>any</em> mixed security content in the page: <a href="http://sharovatov.ru/screenshots/mixed-content-dialog-winXP-IE6.png">IE6</a>, <a href="http://sharovatov.ru/screenshots/mixed-content-dialog-winXP-IE7.png">IE7</a>, <a href="http://sharovatov.ru/screenshots/mixed-content-dialog-winXP-IE8.png">IE8</a>. If user chooses to load only secure content, mixed security content is blocked and the padlock icon is retained: <a href="http://sharovatov.ru/screenshots/mixed-content-refused-winXP-IE6.png">IE6</a> <a href="http://sharovatov.ru/screenshots/mixed-content-refused-winXP-IE7.png">IE7</a> <a href="http://sharovatov.ru/screenshots/mixed-content-refused-winXP-IE8.png">IE8</a>; if the user prefers to allow loading mixed security content, padlock icon is removed and mixed security content is loaded, rendering the view similarly to normal http pages: <a href="http://sharovatov.ru/screenshots/mixed-content-accepted-winXP-IE6.png">IE6</a> <a href="http://sharovatov.ru/screenshots/mixed-content-accepted-winXP-IE7.png">IE8</a> <a href="http://sharovatov.ru/screenshots/mixed-content-accepted-winXP-IE8.png">IE7</a> </p>
+</li>
+<li><p>IE starting from version 9 <a href="http://blogs.msdn.com/b/ie/archive/2011/06/23/internet-explorer-9-security-part-4-protecting-consumers-from-malicious-mixed-content.aspx">started handling different types of mixed security content differently</a> based on its type: passive mixed security content is loaded though the padlock icon is removed, active mixed security content is blocked and a special UI informational popup is shown. Chrome and Firefox could not lag behind, and  so they followed IE: <a href="http://googleonlinesecurity.blogspot.ru/2011/06/trying-to-end-mixed-scripting.html">first Chrome</a> and <a href="https://blog.mozilla.org/security/2013/05/16/mixed-content-blocking-in-firefox-aurora/">two years later Firefox</a> started distinguishing passive and active mixed security content, both browsers are now able to detect when mixed security content is loaded and block what they consider active mixed security content; passive mixed security content is loaded with a corresponding UI change. To me, Chrome padlock UI looks cleaner and saner — when passive mixed security content is loaded, padlock icon still persists but a yellow warning sign is shown on top. Both Firefox and Chrome behave similarly on OS X and Windows.</p>
+</li>
+</ul>
+<ul>
+<li><p>Chrome persists user’s choice to load active mixed security content for the site: if user chooses to load HTTP iframe on one page, HTTP-served script will be loaded on another page. Neither IE nor Firefox persist the user’s choice (which makes sense to me). Safari has nothing to persist as it always loads the content.</p>
+</li>
+<li><p>iOS Safari doesn&#39;t have any &quot;insecure mixed content&quot; icon, it just doesn&#39;t show the padlock icon at all if any mixed security content is present on the page while loading all the resources. </p>
+</li>
+</ul>
+<p>Test-specific notes:</p>
+<ul>
+<li><p>#1, #2, #3 (iframes, scripts, stylesheets). As Safari doesn’t differentiate between types of mixed security content, it simply removes the padlock icon and loads the content. IE9, IE10, IE11, Firefox and Chrome all consider HTTP-based iframe / script / stylesheet on an HTTPS page active mixed security content and therefore block the content and render the padlock icon. All these browsers render additional UI elements which allow user to explicitly allow loading blocked content. If a user chooses to unlock insecure content, padlock icon is removed and the page ”looks” insecure (screenshots: <a href="http://sharovatov.ru/screenshots/iframe-chrome-forced.png">Chrome</a>/<a href="http://sharovatov.ru/screenshots/iframe-firefox-forced.png">Firefox</a>/<a href="http://sharovatov.ru/screenshots/iframe-IE9-forced.png">IE9</a>/<a href="http://sharovatov.ru/screenshots/iframe-IE10-forced.png">IE10</a>/<a href="http://sharovatov.ru/screenshots/iframe-IE11-forced.png">IE11</a>). </p>
+</li>
+<li><p>#4 (Fonts). Same behaviour in all browsers as for the previous case (iframe/scripts/stylesheets), but for some reason Chrome considers fonts passive mixed security content and behaves correspondingly — loads the font and displays notification icon on top of the padlock.</p>
+</li>
+<li><p>#5 (js-XHR to HTTP) IE9 does not support cross-domain XHR, XDomainRequest is used instead, which <a href="http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx">will block any requests to HTTP resource from a HTTPS page</a>. IE10 <a href="http://blogs.msdn.com/b/ie/archive/2012/02/09/cors-for-xhr-in-ie10.aspx">started supporting CORS-enabled XHR</a>, but both IE10 and IE11 block CORS XHR requests to the HTTP page with a simple ”access denied” message in the console log. Safari follows its usual procedure — loads the content but removes the padlock icon, Firefox considers XHR to a HTTP active mixed security content and blocks it with its usual warning icon, Chrome considers AJAX <em>passive</em> mixed security content, <strong>loads</strong> the content and adds its usual passive mixed security content informational triangle on top of the padlock icon.</p>
+</li>
+<li><p>#6 (flash). IE9, IE10 and IE11 consider flash active mixed security content, other browsers treat it as passive mixed security content; so IE9+ blocks the flash object from downloading, and there’s a specific bug easy to spot <a href="http://sharovatov.ru/screenshots/flash-IE11.png">on the screenshot</a> — the loading spinner never stops rotating. Which, combined with the IE’s usual ”Only secure content is displayed” dialog makes http-based flash on HTTPS pages almost unusable.</p>
+</li>
+<li><p>#7 (flash-XHR to HTTP) IE9, IE10, IE11 and Safari <strong>do not</strong> consider HTTP-XHR from flash as mixed security content. Both IE and Safari retain the padlock icon as if all requests were made through a secured connection. Even the console log is empty of warnings or errors. To me this quite clearly seems to be a security hole.</p>
+</li>
+<li><p>#8, #9, #10 (audio, video, images). IE9, IE10, IE11, Firefox and Chrome consider images, HTML5 audio and video as passive mixed security content and treat it correspondingly — load the content and change the UI (IE removes the padlock icon, Firefox replaces it with informational triangle icon, Chrome puts informational icon on top of the padlock icon). Safari has interesting and non-consistent behaviour here: it treats images normally (displays them and removes the padlock icon), but for some odd reason it treats HTML5 audio and HTML5 video loaded via HTTP as normal secure content, it doesn’t even drop the padlock icon.Either Safari developers thought that images are more insecure than audio or video somehow or, more likely, Safari&lt;-&gt;Quicktime link lacks notion of the mixed security content concept (Quicktime plugin is used by Safari to handle all audio/video download).</p>
+</li>
+</ul>
+<p>The tests were done for Google Chrome of version 35, Apple Safari 7.0.5, and Mozilla Firefox 30.</p>
+
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-05-mixed-security-content.html';
+		window.disqus_identifier = 'posts-2014-05-mixed-security-content';
+		window.disqus_title = 'TLS mixed security content status';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+    </div>
+    
+</body>
+</html>

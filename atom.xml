@@ -4,13 +4,215 @@
     <subtitle></subtitle>
     <link href="http://sharovatov.github.io/atom.xml" rel="self" />
     <link href="http://sharovatov.github.io" />
-    <updated>2014-07-06T07:21:31.335Z</updated>
+    <updated>2014-07-22T17:15:44.666Z</updated>
     <id>http://sharovatov.github.io</id>
     <author>
         <name></name>
         <email></email>
     </author>
 
+    
+        <entry>
+            <title>2014-05-more-ssl-issues.html</title>
+            <link href="http://sharovatov.github.io/posts/2014-05-more-ssl-issues.html"/>
+            <updated>2014-07-22T17:15:48.554Z</updated>
+            <id>http://sharovatov.github.io/posts/2014-05-more-ssl-issues.html</id>
+            <content type="html">&lt;p&gt;other ssl notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows XP TLS stack (and therefore IE8) doesn’t support &lt;a href=&quot;http://en.wikipedia.org/wiki/Server_Name_Indication&quot;&gt;SNI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>TLS mixed security content status</title>
+            <link href="http://sharovatov.github.io/posts/2014-05-mixed-security-content.html"/>
+            <updated>2014-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2014-05-mixed-security-content.html</id>
+            <content type="html">&lt;p&gt;Here’s a list of screenshots of all the relevant browsers displaying normal valid (DV) certificate-encrypted site:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-winXP-IE6.png&quot;&gt;IE6&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-winXP-IE7.png&quot;&gt;IE7&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-winXP-IE8.png&quot;&gt;IE8&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-win7-IE9.png&quot;&gt;IE9&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-win7-IE10.png&quot;&gt;IE10&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-win7-IE11.png&quot;&gt;IE11&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-win7-firefox.png&quot;&gt;Win7 Firefox&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-win7-chrome.png&quot;&gt;Win7 Chrome&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-OSX-chrome.png&quot;&gt;OS X Chrome&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-OSX-safari.png&quot;&gt;OS X Safari&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-OSX-firefox.png&quot;&gt;OS X Firefox&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-iOS6.png&quot;&gt;iOS6 Safari&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-iOS7.png&quot;&gt;iOS7 Safari&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-android4-webkit.png&quot;&gt;android 4 webkit&lt;/a&gt;,
+&lt;a href=&quot;http://sharovatov.ru/screenshots/secure-android4-chrome.png&quot;&gt;android 4 chrome&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;All of them have a padlock icon of some sort, which tech-savvy users associate with secure connection.&lt;/p&gt;
+&lt;p&gt;But things change when a browser detects that some content on the https secure page is served from http. The situation when the page is loaded via a secured HTTPS connection but tries to load some resources from an unsecure connection has a special name — ”mixed security content”. &lt;/p&gt;
+&lt;p&gt;There’s an &lt;a href=&quot;https://w3c.github.io/webappsec/specs/mixedcontent/&quot;&gt;in-progress spec explaining what should be considered mixed security content&lt;/a&gt; and also a &lt;a href=&quot;http://www.w3.org/TR/wsc-ui/&quot;&gt;W3C recommendation&lt;/a&gt; on how agents should behave when they see mixed security content appearing on the page.&lt;/p&gt;
+&lt;p&gt;With regards to the certificate type, mixed security content case is handled differently for EV and DV (commonly used) certificates:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;EV — a page is considered not TLS-validated if it has an EV cert and the page tries loading &lt;em&gt;any&lt;/em&gt; mixed content: images, scripts, iframes, video, objects; the EV green bar disappears.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;non-EV — mixed security content is divided into two types: &lt;strong&gt;passive&lt;/strong&gt; and &lt;strong&gt;active&lt;/strong&gt;. &lt;strong&gt;Passive&lt;/strong&gt; mixed security content usually includes images, video, objects (flash included), audio — everything that can’t change the DOM. Browsers &lt;em&gt;load&lt;/em&gt; passive mixed security content though this fact is indicated to the user, usually by showing ”insecure mixed content” icon somewhere in the address bar or elsewhere in the UI. And the &lt;strong&gt;active&lt;/strong&gt; mixed security content (usually all the content that can modify DOM — scripts, stylesheets, iframes, fonts) &lt;em&gt;is not&lt;/em&gt; loaded by most of the browsers and a security warning is usually dumped to the console log.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To illustrate the behaviours of all the modern browsers I prepared a table of testcases and resulting screenshots (older IE6-7-8 behaviour is described below the table):&lt;/p&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+.not-loaded a {color: red;}
+.loaded a {color: green;}
+&lt;/style&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;td&gt;#&lt;/td&gt;
+            &lt;td&gt;resource&lt;/td&gt;
+            &lt;td&gt;IE9&lt;/td&gt;
+            &lt;td&gt;IE10&lt;/td&gt;
+            &lt;td&gt;IE11&lt;/td&gt;
+            &lt;td&gt;Firefox 30&lt;/td&gt;
+            &lt;td&gt;Chrome 35&lt;/td&gt;
+            &lt;td&gt;Safari 7&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;1&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/iframe.html&quot;&gt;Iframe&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-IE9.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-IE10.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-IE11.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-firefox.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-chrome.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;2&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/script.html&quot;&gt;Script&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/script-IE9.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/script-IE10.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/script-IE11.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/script-firefox.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/script-chrome.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/script-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;3&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/style.html&quot;&gt;Stylesheet&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/style-IE9.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/style-IE10.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/style-IE11.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/style-firefox.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/style-chrome.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/style-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;4&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/font.html&quot;&gt;Font&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/font-IE9.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/font-IE10.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/font-IE11.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/font-firefox.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/font-chrome.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/font-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;5&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/xhr.html&quot;&gt;js XHR&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/xhr-IE9.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/xhr-IE10.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/xhr-IE11.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/xhr-firefox.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/xhr-chrome.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/xhr-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;6&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/flash.html&quot;&gt;Flash&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-IE10.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-IE10.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;not-loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-IE11.png&quot;&gt;No&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-firefox.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-chrome.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;7&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/flash-xhr.html&quot;&gt;https flash + http xhr&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-xhr-IE9.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-xhr-IE10.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-xhr-IE11.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-xhr-firefox.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-xhr-chrome.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/flash-xhr-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;8&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/video.html&quot;&gt;Video&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/video-IE9.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/video-IE10.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/video-IE11.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/video-firefox.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/video-chrome.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/video-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;9&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/audio.html&quot;&gt;Audio&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/audio-IE9.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/audio-IE10.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/audio-IE11.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/audio-firefox.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/audio-chrome.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/audio-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td rel=&quot;row&quot;&gt;10&lt;/td&gt;
+            &lt;td rel=&quot;row&quot;&gt;&lt;a href=&quot;https://ssl.sharovatov.ru/mixed/image.html&quot;&gt;Image&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/image-IE9.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/image-IE10.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/image-IE11.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/image-firefox.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/image-chrome.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&quot;loaded&quot;&gt;&lt;a href=&quot;http://sharovatov.ru/screenshots/image-safari.png&quot;&gt;Yes&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+
+&lt;p&gt;General notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Safari seems to not care about the type of mixed security content, it loads any mixed security content regardless of its type though it &lt;em&gt;removes&lt;/em&gt; the padlock icon from the progress bar (almost always, see below for details)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;similarly to Safari, IE up to version 8 (inclusive) &lt;a href=&quot;http://blogs.msdn.com/b/askie/archive/2009/05/14/mixed-content-and-internet-explorer-8-0.aspx&quot;&gt;does not differentiate between active and passive mixed security content&lt;/a&gt;; it shows a modal dialog (asking if user wants to load only secure content or not) upon detecting &lt;em&gt;any&lt;/em&gt; mixed security content in the page: &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-dialog-winXP-IE6.png&quot;&gt;IE6&lt;/a&gt;, &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-dialog-winXP-IE7.png&quot;&gt;IE7&lt;/a&gt;, &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-dialog-winXP-IE8.png&quot;&gt;IE8&lt;/a&gt;. If user chooses to load only secure content, mixed security content is blocked and the padlock icon is retained: &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-refused-winXP-IE6.png&quot;&gt;IE6&lt;/a&gt; &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-refused-winXP-IE7.png&quot;&gt;IE7&lt;/a&gt; &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-refused-winXP-IE8.png&quot;&gt;IE8&lt;/a&gt;; if the user prefers to allow loading mixed security content, padlock icon is removed and mixed security content is loaded, rendering the view similarly to normal http pages: &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-accepted-winXP-IE6.png&quot;&gt;IE6&lt;/a&gt; &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-accepted-winXP-IE7.png&quot;&gt;IE8&lt;/a&gt; &lt;a href=&quot;http://sharovatov.ru/screenshots/mixed-content-accepted-winXP-IE8.png&quot;&gt;IE7&lt;/a&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;IE starting from version 9 &lt;a href=&quot;http://blogs.msdn.com/b/ie/archive/2011/06/23/internet-explorer-9-security-part-4-protecting-consumers-from-malicious-mixed-content.aspx&quot;&gt;started handling different types of mixed security content differently&lt;/a&gt; based on its type: passive mixed security content is loaded though the padlock icon is removed, active mixed security content is blocked and a special UI informational popup is shown. Chrome and Firefox could not lag behind, and  so they followed IE: &lt;a href=&quot;http://googleonlinesecurity.blogspot.ru/2011/06/trying-to-end-mixed-scripting.html&quot;&gt;first Chrome&lt;/a&gt; and &lt;a href=&quot;https://blog.mozilla.org/security/2013/05/16/mixed-content-blocking-in-firefox-aurora/&quot;&gt;two years later Firefox&lt;/a&gt; started distinguishing passive and active mixed security content, both browsers are now able to detect when mixed security content is loaded and block what they consider active mixed security content; passive mixed security content is loaded with a corresponding UI change. To me, Chrome padlock UI looks cleaner and saner — when passive mixed security content is loaded, padlock icon still persists but a yellow warning sign is shown on top. Both Firefox and Chrome behave similarly on OS X and Windows.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Chrome persists user’s choice to load active mixed security content for the site: if user chooses to load HTTP iframe on one page, HTTP-served script will be loaded on another page. Neither IE nor Firefox persist the user’s choice (which makes sense to me). Safari has nothing to persist as it always loads the content.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;iOS Safari doesn&amp;#39;t have any &amp;quot;insecure mixed content&amp;quot; icon, it just doesn&amp;#39;t show the padlock icon at all if any mixed security content is present on the page while loading all the resources. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Test-specific notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;#1, #2, #3 (iframes, scripts, stylesheets). As Safari doesn’t differentiate between types of mixed security content, it simply removes the padlock icon and loads the content. IE9, IE10, IE11, Firefox and Chrome all consider HTTP-based iframe / script / stylesheet on an HTTPS page active mixed security content and therefore block the content and render the padlock icon. All these browsers render additional UI elements which allow user to explicitly allow loading blocked content. If a user chooses to unlock insecure content, padlock icon is removed and the page ”looks” insecure (screenshots: &lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-chrome-forced.png&quot;&gt;Chrome&lt;/a&gt;/&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-firefox-forced.png&quot;&gt;Firefox&lt;/a&gt;/&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-IE9-forced.png&quot;&gt;IE9&lt;/a&gt;/&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-IE10-forced.png&quot;&gt;IE10&lt;/a&gt;/&lt;a href=&quot;http://sharovatov.ru/screenshots/iframe-IE11-forced.png&quot;&gt;IE11&lt;/a&gt;). &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;#4 (Fonts). Same behaviour in all browsers as for the previous case (iframe/scripts/stylesheets), but for some reason Chrome considers fonts passive mixed security content and behaves correspondingly — loads the font and displays notification icon on top of the padlock.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;#5 (js-XHR to HTTP) IE9 does not support cross-domain XHR, XDomainRequest is used instead, which &lt;a href=&quot;http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx&quot;&gt;will block any requests to HTTP resource from a HTTPS page&lt;/a&gt;. IE10 &lt;a href=&quot;http://blogs.msdn.com/b/ie/archive/2012/02/09/cors-for-xhr-in-ie10.aspx&quot;&gt;started supporting CORS-enabled XHR&lt;/a&gt;, but both IE10 and IE11 block CORS XHR requests to the HTTP page with a simple ”access denied” message in the console log. Safari follows its usual procedure — loads the content but removes the padlock icon, Firefox considers XHR to a HTTP active mixed security content and blocks it with its usual warning icon, Chrome considers AJAX &lt;em&gt;passive&lt;/em&gt; mixed security content, &lt;strong&gt;loads&lt;/strong&gt; the content and adds its usual passive mixed security content informational triangle on top of the padlock icon.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;#6 (flash). IE9, IE10 and IE11 consider flash active mixed security content, other browsers treat it as passive mixed security content; so IE9+ blocks the flash object from downloading, and there’s a specific bug easy to spot &lt;a href=&quot;http://sharovatov.ru/screenshots/flash-IE11.png&quot;&gt;on the screenshot&lt;/a&gt; — the loading spinner never stops rotating. Which, combined with the IE’s usual ”Only secure content is displayed” dialog makes http-based flash on HTTPS pages almost unusable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;#7 (flash-XHR to HTTP) IE9, IE10, IE11 and Safari &lt;strong&gt;do not&lt;/strong&gt; consider HTTP-XHR from flash as mixed security content. Both IE and Safari retain the padlock icon as if all requests were made through a secured connection. Even the console log is empty of warnings or errors. To me this quite clearly seems to be a security hole.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;#8, #9, #10 (audio, video, images). IE9, IE10, IE11, Firefox and Chrome consider images, HTML5 audio and video as passive mixed security content and treat it correspondingly — load the content and change the UI (IE removes the padlock icon, Firefox replaces it with informational triangle icon, Chrome puts informational icon on top of the padlock icon). Safari has interesting and non-consistent behaviour here: it treats images normally (displays them and removes the padlock icon), but for some odd reason it treats HTML5 audio and HTML5 video loaded via HTTP as normal secure content, it doesn’t even drop the padlock icon.Either Safari developers thought that images are more insecure than audio or video somehow or, more likely, Safari&amp;lt;-&amp;gt;Quicktime link lacks notion of the mixed security content concept (Quicktime plugin is used by Safari to handle all audio/video download).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The tests were done for Google Chrome of version 35, Apple Safari 7.0.5, and Mozilla Firefox 30.&lt;/p&gt;
+</content>
+        </entry>
     
         <entry>
             <title>few HTTPS issues with wildcard certificates</title>
@@ -31,9 +233,6 @@
 All other browsers follow the RFC and a user can manually pin an arbitrary certificate to the site he’s testing. Here’s a screenshot of a pinned self-signed certificate applied to a host not matching the certificate’s Common Name: 
  &lt;img src=&quot;http://sharovatov.ru/screenshots/ssl-chrome-selfsigned.png&quot; alt=&quot;chrome self-signed certificate&quot;&gt;
  So if you use self-signed certificate on your test environment, be sure to generate it correctly and list all domain variations in certificate’s SAN list.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Only Firefox still supports OCSP Stapling, all other browsers have it disabled:&lt;/p&gt;
-&lt;p&gt; &lt;img src=&quot;http://sharovatov.ru/screenshots/ssl-oscp-stapling.png&quot; alt=&quot;Firefox OSCP stapling&quot;&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;A certificate can have an IP address in the Common Name / SAN list, and this could technically be leveraged to save clients DNS lookup time if static files are served from a separate server with this IP address. However, this approach would also require full control over the set IP address for the whole life of the website (if IP address control is lost, a huge security issue is created). And in any case, in HTTPS scenario it’s almost always better to reuse an existing connection than to create a separate one.&lt;/p&gt;
 &lt;/li&gt;
@@ -431,6 +630,109 @@ var result4 = result3(3);
         </entry>
     
         <entry>
+            <title>IE9 - sucks much less than other browsers</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
+            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
+&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
+&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
+&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
+&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
+&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
+&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
+&lt;p&gt;Some links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows Phone 7 emulator, updates and app blacklist</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
+            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
+&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
+&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
+&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
+src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
+&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
+&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
+&lt;p&gt;Useful links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>link-to-QRCode IE8 accelerator</title>
             <link href="http://sharovatov.github.io/posts/2010-03-link-toqrcode.html"/>
             <updated>2010-03-01T00:00:00.000Z</updated>
@@ -594,109 +896,6 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
         </entry>
     
         <entry>
-            <title>IE9 - sucks much less than other browsers</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
-            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
-&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
-&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
-&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
-&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
-&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
-&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
-&lt;p&gt;Some links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows Phone 7 emulator, updates and app blacklist</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-wp7emul.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-wp7emul.html</id>
-            <content type="html">&lt;p&gt;Today twitter brought me a link to a very interesting &lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;blog of Dan Ardelean&lt;/a&gt; who’s exploring Windows Phone 7.&lt;/p&gt;
-&lt;p&gt;As you know, Microsoft offers a free version of &lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7&lt;/a&gt; which comes with an emulator. But in that emulator you can only run IEMobile (obviously, to test your websites in it) and apps you are developing in Visual Studio Express.&lt;/p&gt;
-&lt;p&gt;So I was really amazed by what Dan did – he unlocked the full version of emulator and made all the default apps available! Visit &lt;a href=&quot;http://sviluppomobile.blogspot.com/2010/03/wmp7-emulator-unlock.html&quot;&gt;his blogpost&lt;/a&gt; for more details &lt;strike&gt;and the link to the modified emulator image&lt;/strike&gt; (unfortunately, the link is now down as Dan says he doesn’t know what Microsoft will think about this).&lt;/p&gt;
-&lt;p&gt;Luckily, I managed to download the image, but I won’t upload it until Dan decides what to do with it. If you have his image, you need to run it with XDA (part of Visual Studio Express for Windows Phone):&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;quot;D:\Program Files\Microsoft XDE\1.0\XDE.exe&amp;quot; &amp;quot;C:\dist\WM70Full.bin&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And you’ll get the emulator running the unlocked image!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1.jpg&quot;&gt;&lt;img title=&quot;wphone1&quot; border=&quot;0&quot; alt=&quot;wphone1&quot;
-src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&amp;#038;h=254&quot; width=&quot;158&quot; height=&quot;254&quot;&gt;&lt;/a&gt; &lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2.jpg&quot;&gt;&lt;img title=&quot;wphone2&quot; border=&quot;0&quot; alt=&quot;wphone2&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone2_thumb.jpg?w=154&amp;#038;h=254&quot; width=&quot;154&quot; height=&quot;254&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As far as I understand, Dan was looking at the registry file from the emulator’s image binary and found that some applications were blacklisted, then he enabled all of them and repackaged the image. Sounds simple, but believe me, it’s not!&lt;/p&gt;
-&lt;p&gt;But what’s more interesting is that:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;apps are going to be distributed only through WP Marketplace&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there will be a Windows Update-like service on the Phone 7&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;there’s a blacklist registry hive for apps on the phone which Dan discovered&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So it will be dead easy for Microsoft to block certain applications with new updates, especially if updates are going to be mandatory and automatically installed.&lt;/p&gt;
-&lt;p&gt;At this moment the system has this configuration screen for updates:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3.jpg&quot;&gt;&lt;img title=&quot;wphone3&quot; border=&quot;0&quot; alt=&quot;wphone3&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone3_thumb.jpg?w=155&amp;#038;h=258&quot; width=&quot;155&quot; height=&quot;258&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Does this “notify me when new updates are found” mean that updates will not be installed automatically and we’ll be able to choose what to install? We’ll see.&lt;/p&gt;
-&lt;p&gt;Useful links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://sviluppomobile.blogspot.com&quot;&gt;Dan Ardelean’s blog&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/express/Phone/&quot;&gt;Visual Studio Express for Windows Phone 7 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=6f014e07-0053-4aca-84a7-cd82f9aa989f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend 4 beta&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?displaylang=en&amp;amp;FamilyID=86370108-4c14-42ee-8855-226e5dd9b85b&amp;amp;utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed:+MicrosoftDownloadCenter+(Microsoft+Download+Center)&quot;&gt;Microsoft Expression Blend SDK preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.microsoft.com/downloads/details.aspx?FamilyID=47f5c718-9dec-4557-9687-619c0fdd3d4f&amp;amp;displaylang=en&quot;&gt;Microsoft Expression Blend Add-in preview for Windows Phone&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>critical IIS vulnerability</title>
             <link href="http://sharovatov.github.io/posts/2009-12-iisvuln.html"/>
             <updated>2009-12-01T00:00:00.000Z</updated>
@@ -729,80 +928,27 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/wphone1_thumb.jpg?w=158&
         </entry>
     
         <entry>
-            <title>Beanstalkapp, FogBugz and now Case Tracker</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-beanstalk.html"/>
+            <title>Browsers' developer tools evolution</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
             <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-beanstalk.html</id>
-            <content type="html">&lt;p&gt;As a follow-up to &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/23/beanstalkapp-and-fogbugz-free-online-bugtracking-and-version-control/&quot;&gt;my post about free hosted integrated solution for bugtracking and version-control&lt;/a&gt;, I’d like to introduce a great tool I accidentally found and then installed – &lt;a href=&quot;http://code.google.com/p/visionmap/wiki/CaseTracker&quot;&gt;Case Tracker&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;It’s a free desktop application which allows you to easily view a list of current bugs, gives you a way to “start working” on the bug – so the time you actually spend on fixing the bug or implementing the feature is carefully calculated. So it’s basically a time-tracking application for a fogbugz – it takes the list of bugs&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image.png?w=717&amp;#038;h=165&quot; width=&quot;717&quot; height=&quot;165&quot;&gt;&lt;/p&gt;
-&lt;p&gt;To start working, you need to enter your fogbugz username, password and the URL where you have it installed:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image1.png?w=505&amp;#038;h=184&quot; width=&quot;505&quot; height=&quot;184&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Case Tracker supports both FogBugz On-demand and hosted versions – it simulates all required POST requests as if you’re working with Fogbugz through your browser. As soon as you entered correct username and password, it will show you the list of active bugs:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image2.png?w=639&amp;#038;h=339&quot; width=&quot;639&quot; height=&quot;339&quot;&gt;&lt;/p&gt;
-&lt;p&gt;However, by default it shows bugs assigned to anybody, which may be not always desirable. To address this issue, Case Tracker provides a search filter (funnel on the right-hand side of the pause button). For example, I need only those bugs that are assigned to me, so I add &lt;code&gt;assignedto:&amp;quot;Vitaly Sharovatov&amp;quot;&lt;/code&gt; as a search filter:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image3.png?w=687&amp;#038;h=131&quot; width=&quot;687&quot; height=&quot;131&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Then I press “Go” and get my list populated with only those bugs that I need! Awesome!&lt;/p&gt;
-&lt;p&gt;For more detailed instructions on the allowed syntax read &lt;a href=&quot;http://www.fogcreek.com/fogbugz/docs/60/topics/basics/Searchingforcases.html&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;What’s really great in Case Tracker – it can automatically stop measuring time when you’re away from keyboard for a certain period of time:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image4.png?w=452&amp;#038;h=278&quot; width=&quot;452&quot; height=&quot;278&quot;&gt;&lt;/p&gt;
-&lt;p&gt;However, Case Tracker doesn’t allow creating new cases – it opens your fogbugz URL in your default browser so you can enter new case there. But Case Tracker is not a replacement for Fogbugz UI – it’s goal is to simplify time tracking.&lt;/p&gt;
-&lt;p&gt;So the general flow is:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;you choose a bug from a drop-down list&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if the estimate hasn’t been set for this bug, Case Tracker prompts you to enter the estimate (using the same syntax rules as in Fogbugz in the browser)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;the work is started and time is measured – if you’re afk or just press pause button, it stops measuring the time&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;when you’re finished – you commit the bug and mark it resolved either by specifying status:resolved in svn comments or using Case Tracker – I prefer to specify it in a submit comment – just got used to it.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So if you use fogbugz – this tool is definitely worth trying!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>HTTP persistent connections, pipelining and chunked encoding</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-http-pipeline.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-http-pipeline.html</id>
-            <content type="html">&lt;p&gt;When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.&lt;/p&gt;
-&lt;p&gt;And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)&lt;/p&gt;
-&lt;p&gt;So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
-encoding.&lt;/p&gt;
-&lt;p&gt;HTTP/1.0 said that for every request to a server you have to open a TCP/IP connection, write a request to the socket and get the data back.&lt;/p&gt;
-&lt;p&gt;But pages on the internet became more complex and authors started including more and more resources on their pages (images, scripts, stylesheets, objects — everything that browsers had to download from the server).&lt;/p&gt;
-&lt;p&gt;And for every resource request clients were opening separate connections, and it was taking time and CPU/memory resources to open a new connection, so from users prospective, resulting latency was becoming worse. Something could be done to improve the situation.&lt;/p&gt;
-&lt;p&gt;So HTTP IETF decided to implement a nice technique called “persistent connections”.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying &lt;code&gt;Connection: Close&lt;/code&gt; header.&lt;/p&gt;
-&lt;p&gt;Usually HTTP/1.1 client sends &lt;code&gt;Connection: Close&lt;/code&gt; header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends &lt;code&gt;Connection: Close&lt;/code&gt; with the 10&lt;sup&gt;th&lt;/sup&gt; image request and the server sends the last image and closes the connection after it’s done).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Persistent connections are the default for HTTP/1.1 clients and servers. &lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;And even more interestingly, HTTP/1.1 introduced &lt;strong&gt;pipelining&lt;/strong&gt; support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. &lt;/p&gt;
-&lt;p&gt;In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&amp;#39;t get a response back will be resubmitted through the new connection.&lt;/p&gt;
-&lt;p&gt;But as one connection is used to send multiple requests and receive responses, how does the client know when it has to finish reading the first request?&lt;/p&gt;
-&lt;p&gt;Obviously, &lt;code&gt;Content-Length&lt;/code&gt; header must be set for each response.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;But what happens when the data is dynamic or the whole response’s content length can’t be determined by the time transmission starts?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In HTTP/1.0 everything’s easy — &lt;code&gt;Content-Length&lt;/code&gt; header can just be left out, so the transmission starts, client starts reading the data it’s getting from the connection, then when the server finishes sending the data, it just closes the TCP/IP connection, so client can’t read from the socket any more and considers the transmission completed.&lt;/p&gt;
-&lt;p&gt;However, as I’ve said, in HTTP/1.1 each transaction has to have correct &lt;code&gt;Content-Length&lt;/code&gt; header because client needs to know when each transmission is completed, so that the client can either start waiting for the next response (if requests were pipelined), or stop reading current response from the socket and send new request through this TCP/IP connection (if requests are sent in a normal sequential mode), or close the connection it if it was the last response he was to receive.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So as the connection is reused for multiple resources’ content transmission, the client needs to know exactly when each resource download is completed, i.e. it needs the exact number of bytes it has to read from the connection socket.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;And it&amp;#39;s obvious that if &lt;code&gt;Content-Length&lt;/code&gt; can not be determined before the transmission starts, the whole persistent connections concept is useless.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;That is why HTTP/1.1 introduced chunked encoding concept.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The concept is quite simple — if exact &lt;code&gt;Content-Length&lt;/code&gt; for the resource is unknown at the time when transmission starts, server may send resource content piece by piece (so-called chunks) and provide &lt;code&gt;Content-Length&lt;/code&gt; for each chunk, plus sends an empty chunk with zero &lt;code&gt;Content-Length&lt;/code&gt; at the end of the whole response to notify client that this response transmission is complete.&lt;/p&gt;
-&lt;p&gt;To let HTTP/1.1 conforming clients know that chunked response is coming, server sends special header — &lt;code&gt;Transfer-Encoding: chunked&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Chunked encoding approach allows client to safely read the data — it knows the exact number of bytes that are to be read for each chunk and knows that if an empty chunk arrived, this resource transmission is completed.&lt;/p&gt;
-&lt;p&gt;It’s a little bit more complex than HTTP/1.0 scenario where server just closes the connection as soon as it’s finished, but truly worth it — persistent connections save server resources and reduce whole network latency, therefore improving overall user experience.&lt;/p&gt;
-&lt;p&gt;Links and resources:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html&quot;&gt;HTTP/1.1 Persistent connections&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_pipelining&quot;&gt;Wikipedia about HTTP Pipelining&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html&quot;&gt;HTTP/1.1 Chunked encoding&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
+            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
+&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
+&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
+&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
+&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
+&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
+&lt;p&gt;Come on, Opera team!&lt;/p&gt;
+&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
 </content>
         </entry>
     
@@ -853,143 +999,80 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
         </entry>
     
         <entry>
-            <title>Browsers' developer tools evolution</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
+            <title>HTTP persistent connections, pipelining and chunked encoding</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-http-pipeline.html"/>
             <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
-            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
-&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
-&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
-&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
-&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
-&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
-&lt;p&gt;Come on, Opera team!&lt;/p&gt;
-&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Opera to reinvent the web?</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-opera-reinvent.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-opera-reinvent.html</id>
-            <content type="html">&lt;p&gt;Opera promises to reinvent the web tomorrow. I mean, really, reinvent the web? Invent TCP/IP, HTTP, DNS, HTML/CSS/JS, CGI, all other stuff that web consists of? I doubt.&lt;/p&gt;
-&lt;p&gt;Different sources &lt;a href=&quot;http://www.geeksaresexy.net/2009/06/15/opera-to-reinvent-the-web-web-waits-for-fat-lady-to-sing/&quot;&gt;speculate&lt;/a&gt; that it’s going to be something cloud-related. Maybe it will be a p2p-based traffic sharing with some clever algorithm to determine where to download the data from? But then I wouldn’t like anybody to be able to sniff my data. Maybe they will install a CDN to make useless Opera Turbo giving at least some performance benefit to users. Don’t know, we’ll see very soon.&lt;/p&gt;
-&lt;p&gt;But because of the last &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/11/windows-7-will-be-shipped-without-ie8-in-europe/&quot;&gt;unfair actions&lt;/a&gt; that were taken by Opera against IE, I (from moral prospective) really hope that all the expenses they took for Opera 10 PR won’t significantly increase their market share. Competition should be fair, Firefox was able to get the same market share as IE in Germany without making users life harder. I really hope that lobbying expenses were higher than the income.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Skype blocking 80 and 443 ports</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-skype-blocking.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-skype-blocking.html</id>
-            <content type="html">&lt;p&gt;When trying to start an IIS7 website, you can get the following message: “The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0&amp;#215;80070020)”:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image2.png?w=491&amp;#038;h=173&quot; width=&quot;491&quot; height=&quot;173&quot;&gt;&lt;/p&gt;
-&lt;p&gt;It’s saying it can’t access the file, but actually IIS can’t bind the ports you’ve configured in Bindings configuration. But which port?&lt;/p&gt;
-&lt;p&gt;Usually I use the following procedure to find out which application occupies the port:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;run &lt;code&gt;netstat –ano –p tcp&lt;/code&gt; to get the list of opened ports, find the port that’s been taken and see which PID the port is bound to&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-11-http-pipeline.html</id>
+            <content type="html">&lt;p&gt;When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.&lt;/p&gt;
+&lt;p&gt;And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)&lt;/p&gt;
+&lt;p&gt;So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
+encoding.&lt;/p&gt;
+&lt;p&gt;HTTP/1.0 said that for every request to a server you have to open a TCP/IP connection, write a request to the socket and get the data back.&lt;/p&gt;
+&lt;p&gt;But pages on the internet became more complex and authors started including more and more resources on their pages (images, scripts, stylesheets, objects — everything that browsers had to download from the server).&lt;/p&gt;
+&lt;p&gt;And for every resource request clients were opening separate connections, and it was taking time and CPU/memory resources to open a new connection, so from users prospective, resulting latency was becoming worse. Something could be done to improve the situation.&lt;/p&gt;
+&lt;p&gt;So HTTP IETF decided to implement a nice technique called “persistent connections”.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying &lt;code&gt;Connection: Close&lt;/code&gt; header.&lt;/p&gt;
+&lt;p&gt;Usually HTTP/1.1 client sends &lt;code&gt;Connection: Close&lt;/code&gt; header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends &lt;code&gt;Connection: Close&lt;/code&gt; with the 10&lt;sup&gt;th&lt;/sup&gt; image request and the server sends the last image and closes the connection after it’s done).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Persistent connections are the default for HTTP/1.1 clients and servers. &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And even more interestingly, HTTP/1.1 introduced &lt;strong&gt;pipelining&lt;/strong&gt; support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. &lt;/p&gt;
+&lt;p&gt;In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&amp;#39;t get a response back will be resubmitted through the new connection.&lt;/p&gt;
+&lt;p&gt;But as one connection is used to send multiple requests and receive responses, how does the client know when it has to finish reading the first request?&lt;/p&gt;
+&lt;p&gt;Obviously, &lt;code&gt;Content-Length&lt;/code&gt; header must be set for each response.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But what happens when the data is dynamic or the whole response’s content length can’t be determined by the time transmission starts?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In HTTP/1.0 everything’s easy — &lt;code&gt;Content-Length&lt;/code&gt; header can just be left out, so the transmission starts, client starts reading the data it’s getting from the connection, then when the server finishes sending the data, it just closes the TCP/IP connection, so client can’t read from the socket any more and considers the transmission completed.&lt;/p&gt;
+&lt;p&gt;However, as I’ve said, in HTTP/1.1 each transaction has to have correct &lt;code&gt;Content-Length&lt;/code&gt; header because client needs to know when each transmission is completed, so that the client can either start waiting for the next response (if requests were pipelined), or stop reading current response from the socket and send new request through this TCP/IP connection (if requests are sent in a normal sequential mode), or close the connection it if it was the last response he was to receive.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So as the connection is reused for multiple resources’ content transmission, the client needs to know exactly when each resource download is completed, i.e. it needs the exact number of bytes it has to read from the connection socket.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And it&amp;#39;s obvious that if &lt;code&gt;Content-Length&lt;/code&gt; can not be determined before the transmission starts, the whole persistent connections concept is useless.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;That is why HTTP/1.1 introduced chunked encoding concept.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The concept is quite simple — if exact &lt;code&gt;Content-Length&lt;/code&gt; for the resource is unknown at the time when transmission starts, server may send resource content piece by piece (so-called chunks) and provide &lt;code&gt;Content-Length&lt;/code&gt; for each chunk, plus sends an empty chunk with zero &lt;code&gt;Content-Length&lt;/code&gt; at the end of the whole response to notify client that this response transmission is complete.&lt;/p&gt;
+&lt;p&gt;To let HTTP/1.1 conforming clients know that chunked response is coming, server sends special header — &lt;code&gt;Transfer-Encoding: chunked&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Chunked encoding approach allows client to safely read the data — it knows the exact number of bytes that are to be read for each chunk and knows that if an empty chunk arrived, this resource transmission is completed.&lt;/p&gt;
+&lt;p&gt;It’s a little bit more complex than HTTP/1.0 scenario where server just closes the connection as soon as it’s finished, but truly worth it — persistent connections save server resources and reduce whole network latency, therefore improving overall user experience.&lt;/p&gt;
+&lt;p&gt;Links and resources:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html&quot;&gt;HTTP/1.1 Persistent connections&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;run &lt;code&gt;tasklist /FI &amp;quot;PID eq XXX&amp;quot;&lt;/code&gt; where XXX is the found PID&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_pipelining&quot;&gt;Wikipedia about HTTP Pipelining&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html&quot;&gt;HTTP/1.1 Chunked encoding&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Beanstalkapp, FogBugz and now Case Tracker</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-beanstalk.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-beanstalk.html</id>
+            <content type="html">&lt;p&gt;As a follow-up to &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/23/beanstalkapp-and-fogbugz-free-online-bugtracking-and-version-control/&quot;&gt;my post about free hosted integrated solution for bugtracking and version-control&lt;/a&gt;, I’d like to introduce a great tool I accidentally found and then installed – &lt;a href=&quot;http://code.google.com/p/visionmap/wiki/CaseTracker&quot;&gt;Case Tracker&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It’s a free desktop application which allows you to easily view a list of current bugs, gives you a way to “start working” on the bug – so the time you actually spend on fixing the bug or implementing the feature is carefully calculated. So it’s basically a time-tracking application for a fogbugz – it takes the list of bugs&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image.png?w=717&amp;#038;h=165&quot; width=&quot;717&quot; height=&quot;165&quot;&gt;&lt;/p&gt;
+&lt;p&gt;To start working, you need to enter your fogbugz username, password and the URL where you have it installed:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image1.png?w=505&amp;#038;h=184&quot; width=&quot;505&quot; height=&quot;184&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Case Tracker supports both FogBugz On-demand and hosted versions – it simulates all required POST requests as if you’re working with Fogbugz through your browser. As soon as you entered correct username and password, it will show you the list of active bugs:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image2.png?w=639&amp;#038;h=339&quot; width=&quot;639&quot; height=&quot;339&quot;&gt;&lt;/p&gt;
+&lt;p&gt;However, by default it shows bugs assigned to anybody, which may be not always desirable. To address this issue, Case Tracker provides a search filter (funnel on the right-hand side of the pause button). For example, I need only those bugs that are assigned to me, so I add &lt;code&gt;assignedto:&amp;quot;Vitaly Sharovatov&amp;quot;&lt;/code&gt; as a search filter:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image3.png?w=687&amp;#038;h=131&quot; width=&quot;687&quot; height=&quot;131&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Then I press “Go” and get my list populated with only those bugs that I need! Awesome!&lt;/p&gt;
+&lt;p&gt;For more detailed instructions on the allowed syntax read &lt;a href=&quot;http://www.fogcreek.com/fogbugz/docs/60/topics/basics/Searchingforcases.html&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;What’s really great in Case Tracker – it can automatically stop measuring time when you’re away from keyboard for a certain period of time:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/11/image4.png?w=452&amp;#038;h=278&quot; width=&quot;452&quot; height=&quot;278&quot;&gt;&lt;/p&gt;
+&lt;p&gt;However, Case Tracker doesn’t allow creating new cases – it opens your fogbugz URL in your default browser so you can enter new case there. But Case Tracker is not a replacement for Fogbugz UI – it’s goal is to simplify time tracking.&lt;/p&gt;
+&lt;p&gt;So the general flow is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;you choose a bug from a drop-down list&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if the estimate hasn’t been set for this bug, Case Tracker prompts you to enter the estimate (using the same syntax rules as in Fogbugz in the browser)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;the work is started and time is measured – if you’re afk or just press pause button, it stops measuring the time&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;when you’re finished – you commit the bug and mark it resolved either by specifying status:resolved in svn comments or using Case Tracker – I prefer to specify it in a submit comment – just got used to it.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;So in my case the 80 and 443 ports were taken by Skype. Whenever you start Skype, it tries to bind 80 and 443 ports, and so if you start your web server later, it won’t be able to work as ports are occupied. This Skype behaviour can be turned off by deselecting “Use port 80 and 443 as alternatives for incoming connections” here:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&amp;#038;h=579&quot; width=&quot;661&quot; height=&quot;579&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Hope this saves somebody some time :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Useful JS tips - getBoundingClientRect()</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
-            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
-&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
-&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
-&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Firefox Build Your Own Browser – a poor copy of IEAK?</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html</id>
-            <content type="html">&lt;p&gt;Mozilla team recently announced that version 3.5 of Firefox browser will come with a bunch of features that will provide companies and individuals to build their own versions of Firefox.&lt;/p&gt;
-&lt;p&gt;According to &lt;a href=&quot;http://www.pcworld.com/businesscenter/article/166328/mozilla_to_let_enterprises_build_custom_firefox_browsers.html&quot;&gt;PCWORLD&lt;/a&gt;, Mike Beltzner, director of Firefox at Mozilla Corp. said:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The Build Your Own Browser program is a good fit for enterprises that want to create a customized browser that can be easily installed across multiple corporate desktops&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I couldn’t find exact details what’s going to be available for customizers, but different sources say that it’s a &lt;a href=&quot;http://labs.mozilla.com/projects/firefox-personas/&quot;&gt;Personas&lt;/a&gt; project combined with &lt;a href=&quot;http://www.mozilla.org/projects/cck/firefox/&quot;&gt;CCK&lt;/a&gt;. So you can setup your company logo, bookmarks, home page, search engines and do other cosmetic changes to the browser. It’s obvious that Mozilla wants to gain some market share in corporations where IE is 100%. But if “Build Your Own Browser” campaignhas CCK as a core, than it’s just a usual marketing hype and nothing else. It can&amp;#39;t even be compared to IEAK&lt;/p&gt;
-&lt;p&gt;There’re a few reasons, Mike, why IE is so wide-spread in corporations. First reason is that it supports &lt;strong&gt;proper&lt;/strong&gt; customisation through &lt;a href=&quot;http://technet.microsoft.com/en-us/ie/bb219517.aspx&quot;&gt;IEAK&lt;/a&gt;, second - if IEAK is not enough, IE can be fully configured through Group Policy, third – it supports ActiveX which is a must-have for building real intranet applications. Passport scanners, barcode readers, label printers, CCTV – all this hardware automation is done through ActiveX.&lt;/p&gt;
-&lt;p&gt;So until Firefox becomes a real platform for building intranet web-applications and gains a proper customisation and integration with AD, it’s not going to be on the corporate market.&lt;/p&gt;
-&lt;p&gt;For reference, read &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2006/02/21/536353.aspx&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows 7 will be shipped without IE8 in Europe?</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-win7woie8.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-win7woie8.html</id>
-            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://news.cnet.com/8301-13860_3-10262630-56.html&quot;&gt;CNET states&lt;/a&gt;, Windows 7 will be shipped to Europe without IE8 because European antitrust regulators told them so. This clearly shows how rotten EU antitrust committee is and how easy it is for a well settled lobby to force the whole EU to accept absolutely stupid and nonsense act.&lt;/p&gt;
-&lt;p&gt;Who will gain any profit from this?&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Users&lt;/strong&gt;? No, they will have to find a way to get &lt;em&gt;any&lt;/em&gt; browser on their new computer. And what if it’s their first computer? How are they supposed to download anything from the internet? Yes it’s a five minutes job for an IT specialist, but go teach your grandmother how to use ftp.exe to download anything ;)&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Hardware vendors&lt;/strong&gt;? No, they were always able to install any browser on the computers they sell and make it the default one.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Other browser vendors&lt;/strong&gt;? To a degree. Anyway Microsoft will provide hardware resellers with an IE8 pack – so they can install IE8 on all the computers they build.&lt;/p&gt;
-&lt;p&gt;Is there any sense at all in this decision? I can’t see it.&lt;/p&gt;
-&lt;p&gt;I just don’t get it, really. If I’m buying a car, I won’t argue that the tyres on this new car are from Pirelli (or any other vendor). I will just change them if I don’t really like Pirelli, or choose another car which doesn’t have Pirelly. I’m not prohibited to change them. I’m just given the default one.&lt;/p&gt;
-&lt;p&gt;And now compare this situation with Apple who clearly prohibits installing Opera on its iPhone. Because it would compete (and, obviously, win the competition) with their Safari browser. Why doesn’t EU antitrust committee look at this? Why don’t Opera take any action here?&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Intel mini ITX D945GCLF2D motherboard</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-intelmb.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-intelmb.html</id>
-            <content type="html">&lt;p&gt;I always wanted to have a second computer where I could install Windows Web Server 2008 (or Win7) with IIS, SQL Express 2008 and run, develop and test my hobby projects locally. Well, you know what it’s like to have a second computer – you can do whatever you want on it and never be afraid that you do anything wrong with your work PC :)&lt;/p&gt;
-&lt;p&gt;My work PC is quite noisy and I just can’t find time to determine which one of 4 coolers is causing the trouble and replace it. So I wanted to  build a computer that would be really quiet (or silent at all) so it wouldn’t add any noise and that I could leave it working at night if required. Then I thought that I didn’t need this computer to be really powerful – I wasn’t going to encode video on it :) And I could save a fortune on buying something that wasn’t a cutting-edge most powerful Core 2 Duo Quad Extreme Mega Turbo Something with 64 gigs of RAM.&lt;/p&gt;
-&lt;p&gt;I’ve been reading a lot about &lt;a href=&quot;http://en.wikipedia.org/wiki/NVIDIA_ION&quot;&gt;nvidia ION platform&lt;/a&gt; recently and thought it would be the best solution for the task – extremely small and nearly silent platform with great specs: dual-core Atom 330 CPU, up to 4 gigs of RAM, good Nvidia graphics card. But then first motherboard with NVIDIA ION and Atom 330 was announced - &lt;a href=&quot;http://www.zotacusa.com/zotac-ionitx-a-u-atom-n330-1-6ghz-dual-core-mini-itx-intel-motherboard.html&quot;&gt;ZOTAC IONITX-A-U&lt;/a&gt;, which is great but according to different sources would cost $300, which is way too much for such a device.&lt;/p&gt;
-&lt;p&gt;So I had a look at Intel’s motherboard – &lt;a href=&quot;http://www.intel.com/products/desktop/motherboards/D945GCLF2-D945GCLF2D/D945GCLF2-D945GCLF2D-overview.htm&quot;&gt;D945GCLF2D&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Yes it has Intel GMA950 video chipset, but as this machine was considered to be used without a monitor, I didn’t care which video card it would have. It also doesn’t have a WI-FI, but at the moment I’ll just plug it in the network switch and if required will add a wi-fi card later. And the price was great – I was able to get the motherboard and a 2Gb memory card at $125 total. I already had a HDD but had to buy a power supply – and here it is, a computer for 160 dollars. 2 Gb RAM, integrated dual-core Atom 330 CPU, 80 Gb HDD
-and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/windows-vista/features/readyboost.aspx&quot;&gt;Ready Boost&lt;/a&gt; – a great local web and database server, NAS and download box.&lt;/p&gt;
-&lt;p&gt;The only noise I can hear from it is a small noise of power supply cooler – so I plan to measure what power consumption this system has and get a fanless power supply fitting this motherboard needs. And also I’m planning to build my own case for it – something that could be screwed to the wall near the network switch.&lt;/p&gt;
-&lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
-&lt;p&gt;Awesome, just awesome.&lt;/p&gt;
-&lt;p&gt;Thanks, Intel!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>HTML5 video tag and Internet Explorer</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-html5video.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-html5video.html</id>
-            <content type="html">&lt;p&gt;It’s interesting to see how popular &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.&lt;/p&gt;
-&lt;p&gt;The whole situation reminds me of AJAX where original concept was invented by Microsoft (actual ActiveX was shipped with IE5 in 1999), then it was standardised by W3C (in a different way), then implemented by other browsers, and then people started accusing IE for not supporting this new W3C standard.&lt;/p&gt;
-&lt;p&gt;The same thing is now happening with inline video/audio playback concept, which has been introduced in IE2 in 1995, almost 15 years ago. Yes, 15 years ago, when W3C has been just founded and was still asking &lt;a href=&quot;http://www.csail.mit.edu/&quot;&gt;MIT/CSAIL&lt;/a&gt; to join. And now this functionality is being spec’ed in HTML5 as &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags. Opera, Firefox, Safari and Google Chrome start supporting &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; and are making a loud marketing message of it.&lt;/p&gt;
-&lt;p&gt;The original concept that was introduced in IE2 (and supported in following versions) was adding a &lt;code&gt;DYNSRC&lt;/code&gt; attribute to &lt;code&gt;IMG&lt;/code&gt; element:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;cover.gif&amp;quot; dynsrc=&amp;quot;clock.avi&amp;quot; controls&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When IE saw dynsrc attribute, it tried loading the movie and playing it. “Controls” attribute made IE show simple playback controls.&lt;/p&gt;
-&lt;p&gt;This is how it looked like in IE3:&lt;/p&gt;
-&lt;p&gt;&lt;img title=&quot;ie3&quot; border=&quot;0&quot; alt=&quot;ie3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/ie3.gif?w=387&amp;#038;h=602&quot; width=&quot;387&quot; height=&quot;602&quot;&gt;&lt;/p&gt;
-&lt;p&gt;However, in future versions the support for DYNSRC was limited to make developers to switch to other ways (&lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;embed&amp;gt;&lt;/code&gt;/SMIL video). In IE5 no controls were shown, in IE7 &lt;code&gt;DYNSRC&lt;/code&gt; disappeared.&lt;/p&gt;
-&lt;p&gt;World changes, and now the functionality that nobody’s been using for a decade seems really new and interesting. It’s great that WHATWG is spending time on defining clear standard on how this should work and it’s really cool that Chrome, Firefox, Opera and Safari already support this draft. Of course, Silverlight supports greater level of RIA, but giving that IE Team is now really focused on following public standards, &lt;/p&gt;
-&lt;p&gt;I hope that in IE9 we’ll have native support for &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; as we had native support for XMLHttpRequest in IE7.&lt;/p&gt;
-&lt;p&gt;But my point is – credit for inline video playback functionality invention should be definitely given to IE2.&lt;/p&gt;
+&lt;p&gt;So if you use fogbugz – this tool is definitely worth trying!&lt;/p&gt;
 </content>
         </entry>
     
@@ -1033,6 +1116,165 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
 &lt;p&gt;Do I need to explain in more detail?&lt;/p&gt;
 &lt;p&gt;P.S. Yes I think people should upgrade from IE6. But not because it has an outdated support for standards, but just because newer browsers provide much better user experience.&lt;/p&gt;
 &lt;p&gt;P.P.S. You know, Andy, I really appreciate what you’re doing. I urge you not to stop. I’ll be priced higher for the same skills that I have now just because you (and those whom you manage to convince) deliberately choose not to deliver what clients need :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Windows 7 will be shipped without IE8 in Europe?</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-win7woie8.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-win7woie8.html</id>
+            <content type="html">&lt;p&gt;As &lt;a href=&quot;http://news.cnet.com/8301-13860_3-10262630-56.html&quot;&gt;CNET states&lt;/a&gt;, Windows 7 will be shipped to Europe without IE8 because European antitrust regulators told them so. This clearly shows how rotten EU antitrust committee is and how easy it is for a well settled lobby to force the whole EU to accept absolutely stupid and nonsense act.&lt;/p&gt;
+&lt;p&gt;Who will gain any profit from this?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Users&lt;/strong&gt;? No, they will have to find a way to get &lt;em&gt;any&lt;/em&gt; browser on their new computer. And what if it’s their first computer? How are they supposed to download anything from the internet? Yes it’s a five minutes job for an IT specialist, but go teach your grandmother how to use ftp.exe to download anything ;)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hardware vendors&lt;/strong&gt;? No, they were always able to install any browser on the computers they sell and make it the default one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Other browser vendors&lt;/strong&gt;? To a degree. Anyway Microsoft will provide hardware resellers with an IE8 pack – so they can install IE8 on all the computers they build.&lt;/p&gt;
+&lt;p&gt;Is there any sense at all in this decision? I can’t see it.&lt;/p&gt;
+&lt;p&gt;I just don’t get it, really. If I’m buying a car, I won’t argue that the tyres on this new car are from Pirelli (or any other vendor). I will just change them if I don’t really like Pirelli, or choose another car which doesn’t have Pirelly. I’m not prohibited to change them. I’m just given the default one.&lt;/p&gt;
+&lt;p&gt;And now compare this situation with Apple who clearly prohibits installing Opera on its iPhone. Because it would compete (and, obviously, win the competition) with their Safari browser. Why doesn’t EU antitrust committee look at this? Why don’t Opera take any action here?&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Intel mini ITX D945GCLF2D motherboard</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-intelmb.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-intelmb.html</id>
+            <content type="html">&lt;p&gt;I always wanted to have a second computer where I could install Windows Web Server 2008 (or Win7) with IIS, SQL Express 2008 and run, develop and test my hobby projects locally. Well, you know what it’s like to have a second computer – you can do whatever you want on it and never be afraid that you do anything wrong with your work PC :)&lt;/p&gt;
+&lt;p&gt;My work PC is quite noisy and I just can’t find time to determine which one of 4 coolers is causing the trouble and replace it. So I wanted to  build a computer that would be really quiet (or silent at all) so it wouldn’t add any noise and that I could leave it working at night if required. Then I thought that I didn’t need this computer to be really powerful – I wasn’t going to encode video on it :) And I could save a fortune on buying something that wasn’t a cutting-edge most powerful Core 2 Duo Quad Extreme Mega Turbo Something with 64 gigs of RAM.&lt;/p&gt;
+&lt;p&gt;I’ve been reading a lot about &lt;a href=&quot;http://en.wikipedia.org/wiki/NVIDIA_ION&quot;&gt;nvidia ION platform&lt;/a&gt; recently and thought it would be the best solution for the task – extremely small and nearly silent platform with great specs: dual-core Atom 330 CPU, up to 4 gigs of RAM, good Nvidia graphics card. But then first motherboard with NVIDIA ION and Atom 330 was announced - &lt;a href=&quot;http://www.zotacusa.com/zotac-ionitx-a-u-atom-n330-1-6ghz-dual-core-mini-itx-intel-motherboard.html&quot;&gt;ZOTAC IONITX-A-U&lt;/a&gt;, which is great but according to different sources would cost $300, which is way too much for such a device.&lt;/p&gt;
+&lt;p&gt;So I had a look at Intel’s motherboard – &lt;a href=&quot;http://www.intel.com/products/desktop/motherboards/D945GCLF2-D945GCLF2D/D945GCLF2-D945GCLF2D-overview.htm&quot;&gt;D945GCLF2D&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Yes it has Intel GMA950 video chipset, but as this machine was considered to be used without a monitor, I didn’t care which video card it would have. It also doesn’t have a WI-FI, but at the moment I’ll just plug it in the network switch and if required will add a wi-fi card later. And the price was great – I was able to get the motherboard and a 2Gb memory card at $125 total. I already had a HDD but had to buy a power supply – and here it is, a computer for 160 dollars. 2 Gb RAM, integrated dual-core Atom 330 CPU, 80 Gb HDD
+and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/windows-vista/features/readyboost.aspx&quot;&gt;Ready Boost&lt;/a&gt; – a great local web and database server, NAS and download box.&lt;/p&gt;
+&lt;p&gt;The only noise I can hear from it is a small noise of power supply cooler – so I plan to measure what power consumption this system has and get a fanless power supply fitting this motherboard needs. And also I’m planning to build my own case for it – something that could be screwed to the wall near the network switch.&lt;/p&gt;
+&lt;p&gt;And I’m also sure that such a computer would be ideal for most office needs – it’s capable of doing any office work, it’s really cheap ($300 with any of the great mini ITX cases on the market) and it’s small so it won’t take precious office space.&lt;/p&gt;
+&lt;p&gt;Awesome, just awesome.&lt;/p&gt;
+&lt;p&gt;Thanks, Intel!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Skype blocking 80 and 443 ports</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-skype-blocking.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-skype-blocking.html</id>
+            <content type="html">&lt;p&gt;When trying to start an IIS7 website, you can get the following message: “The process cannot access the file because it is being used by another process. (Exception from HRESULT: 0&amp;#215;80070020)”:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image2.png?w=491&amp;#038;h=173&quot; width=&quot;491&quot; height=&quot;173&quot;&gt;&lt;/p&gt;
+&lt;p&gt;It’s saying it can’t access the file, but actually IIS can’t bind the ports you’ve configured in Bindings configuration. But which port?&lt;/p&gt;
+&lt;p&gt;Usually I use the following procedure to find out which application occupies the port:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;run &lt;code&gt;netstat –ano –p tcp&lt;/code&gt; to get the list of opened ports, find the port that’s been taken and see which PID the port is bound to&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;run &lt;code&gt;tasklist /FI &amp;quot;PID eq XXX&amp;quot;&lt;/code&gt; where XXX is the found PID&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So in my case the 80 and 443 ports were taken by Skype. Whenever you start Skype, it tries to bind 80 and 443 ports, and so if you start your web server later, it won’t be able to work as ports are occupied. This Skype behaviour can be turned off by deselecting “Use port 80 and 443 as alternatives for incoming connections” here:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&amp;#038;h=579&quot; width=&quot;661&quot; height=&quot;579&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Hope this saves somebody some time :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Opera revolution fail</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
+            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
+&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
+&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
+&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
+&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
+&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
+&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
+&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
+&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
+&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
+&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
+&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
+&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Firefox Build Your Own Browser – a poor copy of IEAK?</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-fx-poor-ieak.html</id>
+            <content type="html">&lt;p&gt;Mozilla team recently announced that version 3.5 of Firefox browser will come with a bunch of features that will provide companies and individuals to build their own versions of Firefox.&lt;/p&gt;
+&lt;p&gt;According to &lt;a href=&quot;http://www.pcworld.com/businesscenter/article/166328/mozilla_to_let_enterprises_build_custom_firefox_browsers.html&quot;&gt;PCWORLD&lt;/a&gt;, Mike Beltzner, director of Firefox at Mozilla Corp. said:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Build Your Own Browser program is a good fit for enterprises that want to create a customized browser that can be easily installed across multiple corporate desktops&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I couldn’t find exact details what’s going to be available for customizers, but different sources say that it’s a &lt;a href=&quot;http://labs.mozilla.com/projects/firefox-personas/&quot;&gt;Personas&lt;/a&gt; project combined with &lt;a href=&quot;http://www.mozilla.org/projects/cck/firefox/&quot;&gt;CCK&lt;/a&gt;. So you can setup your company logo, bookmarks, home page, search engines and do other cosmetic changes to the browser. It’s obvious that Mozilla wants to gain some market share in corporations where IE is 100%. But if “Build Your Own Browser” campaignhas CCK as a core, than it’s just a usual marketing hype and nothing else. It can&amp;#39;t even be compared to IEAK&lt;/p&gt;
+&lt;p&gt;There’re a few reasons, Mike, why IE is so wide-spread in corporations. First reason is that it supports &lt;strong&gt;proper&lt;/strong&gt; customisation through &lt;a href=&quot;http://technet.microsoft.com/en-us/ie/bb219517.aspx&quot;&gt;IEAK&lt;/a&gt;, second - if IEAK is not enough, IE can be fully configured through Group Policy, third – it supports ActiveX which is a must-have for building real intranet applications. Passport scanners, barcode readers, label printers, CCTV – all this hardware automation is done through ActiveX.&lt;/p&gt;
+&lt;p&gt;So until Firefox becomes a real platform for building intranet web-applications and gains a proper customisation and integration with AD, it’s not going to be on the corporate market.&lt;/p&gt;
+&lt;p&gt;For reference, read &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2006/02/21/536353.aspx&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Opera to reinvent the web?</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-opera-reinvent.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-opera-reinvent.html</id>
+            <content type="html">&lt;p&gt;Opera promises to reinvent the web tomorrow. I mean, really, reinvent the web? Invent TCP/IP, HTTP, DNS, HTML/CSS/JS, CGI, all other stuff that web consists of? I doubt.&lt;/p&gt;
+&lt;p&gt;Different sources &lt;a href=&quot;http://www.geeksaresexy.net/2009/06/15/opera-to-reinvent-the-web-web-waits-for-fat-lady-to-sing/&quot;&gt;speculate&lt;/a&gt; that it’s going to be something cloud-related. Maybe it will be a p2p-based traffic sharing with some clever algorithm to determine where to download the data from? But then I wouldn’t like anybody to be able to sniff my data. Maybe they will install a CDN to make useless Opera Turbo giving at least some performance benefit to users. Don’t know, we’ll see very soon.&lt;/p&gt;
+&lt;p&gt;But because of the last &lt;a href=&quot;http://sharovatov.wordpress.com/2009/06/11/windows-7-will-be-shipped-without-ie8-in-europe/&quot;&gt;unfair actions&lt;/a&gt; that were taken by Opera against IE, I (from moral prospective) really hope that all the expenses they took for Opera 10 PR won’t significantly increase their market share. Competition should be fair, Firefox was able to get the same market share as IE in Germany without making users life harder. I really hope that lobbying expenses were higher than the income.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>HTML5 video tag and Internet Explorer</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-html5video.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-html5video.html</id>
+            <content type="html">&lt;p&gt;It’s interesting to see how popular &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags are getting now. Every browser tries to implement it as soon as it can and shout about it as loud as possible. And now people are even starting blaming IE for being old and not supporting inline video and audio.&lt;/p&gt;
+&lt;p&gt;The whole situation reminds me of AJAX where original concept was invented by Microsoft (actual ActiveX was shipped with IE5 in 1999), then it was standardised by W3C (in a different way), then implemented by other browsers, and then people started accusing IE for not supporting this new W3C standard.&lt;/p&gt;
+&lt;p&gt;The same thing is now happening with inline video/audio playback concept, which has been introduced in IE2 in 1995, almost 15 years ago. Yes, 15 years ago, when W3C has been just founded and was still asking &lt;a href=&quot;http://www.csail.mit.edu/&quot;&gt;MIT/CSAIL&lt;/a&gt; to join. And now this functionality is being spec’ed in HTML5 as &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; tags. Opera, Firefox, Safari and Google Chrome start supporting &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; and are making a loud marketing message of it.&lt;/p&gt;
+&lt;p&gt;The original concept that was introduced in IE2 (and supported in following versions) was adding a &lt;code&gt;DYNSRC&lt;/code&gt; attribute to &lt;code&gt;IMG&lt;/code&gt; element:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;cover.gif&amp;quot; dynsrc=&amp;quot;clock.avi&amp;quot; controls&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When IE saw dynsrc attribute, it tried loading the movie and playing it. “Controls” attribute made IE show simple playback controls.&lt;/p&gt;
+&lt;p&gt;This is how it looked like in IE3:&lt;/p&gt;
+&lt;p&gt;&lt;img title=&quot;ie3&quot; border=&quot;0&quot; alt=&quot;ie3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/ie3.gif?w=387&amp;#038;h=602&quot; width=&quot;387&quot; height=&quot;602&quot;&gt;&lt;/p&gt;
+&lt;p&gt;However, in future versions the support for DYNSRC was limited to make developers to switch to other ways (&lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;embed&amp;gt;&lt;/code&gt;/SMIL video). In IE5 no controls were shown, in IE7 &lt;code&gt;DYNSRC&lt;/code&gt; disappeared.&lt;/p&gt;
+&lt;p&gt;World changes, and now the functionality that nobody’s been using for a decade seems really new and interesting. It’s great that WHATWG is spending time on defining clear standard on how this should work and it’s really cool that Chrome, Firefox, Opera and Safari already support this draft. Of course, Silverlight supports greater level of RIA, but giving that IE Team is now really focused on following public standards, &lt;/p&gt;
+&lt;p&gt;I hope that in IE9 we’ll have native support for &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt;/&lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; as we had native support for XMLHttpRequest in IE7.&lt;/p&gt;
+&lt;p&gt;But my point is – credit for inline video playback functionality invention should be definitely given to IE2.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Useful JS tips - getBoundingClientRect()</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
+            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
+&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
+&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
+&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
 </content>
         </entry>
     
@@ -1095,45 +1337,14 @@ versions:&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Opera revolution fail</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-opera-rev-fail.html</id>
-            <content type="html">&lt;p&gt;Opera announced “&lt;a href=&quot;http://unite.opera.com&quot;&gt;Opera Unite&lt;/a&gt;” concept – they integrated a web-server right into Opera and made Opera Desktop Gadgets run on it.&lt;/p&gt;
-&lt;p&gt;All the &lt;a href=&quot;http://unite.opera.com/services/&quot;&gt;services&lt;/a&gt; Opera Unite offers are web gadgets, so they are built in html+javascript with some &lt;a href=&quot;http://dev.opera.com/libraries/unite/&quot;&gt;additional API&lt;/a&gt; provided by the browser.&lt;/p&gt;
-&lt;p&gt;To get any of the services, you must register at Opera. When you register, you give your computer a name, e.g. “home” and then you are provided with a URL home.yourlogin.operaunite.com where &lt;strong&gt;yourlogin &lt;/strong&gt;is what you chose as a login when you were registering.&lt;/p&gt;
-&lt;p&gt;File sharing service is basically a web server directory listing exposed to the internet. This is my understanding how it works:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;You point Opera Unite to a directory&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera internal web server starts listening 8840 port locally&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Opera opens a persistent connection to operaunite.com (213.236.208.30 IP address in my case)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;So when anyone opens up home.yourlogin.operaunite.com, operaunite.com server requests the list of files from your machine using a persistent connection that you opened and sends the response back to user.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;when you close Opera, web server is shut down, connection is dropped and nobody can download anything.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;So sharing can work ONLY when your computer is working and Opera is running.&lt;/p&gt;
-&lt;h2 id=&quot;so-none-of-the-services-can-work-when-computer-is-turned-off-or-opera-is-not-running-&quot;&gt;So none of the services can work when computer is turned off or Opera is not running.&lt;/h2&gt;
-&lt;p&gt;When you want your sharing/chat/fridge services to be working, you will need to keep your Opera running. And if several users start using it, your computer will slow down significantly. And if you by any chance put a link to an image hosted in your Opera Unite on a popular site… Your computer will either stop responding or eat 100% resources.&lt;/p&gt;
-&lt;p&gt;That’s what John Resig, the author of beautiful jQuery says:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I just tried to visit six Opera Unite pages and only one resolved. The future of the web is two 9s: 0.99% uptime!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Useful service? I doubt.&lt;/p&gt;
-&lt;p&gt;Photo sharing service is just crap at the moment. My Opera Unite serving 1 client with a Photo Sharing page with thumbnails eats 60-70% of CPU and up to 200 Megabytes of memory. Full-blown web servers like IIS7 or Apache2 would serve this page and static files in a milliseconds without any noticeable resources eating. Thumbnails are created in really poor quality.&lt;/p&gt;
-&lt;p&gt;In Web Server service CGI is not supported, in-memory modules are not supported. PHP is not supported. The only language you can use is javascript. HTTPS is not supported.&lt;/p&gt;
-&lt;p&gt;Opera &lt;a href=&quot;http://unite.opera.com/support/userguide/#diff_data_share&quot;&gt;says&lt;/a&gt; that the communication between users is done directly. Truth is that it’s done through operaunite.com. Let me repeat it, &lt;strong&gt;all the traffic goes through operaunite.com&lt;/strong&gt;. Are you ready to give all your information to Opera?&lt;/p&gt;
-&lt;p&gt;Do you trust them so much? Do you care about your privacy? Do you think they will care about users after what they did to Windows 7 users in Europe?&lt;/p&gt;
-&lt;p&gt;Opera says this is a revolution – I can only see a bad (or alpha, not even beta) implementation of a rather poor technology. When I go out, I don’t leave my laptop working and Opera running, so the sharing won’t work. And I don’t want my &lt;em&gt;browser&lt;/em&gt; to take 100% CPU and 400 Mb RAM when two users are watching static pages with static thumbnails. And it’s not p2p as all the traffic goes through Opera servers.&lt;/p&gt;
-&lt;p&gt;There’re plenty of good services that do their work and don’t pretend to do a revolution where there’sclearly nothing revolutionary.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://labs.opera.com/news/2009/06/16/&quot;&gt;This&lt;/a&gt; makes me laugh:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Our computers are only dumb terminals connected to other computers (meaning servers) owned by other people — such as large corporations — who we depend upon to host our words, thoughts, and images. We depend on them to do it well and with our best interests at heart. We place our trust in these third parties, and we hope for the best, but as long as our own computers are not first class citizens on the Web, we are merely tenants, and hosting companies are the landlords of the Internet.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;P.S. Opera engineers said that in the final version p2p file sharing will be implemented – well, let’s see.&lt;/p&gt;
+            <title>Hosting issues</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-hostingissues.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-hostingissues.html</id>
+            <content type="html">&lt;p&gt;I’ve been trying to prepare some test cases for HTTP Chunked Encoding support, but noticed that something went weird when I was requesting data from my host (&lt;a href=&quot;http://sharovatov.ru/&quot;&gt;sharovatov.ru&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;I’ve got a basic LAMP virtual hosting at &lt;a href=&quot;http://naunet.ru&quot;&gt;naunet.ru&lt;/a&gt; which worked fine when I was hosting static content. But when I started doing the testcase, I found out all the weird and wonderful issues – mainly because they have SQUID installed before apache, so every single request goes to squid, and it’s a caching proxy that serves all my request from its cache – so I can’t test chunked encoding properly, can’t test ranges support properly… Crap. Seems that they just use squid to reduce load on their web servers.&lt;/p&gt;
+&lt;p&gt;But the worst thing is bad techsupport – it works 8 hours a day and there’s nobody there on the weekends or bank holidays. I ask a question and nobody answers it in 3 days. It just drives me insane.&lt;/p&gt;
+&lt;p&gt;Will have to move to somewhere else where sysadmins know how to do load-balancing without installing front-end proxies.&lt;/p&gt;
 </content>
         </entry>
     
@@ -1160,74 +1371,6 @@ affect you or even if it does, you’ll be able to easily explain to business wh
 &lt;a href=&quot;http://www.omninet.biz/index.php?id=138&quot;&gt;Omnitracker&lt;/a&gt; costs from €12000 and it’s got everything your company might need, plus API for integration, plus additional templates – it will automate everything. &lt;/p&gt;
 &lt;p&gt;However, the consultancy will be around 10 times more expensive. But again – nothing stops your company to send your own IT guys for training and save a fortune :)&lt;/p&gt;
 &lt;p&gt;So thanks for all the interesting stuff, OSP! The conference was really worthy to visit! Will probably write a couple more blog posts on the topic as soon as I get all my thoughts in order :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Hosting issues</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-hostingissues.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-hostingissues.html</id>
-            <content type="html">&lt;p&gt;I’ve been trying to prepare some test cases for HTTP Chunked Encoding support, but noticed that something went weird when I was requesting data from my host (&lt;a href=&quot;http://sharovatov.ru/&quot;&gt;sharovatov.ru&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;I’ve got a basic LAMP virtual hosting at &lt;a href=&quot;http://naunet.ru&quot;&gt;naunet.ru&lt;/a&gt; which worked fine when I was hosting static content. But when I started doing the testcase, I found out all the weird and wonderful issues – mainly because they have SQUID installed before apache, so every single request goes to squid, and it’s a caching proxy that serves all my request from its cache – so I can’t test chunked encoding properly, can’t test ranges support properly… Crap. Seems that they just use squid to reduce load on their web servers.&lt;/p&gt;
-&lt;p&gt;But the worst thing is bad techsupport – it works 8 hours a day and there’s nobody there on the weekends or bank holidays. I ask a question and nobody answers it in 3 days. It just drives me insane.&lt;/p&gt;
-&lt;p&gt;Will have to move to somewhere else where sysadmins know how to do load-balancing without installing front-end proxies.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Windows 7 taskbar - new approach</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-win7taskbar.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-win7taskbar.html</id>
-            <content type="html">&lt;p&gt;I just love the way programs are organised on new Windows 7 taskbar.&lt;/p&gt;
-&lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
-&lt;p&gt;In earlier Windows versions to get the program window shown you had to do two things:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;check if the program is running by looking at the taskbar and maximise it window if it’s there&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if it’s not running, you had to launch it from quick launch or other place&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This approach has some major flows:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;when you just need a program window to be shown, you have to do a cognitive effort to find where to get it from – either launch the program from quicklaunch (or somewhere else) or maximise its window from the taskbar&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;if you have, say, ten commonly used programs and put them on a quicklaunch and then open all them up, you’ve suddenly got quicklaunch icons just taking space and doing nothing as the programs are already opened. And you’ve got your programs’ icons in the taskbar – so you effectively have two icons for every program – one for launching a program and one for controlling its window state.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;nowadays&quot;&gt;Nowadays&lt;/h2&gt;
-&lt;p&gt;In windows 7 the new approach is taken.&lt;/p&gt;
-&lt;p&gt;Basically, taskbar and quick launch are combined in one place and then enhanced a lot.&lt;/p&gt;
-&lt;p&gt;The concept is just great - you don’t need to check if a program is running or not to get it shown – you just click on its icon and if its running, you’ll get its window, otherwise it will launch and you will still get its window. Less cognitive effort, better usability.&lt;/p&gt;
-&lt;p&gt;One of the implications of this approach is that the space on the taskbar is saved by having “program-launching” and “window-managing” controls combined.&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot.jpg&quot;&gt;&lt;img title=&quot;sidebar_screenshot&quot; border=&quot;0&quot; alt=&quot;sidebar_screenshot&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot_thumb.jpg?w=640&amp;#038;h=306&quot; width=&quot;640&quot; height=&quot;306&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;As you can see, Far, Explorer and Microsoft Word are not launched, Outlook, Messenger, Sticky Notes, Live Writer and IE8 are running.&lt;/p&gt;
-&lt;p&gt;As you can also notice on the screenshot, multiple instances of IE8 are grouped and if you hover them, that’s what you’ll see:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot2&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot2&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2_thumb.jpg?w=619&amp;#038;h=500&quot; width=&quot;619&quot; height=&quot;500&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;So managing multiple program instances is really easy – when you hover on an item, its window appears on the screen so you can preview if this window is what you were looking for and click on it to open. You can also close any window from the group right from the taskbar.&lt;/p&gt;
-&lt;p&gt;Here’s a screenshot when there’s many IE8 tabs opened:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot3&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3_thumb.jpg?w=628&amp;#038;h=538&quot; width=&quot;628&quot; height=&quot;538&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Again, when you hover on an item, its window is shown, so you either click on it to make it active or close it down.&lt;/p&gt;
-&lt;p&gt;Another great interface solution is displaying progress bars directly on the taskbar. For example, here’s how IE8 displays download progress bar:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot4&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot4&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4_thumb.jpg?w=499&amp;#038;h=144&quot; width=&quot;499&quot; height=&quot;144&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;And all the features I showed is just a part of all the goodness Windows 7 taskbar introduces.&lt;/p&gt;
-&lt;p&gt;So yes, I agree with Gizmodo that &lt;a href=&quot;http://gizmodo.com/5131933/giz-explains-why-the-windows-7-taskbar-beats-mac-os-xs-dock&quot;&gt;Windows 7 Taskbar is much better than MAC OS X dock&lt;/a&gt;.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>HTML+CSS+JS Widgets - future cross-platform environment</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html</id>
-            <content type="html">&lt;p&gt;Yesterday I installed Windows 7 on both my laptop (MSI Wind U100) and work PC (Core2Duo with 2Gb RAM). Both machines had XP – Home on laptop and Pro on work PC. One of the first things I’ve noticed right after installation was Gadgets technology that Windows 7 supports (actually, support for Sidebar Gadgets appeared in Vista, but as I didn’t have Vista installed, I couldn’t check it out). The technology is very simple – you create a manifest file with your gadget settings and HTML file with your gadget code, styles and scripting (of course, you’d better put styles and js in separate files); then zip everything in one archive and rename its extension to .gadget. That’s it, then you can install it on your sidebar in Vista or Windows 7.&lt;/p&gt;
-&lt;p&gt;Technical details of how gadgets work are for one of next blog posts, but I feel the tendency that all small applications soon will be written in HTML/JS/CSS (especially those that use web-services!).&lt;/p&gt;
-&lt;p&gt;Look, Opera has proposed a &lt;a href=&quot;http://www.w3.org/TR/widgets-apis/&quot;&gt;draft to W3C called Widgets&lt;/a&gt; – the same concept of small HTML/CSS/JS application but running inside a browser. Vodafone &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2009/03/testing_mobile.html&quot;&gt;hired PPK&lt;/a&gt; to spec Mobile Widgets technology and test thoroughly (and Peter-Paul is famous for his great tests and compatibility tables!). Nokia already supports
-&lt;a href=&quot;http://www.s60.com/life/thisiss60/s60indetail/technologiesandfeatures/webruntime&quot;&gt;Web Widgets&lt;/a&gt; on S60 phones.&lt;/p&gt;
-&lt;p&gt;So instead of multiple environments we have one common environment for building applications for almost any platform – be it a browser, a mobile phone or Windows desktop. Yes, there’re API and DOM differences, for example, Windows Gadgets allow access to WMI so that you can build an application leveraging all the system functionality provided by WMI, on the phones and in Opera you will be limited to web-service based development and some pretty basic DOM, but even so it’s great that html/js/css is becoming a standard for writing cross-platform applications.&lt;/p&gt;
-&lt;p&gt;Front-end developers – our skills will become even more valuable :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -1736,6 +1879,62 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
         </entry>
     
         <entry>
+            <title>Windows 7 taskbar - new approach</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-win7taskbar.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-win7taskbar.html</id>
+            <content type="html">&lt;p&gt;I just love the way programs are organised on new Windows 7 taskbar.&lt;/p&gt;
+&lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
+&lt;p&gt;In earlier Windows versions to get the program window shown you had to do two things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;check if the program is running by looking at the taskbar and maximise it window if it’s there&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if it’s not running, you had to launch it from quick launch or other place&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This approach has some major flows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;when you just need a program window to be shown, you have to do a cognitive effort to find where to get it from – either launch the program from quicklaunch (or somewhere else) or maximise its window from the taskbar&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;if you have, say, ten commonly used programs and put them on a quicklaunch and then open all them up, you’ve suddenly got quicklaunch icons just taking space and doing nothing as the programs are already opened. And you’ve got your programs’ icons in the taskbar – so you effectively have two icons for every program – one for launching a program and one for controlling its window state.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;nowadays&quot;&gt;Nowadays&lt;/h2&gt;
+&lt;p&gt;In windows 7 the new approach is taken.&lt;/p&gt;
+&lt;p&gt;Basically, taskbar and quick launch are combined in one place and then enhanced a lot.&lt;/p&gt;
+&lt;p&gt;The concept is just great - you don’t need to check if a program is running or not to get it shown – you just click on its icon and if its running, you’ll get its window, otherwise it will launch and you will still get its window. Less cognitive effort, better usability.&lt;/p&gt;
+&lt;p&gt;One of the implications of this approach is that the space on the taskbar is saved by having “program-launching” and “window-managing” controls combined.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot.jpg&quot;&gt;&lt;img title=&quot;sidebar_screenshot&quot; border=&quot;0&quot; alt=&quot;sidebar_screenshot&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot_thumb.jpg?w=640&amp;#038;h=306&quot; width=&quot;640&quot; height=&quot;306&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As you can see, Far, Explorer and Microsoft Word are not launched, Outlook, Messenger, Sticky Notes, Live Writer and IE8 are running.&lt;/p&gt;
+&lt;p&gt;As you can also notice on the screenshot, multiple instances of IE8 are grouped and if you hover them, that’s what you’ll see:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot2&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot2&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot2_thumb.jpg?w=619&amp;#038;h=500&quot; width=&quot;619&quot; height=&quot;500&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So managing multiple program instances is really easy – when you hover on an item, its window appears on the screen so you can preview if this window is what you were looking for and click on it to open. You can also close any window from the group right from the taskbar.&lt;/p&gt;
+&lt;p&gt;Here’s a screenshot when there’s many IE8 tabs opened:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot3&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot3&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot3_thumb.jpg?w=628&amp;#038;h=538&quot; width=&quot;628&quot; height=&quot;538&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Again, when you hover on an item, its window is shown, so you either click on it to make it active or close it down.&lt;/p&gt;
+&lt;p&gt;Another great interface solution is displaying progress bars directly on the taskbar. For example, here’s how IE8 displays download progress bar:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4.jpg&quot;&gt;&lt;img title=&quot;sidebar_Screenshot4&quot; border=&quot;0&quot; alt=&quot;sidebar_Screenshot4&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/05/sidebar_screenshot4_thumb.jpg?w=499&amp;#038;h=144&quot; width=&quot;499&quot; height=&quot;144&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And all the features I showed is just a part of all the goodness Windows 7 taskbar introduces.&lt;/p&gt;
+&lt;p&gt;So yes, I agree with Gizmodo that &lt;a href=&quot;http://gizmodo.com/5131933/giz-explains-why-the-windows-7-taskbar-beats-mac-os-xs-dock&quot;&gt;Windows 7 Taskbar is much better than MAC OS X dock&lt;/a&gt;.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>HTML+CSS+JS Widgets - future cross-platform environment</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-htmlcssjsplatform.html</id>
+            <content type="html">&lt;p&gt;Yesterday I installed Windows 7 on both my laptop (MSI Wind U100) and work PC (Core2Duo with 2Gb RAM). Both machines had XP – Home on laptop and Pro on work PC. One of the first things I’ve noticed right after installation was Gadgets technology that Windows 7 supports (actually, support for Sidebar Gadgets appeared in Vista, but as I didn’t have Vista installed, I couldn’t check it out). The technology is very simple – you create a manifest file with your gadget settings and HTML file with your gadget code, styles and scripting (of course, you’d better put styles and js in separate files); then zip everything in one archive and rename its extension to .gadget. That’s it, then you can install it on your sidebar in Vista or Windows 7.&lt;/p&gt;
+&lt;p&gt;Technical details of how gadgets work are for one of next blog posts, but I feel the tendency that all small applications soon will be written in HTML/JS/CSS (especially those that use web-services!).&lt;/p&gt;
+&lt;p&gt;Look, Opera has proposed a &lt;a href=&quot;http://www.w3.org/TR/widgets-apis/&quot;&gt;draft to W3C called Widgets&lt;/a&gt; – the same concept of small HTML/CSS/JS application but running inside a browser. Vodafone &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2009/03/testing_mobile.html&quot;&gt;hired PPK&lt;/a&gt; to spec Mobile Widgets technology and test thoroughly (and Peter-Paul is famous for his great tests and compatibility tables!). Nokia already supports
+&lt;a href=&quot;http://www.s60.com/life/thisiss60/s60indetail/technologiesandfeatures/webruntime&quot;&gt;Web Widgets&lt;/a&gt; on S60 phones.&lt;/p&gt;
+&lt;p&gt;So instead of multiple environments we have one common environment for building applications for almost any platform – be it a browser, a mobile phone or Windows desktop. Yes, there’re API and DOM differences, for example, Windows Gadgets allow access to WMI so that you can build an application leveraging all the system functionality provided by WMI, on the phones and in Opera you will be limited to web-service based development and some pretty basic DOM, but even so it’s great that html/js/css is becoming a standard for writing cross-platform applications.&lt;/p&gt;
+&lt;p&gt;Front-end developers – our skills will become even more valuable :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Windows Live</title>
             <link href="http://sharovatov.github.io/posts/2009-04-wl.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -1769,60 +1968,6 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 &lt;/ul&gt;
 &lt;p&gt;Good stuff, Live Team, thanks!&lt;/p&gt;
 &lt;p&gt;P.S. for more information, read &lt;a href=&quot;http://windowslivewriter.spaces.live.com/blog/cns!D85741BB5E0BE8AA!1650.entry&quot;&gt;this blogpost&lt;/a&gt;.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Various IE8 Accelerators - thepiratebay, php.net, pagerank, alexa</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-ie8accels.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-ie8accels.html</id>
-            <content type="html">&lt;p&gt;I recently updated to Internet Explorer 8, and it just rocks! One of the new shiny features that’s been added to IE8 is &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc289775(VS.85).aspx&quot;&gt;Web Accelerators&lt;/a&gt;. I’ve just written some to make my life easier a bit. Hope you find them handy.&lt;/p&gt;
-&lt;p&gt;Search category:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Search on thepiratebay&lt;/a&gt;&lt;/strong&gt; – just select any text on the page, wait for Accelerators icon, and click “Search on ThePirateBay” and it wil open you a new tab with search results&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;SEO category:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Check Google Pagerank&lt;/a&gt;&lt;/strong&gt; of the page by its link – just right-click on any link, go to Accelerators, hover on “Check pagerank” and you’ll get it’s pagerank directly fetched from google.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Check Alexa rating&lt;/a&gt;&lt;/strong&gt; of the page by its link – the same instructions – right click on a link, go to Accelerators, hover on “Check Alexa rating” and you’ll see this page’s Alexa rating in a preview window.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Check Alexa+pagerank&lt;/a&gt;&lt;/strong&gt; – a little bit more useful Accelerator which combines both alexa and pagerank checks in one accelerator, but is hosted on my server – and again it shows Alexa rating and Google Pagerank on the preview screen.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Web-development:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;PHP manual for selected property&lt;/a&gt;&lt;/strong&gt; – just select a function name on the page, wait for the Accelerators icon to appear, click on “Search definition on php.net” and you’ll get a page with php.net manual loaded for this function&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Validate a page&lt;/a&gt;&lt;/strong&gt; – right click on any link to get the context menu, go to Accelerators and select “Validate a page” and you’ll get w3.org validator checking this link!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Remember, Accelerators work only in IE8, and clicking on these links in other browsers will just show the XML source of accelerators :)&lt;/p&gt;
-&lt;p&gt;It took me really half an hour to grasp the manual and write these six accelerators – thanks Microsoft for such an easy and productive platform.&lt;/p&gt;
-&lt;p&gt;Some useful links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Internet_Explorer_8#Accelerators&quot;&gt;http://en.wikipedia.org/wiki/Internet_Explorer_8#Accelerators&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.ieaddons.com/en/accelerators/&quot;&gt;IE Accelerators Gallery&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.labnol.org/software/ie8-accelerator-tutorial/8259/&quot;&gt;How to write an IE8 Accelerator for your website&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/miah/archive/2008/10/04/ie8-rocks-creating-custom-accelerators.aspx&quot;&gt;Creating custom accelerators&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;P.S. And I&amp;#39;ve just created another one accelerator – “&lt;a href=&quot;http://sharovatov.ru/current.html&quot;&gt;Find broken links on a page&lt;/a&gt;”. It allows you to use W3C links checker utility to quickly check if any of your links on the page are broken – just right click on a page to get the context menu, go to Accelerators and press “&lt;strong&gt;Find broken links&lt;/strong&gt;” :) May be really useful.&lt;/p&gt;
-&lt;p&gt;I submitted four of my IE8 accelerators to a IE8 Addons gallery today and now waiting for approval :) Hope they will be approved and I’ll create more!&lt;/p&gt;
-&lt;p&gt;P.S. To submit your new Accelerator or Webslice, you need to register at &lt;a href=&quot;http://www.ieaddons.com/gb/Register.aspx&quot;&gt;ieaddons.com&lt;/a&gt;, then go to the Upload page, provide name, description, screenshot and XML of your Accelerator and then wait for the approval :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>IE8 - important update!</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-ie8impupd.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-ie8impupd.html</id>
-            <content type="html">&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2009/04/10/prepare-for-automatic-update-distribution-of-ie8.aspx&quot;&gt;IE team says that starting from this week IE8 will be distributed as an important update&lt;/a&gt;! Hooray! It will be marked as important update for Vista and Windows Server 2008. Hope most people will install it and we’ll soon forget about IE6 and IE7 :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -2276,6 +2421,60 @@ content:&lt;/p&gt;
 &lt;p&gt;I also asked MSN Live Search Team about that – hope they reply soon – I’ll update the post.&lt;/p&gt;
 &lt;p&gt;So – use this approach if you have a page which is accessed by both HTTP and HTTPS and whenever you need to reference any resource from a different host on this page. Plus this host must support both HTTP and HTTPS :)&lt;/p&gt;
 &lt;p&gt;McAffee SiteScan button uses this in their image - &lt;strong&gt;check!&lt;/strong&gt;&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Various IE8 Accelerators - thepiratebay, php.net, pagerank, alexa</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-ie8accels.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-ie8accels.html</id>
+            <content type="html">&lt;p&gt;I recently updated to Internet Explorer 8, and it just rocks! One of the new shiny features that’s been added to IE8 is &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc289775(VS.85).aspx&quot;&gt;Web Accelerators&lt;/a&gt;. I’ve just written some to make my life easier a bit. Hope you find them handy.&lt;/p&gt;
+&lt;p&gt;Search category:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Search on thepiratebay&lt;/a&gt;&lt;/strong&gt; – just select any text on the page, wait for Accelerators icon, and click “Search on ThePirateBay” and it wil open you a new tab with search results&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;SEO category:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Check Google Pagerank&lt;/a&gt;&lt;/strong&gt; of the page by its link – just right-click on any link, go to Accelerators, hover on “Check pagerank” and you’ll get it’s pagerank directly fetched from google.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Check Alexa rating&lt;/a&gt;&lt;/strong&gt; of the page by its link – the same instructions – right click on a link, go to Accelerators, hover on “Check Alexa rating” and you’ll see this page’s Alexa rating in a preview window.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Check Alexa+pagerank&lt;/a&gt;&lt;/strong&gt; – a little bit more useful Accelerator which combines both alexa and pagerank checks in one accelerator, but is hosted on my server – and again it shows Alexa rating and Google Pagerank on the preview screen.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Web-development:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;PHP manual for selected property&lt;/a&gt;&lt;/strong&gt; – just select a function name on the page, wait for the Accelerators icon to appear, click on “Search definition on php.net” and you’ll get a page with php.net manual loaded for this function&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://sharovatov.ru/current.html#accelerators&quot;&gt;Validate a page&lt;/a&gt;&lt;/strong&gt; – right click on any link to get the context menu, go to Accelerators and select “Validate a page” and you’ll get w3.org validator checking this link!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Remember, Accelerators work only in IE8, and clicking on these links in other browsers will just show the XML source of accelerators :)&lt;/p&gt;
+&lt;p&gt;It took me really half an hour to grasp the manual and write these six accelerators – thanks Microsoft for such an easy and productive platform.&lt;/p&gt;
+&lt;p&gt;Some useful links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Internet_Explorer_8#Accelerators&quot;&gt;http://en.wikipedia.org/wiki/Internet_Explorer_8#Accelerators&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.ieaddons.com/en/accelerators/&quot;&gt;IE Accelerators Gallery&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.labnol.org/software/ie8-accelerator-tutorial/8259/&quot;&gt;How to write an IE8 Accelerator for your website&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/miah/archive/2008/10/04/ie8-rocks-creating-custom-accelerators.aspx&quot;&gt;Creating custom accelerators&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;P.S. And I&amp;#39;ve just created another one accelerator – “&lt;a href=&quot;http://sharovatov.ru/current.html&quot;&gt;Find broken links on a page&lt;/a&gt;”. It allows you to use W3C links checker utility to quickly check if any of your links on the page are broken – just right click on a page to get the context menu, go to Accelerators and press “&lt;strong&gt;Find broken links&lt;/strong&gt;” :) May be really useful.&lt;/p&gt;
+&lt;p&gt;I submitted four of my IE8 accelerators to a IE8 Addons gallery today and now waiting for approval :) Hope they will be approved and I’ll create more!&lt;/p&gt;
+&lt;p&gt;P.S. To submit your new Accelerator or Webslice, you need to register at &lt;a href=&quot;http://www.ieaddons.com/gb/Register.aspx&quot;&gt;ieaddons.com&lt;/a&gt;, then go to the Upload page, provide name, description, screenshot and XML of your Accelerator and then wait for the approval :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>IE8 - important update!</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-ie8impupd.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-ie8impupd.html</id>
+            <content type="html">&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2009/04/10/prepare-for-automatic-update-distribution-of-ie8.aspx&quot;&gt;IE team says that starting from this week IE8 will be distributed as an important update&lt;/a&gt;! Hooray! It will be marked as important update for Vista and Windows Server 2008. Hope most people will install it and we’ll soon forget about IE6 and IE7 :)&lt;/p&gt;
 </content>
         </entry>
     
