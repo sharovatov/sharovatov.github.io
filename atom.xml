@@ -4,13 +4,26 @@
     <subtitle></subtitle>
     <link href="http://sharovatov.github.io/atom.xml" rel="self" />
     <link href="http://sharovatov.github.io" />
-    <updated>2014-07-22T17:19:17.662Z</updated>
+    <updated>2014-10-09T10:49:36.359Z</updated>
     <id>http://sharovatov.github.io</id>
     <author>
         <name></name>
         <email></email>
     </author>
 
+    
+        <entry>
+            <title>iOS javascript cookies persistence</title>
+            <link href="http://sharovatov.github.io/posts/2014-07-ios-cookies.html"/>
+            <updated>2014-07-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2014-07-ios-cookies.html</id>
+            <content type="html">&lt;p&gt;I’ve recently come across an interesting issue in iOS Safari — if the browser is forced to quit, a cookie I set in javascript is forgotten when the browser is reopened.&lt;/p&gt;
+&lt;p&gt;A &lt;a href=&quot;http://sharovatov.ru/setcookie.php&quot;&gt;minimal test page reproducing the issue&lt;/a&gt; was prepared. The page provides two options to set the cookie — via a server-side php &lt;code&gt;setcookie&lt;/code&gt; call and via a clientside javascript &lt;code&gt;document.cookie&lt;/code&gt; call.&lt;/p&gt;
+&lt;p&gt;If you set the cookie via javascript, all is fine until you close the browser: you can safely navigate to any other page on this or other domains and the cookie will retain as long as its expiry period lasts. However, if you force the browser to close, the cookie that was set in javascript gets forgotten. I couldn’t find any online resource explaining the behaviour, but only questions like &lt;a href=&quot;http://stackoverflow.com/questions/17669938/in-ios-safari-cookie-data-gets-destroyed-on-closing-browser-from-background-i&quot;&gt;this&lt;/a&gt; or &lt;a href=&quot;http://stackoverflow.com/questions/20041399/mobile-safari-clears-cookies-and-localstorage-on-hard-reset&quot;&gt;that&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;It seems to be a bug in iOS Safari, I can’t find out any reasonable explanation for why cookies set in javascript should differ in behaviour from those set from server-sent HTTP header. I can only guess that in iOS Safari javascript-set cookies are retained in some in-memory storage which is not serialized to the storage, while server-sent cookies are serialized and persisted. I submitted bug report to Apple’s bugreporter under 18568056 number, hope that Apple resolves this in some future iOS version.&lt;/p&gt;
+&lt;p&gt;As the only way to set a cookie that will really persist seems to be to set it from the server, simplest workaround would be to create a server-side script that will return a single pixel with a required cookie. &lt;a href=&quot;http://sharovatov.ru/setcookie-img.php&quot;&gt;Resulting test page&lt;/a&gt; proves this approach is working correctly, though it’s certainly weird that serious bug like this went unnoticed since iOS version 6.&lt;/p&gt;
+</content>
+        </entry>
     
         <entry>
             <title>TLS mixed security content status</title>
@@ -712,6 +725,66 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
         </entry>
     
         <entry>
+            <title>IE9 - sucks much less than other browsers</title>
+            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
+            <updated>2010-03-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
+            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
+&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
+&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
+&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
+&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
+&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
+&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
+&lt;p&gt;Some links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Windows Phone 7 Internet Explorer IEMobile 7.0</title>
             <link href="http://sharovatov.github.io/posts/2010-03-wp7.html"/>
             <updated>2010-03-01T00:00:00.000Z</updated>
@@ -824,66 +897,6 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
         </entry>
     
         <entry>
-            <title>IE9 - sucks much less than other browsers</title>
-            <link href="http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html"/>
-            <updated>2010-03-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2010-03-ie9-sucksmuchless.html</id>
-            <content type="html">&lt;p&gt;I won’t repeat everything that’s been said on &lt;a href=&quot;http://live.visitmix.com/&quot;&gt;Mix&lt;/a&gt; now, you should read &lt;a href=&quot;http://msdn.microsoft.com/en-us/ie/ff468705.aspx&quot;&gt;this article&lt;/a&gt; and &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;this IEBlog entry&lt;/a&gt; and get the &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;IE platform preview&lt;/a&gt;. Don’t be afraid that IE9 will spoil your IE8 – IE9 preview doesn’t replace IE8 or anything, it’s got new jscript engine (called “Chakra”), new Trident layout engine version and wininet bundled in one package (31 megabytes installed size!) – first time when Microsoft does it this way – very impressive!&lt;/p&gt;
-&lt;p&gt;This preview will be updated each few weeks – the work isn’t finished, UI is still in a very “beta” mode:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://sharovatov.files.wordpress.com/2010/03/ie91.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img title=&quot;ie9&quot; border=&quot;0&quot; alt=&quot;ie9&quot; src=&quot;http://sharovatov.files.wordpress.com/2010/03/ie9_thumb1.jpg?w=256&amp;#038;h=208&quot; width=&quot;256&quot; height=&quot;208&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Most important changes IE9 has from IE8:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;JIT-powered js optimisation in jscript engine (Sunspider reports speed faster than Firefox 3.7 alpha2) – looks similar to Apple’s Nitro JIT.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;new Trident with more CSS3 support – &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Selectors&lt;/a&gt; module, &lt;a href=&quot;http://dev.w3.org/csswg/css3-background/&quot;&gt;CSS3 Borders and Backgrounds&lt;/a&gt; module (passes &lt;a href=&quot;http://tools.css3.info/selectors-test/test.html&quot;&gt;CSS Selectors tests&lt;/a&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113/&quot;&gt;DOM2 Styles&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://dev.w3.org/SVG/profiles/1.1F2/publish/&quot;&gt;SVG 1.1 2nd ed&lt;/a&gt; support (plus hardware acceleration)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;XHTML support (with proper namespaces support)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;complete hardware acceleration support for graphics and text rendering, which makes any animation in IE9 WAY much faster than in other browsers – you should look at videos&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;HTML5 video support with h264 codec with proper hardware acceleration support (kicks Chrome’s ass, allows 2 simultaneous HD 720p video playbacks via HTML5 video on a cheap netbook). Another nail in the OGG coffin :)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/TR/DOM-Level-3-Events/&quot;&gt;DOM Events&lt;/a&gt; support&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And IE9 is ridiculously fast. That’s partly due to the fact that “Chakra” jscript compiles javascript in a separate CPU core in parallel to IE (natural improvement to &lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/04/tab-isolation.aspx&quot;&gt;LCIE&lt;/a&gt;), and partly because of hardware optimisation for all rendering and animations.&lt;/p&gt;
-&lt;p&gt;Unfortunately, IE9 is not available for Windows XP (and it won’t be), the main reason is the security model – basically, XP security model just doesn’t suit for IE9. Quite right, XP is nearly 10 years old! Another reason is that graphical core on Windows XP works in a different way, so IE9 hardware acceleration just cannot work there.&lt;/p&gt;
-&lt;p&gt;Of course, IE9 follows the same logics IE8 has in terms of backwards compatibility – rules that &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/18/ie8-rendering-modes-theory-and-practice/&quot;&gt;I described here&lt;/a&gt; apply to IE9 – if X-UA-Compatible header/meta is set to &lt;strong&gt;Edge&lt;/strong&gt;, IE9 new engine will run. Of course, it will render sites with correct doctype (but withouth X-UA-Compatible) in IE9 standards mode, and it will continue support for &lt;a href=&quot;http://go2.wordpress.com/?id=725X1342&amp;amp;site=sharovatov.wordpress.com&amp;amp;url=http%3A%2F%2Fsupport.microsoft.com%2Fkb%2F960321&quot;&gt;compatibility view lists&lt;/a&gt; feature. So old crappy sites designed for IE6 will still work in compatibility mode, and new sites will work in awesome IE9 in the standards mode without any problems. Read the abovementioned post for more details.&lt;/p&gt;
-&lt;p&gt;Improvements that will be done later:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;better Ecma262 conformance and as a result, better ACID3 scores (current score is 55, IE team promises to improve this significantly, I think it will pass the test by the time RC ships&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;support for other CSS3 standard modules&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;canvas support – wasn’t announced, but I think this is a natural move when SVG is already done and done properly!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;But anyway, the whole feeling after watching IE9 keynote session is IT’S AWESOME!&lt;/p&gt;
-&lt;p&gt;We’re entering the new era when Microsoft browser is faster than others, more secure (it’s been more secure than others since IE8b1) and provides better level of standards support.&lt;/p&gt;
-&lt;p&gt;P.S. To see the real speed just run &lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;these test&lt;/a&gt; on IE9 platform preview and on any other browser and feel the difference :)&lt;/p&gt;
-&lt;p&gt;Some links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/Introducing-the-IE9-Developer-Platform-Preview/&quot;&gt;In your hands: Introducing the IE9 Developer Platform Preview&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Surfing-on-Metal-GPU-Powered-HTML5/&quot;&gt;In your hands: IE 9 – Surfing on Metal with GPU Powered HTML5&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE-9-Performance-From-JS-to-COM-to-DOM-to-HTML5-on-GPU/&quot;&gt;In your hands: IE 9 Performance – From JS to COM to DOM to HTML5 on GPU&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://channel9.msdn.com/posts/Charles/In-your-hands-IE9-and-SVG-Past-Present-and-Future-of-Vector-Graphics-for-the-Web/&quot;&gt;In your hands: IE9 and SVG – Past, Present and Future of Vector Graphics for the Web&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2010/03/16/html5-hardware-accelerated-first-ie9-platform-preview-available-for-developers.aspx&quot;&gt;HTML5, Hardware Accelerated: First IE9 Platform Preview Available for Developers&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://ie.microsoft.com/testdrive/&quot;&gt;http://ie.microsoft.com/testdrive/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>critical IIS vulnerability</title>
             <link href="http://sharovatov.github.io/posts/2009-12-iisvuln.html"/>
             <updated>2009-12-01T00:00:00.000Z</updated>
@@ -912,6 +925,75 @@ src=&quot;http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1
 &lt;p&gt;Needless to say, Firefox 3 decided to change the value as well, so &lt;a href=&quot;http://kb.mozillazine.org/Network.http.max-persistent-connections-per-server&quot;&gt;now Firefox 3 has 6 as a default value for network.http.max-persistent-connections-per-server&lt;/a&gt; configuration setting. Good for Mozilla for copying stuff from IE again!&lt;/p&gt;
 &lt;p&gt;And now HTTPBis team (Julian Reschke) &lt;a href=&quot;http://trac.tools.ietf.org/wg/httpbis/trac/changeset/715&quot;&gt;commits the change&lt;/a&gt; which states that in the forthcoming HTTP standard the maximum amount of concurrent requests is not limited even with “SHOULD NOT” clause :)&lt;/p&gt;
 &lt;p&gt;Thanks HTTPBis team!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Browsers' developer tools evolution</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
+            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
+&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
+&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
+&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
+&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
+&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
+&lt;p&gt;Come on, Opera team!&lt;/p&gt;
+&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>HTTP persistent connections, pipelining and chunked encoding</title>
+            <link href="http://sharovatov.github.io/posts/2009-11-http-pipeline.html"/>
+            <updated>2009-11-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-11-http-pipeline.html</id>
+            <content type="html">&lt;p&gt;When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.&lt;/p&gt;
+&lt;p&gt;And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)&lt;/p&gt;
+&lt;p&gt;So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
+encoding.&lt;/p&gt;
+&lt;p&gt;HTTP/1.0 said that for every request to a server you have to open a TCP/IP connection, write a request to the socket and get the data back.&lt;/p&gt;
+&lt;p&gt;But pages on the internet became more complex and authors started including more and more resources on their pages (images, scripts, stylesheets, objects — everything that browsers had to download from the server).&lt;/p&gt;
+&lt;p&gt;And for every resource request clients were opening separate connections, and it was taking time and CPU/memory resources to open a new connection, so from users prospective, resulting latency was becoming worse. Something could be done to improve the situation.&lt;/p&gt;
+&lt;p&gt;So HTTP IETF decided to implement a nice technique called “persistent connections”.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying &lt;code&gt;Connection: Close&lt;/code&gt; header.&lt;/p&gt;
+&lt;p&gt;Usually HTTP/1.1 client sends &lt;code&gt;Connection: Close&lt;/code&gt; header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends &lt;code&gt;Connection: Close&lt;/code&gt; with the 10&lt;sup&gt;th&lt;/sup&gt; image request and the server sends the last image and closes the connection after it’s done).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Persistent connections are the default for HTTP/1.1 clients and servers. &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And even more interestingly, HTTP/1.1 introduced &lt;strong&gt;pipelining&lt;/strong&gt; support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. &lt;/p&gt;
+&lt;p&gt;In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&amp;#39;t get a response back will be resubmitted through the new connection.&lt;/p&gt;
+&lt;p&gt;But as one connection is used to send multiple requests and receive responses, how does the client know when it has to finish reading the first request?&lt;/p&gt;
+&lt;p&gt;Obviously, &lt;code&gt;Content-Length&lt;/code&gt; header must be set for each response.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But what happens when the data is dynamic or the whole response’s content length can’t be determined by the time transmission starts?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In HTTP/1.0 everything’s easy — &lt;code&gt;Content-Length&lt;/code&gt; header can just be left out, so the transmission starts, client starts reading the data it’s getting from the connection, then when the server finishes sending the data, it just closes the TCP/IP connection, so client can’t read from the socket any more and considers the transmission completed.&lt;/p&gt;
+&lt;p&gt;However, as I’ve said, in HTTP/1.1 each transaction has to have correct &lt;code&gt;Content-Length&lt;/code&gt; header because client needs to know when each transmission is completed, so that the client can either start waiting for the next response (if requests were pipelined), or stop reading current response from the socket and send new request through this TCP/IP connection (if requests are sent in a normal sequential mode), or close the connection it if it was the last response he was to receive.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So as the connection is reused for multiple resources’ content transmission, the client needs to know exactly when each resource download is completed, i.e. it needs the exact number of bytes it has to read from the connection socket.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And it&amp;#39;s obvious that if &lt;code&gt;Content-Length&lt;/code&gt; can not be determined before the transmission starts, the whole persistent connections concept is useless.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;That is why HTTP/1.1 introduced chunked encoding concept.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The concept is quite simple — if exact &lt;code&gt;Content-Length&lt;/code&gt; for the resource is unknown at the time when transmission starts, server may send resource content piece by piece (so-called chunks) and provide &lt;code&gt;Content-Length&lt;/code&gt; for each chunk, plus sends an empty chunk with zero &lt;code&gt;Content-Length&lt;/code&gt; at the end of the whole response to notify client that this response transmission is complete.&lt;/p&gt;
+&lt;p&gt;To let HTTP/1.1 conforming clients know that chunked response is coming, server sends special header — &lt;code&gt;Transfer-Encoding: chunked&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Chunked encoding approach allows client to safely read the data — it knows the exact number of bytes that are to be read for each chunk and knows that if an empty chunk arrived, this resource transmission is completed.&lt;/p&gt;
+&lt;p&gt;It’s a little bit more complex than HTTP/1.0 scenario where server just closes the connection as soon as it’s finished, but truly worth it — persistent connections save server resources and reduce whole network latency, therefore improving overall user experience.&lt;/p&gt;
+&lt;p&gt;Links and resources:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html&quot;&gt;HTTP/1.1 Persistent connections&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_pipelining&quot;&gt;Wikipedia about HTTP Pipelining&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html&quot;&gt;HTTP/1.1 Chunked encoding&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </content>
         </entry>
     
@@ -962,50 +1044,6 @@ not proper UTF-8, indicate encoding ! in /home/test/www/test-russian.html, line:
         </entry>
     
         <entry>
-            <title>HTTP persistent connections, pipelining and chunked encoding</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-http-pipeline.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-http-pipeline.html</id>
-            <content type="html">&lt;p&gt;When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.&lt;/p&gt;
-&lt;p&gt;And I also like posting resulting resources to blog — that’s a good English techwriting skills practice plus some publicity for the knowledge ;)&lt;/p&gt;
-&lt;p&gt;So this post is another one from the HTTP series and describes HTTP/1.1 persistent connections and chunked
-encoding.&lt;/p&gt;
-&lt;p&gt;HTTP/1.0 said that for every request to a server you have to open a TCP/IP connection, write a request to the socket and get the data back.&lt;/p&gt;
-&lt;p&gt;But pages on the internet became more complex and authors started including more and more resources on their pages (images, scripts, stylesheets, objects — everything that browsers had to download from the server).&lt;/p&gt;
-&lt;p&gt;And for every resource request clients were opening separate connections, and it was taking time and CPU/memory resources to open a new connection, so from users prospective, resulting latency was becoming worse. Something could be done to improve the situation.&lt;/p&gt;
-&lt;p&gt;So HTTP IETF decided to implement a nice technique called “persistent connections”.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying &lt;code&gt;Connection: Close&lt;/code&gt; header.&lt;/p&gt;
-&lt;p&gt;Usually HTTP/1.1 client sends &lt;code&gt;Connection: Close&lt;/code&gt; header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends &lt;code&gt;Connection: Close&lt;/code&gt; with the 10&lt;sup&gt;th&lt;/sup&gt; image request and the server sends the last image and closes the connection after it’s done).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Persistent connections are the default for HTTP/1.1 clients and servers. &lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;And even more interestingly, HTTP/1.1 introduced &lt;strong&gt;pipelining&lt;/strong&gt; support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. &lt;/p&gt;
-&lt;p&gt;In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&amp;#39;t get a response back will be resubmitted through the new connection.&lt;/p&gt;
-&lt;p&gt;But as one connection is used to send multiple requests and receive responses, how does the client know when it has to finish reading the first request?&lt;/p&gt;
-&lt;p&gt;Obviously, &lt;code&gt;Content-Length&lt;/code&gt; header must be set for each response.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;But what happens when the data is dynamic or the whole response’s content length can’t be determined by the time transmission starts?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In HTTP/1.0 everything’s easy — &lt;code&gt;Content-Length&lt;/code&gt; header can just be left out, so the transmission starts, client starts reading the data it’s getting from the connection, then when the server finishes sending the data, it just closes the TCP/IP connection, so client can’t read from the socket any more and considers the transmission completed.&lt;/p&gt;
-&lt;p&gt;However, as I’ve said, in HTTP/1.1 each transaction has to have correct &lt;code&gt;Content-Length&lt;/code&gt; header because client needs to know when each transmission is completed, so that the client can either start waiting for the next response (if requests were pipelined), or stop reading current response from the socket and send new request through this TCP/IP connection (if requests are sent in a normal sequential mode), or close the connection it if it was the last response he was to receive.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So as the connection is reused for multiple resources’ content transmission, the client needs to know exactly when each resource download is completed, i.e. it needs the exact number of bytes it has to read from the connection socket.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;And it&amp;#39;s obvious that if &lt;code&gt;Content-Length&lt;/code&gt; can not be determined before the transmission starts, the whole persistent connections concept is useless.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;That is why HTTP/1.1 introduced chunked encoding concept.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The concept is quite simple — if exact &lt;code&gt;Content-Length&lt;/code&gt; for the resource is unknown at the time when transmission starts, server may send resource content piece by piece (so-called chunks) and provide &lt;code&gt;Content-Length&lt;/code&gt; for each chunk, plus sends an empty chunk with zero &lt;code&gt;Content-Length&lt;/code&gt; at the end of the whole response to notify client that this response transmission is complete.&lt;/p&gt;
-&lt;p&gt;To let HTTP/1.1 conforming clients know that chunked response is coming, server sends special header — &lt;code&gt;Transfer-Encoding: chunked&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Chunked encoding approach allows client to safely read the data — it knows the exact number of bytes that are to be read for each chunk and knows that if an empty chunk arrived, this resource transmission is completed.&lt;/p&gt;
-&lt;p&gt;It’s a little bit more complex than HTTP/1.0 scenario where server just closes the connection as soon as it’s finished, but truly worth it — persistent connections save server resources and reduce whole network latency, therefore improving overall user experience.&lt;/p&gt;
-&lt;p&gt;Links and resources:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html&quot;&gt;HTTP/1.1 Persistent connections&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_pipelining&quot;&gt;Wikipedia about HTTP Pipelining&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html&quot;&gt;HTTP/1.1 Chunked encoding&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Beanstalkapp, FogBugz and now Case Tracker</title>
             <link href="http://sharovatov.github.io/posts/2009-11-beanstalk.html"/>
             <updated>2009-11-01T00:00:00.000Z</updated>
@@ -1040,40 +1078,45 @@ encoding.&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Browsers' developer tools evolution</title>
-            <link href="http://sharovatov.github.io/posts/2009-11-devtools.html"/>
-            <updated>2009-11-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-11-devtools.html</id>
-            <content type="html">&lt;p&gt;It’s great to see that better tools for developer start to appear.&lt;/p&gt;
-&lt;p&gt;As in many other cases, the race started IE5.01 with support for script debugging in an external Script Debugger app. And now the race takes us to the new level with awesome tools built into browsers (like Firebug in Fx or Devtools in IE8) or even better external – let’s welcome &lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://ajax.dynatrace.com/pages/&quot;&gt;dynaTrace Ajax&lt;/a&gt; supports IE6, IE7 and IE8, and will soon support Firefox. It’s basically the best tool out there for profiling and debugging javascript and CSS.&lt;/p&gt;
-&lt;p&gt;Here’s what John Resig, creator of JQuery library says about the tool:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I’m very impressed with dynaTrace AJAX Edition’s ability to get at the underlying “magic” that happens inside a browser: page rendering, DOM method execution, browser events, and page layout calculation.&lt;/p&gt;
-&lt;p&gt;Much of this information is completely hidden from developers and I’ve never seen it so easily collected into a single tool. Huge kudos to dynaTrace for revealing this information and especially so for making it happen in Internet Explorer.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;And here’s Steve Souders, web perfomance guru, says:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;When it comes to analyzing your JavaScript code to find what&amp;#39;s causing performance issues, dynaTrace Ajax Edition has the information to pinpoint the high-level area all the way down to the actual line of code that needs to be improved. I recommend you give it a test run and add it to your performance tool kit.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Must-have for any web-developer, seriously.&lt;/p&gt;
-&lt;p&gt;It’s interesting to see that Google and Apple play a good catch-up – both Chromium 4 and Apple Safari teams invest significant resources in building devtools, Chromium 4 finally
-&lt;a href=&quot;http://www.youtube.com/watch?v=OxW1dCjOstE&quot;&gt;has its own CPU &amp;amp; heap profilers now&lt;/a&gt; on top of V8. So bearing in mind that Firefox profiling will be supported by dynaTrace Ajax, it’s only Opera that’s left behind the game at the moment.&lt;/p&gt;
-&lt;p&gt;Come on, Opera team!&lt;/p&gt;
-&lt;p&gt;P.S. and by the way, Opera, can we get inPrivate browsing mode please?&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Useful JS tips - getBoundingClientRect()</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
+            <title>Universal Internet Explorer 6 CSS</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-ie6-universal.html"/>
             <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
-            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
-&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
-&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
-&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-06-ie6-universal.html</id>
+            <content type="html">&lt;p&gt;Today I’ve read an interesting article by Andy Clarke &lt;a href=&quot;http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here’s the author’s key points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;IE6 is hard to support&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;it’s so cool to write CSS for modern browsers only&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;sites shouldn’t look the same in different browsers&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;people come to websites for content&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So by throwing these thoughts in he’s making a conclusion that IE6 should be supported in a limited way – i.e. by giving it &lt;a href=&quot;http://forabeautifulweb.com/demo/2009/05/21/ie6.0.3.css&quot;&gt;a special “stripped” CSS&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So let’s see.&lt;/p&gt;
+&lt;h2 id=&quot;ie6-is-hard-to-support&quot;&gt;IE6 is hard to support&lt;/h2&gt;
+&lt;p&gt;From technical side it’s not hard, period. The amount of effort depends on the project peculiarities (to a degree).&lt;/p&gt;
+&lt;h2 id=&quot;it-s-cool-to-write-css-for-modern-browsers-only&quot;&gt;It’s cool to write CSS for modern browsers only&lt;/h2&gt;
+&lt;p&gt;Doing your work is not always doing cool stuff.&lt;/p&gt;
+&lt;h2 id=&quot;sites-shouldn-t-look-the-same-in-different-browsers&quot;&gt;Sites shouldn’t look the same in different browsers&lt;/h2&gt;
+&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
+&lt;h2 id=&quot;people-come-to-websites-for-content&quot;&gt;People come to websites for content&lt;/h2&gt;
+&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
+&lt;h2 id=&quot;i-do-keep-saying-that-all-this-depends-on-the-project-peculiarities-&quot;&gt;I do keep saying that all this depends on the project peculiarities.&lt;/h2&gt;
+&lt;p&gt;And I can’t understand why it’s not obvious to Andy Clarke. When a project is planned, all the issues are taken into consideration. As websites are displayed in different browsers, three key factors matter:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;nature of the website&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;market share of the browser&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;cost of supporting a browser&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Do I need to explain in more detail?&lt;/p&gt;
+&lt;p&gt;P.S. Yes I think people should upgrade from IE6. But not because it has an outdated support for standards, but just because newer browsers provide much better user experience.&lt;/p&gt;
+&lt;p&gt;P.P.S. You know, Andy, I really appreciate what you’re doing. I urge you not to stop. I’ll be priced higher for the same skills that I have now just because you (and those whom you manage to convince) deliberately choose not to deliver what clients need :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -1129,107 +1172,6 @@ and 2 Gb USB flash card for &lt;a href=&quot;http://www.microsoft.com/windows/wi
 &lt;p&gt;So in my case the 80 and 443 ports were taken by Skype. Whenever you start Skype, it tries to bind 80 and 443 ports, and so if you start your web server later, it won’t be able to work as ports are occupied. This Skype behaviour can be turned off by deselecting “Use port 80 and 443 as alternatives for incoming connections” here:&lt;/p&gt;
 &lt;p&gt;&lt;img title=&quot;image&quot; border=&quot;0&quot; alt=&quot;image&quot; src=&quot;http://sharovatov.files.wordpress.com/2009/06/image3.png?w=661&amp;#038;h=579&quot; width=&quot;661&quot; height=&quot;579&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Hope this saves somebody some time :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Universal Internet Explorer 6 CSS</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-ie6-universal.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-ie6-universal.html</id>
-            <content type="html">&lt;p&gt;Today I’ve read an interesting article by Andy Clarke &lt;a href=&quot;http://forabeautifulweb.com/blog/about/universal_internet_explorer_6_css&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Here’s the author’s key points:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;IE6 is hard to support&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;it’s so cool to write CSS for modern browsers only&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;sites shouldn’t look the same in different browsers&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;people come to websites for content&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So by throwing these thoughts in he’s making a conclusion that IE6 should be supported in a limited way – i.e. by giving it &lt;a href=&quot;http://forabeautifulweb.com/demo/2009/05/21/ie6.0.3.css&quot;&gt;a special “stripped” CSS&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So let’s see.&lt;/p&gt;
-&lt;h2 id=&quot;ie6-is-hard-to-support&quot;&gt;IE6 is hard to support&lt;/h2&gt;
-&lt;p&gt;From technical side it’s not hard, period. The amount of effort depends on the project peculiarities (to a degree).&lt;/p&gt;
-&lt;h2 id=&quot;it-s-cool-to-write-css-for-modern-browsers-only&quot;&gt;It’s cool to write CSS for modern browsers only&lt;/h2&gt;
-&lt;p&gt;Doing your work is not always doing cool stuff.&lt;/p&gt;
-&lt;h2 id=&quot;sites-shouldn-t-look-the-same-in-different-browsers&quot;&gt;Sites shouldn’t look the same in different browsers&lt;/h2&gt;
-&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
-&lt;h2 id=&quot;people-come-to-websites-for-content&quot;&gt;People come to websites for content&lt;/h2&gt;
-&lt;p&gt;It fully depends on the project peculiarities.&lt;/p&gt;
-&lt;h2 id=&quot;i-do-keep-saying-that-all-this-depends-on-the-project-peculiarities-&quot;&gt;I do keep saying that all this depends on the project peculiarities.&lt;/h2&gt;
-&lt;p&gt;And I can’t understand why it’s not obvious to Andy Clarke. When a project is planned, all the issues are taken into consideration. As websites are displayed in different browsers, three key factors matter:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;nature of the website&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;market share of the browser&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;cost of supporting a browser&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Do I need to explain in more detail?&lt;/p&gt;
-&lt;p&gt;P.S. Yes I think people should upgrade from IE6. But not because it has an outdated support for standards, but just because newer browsers provide much better user experience.&lt;/p&gt;
-&lt;p&gt;P.P.S. You know, Andy, I really appreciate what you’re doing. I urge you not to stop. I’ll be priced higher for the same skills that I have now just because you (and those whom you manage to convince) deliberately choose not to deliver what clients need :)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Efficient IE version targeting</title>
-            <link href="http://sharovatov.github.io/posts/2009-06-ie-version-targeting.html"/>
-            <updated>2009-06-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-06-ie-version-targeting.html</id>
-            <content type="html">&lt;p&gt;When you’re writing a web page, you have to keep in mind that IE6 and IE7 have higher market share than all other browsers combined and IE8 has only started gaining popularity. So in most projects you have to support IE6 and IE7, even though IE6 support for CSS2.1 has a significant amount of bugs and issues. IE7 was slightly better and IE8 provides full CSS2.1 support, which is nice.&lt;/p&gt;
-&lt;p&gt;Some web-developers whose fanatic hatred to IE blows out common sense, &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/22/universal-internet-explorer-6-css/&quot;&gt;propose really weird “solutions”&lt;/a&gt;, while all sane people support all their target audience browsers with &lt;a href=&quot;http://marketshare.hitslink.com/browser-market-share.aspx?qprid=2&quot;&gt;significant market share&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So we have three IE versions with different level of CSS support. One of the most often mentioned issues is IE6’s lack of support for &lt;a href=&quot;http://www.w3.org/TR/CSS2/selector.html#dynamic-pseudo-classes&quot;&gt;&lt;code&gt;:hover&lt;/code&gt;pseudo class&lt;/a&gt; on elements other than links. IE7 and IE8 support &lt;code&gt;:hover&lt;/code&gt; fully. Another sample is that IE8 supports &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc304082(VS.85).aspx#gen_content&quot;&gt;&lt;code&gt;:after&lt;/code&gt; and &lt;code&gt;:before&lt;/code&gt; generated content elements&lt;/a&gt; while IE6 and IE7 don’t. These are just two samples that spring to my mind just to show that level of CSS2.1 support really differs.&lt;/p&gt;
-&lt;p&gt;The first thing that most web-developers would use to specify a CSS rule for different browsers would be CSS hacks. But this leads to problems. For example, when IE7 wasn’t yet published, and people were using IE6, many developers used star selector bug to fix CSS2.1 issues in IE. When IE7 was shipped, it fixed support for star hack, but didn’t fix all the CSS2.1 issues. So using CSS hacks is &lt;strong&gt;perfectly backwards compatible&lt;/strong&gt; – you know in which already shipped browsers and their versions it works – but is &lt;strong&gt;not future-compatible&lt;/strong&gt;. This is because CSS hacks do not provide an obvious mechanism for a version targeting.&lt;/p&gt;
-&lt;h2 id=&quot;conditional-comments-to-rescue&quot;&gt;Conditional comments to rescue&lt;/h2&gt;
-&lt;p&gt;Microsoft was aware that this problem would occur and in IE5 (and all newer versions, of course) they included &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms537512(VS.85).aspx&quot;&gt;conditional comments&lt;/a&gt; feature. There’s a perfect PPK’s post about &lt;a href=&quot;http://www.quirksmode.org/css/condcom.html&quot;&gt;“conditional comments”&lt;/a&gt; with samples so I’m not going to dive into details of conditional comments in this post. The main thing is that you can specify a version vector (IE version) and serve different IE versions with separate content – usually, CSS files.&lt;/p&gt;
-&lt;p&gt;Conditional comments allow to &lt;em&gt;configure&lt;/em&gt; compatibility.&lt;/p&gt;
-&lt;p&gt;I consider a best practice to set one separate CSS and JS file for Internet Explorers that are older than IE8:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;!--[if lte IE 7]&amp;gt;
-    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;iefix.css&amp;quot;&amp;gt;
-&amp;lt;![endif]--&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And inside this iefix.css I use star selector hack to fix issues in IE6 and lower:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* html #someElement { /*rules for IE6 and lower */ }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Using star selector hack here is a perfect way to target IE6 and lower:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;we are aware that star selector CSS hack was fixed in IE7&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;we are inside a CSS file that is only served to IE7 and lower&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;It’s perfectly future-compatible (IE8 and newer versions won’t fetch it as it’s inside a conditional comments) and also perfectly backwards-compatible (we know that star selector hack works in IE6 and lower versions).&lt;/p&gt;
-&lt;p&gt;So there’s no real need for a separate CSS file for IE6 and lower because we can easily separate IE7 and lower versions’ rules inside our iefix.css file.&lt;/p&gt;
-&lt;h2 id=&quot;version-targeting-in-javascript&quot;&gt;Version targeting in javascript&lt;/h2&gt;
-&lt;p&gt;There are cases when adding some javascript for IE6 and lower versions is required, for example, if you want to emulate &lt;code&gt;:hover&lt;/code&gt; support on some elements.&lt;/p&gt;
-&lt;p&gt;Microsoft thought about this and along with conditional comments provided a &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ahx1z4fs(VS.71).aspx&quot;&gt;conditional compilation&lt;/a&gt; technique. The approach is very similar – you put some javascript code inside &lt;strong&gt;/&lt;em&gt;@cc_on @&lt;/em&gt;/&lt;/strong&gt;
-comment block and IE parses it.&lt;/p&gt;
-&lt;p&gt;To control which version to target, special &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/7142yyxw(VS.71).aspx&quot;&gt;conditional compilation variable&lt;/a&gt; &lt;code&gt;@_jscript_version&lt;/code&gt; is provided. This variable shows the build number of JScript compiler. Different versions of IE had different JScript compiler versions: IE5.01 had &lt;code&gt;@_jscript_version&lt;/code&gt; of 5.1, IE5.5 – 5.5, IE6 – 5.6, IE7 – 5.7 and IE8 – 5.8. &lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;And this approach worked fine until Windows XP Service Pack 3 was shipped which replaced IE6’s JScript compiler of version 5.6 with a newer one of version 5.7&lt;/strong&gt;. Before SP3 you could use the following code to separate IE6 from IE7 and upper
-versions:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/*@cc_on
-    if (@_jscript_version &amp;lt; 5.7) {
-        //code for IE6 and lower
-    } else {
-        //code for IE7 and upper
-    }
-@*/
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But when SP3 was installed, IE6 JScript compiler was updated and wouldn&amp;#39;t enter the first if clause. This was a serious compatibility issue and many libraries had to update their code to find a workaround. The problem was that we were solving an issue of one technology (CSS) with another (javascript), and these technologies are supposed to be loosely coupled. So JScript was upgraded, new features were added, but CSS wasn’t. This leads me to a conclusion that&lt;/p&gt;
-&lt;h2 id=&quot;using-conditional-compilation-version-targeting-to-solve-css-problems-is-wrong&quot;&gt;Using conditional compilation version targeting to solve CSS problems is wrong&lt;/h2&gt;
-&lt;p&gt;Again, these technologies are loosely coupled and you cannot assume that if &lt;code&gt;@_jscript_version&lt;/code&gt; is &lt;strong&gt;X&lt;/strong&gt;, CSS parser version is &lt;strong&gt;Y&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;So ideally, if you want to support &lt;code&gt;:hover&lt;/code&gt; for IE6 and lower in javascript, serve a separate javascript file for them using conditional comments.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;But if want to support something that’s not provided in a specific version of JScript compiler – using conditional compilation is perfectly valid&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;P.S. Well, if you still want to separate all IE6 from IE7, here’s a snippet that would work:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/*@cc_on
-    if (@_jscript_version==5.6 ||
-        (@_jscript_version==5.7 &amp;amp;amp;&amp;amp;amp;
-         navigator.userAgent.toLowerCase().indexOf(&amp;quot;msie 6.&amp;quot;) != -1)) {
-            //ie6 code
-        }
-@*/
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So even if Windows XP user installed Service Pack 3 which updated JScript compiler to version 5.7, IE6 own version will still be 6. And it’s perfectly safe to use userAgent sniffing inside a conditional comments block which will be run in IE only.&lt;/p&gt;
 </content>
         </entry>
     
@@ -1325,16 +1267,73 @@ versions:&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>ITIL Conference</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-itil.html"/>
-            <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-itil.html</id>
-            <content type="html">&lt;p&gt;I&amp;#39;ve recently visited &lt;a href=&quot;http://www.osp.ru/conf/2007/0529/3903142&quot;&gt;OSPConf&lt;/a&gt; on business processes automation and ITIL. Was held at &lt;a href=&quot;http://www.radissonsas.com/cs/Satellite/Page/RadissonSAS/Page/rsasHotelDescription/1053502961507/en/hotelCode--mowzh/&quot;&gt;Radisson SAS hotel&lt;/a&gt; – quite a nice hotel, the launch was brilliant, the loos were not better than &lt;em&gt;*&lt;/em&gt;. But the conference was brilliant – there were top IT guys from HP, IBS, Megafon, Naumen, InlineGroup, IT Expert. Was really interesting to listen about the ITSM implementation in current investments-greedy crisis world. What I found out for myself was that if in your company and IT dept management is done properly, crisis won’t
-affect you or even if it does, you’ll be able to easily explain to business what value it will lose if they cut investments or stop projects. So all the management practices and tools are for making all the work really transparent so that managers and CEO can focus and spend more time on strategic decisions rather than on operational routines. I had all these thoughts flying in my head, but when I listened to speech of &lt;a href=&quot;http://www.cbr.ru/eng/&quot;&gt;CBR&lt;/a&gt; IT chief, all the thoughts got sorted in a proper way.&lt;/p&gt;
-&lt;p&gt;And I also have to note that ITSM software is not that expensive for SME – excellent
-&lt;a href=&quot;http://www.omninet.biz/index.php?id=138&quot;&gt;Omnitracker&lt;/a&gt; costs from €12000 and it’s got everything your company might need, plus API for integration, plus additional templates – it will automate everything. &lt;/p&gt;
-&lt;p&gt;However, the consultancy will be around 10 times more expensive. But again – nothing stops your company to send your own IT guys for training and save a fortune :)&lt;/p&gt;
-&lt;p&gt;So thanks for all the interesting stuff, OSP! The conference was really worthy to visit! Will probably write a couple more blog posts on the topic as soon as I get all my thoughts in order :)&lt;/p&gt;
+            <title>Useful JS tips - getBoundingClientRect()</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-getboundingrect.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-getboundingrect.html</id>
+            <content type="html">&lt;p&gt;What do you use to get element’s offset? Looping through its parents and summing offsetLeft/offsetTop numbers? I bet you had problems with it. Well, I did, especially when additional positioning context was generated by an element with position!=static.&lt;/p&gt;
+&lt;p&gt;10 years ago in IE5.0 Microsoft invented a better way - &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms536433(VS.85).aspx&quot;&gt;getBoundingClientRect()&lt;/a&gt; method.&lt;/p&gt;
+&lt;p&gt;It’s been &lt;a href=&quot;http://www.quirksmode.org/blog/archives/2008/02/the_cssom_view.html&quot;&gt;popularised by PPK&lt;/a&gt;, specified in &lt;a href=&quot;http://www.w3.org/TR/cssom-view/#the-getclientrects&quot;&gt;cssom-view spec&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/En/DOM/Element.getBoundingClientRect&quot;&gt;copied by Firefox 3&lt;/a&gt;, Opera 9, Chrome 2, Safari; &lt;a href=&quot;http://ejohn.org/blog/getboundingclientrect-is-awesome/&quot;&gt;used in jQuery&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;element.getBoundingClientRect()&lt;/code&gt; basically returns the object containing this element’s coordinates according to the window element. So you don’t have to do a loop, just call this method once and get the results. The only thing it doesn’t count for is scrolling offset, which can be calculated easily.&lt;/p&gt;
+&lt;p&gt;Extremely useful, thanks Microsoft IETeam!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Efficient IE version targeting</title>
+            <link href="http://sharovatov.github.io/posts/2009-06-ie-version-targeting.html"/>
+            <updated>2009-06-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-06-ie-version-targeting.html</id>
+            <content type="html">&lt;p&gt;When you’re writing a web page, you have to keep in mind that IE6 and IE7 have higher market share than all other browsers combined and IE8 has only started gaining popularity. So in most projects you have to support IE6 and IE7, even though IE6 support for CSS2.1 has a significant amount of bugs and issues. IE7 was slightly better and IE8 provides full CSS2.1 support, which is nice.&lt;/p&gt;
+&lt;p&gt;Some web-developers whose fanatic hatred to IE blows out common sense, &lt;a href=&quot;http://sharovatov.wordpress.com/2009/05/22/universal-internet-explorer-6-css/&quot;&gt;propose really weird “solutions”&lt;/a&gt;, while all sane people support all their target audience browsers with &lt;a href=&quot;http://marketshare.hitslink.com/browser-market-share.aspx?qprid=2&quot;&gt;significant market share&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So we have three IE versions with different level of CSS support. One of the most often mentioned issues is IE6’s lack of support for &lt;a href=&quot;http://www.w3.org/TR/CSS2/selector.html#dynamic-pseudo-classes&quot;&gt;&lt;code&gt;:hover&lt;/code&gt;pseudo class&lt;/a&gt; on elements other than links. IE7 and IE8 support &lt;code&gt;:hover&lt;/code&gt; fully. Another sample is that IE8 supports &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/cc304082(VS.85).aspx#gen_content&quot;&gt;&lt;code&gt;:after&lt;/code&gt; and &lt;code&gt;:before&lt;/code&gt; generated content elements&lt;/a&gt; while IE6 and IE7 don’t. These are just two samples that spring to my mind just to show that level of CSS2.1 support really differs.&lt;/p&gt;
+&lt;p&gt;The first thing that most web-developers would use to specify a CSS rule for different browsers would be CSS hacks. But this leads to problems. For example, when IE7 wasn’t yet published, and people were using IE6, many developers used star selector bug to fix CSS2.1 issues in IE. When IE7 was shipped, it fixed support for star hack, but didn’t fix all the CSS2.1 issues. So using CSS hacks is &lt;strong&gt;perfectly backwards compatible&lt;/strong&gt; – you know in which already shipped browsers and their versions it works – but is &lt;strong&gt;not future-compatible&lt;/strong&gt;. This is because CSS hacks do not provide an obvious mechanism for a version targeting.&lt;/p&gt;
+&lt;h2 id=&quot;conditional-comments-to-rescue&quot;&gt;Conditional comments to rescue&lt;/h2&gt;
+&lt;p&gt;Microsoft was aware that this problem would occur and in IE5 (and all newer versions, of course) they included &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ms537512(VS.85).aspx&quot;&gt;conditional comments&lt;/a&gt; feature. There’s a perfect PPK’s post about &lt;a href=&quot;http://www.quirksmode.org/css/condcom.html&quot;&gt;“conditional comments”&lt;/a&gt; with samples so I’m not going to dive into details of conditional comments in this post. The main thing is that you can specify a version vector (IE version) and serve different IE versions with separate content – usually, CSS files.&lt;/p&gt;
+&lt;p&gt;Conditional comments allow to &lt;em&gt;configure&lt;/em&gt; compatibility.&lt;/p&gt;
+&lt;p&gt;I consider a best practice to set one separate CSS and JS file for Internet Explorers that are older than IE8:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--[if lte IE 7]&amp;gt;
+    &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;iefix.css&amp;quot;&amp;gt;
+&amp;lt;![endif]--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And inside this iefix.css I use star selector hack to fix issues in IE6 and lower:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;* html #someElement { /*rules for IE6 and lower */ }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Using star selector hack here is a perfect way to target IE6 and lower:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;we are aware that star selector CSS hack was fixed in IE7&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;we are inside a CSS file that is only served to IE7 and lower&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It’s perfectly future-compatible (IE8 and newer versions won’t fetch it as it’s inside a conditional comments) and also perfectly backwards-compatible (we know that star selector hack works in IE6 and lower versions).&lt;/p&gt;
+&lt;p&gt;So there’s no real need for a separate CSS file for IE6 and lower because we can easily separate IE7 and lower versions’ rules inside our iefix.css file.&lt;/p&gt;
+&lt;h2 id=&quot;version-targeting-in-javascript&quot;&gt;Version targeting in javascript&lt;/h2&gt;
+&lt;p&gt;There are cases when adding some javascript for IE6 and lower versions is required, for example, if you want to emulate &lt;code&gt;:hover&lt;/code&gt; support on some elements.&lt;/p&gt;
+&lt;p&gt;Microsoft thought about this and along with conditional comments provided a &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ahx1z4fs(VS.71).aspx&quot;&gt;conditional compilation&lt;/a&gt; technique. The approach is very similar – you put some javascript code inside &lt;strong&gt;/&lt;em&gt;@cc_on @&lt;/em&gt;/&lt;/strong&gt;
+comment block and IE parses it.&lt;/p&gt;
+&lt;p&gt;To control which version to target, special &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/7142yyxw(VS.71).aspx&quot;&gt;conditional compilation variable&lt;/a&gt; &lt;code&gt;@_jscript_version&lt;/code&gt; is provided. This variable shows the build number of JScript compiler. Different versions of IE had different JScript compiler versions: IE5.01 had &lt;code&gt;@_jscript_version&lt;/code&gt; of 5.1, IE5.5 – 5.5, IE6 – 5.6, IE7 – 5.7 and IE8 – 5.8. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;And this approach worked fine until Windows XP Service Pack 3 was shipped which replaced IE6’s JScript compiler of version 5.6 with a newer one of version 5.7&lt;/strong&gt;. Before SP3 you could use the following code to separate IE6 from IE7 and upper
+versions:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/*@cc_on
+    if (@_jscript_version &amp;lt; 5.7) {
+        //code for IE6 and lower
+    } else {
+        //code for IE7 and upper
+    }
+@*/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But when SP3 was installed, IE6 JScript compiler was updated and wouldn&amp;#39;t enter the first if clause. This was a serious compatibility issue and many libraries had to update their code to find a workaround. The problem was that we were solving an issue of one technology (CSS) with another (javascript), and these technologies are supposed to be loosely coupled. So JScript was upgraded, new features were added, but CSS wasn’t. This leads me to a conclusion that&lt;/p&gt;
+&lt;h2 id=&quot;using-conditional-compilation-version-targeting-to-solve-css-problems-is-wrong&quot;&gt;Using conditional compilation version targeting to solve CSS problems is wrong&lt;/h2&gt;
+&lt;p&gt;Again, these technologies are loosely coupled and you cannot assume that if &lt;code&gt;@_jscript_version&lt;/code&gt; is &lt;strong&gt;X&lt;/strong&gt;, CSS parser version is &lt;strong&gt;Y&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So ideally, if you want to support &lt;code&gt;:hover&lt;/code&gt; for IE6 and lower in javascript, serve a separate javascript file for them using conditional comments.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But if want to support something that’s not provided in a specific version of JScript compiler – using conditional compilation is perfectly valid&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;P.S. Well, if you still want to separate all IE6 from IE7, here’s a snippet that would work:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/*@cc_on
+    if (@_jscript_version==5.6 ||
+        (@_jscript_version==5.7 &amp;amp;amp;&amp;amp;amp;
+         navigator.userAgent.toLowerCase().indexOf(&amp;quot;msie 6.&amp;quot;) != -1)) {
+            //ie6 code
+        }
+@*/
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So even if Windows XP user installed Service Pack 3 which updated JScript compiler to version 5.7, IE6 own version will still be 6. And it’s perfectly safe to use userAgent sniffing inside a conditional comments block which will be run in IE only.&lt;/p&gt;
 </content>
         </entry>
     
@@ -1351,14 +1350,16 @@ affect you or even if it does, you’ll be able to easily explain to business wh
         </entry>
     
         <entry>
-            <title>IE8 news - MUI packs, compatibility view for intranet</title>
-            <link href="http://sharovatov.github.io/posts/2009-05-ie8news.html"/>
+            <title>ITIL Conference</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-itil.html"/>
             <updated>2009-05-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-05-ie8news.html</id>
-            <content type="html">&lt;p&gt;First of all, as guys at IEBLOG reported, IE8 MUI packs for Windows XP (and also Windows Server 2003) are now available and have the following languages: Arabic, Chinese (Traditional), Chinese (Hong Kong), Czech, Danish, Dutch, Finnish, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Portugal), Portuguese (Brazil), Russian, Spanish, Swedish, Turkish, Bulgarian, Croatian, Estonian, Latvian, Lithuanian, Romanian, Slovenian, Slovakian, Thai. This is great for those who use localised versions.&lt;/p&gt;
-&lt;p&gt;Another interesting thing is that IE8 renders sites from Intranet security zone in compatibility view by default, unless the page specifically indicates that it should be rendered in standards-compliant mode (either by corresponding META or HTTP header). &lt;/p&gt;
-&lt;p&gt;However, this behaviour can be controlled from Group Policy. This is one of the most valuable benefits of using Microsoft technologies – you get great level of
-integration out-of-the-box.&lt;/p&gt;
+            <id>http://sharovatov.github.io/posts/2009-05-itil.html</id>
+            <content type="html">&lt;p&gt;I&amp;#39;ve recently visited &lt;a href=&quot;http://www.osp.ru/conf/2007/0529/3903142&quot;&gt;OSPConf&lt;/a&gt; on business processes automation and ITIL. Was held at &lt;a href=&quot;http://www.radissonsas.com/cs/Satellite/Page/RadissonSAS/Page/rsasHotelDescription/1053502961507/en/hotelCode--mowzh/&quot;&gt;Radisson SAS hotel&lt;/a&gt; – quite a nice hotel, the launch was brilliant, the loos were not better than &lt;em&gt;*&lt;/em&gt;. But the conference was brilliant – there were top IT guys from HP, IBS, Megafon, Naumen, InlineGroup, IT Expert. Was really interesting to listen about the ITSM implementation in current investments-greedy crisis world. What I found out for myself was that if in your company and IT dept management is done properly, crisis won’t
+affect you or even if it does, you’ll be able to easily explain to business what value it will lose if they cut investments or stop projects. So all the management practices and tools are for making all the work really transparent so that managers and CEO can focus and spend more time on strategic decisions rather than on operational routines. I had all these thoughts flying in my head, but when I listened to speech of &lt;a href=&quot;http://www.cbr.ru/eng/&quot;&gt;CBR&lt;/a&gt; IT chief, all the thoughts got sorted in a proper way.&lt;/p&gt;
+&lt;p&gt;And I also have to note that ITSM software is not that expensive for SME – excellent
+&lt;a href=&quot;http://www.omninet.biz/index.php?id=138&quot;&gt;Omnitracker&lt;/a&gt; costs from €12000 and it’s got everything your company might need, plus API for integration, plus additional templates – it will automate everything. &lt;/p&gt;
+&lt;p&gt;However, the consultancy will be around 10 times more expensive. But again – nothing stops your company to send your own IT guys for training and save a fortune :)&lt;/p&gt;
+&lt;p&gt;So thanks for all the interesting stuff, OSP! The conference was really worthy to visit! Will probably write a couple more blog posts on the topic as soon as I get all my thoughts in order :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -1923,6 +1924,18 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
         </entry>
     
         <entry>
+            <title>IE8 news - MUI packs, compatibility view for intranet</title>
+            <link href="http://sharovatov.github.io/posts/2009-05-ie8news.html"/>
+            <updated>2009-05-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-05-ie8news.html</id>
+            <content type="html">&lt;p&gt;First of all, as guys at IEBLOG reported, IE8 MUI packs for Windows XP (and also Windows Server 2003) are now available and have the following languages: Arabic, Chinese (Traditional), Chinese (Hong Kong), Czech, Danish, Dutch, Finnish, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Portugal), Portuguese (Brazil), Russian, Spanish, Swedish, Turkish, Bulgarian, Croatian, Estonian, Latvian, Lithuanian, Romanian, Slovenian, Slovakian, Thai. This is great for those who use localised versions.&lt;/p&gt;
+&lt;p&gt;Another interesting thing is that IE8 renders sites from Intranet security zone in compatibility view by default, unless the page specifically indicates that it should be rendered in standards-compliant mode (either by corresponding META or HTTP header). &lt;/p&gt;
+&lt;p&gt;However, this behaviour can be controlled from Group Policy. This is one of the most valuable benefits of using Microsoft technologies – you get great level of
+integration out-of-the-box.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Windows Live</title>
             <link href="http://sharovatov.github.io/posts/2009-04-wl.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -1956,15 +1969,6 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 &lt;/ul&gt;
 &lt;p&gt;Good stuff, Live Team, thanks!&lt;/p&gt;
 &lt;p&gt;P.S. for more information, read &lt;a href=&quot;http://windowslivewriter.spaces.live.com/blog/cns!D85741BB5E0BE8AA!1650.entry&quot;&gt;this blogpost&lt;/a&gt;.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>IE8 - important update!</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-ie8impupd.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-ie8impupd.html</id>
-            <content type="html">&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2009/04/10/prepare-for-automatic-update-distribution-of-ie8.aspx&quot;&gt;IE team says that starting from this week IE8 will be distributed as an important update&lt;/a&gt;! Hooray! It will be marked as important update for Vista and Windows Server 2008. Hope most people will install it and we’ll soon forget about IE6 and IE7 :)&lt;/p&gt;
 </content>
         </entry>
     
@@ -2467,6 +2471,29 @@ content:&lt;/p&gt;
         </entry>
     
         <entry>
+            <title>IE8 - important update!</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-ie8impupd.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-ie8impupd.html</id>
+            <content type="html">&lt;p&gt;&lt;a href=&quot;http://blogs.msdn.com/ie/archive/2009/04/10/prepare-for-automatic-update-distribution-of-ie8.aspx&quot;&gt;IE team says that starting from this week IE8 will be distributed as an important update&lt;/a&gt;! Hooray! It will be marked as important update for Vista and Windows Server 2008. Hope most people will install it and we’ll soon forget about IE6 and IE7 :)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>rel=&quot;canonical&quot;</title>
+            <link href="http://sharovatov.github.io/posts/2009-04-canonical.html"/>
+            <updated>2009-04-01T00:00:00.000Z</updated>
+            <id>http://sharovatov.github.io/posts/2009-04-canonical.html</id>
+            <content type="html">&lt;p&gt;I recently found out a very useful SEO stuff supported by Google (&lt;a href=&quot;http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html&quot;&gt;here&lt;/a&gt;), Microsoft Live Search (&lt;a href=&quot;http://blogs.msdn.com/webmaster/archive/2009/02/12/partnering-to-help-solve-duplicate-content-issues.aspx&quot;&gt;here&lt;/a&gt;), Yahoo (&lt;a href=&quot;http://blog.ask.com/2009/02/ask-is-going-canonical.html&quot;&gt;here&lt;/a&gt;) and Ask.com ( &lt;a href=&quot;http://ysearchblog.com/2009/02/12/fighting-duplication-adding-more-arrows-to-your-quiver/&quot;&gt;here&lt;/a&gt;) – canonical links.&lt;/p&gt;
+&lt;p&gt;Basically, if you have a page accessible by multiple URLs, from search engine’s prospective you’re bloating its database by serving duplicate content. So to avoid this, you have to set &lt;code&gt;&amp;lt;link rel=&amp;quot;canonical&amp;quot; href=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt; with &lt;code&gt;href&lt;/code&gt; pointing to the original URL of this page. Search engines will check the url in href attr and won’t put a duplicate content penalty on your pages.&lt;/p&gt;
+&lt;p&gt;Useful thing to remember and use!&lt;/p&gt;
+&lt;p&gt;WordPress (&lt;a href=&quot;http://wordpress.org/extend/plugins/canonical/&quot;&gt;here&lt;/a&gt;) and RoR (
+&lt;a href=&quot;http://github.com/mbleigh/canonical-url/tree/master&quot;&gt;here&lt;/a&gt;) have already got plugins for canonical URL support. Hope to see support for this useful rel in other frameworks, forum and blog engines.&lt;/p&gt;
+&lt;p&gt;And I just found an &lt;a href=&quot;http://annevankesteren.nl/2009/04/rev-canonical&quot;&gt;interesting post on this topic&lt;/a&gt; by Anne van Kesteren with interesting discussion going in comments.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Weird bug with hiding columns in IE7</title>
             <link href="http://sharovatov.github.io/posts/2009-04-ie7weirdcolbug.html"/>
             <updated>2009-04-01T00:00:00.000Z</updated>
@@ -2491,20 +2518,6 @@ content:&lt;/p&gt;
 @*/
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to the toggling function. As you may know, js code within &lt;code&gt;/*@cc_on ... @*/&lt;/code&gt; block will be executed only by IE, and only IE8 has support for &lt;code&gt;document.querySelector&lt;/code&gt; interface, so chances are that this code will be executed only in IE with version earlier than 8, which is precisely what we need (as IE8 doesn&amp;#39;t have this problem).&lt;/p&gt;
 &lt;p&gt;It’s interesting to know, that YUI Team in their &lt;a href=&quot;http://developer.yahoo.com/yui/datatable/&quot;&gt;DataTable control&lt;/a&gt; in order to implement hiding/showing functionality choosed to loop through all the cells and set their display individually (see &lt;code&gt;hideColumn&lt;/code&gt;/&lt;code&gt;showColumn&lt;/code&gt; functions &lt;a href=&quot;http://yui.yahooapis.com/2.7.0/build/datatable/datatable.js&quot;&gt;here&lt;/a&gt;). I understand that this is the bulletproof approach ready to use in any environment, but it can be rather ineffective when your table has a significant amount of rows as it will have to go through all the TR’s. And it will do the loop twice if you choose to hide two columns :) Of course, using my approach requires setting classes for those cells that you were going to hide, so it’s not that flexible, but in the controlled environment it’s definitely the best option.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>rel=&quot;canonical&quot;</title>
-            <link href="http://sharovatov.github.io/posts/2009-04-canonical.html"/>
-            <updated>2009-04-01T00:00:00.000Z</updated>
-            <id>http://sharovatov.github.io/posts/2009-04-canonical.html</id>
-            <content type="html">&lt;p&gt;I recently found out a very useful SEO stuff supported by Google (&lt;a href=&quot;http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html&quot;&gt;here&lt;/a&gt;), Microsoft Live Search (&lt;a href=&quot;http://blogs.msdn.com/webmaster/archive/2009/02/12/partnering-to-help-solve-duplicate-content-issues.aspx&quot;&gt;here&lt;/a&gt;), Yahoo (&lt;a href=&quot;http://blog.ask.com/2009/02/ask-is-going-canonical.html&quot;&gt;here&lt;/a&gt;) and Ask.com ( &lt;a href=&quot;http://ysearchblog.com/2009/02/12/fighting-duplication-adding-more-arrows-to-your-quiver/&quot;&gt;here&lt;/a&gt;) – canonical links.&lt;/p&gt;
-&lt;p&gt;Basically, if you have a page accessible by multiple URLs, from search engine’s prospective you’re bloating its database by serving duplicate content. So to avoid this, you have to set &lt;code&gt;&amp;lt;link rel=&amp;quot;canonical&amp;quot; href=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt; with &lt;code&gt;href&lt;/code&gt; pointing to the original URL of this page. Search engines will check the url in href attr and won’t put a duplicate content penalty on your pages.&lt;/p&gt;
-&lt;p&gt;Useful thing to remember and use!&lt;/p&gt;
-&lt;p&gt;WordPress (&lt;a href=&quot;http://wordpress.org/extend/plugins/canonical/&quot;&gt;here&lt;/a&gt;) and RoR (
-&lt;a href=&quot;http://github.com/mbleigh/canonical-url/tree/master&quot;&gt;here&lt;/a&gt;) have already got plugins for canonical URL support. Hope to see support for this useful rel in other frameworks, forum and blog engines.&lt;/p&gt;
-&lt;p&gt;And I just found an &lt;a href=&quot;http://annevankesteren.nl/2009/04/rev-canonical&quot;&gt;interesting post on this topic&lt;/a&gt; by Anne van Kesteren with interesting discussion going in comments.&lt;/p&gt;
 </content>
         </entry>
     

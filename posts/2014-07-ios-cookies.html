@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iOS javascript cookies persistence</title>
+    <meta name="generator" content="DocPad v6.60.3" />
+    <link  rel="stylesheet" href="/styles/style.css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+</head>
+<body>
+    <nav role="navigation">
+        <ol class="menu">
+            <li class="menu__item">
+                <a class="menu__item__link" href="/">blog posts</a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__item__link" href="/books.html">books read</a>
+            </li>
+        </ol>
+    </nav>
+    <div class="wrapper">
+        <h1>iOS javascript cookies persistence</h1>
+<p>I’ve recently come across an interesting issue in iOS Safari — if the browser is forced to quit, a cookie I set in javascript is forgotten when the browser is reopened.</p>
+<p>A <a href="http://sharovatov.ru/setcookie.php">minimal test page reproducing the issue</a> was prepared. The page provides two options to set the cookie — via a server-side php <code>setcookie</code> call and via a clientside javascript <code>document.cookie</code> call.</p>
+<p>If you set the cookie via javascript, all is fine until you close the browser: you can safely navigate to any other page on this or other domains and the cookie will retain as long as its expiry period lasts. However, if you force the browser to close, the cookie that was set in javascript gets forgotten. I couldn’t find any online resource explaining the behaviour, but only questions like <a href="http://stackoverflow.com/questions/17669938/in-ios-safari-cookie-data-gets-destroyed-on-closing-browser-from-background-i">this</a> or <a href="http://stackoverflow.com/questions/20041399/mobile-safari-clears-cookies-and-localstorage-on-hard-reset">that</a>. </p>
+<p>It seems to be a bug in iOS Safari, I can’t find out any reasonable explanation for why cookies set in javascript should differ in behaviour from those set from server-sent HTTP header. I can only guess that in iOS Safari javascript-set cookies are retained in some in-memory storage which is not serialized to the storage, while server-sent cookies are serialized and persisted. I submitted bug report to Apple’s bugreporter under 18568056 number, hope that Apple resolves this in some future iOS version.</p>
+<p>As the only way to set a cookie that will really persist seems to be to set it from the server, simplest workaround would be to create a server-side script that will return a single pixel with a required cookie. <a href="http://sharovatov.ru/setcookie-img.php">Resulting test page</a> proves this approach is working correctly, though it’s certainly weird that serious bug like this went unnoticed since iOS version 6.</p>
+
+<div class="comments"><div id="disqus_thread"></div>
+<script>
+	(function(){
+		window.disqus_shortname = 'sharovatov';
+		window.disqus_developer = '1';
+		window.disqus_url = 'http://sharovatov.github.io/posts/2014-07-ios-cookies.html';
+		window.disqus_identifier = 'posts-2014-07-ios-cookies';
+		window.disqus_title = 'iOS javascript cookies persistence';
+		if ( window.DISQUS ) {
+			return DISQUS.reset({
+				reload: true,
+				config: function () {
+					this.page.identifier = window.disqus_identifier;
+					this.page.url = window.disqus_url;
+					this.page.title = window.disqus_title;
+				}
+			});
+		}
+		else {
+		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		}
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+    </div>
+    
+</body>
+</html>
