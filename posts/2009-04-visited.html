@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>startpanic.com and :visited links privacy issue</title>
-    <meta name="generator" content="DocPad v6.60.3" />
+    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
@@ -30,7 +30,7 @@
 <p>UAs may therefore treat all links as unvisited links, or implement other measures to preserve the user&#39;s privacy while rendering visited and unvisited links differently.</p>
 </blockquote>
 <p>The <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=57351">original bugzilla issue</a> was reported back in October 2000, <a href="http://crypto.stanford.edu/sameorigin/">Stanford sameorigin whitepapers</a> had this issue described in 2002, then lots of articles followed, and then Ajaxian had an <a href="http://ajaxian.com/archives/spyjax-using-avisited-to-test-your-history">article</a> in 2007 which made this issue really popular.</p>
-<p>And now we have <a href="http://startpanic.com"><a href="http://startpanic.com">http://startpanic.com</a></a> with nice implementation of this approach – it has <a href="http://startpanic.com/db/db_en.txt">a txt database</a> of some thousands URLs that are tested for being visited.</p>
+<p>And now we have <a href="http://startpanic.com">http://startpanic.com</a> with nice implementation of this approach – it has <a href="http://startpanic.com/db/db_en.txt">a txt database</a> of some thousands URLs that are tested for being visited.</p>
 <p>You can check <a href="http://startpanic.com/js/sp.js">the code</a> – it’s pretty straight forward – links from the database are appended to the iframe where <code>:visited</code> links are displayed and others are hidden, then current style of the current link is checked and if it’s hidden, this link is appended to the big list of visited links.</p>
 <h2 id="possible-solutions">Possible solutions</h2>
 <p>Basically, there’re some ways to resolve this issue:</p>
@@ -64,7 +64,7 @@ a:visited span { display: block }
 <p><strong>Note</strong>: currently Google Chrome has a bug – it applies <code>:visited</code> pseudo class to
 links in Incognito Mode. However, <a href="http://codereview.chromium.org/42114">the bug is fixed</a> and the bugfix will be included in one of new updates.</p>
 <h2 id="-private-browsing-browser-feature-is-the-only-true-solution-to-this-issue-">“Private Browsing” browser feature is the only true solution to this issue.</h2>
-<p>Here’s a <u><a href="http://sharovatov.ru/testcases/visitedIssueTest.html">testcase</a></u>. I visited both <a href="http://ya.ru"><a href="http://ya.ru">http://ya.ru</a></a> and <a href="http://www.google.com"><a href="http://www.google.com">http://www.google.com</a></a> links in IE8 InPrivate mode, then went to the <a href="http://sharovatov.ru/testcases/visitedIssueTest.html">testcase page</a> and it didn’t tell anything as if I hadn’t visited these URLs.</p>
+<p>Here’s a <u><a href="http://sharovatov.ru/testcases/visitedIssueTest.html">testcase</a></u>. I visited both <a href="http://ya.ru">http://ya.ru</a> and <a href="http://www.google.com">http://www.google.com</a> links in IE8 InPrivate mode, then went to the <a href="http://sharovatov.ru/testcases/visitedIssueTest.html">testcase page</a> and it didn’t tell anything as if I hadn’t visited these URLs.</p>
 <p><img src="http://sharovatov.ru/screenshots/visitedIssueIE8.png"></p>
 <p>When I followed the same process in Google Chrome “Incognito mode”, it showed that I visited both ya.ru and Google.com. <a href="http://codereview.chromium.org/42114">This bug is fixed</a> and will be updated in newer versions of Google Chrome.</p>
 <p><img src="http://sharovatov.ru/screenshots/visitedIssueGG.png"></p>
