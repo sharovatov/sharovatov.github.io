@@ -2,37 +2,24 @@
 <html>
 <head>
     <title>IE7, standalone, впечатления.</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>IE7, standalone, впечатления.</h1>
 <p>Выкачал. Сначала поставил целиком и по-нормальному, посмотреть на него :) Отличный браузер. С юзабилити поработали, сразу видно. Не понравилось только то, что поисковый движок дополнительный можно добавить только с сайта microsoft :) Ну да это всё мелочи. Читает
 фиды. Всяких секьюрных функций - не пересчесть. Но самое приятное в том, что он удобен, Maxthon становится просто не нужен. Но при установке он прописывает себя везде, где можно, и IE6 из компьютера пропадает... Мне это не подходит.</p>
 <p><a href="http://tredosoft.com/IE7_standalone">Выкачал</a> <i>запускалку</i>, очень удобная штука. Деинсталлировал IE7, сделал как в инструкции - распаковал содержимое установщика, положил в папку с распакованным файл ie7s.exe, запустил. Конечно, функционал не полный (фиды не работают и еще всякие вкусности), но для тестов вполне хватает. На conditional comments откликается верно, с IE6 сосуществует в таком виде ровно. Итого у меня на компьютере 5 разных версий IE %) Можно выпендриться и поставить еще и IE3.0, да только смысла нет - пользователи его либо в фидо, либо умерли.</p>
 <p>Первым делом посмотрел, как выглядит блог в IE7... Выглядит, надо сказать, неплохо, только съехал чуть-чуть вверх блок с большой картинкой и текст понизу. Самое обидное, что в IE7 у меня не вылазят алёрты. Это существенно принижает ценность IE7 как standalone-версии. Я уже думаю о vmware с winXP+ie7. Пока только думаю. Так вот, про съехавший блок. Посмотрел в свой css, ничего не увидел такого, оказалось, что собака порылась в подгружаемой блоггером автоматически своей таблице стилей:</p>
-<pre><code>@import url(http://www.blogger.com/css/navbar/main.css);
-</code></pre><p>Я видел, что &quot;оперная&quot; и FF&#39;ная консоли ругаются на кучу underscore-хаков, но было как-то пофик. А щас вот посмотрел, таки да, начинаются у людей проблемы с IE7.</p>
+<pre><code>@import url(http://www.blogger.com/css/navbar/main.css);</code></pre><p>Я видел, что &quot;оперная&quot; и FF&#39;ная консоли ругаются на кучу underscore-хаков, но было как-то пофик. А щас вот посмотрел, таки да, начинаются у людей проблемы с IE7.</p>
 <pre><code>#space-for-ie {
     display:none;
     _border:0 !important;
     _display:block;
-}
-</code></pre><p>Ну вот IE7, как и FF/Opera, прочитал первое правило (underscore-bug у него решён), а на остальные внимания не обратил... В результате поехало %) Но что происходит? Не зря там стоял этот space-for-ie - он лечил известный IE-шный баг, который и в IE7 остался, к
+}</code></pre><p>Ну вот IE7, как и FF/Opera, прочитал первое правило (underscore-bug у него решён), а на остальные внимания не обратил... В результате поехало %) Но что происходит? Не зря там стоял этот space-for-ie - он лечил известный IE-шный баг, который и в IE7 остался, к
 сожалению...</p>
 <p>Если кому интересно, баг в том, что если один элемент спозиционирован абсолютно, то следующий за ним элемент потеряет верхний отступ, это даже <a href="http://www.brunildo.it/test/IEWapie2.html">описано</a>.</p>
 <p>К сожалению, этот пакостный блок <i>совсем</i> убрать никак нельзя - и html и css-код его блоггером подставляется автоматически... Потому я просто поправлю css :)</p>
@@ -40,8 +27,7 @@
 #space-for-ie { display: none; }
 /* заменим пропадающий в IE6/7 margin-top у ребёнка на такой же padding-bottom, но у родителя:*/
 body { padding-top: 50px !important;}
-body #header{ margin-top: 0;}
-</code></pre><p>Так правильнее, как мне кажется. И не нужны фильтры и хаки... Ещё бы blogger.com сам взял да поправил свои стили, а то уж больно много мусора в консолях FF/Opera после посещения какого-нибудь блога на блоггере. В общем, не знаю, приживётся ли IE7b3 на моей машине, надеюсь всё-таки, что скоро дождемся релиза, и что наконец-то поправят кучищу глюков.</p>
+body #header{ margin-top: 0;}</code></pre><p>Так правильнее, как мне кажется. И не нужны фильтры и хаки... Ещё бы blogger.com сам взял да поправил свои стили, а то уж больно много мусора в консолях FF/Opera после посещения какого-нибудь блога на блоггере. В общем, не знаю, приживётся ли IE7b3 на моей машине, надеюсь всё-таки, что скоро дождемся релиза, и что наконец-то поправят кучищу глюков.</p>
 
 <div class="comments"><div id="disqus_thread"></div>
 <script>
@@ -63,13 +49,13 @@ body #header{ margin-top: 0;}
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

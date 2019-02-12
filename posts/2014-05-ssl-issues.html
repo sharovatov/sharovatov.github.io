@@ -2,28 +2,17 @@
 <html>
 <head>
     <title>few HTTPS issues with wildcard certificates</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>few HTTPS issues with wildcard certificates</h1>
 <p>While playing with an https issue I discovered a few things in current HTTPS state in modern browsers:</p>
 <ul>
-<li><p>support for <a href="http://en.wikipedia.org/wiki/Wildcard_certificate">wildcard certificates</a>, though <a href="http://tools.ietf.org/html/rfc6125#section-6.4.3">not obligatory</a> and even discouraged in RFC6125, is provided in all modern browsers; so that one certificate can cover multiple wildcard domains by putting them in SAN list: <em>.first.domain.com, </em>.second.domain.com, *.third.domain.com</p>
+<li><p>support for <a href="http://en.wikipedia.org/wiki/Wildcard_certificate">wildcard certificates</a>, though <a href="http://tools.ietf.org/html/rfc6125#section-6.4.3">not obligatory</a> and even discouraged in RFC6125, is provided in all modern browsers; so that one certificate can cover multiple wildcard domains by putting them in SAN list: *.first.domain.com, *.second.domain.com, *.third.domain.com</p>
 </li>
 <li><p><a href="http://en.wikipedia.org/wiki/Extended_Validation_Certificate">EV</a> certificates <a href="http://www.networksolutions.com/support/why-can-t-i-get-a-wildcard-extended-validation-ev-ssl-certificate/">don’t support</a> quite useful wildcards in SANs (Subject Alternative Names) / CNs (Common Name) names at all</p>
 </li>
@@ -60,13 +49,13 @@ All other browsers follow the RFC and a user can manually pin an arbitrary certi
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

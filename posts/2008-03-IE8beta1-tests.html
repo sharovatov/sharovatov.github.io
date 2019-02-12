@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>Some IE8b1 test results:</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>Some IE8b1 test results:</h1>
 <h1 id="ie8b1-intitial-tests">IE8b1 intitial tests</h1>
@@ -35,8 +24,7 @@
 <ul>
 <li><p>First bug I&#39;ve noticed was happening when you set <code>position: relative</code> for the generated content rule. The tab where you have this page opened dies. And then due to newly introduced <a href="http://www.microsoft.com/windows/products/winfamily/ie/ie8/readiness/NewFeatures.htm#crash">crash recovery system</a>, it tries to recover the tab, loads the page and dies again and so on - an infinite loop that you can&#39;t break. But the weird thing is that it doesn&#39;t actually <em>die</em> - it shows a window promting to select a debugger. The kind of window that appears when you have errors in your javascript code.</p>
 <p>  here&#39;s the code sample:</p>
-<pre><code>  p:before {content: &quot;test&quot;; position: relative;}` 
-</code></pre><p>  and <a href="http://sharovatov.ru/testcases/genPosition.html">the testcase</a>.</p>
+<pre><code>  p:before {content: &quot;test&quot;; position: relative;}` </code></pre><p>  and <a href="http://sharovatov.ru/testcases/genPosition.html">the testcase</a>.</p>
 </li>
 <li><p>I noted the bug and continued testing. 
   Next thing I came up with was the fact that if the page doesn&#39;t have IMG/OBJECT/IFRAME elements or an image set as a background for an element, generated content is created <strong>after</strong> <code>window.onload</code>!</p>
@@ -142,13 +130,13 @@ elements in CSS and you can&#39;t query them using <strong>Selectors</strong>.</
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

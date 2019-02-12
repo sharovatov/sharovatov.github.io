@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>X-FRAME-OPTIONS</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>X-FRAME-OPTIONS</h1>
 <p>This X-FRAME-OPTIONS HTTP header invented by Microsoft for IE8 provides an easy way to work around <a href="http://en.wikipedia.org/wiki/Clickjacking">Clickjacking</a> security issue (see <a href="http://w2spconf.com/2010/papers/p27.pdf">this great paper</a> for even more details). The main article explaining how X-FRAME-OPTION works is this: <a href="http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx">http://blogs.msdn.com/b/ie/archive/2009/01/27/ie8-security-part-vii-clickjacking-defenses.aspx</a></p>
@@ -26,16 +15,16 @@
 <table border="0" cellspacing="0" cellpadding="5" width="703">
     <tbody>
     <tr>
-        <td valign="top" width="201"><code>DENY</code></td>
+        <td valign="top" width="201">`DENY`</td>
         <td valign="top" width="500">browser will not render the iframe contents in any case</td>
     </tr>
     <tr>
-        <td valign="top" width="201"><code>SAMEORIGIN</code></td>
+        <td valign="top" width="201">`SAMEORIGIN`</td>
         <td valign="top" width="500">browser will only render the iframe contents if host page origin is the same as the iframe page origin
     </td>
     </tr>
     <tr>
-        <td valign="top" width="201"><code>ALLOW FROM http://host</code></td>
+        <td valign="top" width="201">`ALLOW FROM http://host`</td>
         <td valign="top" width="500">browser will only render the iframe contents if the iframe host is httр://host </td>
     </tr>
     </tbody>
@@ -69,13 +58,13 @@
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

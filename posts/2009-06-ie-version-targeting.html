@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>Efficient IE version targeting</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>Efficient IE version targeting</h1>
 <p>When you’re writing a web page, you have to keep in mind that IE6 and IE7 have higher market share than all other browsers combined and IE8 has only started gaining popularity. So in most projects you have to support IE6 and IE7, even though IE6 support for CSS2.1 has a significant amount of bugs and issues. IE7 was slightly better and IE8 provides full CSS2.1 support, which is nice.</p>
@@ -31,10 +20,8 @@
 <p>I consider a best practice to set one separate CSS and JS file for Internet Explorers that are older than IE8:</p>
 <pre><code>&lt;!--[if lte IE 7]&gt;
     &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;iefix.css&quot;&gt;
-&lt;![endif]--&gt;
-</code></pre><p>And inside this iefix.css I use star selector hack to fix issues in IE6 and lower:</p>
-<pre><code>* html #someElement { /*rules for IE6 and lower */ }
-</code></pre><p>Using star selector hack here is a perfect way to target IE6 and lower:</p>
+&lt;![endif]--&gt;</code></pre><p>And inside this iefix.css I use star selector hack to fix issues in IE6 and lower:</p>
+<pre><code>* html #someElement { /*rules for IE6 and lower */ }</code></pre><p>Using star selector hack here is a perfect way to target IE6 and lower:</p>
 <ul>
 <li><p>we are aware that star selector CSS hack was fixed in IE7</p>
 </li>
@@ -56,10 +43,9 @@ versions:</p>
     } else {
         //code for IE7 and upper
     }
-@*/
-</code></pre><p>But when SP3 was installed, IE6 JScript compiler was updated and wouldn&#39;t enter the first if clause. This was a serious compatibility issue and many libraries had to update their code to find a workaround. The problem was that we were solving an issue of one technology (CSS) with another (javascript), and these technologies are supposed to be loosely coupled. So JScript was upgraded, new features were added, but CSS wasn’t. This leads me to a conclusion that</p>
+@*/</code></pre><p>But when SP3 was installed, IE6 JScript compiler was updated and wouldn&#39;t enter the first if clause. This was a serious compatibility issue and many libraries had to update their code to find a workaround. The problem was that we were solving an issue of one technology (CSS) with another (javascript), and these technologies are supposed to be loosely coupled. So JScript was upgraded, new features were added, but CSS wasn’t. This leads me to a conclusion that</p>
 <h2 id="using-conditional-compilation-version-targeting-to-solve-css-problems-is-wrong">Using conditional compilation version targeting to solve CSS problems is wrong</h2>
-<p>Again, these technologies are loosely coupled and you cannot assume that if <code>@_jscript_version</code> is <strong>X</strong>, CSS parser version is <strong>Y</strong>.</p>
+<p>Again, these technologies are loosely coupled and you cannot assume that if <code>@_jscript_version</code> is <strong>X*<em>, CSS parser version is *</em>Y</strong>.</p>
 <p>So ideally, if you want to support <code>:hover</code> for IE6 and lower in javascript, serve a separate javascript file for them using conditional comments.</p>
 <p><strong>But if want to support something that’s not provided in a specific version of JScript compiler – using conditional compilation is perfectly valid</strong>.</p>
 <p>P.S. Well, if you still want to separate all IE6 from IE7, here’s a snippet that would work:</p>
@@ -69,8 +55,7 @@ versions:</p>
          navigator.userAgent.toLowerCase().indexOf(&quot;msie 6.&quot;) != -1)) {
             //ie6 code
         }
-@*/
-</code></pre><p>So even if Windows XP user installed Service Pack 3 which updated JScript compiler to version 5.7, IE6 own version will still be 6. And it’s perfectly safe to use userAgent sniffing inside a conditional comments block which will be run in IE only.</p>
+@*/</code></pre><p>So even if Windows XP user installed Service Pack 3 which updated JScript compiler to version 5.7, IE6 own version will still be 6. And it’s perfectly safe to use userAgent sniffing inside a conditional comments block which will be run in IE only.</p>
 
 <div class="comments"><div id="disqus_thread"></div>
 <script>
@@ -92,13 +77,13 @@ versions:</p>
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

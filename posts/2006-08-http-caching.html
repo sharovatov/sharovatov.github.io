@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>Кэширование и сжатие: теория</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>Кэширование и сжатие: теория</h1>
 <p>Я не претендую на полноту рассказа о кэшировании — для этого есть спецификация, но расскажу лишь то, что необходимо для реализации кэширования динамически создаваемых или изменяемых документов.</p>
@@ -29,8 +18,7 @@
 <h4 id="-">Механизм метода устаревания документа</h4>
 <ul>
 <li><p>клиент запрашивает какой-либо ресурс.</p>
-<pre><code>  GET http://somehost.ru/index.html HTTP/1.0
-</code></pre></li>
+<pre><code>  GET http://somehost.ru/index.html HTTP/1.0</code></pre></li>
 <li><p>Сервер, &quot;знающий&quot;, что данный ресурс не устареет до определённой даты, включает её в заголовок <var>Expires</var>.</p>
 <pre><code>  HTTP/1.0 200 OK
   Date: Tue, 08 Aug 2006 08:15:21 GMT
@@ -38,8 +26,7 @@
   Content-Length: 4
   Content-Type: text/html
 
-  test
-</code></pre></li>
+  test</code></pre></li>
 </ul>
 <p>В данном примере ресурс <var>index.html</var> устареет ровно через день.</p>
 <ul>
@@ -64,10 +51,10 @@
 </li>
 </ul>
 <p>Так как в большинстве браузеров по нажатию кнопки &quot;Обновить&quot; такие ресурсы запрашиваются заново, поэтому я и предлагаю сочетать этот метод с &quot;GET-запросом с условием&quot;.</p>
-<h3 id="-get-conditional-get-">&quot;GET-запрос с условием&quot; (conditional GET)</h3>
+<h3 id="get-conditional-get-">&quot;GET-запрос с условием&quot; (conditional GET)</h3>
 <p>Не всегда авторам известна дата устаревания ресурса, потому был создан механизм &quot;GET-запроса с условием&quot;.</p>
 <p>Общий механизм прост — сервер каким-либо образом идентифицирует ресурс, и клиент в последующем запросе добавляет в заголовки присланный сервером идентификатор; сервер сверяет собственный и присланный идентификатор, если они равны, значит, ресурс не изменился, в таком случае сервер говорит клиенту, чтобы тот показывал ресурс из кэша. Если же идентификаторы различаются, сервер заново отдаёт ресурс с новым идентификатором. Образно говоря, клиент просит сервер отдать документ, если он изменился.</p>
-<h4 id="-get-http-1-0">&quot;GET-запрос с условием&quot; в HTTP/1.0</h4>
+<h4 id="get-http-1-0">&quot;GET-запрос с условием&quot; в HTTP/1.0</h4>
 <p>При запросе клиентом ресурса, определенного <abbr title="Uniform Resource Identifier">URI</abbr>, сервер может добавить к стандартным заголовкам ответа заголовок <var>Last-Modified</var> со значением даты последней модификации ресурса. В случае запроса статического файла в качестве времени модификации удобно использовать время его последней модификации в файловой системе.</p>
 <p>Клиент получает ответ, и если он умеет работать с кэшем, сохраняет скачанный документ вместе с полученной датой. При следующем запросе ресурса с тем же URI клиент смотрит в свой кэш, и если находит ресурс с сохранённой датой (полученной из заголовка <var>Last-Modified</var>), добавляет к заголовкам запроса заголовок <var>If-Modified-Since</var>,
 куда подставляет сохранённую дату.</p>
@@ -75,8 +62,7 @@
 <h4 id="-get-http-1-0-">Механизм работы &quot;GET-запроса с условием&quot; HTTP/1.0:</h4>
 <ol>
 <li><p>клиент запрашивает какой-либо ресурс:</p>
-<pre><code> GET http://somehost.ru/index.html HTTP/1.0
-</code></pre></li>
+<pre><code> GET http://somehost.ru/index.html HTTP/1.0</code></pre></li>
 <li><p>Сервер, поддерживающий кэширование для данного ресурса, добавляет в ответ заголовок <var>Last-Modified</var>.</p>
 <pre><code> HTTP/1.0 200 OK
  Date: Fri, 30 Dec 2003 13:20:12 GMT
@@ -84,16 +70,14 @@
  Content-Length: 4
  Content-Type: text/html
 
- test
-</code></pre></li>
+ test</code></pre></li>
 </ol>
 <ul>
 <li><p>Клиент сохраняет в кэше документ вместе с датой, полученной от сервера в заголовке <var>Last-Modified</var>.</p>
 </li>
 <li><p>В следующий раз клиент при запросе того же ресурса в заголовок запроса добавит сохранённую дату</p>
 <pre><code>  GET http://somehost.ru/index.html HTTP/1.0
-  If-Modified-Since: Fri, 29 Dec 2003 13:20:12 GMT
-</code></pre></li>
+  If-Modified-Since: Fri, 29 Dec 2003 13:20:12 GMT</code></pre></li>
 <li><p>Сервер сравнит полученную дату с датой последнего изменения ресурса. Если на сервере находится более &quot;свежая&quot; версия ресурса, он отдаст её вместе с новой датой модификации.</p>
 <pre><code>  HTTP/1.0 200 OK
   Date: Sat, 31 Dec 2003 11:20:22 GMT
@@ -101,18 +85,15 @@
   Content-Length: 7
   Content-Type: text/html
 
-  newtest
-</code></pre></li>
+  newtest</code></pre></li>
 </ul>
 <p>Если же на сервере документ актуален (т.е. даты равны), то сервер отдаст заголовок <var>HTTP/1.0 304 Not Modified</var>, но уже не отдаст тело ответа</p>
 <pre><code>    HTTP/1.0 304 Not Modified
-    Date: Sat, 31 Dec 2003 11:20:22 GMT
-</code></pre><p>Клиент же, получив такой ответ, покажет пользователю документ из своего кэша.</p>
+    Date: Sat, 31 Dec 2003 11:20:22 GMT</code></pre><p>Клиент же, получив такой ответ, покажет пользователю документ из своего кэша.</p>
 <p>Дата, указанная в Last-Modified, должна быть именно в таком виде и в формате GMT. Строго говоря, и HTTP/1.0 и HTTP/1.1 обязывают серверы <em>понимать</em> три формата времени:</p>
 <pre><code>    Sun, 06 Nov 1994 08:49:37 GMT
     Sunday, 06-Nov-94 08:49:37 GMT
-    Sun Nov  6 08:49:37 1994
-</code></pre><p>Но HTTP/1.0 добавляет, что сами серверы не имеют права использовать последний формат, а HTTP/1.1 требует от серверов использовать только первый формат времени.</p>
+    Sun Nov  6 08:49:37 1994</code></pre><p>Но HTTP/1.0 добавляет, что сами серверы не имеют права использовать последний формат, а HTTP/1.1 требует от серверов использовать только первый формат времени.</p>
 <p>Таким образом реализуется замечательная возможность — передавать только те документы, которые действительно изменились. Но этот метод далёк от совершенства — бывает сложно однозначно идентифицировать изменённость документа
 только по дате модификации файла, а в случае динамически генерируемого содержимого и вовсе не всегда возможно. Потому в спецификации HTTP/1.1 механизм &quot;GET-запроса с условием&quot; был расширен и дополнен.</p>
 <h4 id="-">Резюмируем:</h4>
@@ -124,7 +105,7 @@
 <li><p>в сочетании с методом кэширования, основанном на устаревании ресурса (<var>Expires</var>) идеален для кэширования служебных изображений, таблиц стилей, скриптов. Клиент не будет запрашивать сервер до даты, определённой в <var>Expires</var>, а затем, когда запросит, если ресурс не изменился, получит <var>304 Not Modified</var> с новым значением <var>Expires</var> и снова перестанет запрашивать сервер до даты из нового <var>Expires</var>.</p>
 </li>
 </ul>
-<h4 id="-get-http-1-1">&quot;GET-запрос с условием&quot; в HTTP/1.1</h4>
+<h4 id="get-http-1-1">&quot;GET-запрос с условием&quot; в HTTP/1.1</h4>
 <p>В HTTP/1.1 в механизм &quot;GET-запроса с условием&quot; было добавлено ещё одно &quot;условие&quot; т.н. <var>ETag</var> — сущность, однозначно определяющая содержимое ресурса.</p>
 <p>Это может быть хэш всего ресурса, его контрольная сумма или другая функция, однозначно идентифицирующая содержимое. В ситуации, когда документ генерируется шаблонной системой и CMS, бывает сложно определить время модификации ресурса, особенно если он &quot;собирается&quot; из нескольких частей. Вот в таких случаях удобнее определить <var>ETag</var> и сравнить его с присланным клиентом. Механизм сравнения похож на реализованный в HTTP/1.0 механизм сравнения даты модификации.</p>
 <p>Только если в HTTP/1.0 использовалась пара заголовков <var>Last-Modified</var>(сервер)/<var>If-Modified-Since</var>(клиент), то в в HTTP/1.1 используется пара <var>ETag</var>(сервер)/<var>If-None-Match</var>(клиент), использующаяся таким же образом — сервер идентифицирует ресурс и шлёт клиенту в заголовке <var>ETag</var> этот идентификатор. Клиент в следующий раз в запрос того же ресурса добавляет заголовок <var>If-None-Match</var> с сохраненным значением присланного сервером заголовка ETag. Сервер сверяет идентификаторы и либо возвращает <var>304 Not Modified</var> в случае, если ресурс не изменился, или же возвращает заново весь ресурс с новым значением <var>ETag</var>.</p>
@@ -132,8 +113,7 @@
 <ol>
 <li><p>клиент запрашивает какой-либо ресурс.</p>
 <pre><code> GET /index.html HTTP/1.1
- Host: somehost.ru
-</code></pre></li>
+ Host: somehost.ru</code></pre></li>
 <li><p>Сервер, поддерживающий кэширование для данного ресурса, добавляет в ответ заголовок <var>ETag</var>.</p>
 <pre><code> HTTP/1.1 200 OK
  Date: Fri, 30 Dec 2003 13:20:12 GMT
@@ -141,15 +121,13 @@
  Content-Length: 4
  Content-Type: text/html
 
- test
-</code></pre></li>
+ test</code></pre></li>
 <li><p>Клиент сохраняет в кэше документ вместе со значением заголовка <var>ETag</var>, полученным с сервера.</p>
 </li>
 <li><p>В следующий раз клиент при запросе того же ресурса в заголовок запроса добавит сохранённое значение <var>ETag</var>.</p>
 <pre><code> GET /index.html HTTP/1.1
  Host: somehost.ru
- If-None-Match: &quot;328e-1d-1b63fda6&quot;
-</code></pre></li>
+ If-None-Match: &quot;328e-1d-1b63fda6&quot;</code></pre></li>
 <li><p>Сервер сравнит полученное значение идентификатора ETag с собственным. Если идентификаторы различаются, сервер отдаст документ вместе с новым значением идентификатора <var>ETag</var>.</p>
 <pre><code> HTTP/1.1 200 OK
  Date: Sat, 31 Dec 2003 11:20:22 GMT
@@ -157,11 +135,9 @@
  Content-Length: 7
  Content-Type: text/html
 
- newtest
-</code></pre><p> Если же значение идентификатора <var>ETag</var>, присланное клиентом совпадает со значением серверным, то сервер отдаст заголовок <var>HTTP/1.1 304 Not Modified</var>, но уже не отдаст тело ответа.</p>
+ newtest</code></pre><p> Если же значение идентификатора <var>ETag</var>, присланное клиентом совпадает со значением серверным, то сервер отдаст заголовок <var>HTTP/1.1 304 Not Modified</var>, но уже не отдаст тело ответа.</p>
 <pre><code> HTTP/1.1 304 Not Modified
- Date: Sat, 31 Dec 2003 11:20:22 GMT
-</code></pre><p> Клиент же, получив такой ответ, покажет пользователю документ из своего кэша.</p>
+ Date: Sat, 31 Dec 2003 11:20:22 GMT</code></pre><p> Клиент же, получив такой ответ, покажет пользователю документ из своего кэша.</p>
 </li>
 </ol>
 <h4 id="-">Резюмируем:</h4>
@@ -182,16 +158,14 @@
 <li><p>Клиент запрашивает какой-то ресурс, сообщая серверу о поддерживаемых типах кодирования:</p>
 <pre><code>  GET /index.html HTTP/1.1
   Host: somehost.ru
-  Accept-Encoding: gzip,deflate
-</code></pre></li>
+  Accept-Encoding: gzip,deflate</code></pre></li>
 <li><p>Сервер выбирает тип кодирования, кодирует ресурс и шлёт пользователю</p>
 <pre><code>  HTTP/1.1 200 OK
   Date: Thu, 10 Aug 2006 17:08:26 GMT
   Content-Encoding: gzip
   Content-Length: 59
 
-  всякая_пожатая_непроизносимая_ерунда
-</code></pre></li>
+  всякая_пожатая_непроизносимая_ерунда</code></pre></li>
 <li><p>Клиент, зная тип кодирования, декодирует ресурс.</p>
 </li>
 </ul>
@@ -264,13 +238,13 @@
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

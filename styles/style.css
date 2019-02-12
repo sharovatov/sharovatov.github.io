@@ -9,13 +9,11 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 .wrapper {
-    max-width: 800px; 
-    margin: 10px auto;
-    padding: 0 12px 12px 12px;
+    margin: 1em 2em;
 }
 .postslist {
     margin: 0;
-    padding: 0;
+    padding-left: 30px;
     list-style-position: inside;
 }
 .date {
@@ -24,9 +22,8 @@ body {
 }
 
 h1 {
-    font-weight: bold;
-    font-size: 1.1em;
-    line-height: 1.25em;
+    font-weight: normal;
+    font-size: 1.5em;
 }
 a {
     color: rgb(65, 110, 210);
@@ -34,39 +31,3 @@ a {
 a:visited {
     color: rgb(32, 0, 127);
 }
-
-ul {
-    padding-left: 30px;
-}
-
-.menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 40px;
-    background-color: #EEEEEE;
-    border-color: #D1D1D1;
-    border-style: solid;
-    border-width: 0 0 1px 0;
-    font-size: 13px;
-    width: 100%;
-}
-
-.menu__item {
-    margin: 0;
-    padding: 7px 10px 0 10px;
-    height: 32px;
-    float: left;
-    text-shadow: 0 1px 0 #fff;
-    -moz-text-shadow: 0 1px 0 #fff;
-    font-size: 18px;
-}
-.menu__item:first-child {
-    border-right: 1px solid #ddd;
-}
-
-/*.menu a:focus {
-    outline:  2px solid rgba(195, 0, 0, 0.3);
-    -moz-outline-radius: 3px;
-}
-*/

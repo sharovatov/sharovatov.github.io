@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>HTTP persistent connections, pipelining and chunked encoding</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>HTTP persistent connections, pipelining and chunked encoding</h1>
 <p>When I have free time, I like to reorganise the knowledge I’ve got and prepare mindmaps/cheatsheets/manuals of interesting stuff. And the formal approach I usually use forces me to organise data in a way so that it won’t take me long to grasp the idea if I forget something.</p>
@@ -32,7 +21,7 @@ encoding.</p>
 <p><strong>Persistent connections reduce network latency and CPU/memory usage of all the peers by allowing reuse of the already established TCP/IP connection for multiple requests.</strong></p>
 <p>As I mentioned, HTTP/1.0 client was closing the connection after each request. HTTP/1.1 introduced using one TCP/IP connection for multiple sequential requests, and both server and client can indicate that the connection has to be closed upon the completion of current request-response by specifying <code>Connection: Close</code> header.</p>
 <p>Usually HTTP/1.1 client sends <code>Connection: Close</code> header with the last request in the queue to indicate that it won’t need anything else from the server, so that the TCP/IP connection can be safely closed after the request has been served with response. (Say, it wanted to download 10 images for the HTML page, it sends <code>Connection: Close</code> with the 10<sup>th</sup> image request and the server sends the last image and closes the connection after it’s done).</p>
-<p><strong>Persistent connections are the default for HTTP/1.1 clients and servers. </strong></p>
+<p>*<em>Persistent connections are the default for HTTP/1.1 clients and servers. *</em></p>
 <p>And even more interestingly, HTTP/1.1 introduced <strong>pipelining</strong> support – a concept where client can send multiple requests without waiting for each response to be sent back, and then server will have to send responses in the same order the requests came in.</p>
 <p><strong>Note:</strong> pipelining is not supported in IE/Safari/Chrome, disabled by default in Firefox, leaving Opera the only browser to support and have it enabled. </p>
 <p>In any case, if the connection was dropped, client will initiate new TCP/IP connection and those requests that didn&#39;t get a response back will be resubmitted through the new connection.</p>
@@ -78,13 +67,13 @@ encoding.</p>
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

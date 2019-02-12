@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>link-to-QRCode IE8 accelerator</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>link-to-QRCode IE8 accelerator</h1>
 <p>I have Nokia N78 phone and use it a lot for surfing web (with beautiful <a href="http://www.opera.com/mobile/">Opera Mobile 10</a>), reading RSS (with internal webkit-based browser), tweeting (with <a href="http://mobileways.de/products/gravity/gravity/">awesome Gravity client</a>), reading CHMs (with <a href="http://www.hugematrix.com/modules/news/article.php?storyid=8">great mobiCHM tool</a>) or using <a href="http://www.skype.com/intl/en/download/skype/symbian/">Skype</a>, or doing many other tasks.</p>
@@ -32,8 +21,7 @@
 require_once(&#39;bitly.php&#39;);
 $sUrl = make_bitly_url($_GET[&#39;url&#39;]); //shorten the original URL first
 echo &#39;&lt;img src=&quot;http://mobilecodes.nokia.com/qr?DATA=&#39;.$sUrl.&#39;&amp;amp;MODULE_SIZE=4&amp;amp;name=&amp;amp;MARGIN=2&amp;amp;ENCODING=BYTE&amp;amp;type=link&amp;amp;MODE=TEXT&amp;amp;a=view&quot;&gt;&#39;;
-?&gt;
-</code></pre><p>Bit.ly is used to make QRCode creation faster and easier as only small chunk of data is encoded.</p>
+?&gt;</code></pre><p>Bit.ly is used to make QRCode creation faster and easier as only small chunk of data is encoded.</p>
 <p>Then I created a very simple XML file which instructs IE8 what to do with the link:</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!-- author: Vitaly Sharovatov (http://sharovatov.ru) --&gt;
@@ -50,8 +38,7 @@ echo &#39;&lt;img src=&quot;http://mobilecodes.nokia.com/qr?DATA=&#39;.$sUrl.&#3
             &lt;execute method=&quot;get&quot; action=&quot;http://sharovatov.ru/qrcode/createCode.php?url={link}&quot; /&gt;
         &lt;/activityAction&gt;
     &lt;/activity&gt;
-&lt;/openServiceDescription&gt;
-</code></pre><p>And then just uploaded the php script and my accelerator to my site. Dead easy, 10 minutes job.</p>
+&lt;/openServiceDescription&gt;</code></pre><p>And then just uploaded the php script and my accelerator to my site. Dead easy, 10 minutes job.</p>
 <p>As wordpress.com doesn’t allow javascript onclick handlers on the links (and accelerator gets added to IE by <code>window.external.addService</code> call), I had to put the install page on my site. Please visit <a href="http://sharovatov.ru/current.html">http://sharovatov.ru/current.html</a> for this and few other IE8 accelerators. To get this accelerator installed, just press on “Install now” link in its description.</p>
 <p>Now if you right-click on any link, go to Accelerators, and just hover “link to QRCode” accelerator you’ll get the window with QRCode for the current link:</p>
 <p><a href="http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator1.gif" target="_blank"><img title="qrcode-accelerator" border="0" alt="qrcode-accelerator"
@@ -85,13 +72,13 @@ src="http://sharovatov.files.wordpress.com/2010/03/qrcodeaccelerator_thumb1.gif?
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

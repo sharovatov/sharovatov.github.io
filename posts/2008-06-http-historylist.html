@@ -2,32 +2,29 @@
 <html>
 <head>
     <title>HTTP History Lists and Back Button</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>HTTP History Lists and Back Button</h1>
 <p>While writing the post about forms values persistence, I noticed that browsers handle back button in different HTTP <em>situations</em> differently.</p>
 <p><a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP 1.1 spec</a> says the following:</p>
 <blockquote>
 <p>13.13 History Lists</p>
+</blockquote>
+<blockquote>
 <p>User agents often have history mechanisms, such as &quot;Back&quot; buttons and history lists, which can be used to redisplay an entity retrieved earlier in a session.</p>
+</blockquote>
+<blockquote>
 <p>History mechanisms and caches are different. In particular history mechanisms SHOULD NOT try to show a semantically transparent view of the current state of a resource. Rather, a history mechanism is meant to show exactly what the user saw at the time when the resource was retrieved.</p>
+</blockquote>
+<blockquote>
 <p>By default, an expiration time does not apply to history mechanisms. If the entity is still in storage, a history mechanism SHOULD display it even if the entity has expired, unless the user has specifically configured the agent to refresh expired history documents.</p>
+</blockquote>
+<blockquote>
 <p>This is not to be construed to prohibit the history mechanism from telling the user that a view might be stale.</p>
 </blockquote>
 <p>So it clearly recommends UA authors to separate history list and cache behaviour. So if user navigates through the history list (using Back or Forward buttons), HTTP spec recommends to show the <strong>exact</strong> response that the user saw before, regardless if it&#39;s stale or expired.</p>
@@ -133,13 +130,13 @@ href="http://sharovatov.ru/testcases/samples/noStoreAndExpiresPast.txt">Cache-Co
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

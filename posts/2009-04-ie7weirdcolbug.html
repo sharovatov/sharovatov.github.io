@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>Weird bug with hiding columns in IE7</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>Weird bug with hiding columns in IE7</h1>
 <p>Sometimes when you create a table, you need to dynamically toggle certain columns visibility. I usually use the following approach:</p>
@@ -38,8 +27,7 @@
 <p>But as in most cases, there’s a workaround – you have to “poke” any TH of your table. In <a href="http://sharovatov.ru/testcases/hideColumns1.html">this testcase</a> I added the following code:</p>
 <pre><code>/*@cc_on if (!document.querySelector)
     document.getElementsByTagName(&#39;th&#39;)[0].className = &#39;wt2&#39;; 
-@*/
-</code></pre><p>to the toggling function. As you may know, js code within <code>/*@cc_on ... @*/</code> block will be executed only by IE, and only IE8 has support for <code>document.querySelector</code> interface, so chances are that this code will be executed only in IE with version earlier than 8, which is precisely what we need (as IE8 doesn&#39;t have this problem).</p>
+@*/</code></pre><p>to the toggling function. As you may know, js code within <code>/*@cc_on ... @*/</code> block will be executed only by IE, and only IE8 has support for <code>document.querySelector</code> interface, so chances are that this code will be executed only in IE with version earlier than 8, which is precisely what we need (as IE8 doesn&#39;t have this problem).</p>
 <p>It’s interesting to know, that YUI Team in their <a href="http://developer.yahoo.com/yui/datatable/">DataTable control</a> in order to implement hiding/showing functionality choosed to loop through all the cells and set their display individually (see <code>hideColumn</code>/<code>showColumn</code> functions <a href="http://yui.yahooapis.com/2.7.0/build/datatable/datatable.js">here</a>). I understand that this is the bulletproof approach ready to use in any environment, but it can be rather ineffective when your table has a significant amount of rows as it will have to go through all the TR’s. And it will do the loop twice if you choose to hide two columns :) Of course, using my approach requires setting classes for those cells that you were going to hide, so it’s not that flexible, but in the controlled environment it’s definitely the best option.</p>
 
 <div class="comments"><div id="disqus_thread"></div>
@@ -62,13 +50,13 @@
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

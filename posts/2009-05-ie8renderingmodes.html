@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>IE8 Rendering Modes theory and practice</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>IE8 Rendering Modes theory and practice</h1>
 <p>Many web-developers moan about the Rendering Modes switch that’s been introduced in IE8. I’ve got some thoughts on this.</p>
@@ -55,8 +44,8 @@ and still is fine for non-IE browsers.</p>
 <li><p>IE5 – Quirks mode</p>
 </li>
 </ul>
-<p><strong>Edge Standard compliancy mode </strong>basically tells the browser that it should use the most recent rendering mode – in IE8 it’s “IE8 Standards mode”, in IE9 it will hopefully be “IE9 Standards mode”.</p>
-<p><strong>IE8 Standards mode </strong>makes browser render a page using IE8 standards compliancy parser and renderer.</p>
+<p>*<em>Edge Standard compliancy mode *</em>basically tells the browser that it should use the most recent rendering mode – in IE8 it’s “IE8 Standards mode”, in IE9 it will hopefully be “IE9 Standards mode”.</p>
+<p>*<em>IE8 Standards mode *</em>makes browser render a page using IE8 standards compliancy parser and renderer.</p>
 <p><strong>Emulate IE8</strong> – DOCTYPE switch will be used to determine whether to use IE8 Standards
 compliancy mode or IE5 Mode.</p>
 <p><strong>IE7 Standards mode</strong> makes browser render a page using IE7 Standards compliancy parser and renderer.</p>
@@ -67,8 +56,7 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 <h2 id="ie8-rendering-modes-practice">IE8 Rendering Modes Practice</h2>
 <p>As I’ve shown above, the whole idea of using DOCTYPE as a rendering mode switch failed because <strong>there were more than two types of documents</strong> on the web – those that should work in quirks mode, those that should work in IE7 standards mode, those that should work in IE8 standards compliancy mode and those that should work even with future versions of IE. So instead of two types we have three and a half :)</p>
 <p>To give a proper way to control this, Microsoft and <a href="http://www.webstandards.org/">WaSP</a> invented X-UA-Compatible http header, so you can either configure your server to send this header with corresponding value or add it as META HTTP-EQUIV to your page. For example:</p>
-<pre><code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot;&gt;
-</code></pre><p>This declaration will tell IE8 to toggle <strong>IE8 Standards compliancy mode</strong> to render the page.</p>
+<pre><code>&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=8&quot;&gt;</code></pre><p>This declaration will tell IE8 to toggle <strong>IE8 Standards compliancy mode</strong> to render the page.</p>
 <p>Here’s a list of modes:</p>
 <table border="1" cellspacing="0" cellpadding="4" width="540">
     <tbody></tbody>
@@ -122,7 +110,7 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 <p>If it’s <strong>IE=5</strong>, IE5 Quirks mode is used even if there is a DOCTYPE (actually it didn’t matter for IE5 if there was DOCTYPE or not – quirks mode was the only mode it had). See <a href="http://sharovatov.ru/testcases/X-UA-Compatible(IE=5).html">test case</a>.</p>
 <p>If it’s <strong>Edge</strong>, most modern rendering engine is used. For example, IE8 uses <strong>IE=8</strong> mode regardless if there’s a DOCTYPE or not and IE9 will use <strong>IE=9</strong>. See test case <a href="http://sharovatov.ru/testcases/X-UA-Compatible(IE=edge)DTD.html">with DTD</a> and <a href="http://sharovatov.ru/testcases/X-UA-Compatible(IE=edge)noDTD.html">without DTD</a>.</p>
 <p>It’s worthy to note that <strong>X-UA-Compatible META overwrites X-UA-Compatible HTTP header</strong>, so you can set X-UA-Compatible HTTP header for the whole website and then have X-UA-Compatible META with a different value on some pages.</p>
-<p><strong>If website doesn’t have X-UA-Compatible META tag or HTTP header, IE8 uses EmulateIE8 mode </strong>i.e. DOCTYPE is used to switch between IE8 standards compliancy mode and IE5 Quirks mode.</p>
+<p>*<em>If website doesn’t have X-UA-Compatible META tag or HTTP header, IE8 uses EmulateIE8 mode *</em>i.e. DOCTYPE is used to switch between IE8 standards compliancy mode and IE5 Quirks mode.</p>
 <p>This means that everybody needs to add to add X-UA-Compatible header or META to their websites.</p>
 <p>Accepting the fact that web-developers wouldn’t update all the websites that were built around IE6/IE7 standards compliancy mode, Microsoft decision to take standards compliancy mode as a default would certainly “break the web”.</p>
 <p>So Microsoft had to find a way around this which they successfully did by introducing a bunch of Compatibility View settings.</p>
@@ -170,13 +158,13 @@ compliancy mode or IE5 Mode. If you have a site that’s been built with IE7 Sta
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

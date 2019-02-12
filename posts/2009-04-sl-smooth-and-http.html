@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>Silverlight smooth streaming and HTTP</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>Silverlight smooth streaming and HTTP</h1>
 <p>I’ve read about smooth streaming technology, and I must say, I just love the way it works. It automatically and smoothly adjusts video quality and allows clients to view smooth video online regardless of their bandwidth and without a need to sit and wait staring at “buffering” message for ages – what it does it dynamically changes the video quality based on network bandwidth, CPU load and other factors.</p>
@@ -41,13 +30,12 @@
 <p>Both approaches had serious issues – RTSP couldn’t work for clients behind proxies or firewalls without extra efforts (that’s why Apple had to spend time inventing <strike>the wheel</strike> <a href="http://developer.apple.com/documentation/QuickTime/QTSS/Concepts/QTSSConcepts.html#//apple_ref/doc/uid/TP30000245-TPXREF143">tunnelling RTSP over HTTP</a>), progressive download couldn&#39;t work fine for situation where bandwidth wasn&#39;t good enough – have you had wonderful time sitting and staring at “Buffering” message?</p>
 <p>So if you want to give highest video quality to users on a high bandwidth but still want to show users with low bandwidth at least something &#8211; you’ll create several versions of the same video and give users a way to choose and watch what they want.</p>
 <p>But what if a user doesn’t know what bandwidth he’s got? What if <em>the player itself</em> could automatically select what video to download – high-res or low-res? What if the player could <em>change bitrate during the playback if network conditions or CPU load changed</em>? What if the player could instantly start playback from <em>any point of the movie</em>? And what if pure HTTP was used so that there would be no issues with proxies? What if each chunk of video could be perfectly cached by HTTP agent, such as proxy?</p>
-<p><strong>That’s precisely how Microsoft Silverlight Smooth Streaming works. </strong></p>
+<p>*<em>That’s precisely how Microsoft Silverlight Smooth Streaming works. *</em></p>
 <p>First of all, Microsoft decided to switch from their ASF format to <a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41828">MP4</a>.</p>
 <p>There were many reasons for that, but the main point is that MP4 container specification allows content to be internally organised as a series of fragments, so-called “boxes”. Each box contains data and metadata, so that if metadata is written before the data, player can have required information about the video before it plays it.</p>
-<p>So what does Expression Encoder do? It allows you to easily create multiple versions of the same video for different bitrates in this fragmented MP4 format. So you get up to 10 versions of the same video file with different resolution – from 320&#215;200 up to 1080 or 720p. Each file internally is split in 2-seconds chunks, each chunk has its own metadata so you can programmatically identify the required chunk. Plus Expression Encoder creates two complimentary files (both follow <a href="http://www.w3.org/TR/SMIL20/">SMIL XML standard</a>) – <em>.ISM – server manifest file, which basically just describes to server which file versions have what bitrates; and </em>.ISMC, which tells a client what bitrates can be used and how many fragments files have.</p>
+<p>So what does Expression Encoder do? It allows you to easily create multiple versions of the same video for different bitrates in this fragmented MP4 format. So you get up to 10 versions of the same video file with different resolution – from 320&#215;200 up to 1080 or 720p. Each file internally is split in 2-seconds chunks, each chunk has its own metadata so you can programmatically identify the required chunk. Plus Expression Encoder creates two complimentary files (both follow <a href="http://www.w3.org/TR/SMIL20/">SMIL XML standard</a>) – *.ISM – server manifest file, which basically just describes to server which file versions have what bitrates; and *.ISMC, which tells a client what bitrates can be used and how many fragments files have.</p>
 <p>Can you see the idea? <strong>IIS Smooth Streaming extension just maps URL to a chunk in a file.</strong> You do a HTTP GET request to a URL like this:</p>
-<pre><code>&lt;a href=&quot;http://test.ru/mov.ism/QualityLevels(400000)/Fragments(video=61024)&quot;&gt;http://test.ru/mov.ism/QualityLevels(400000)/Fragments(video=61024)&lt;/a&gt;
-</code></pre><p>And IIS Smooth Streaming extension checks “mov.ism” manifest file to find filename of the file with requested quality level (400000), opens and parses this file to get the chunk with requested time offset (61024). Then this chunk is returned to you in a normal HTTP response.</p>
+<pre><code>&lt;a href=&quot;http://test.ru/mov.ism/QualityLevels(400000)/Fragments(video=61024)&quot;&gt;http://test.ru/mov.ism/QualityLevels(400000)/Fragments(video=61024)&lt;/a&gt;</code></pre><p>And IIS Smooth Streaming extension checks “mov.ism” manifest file to find filename of the file with requested quality level (400000), opens and parses this file to get the chunk with requested time offset (61024). Then this chunk is returned to you in a normal HTTP response.</p>
 <p><strong>So you can query for any chunk of any one of your video files with the requested time offset.</strong></p>
 <p>Let me repeat it – you encoded your original video file into 10 fragmented video files with different bitrate. And you have a way to query for any chunk in any of these files.</p>
 <p>So to play 10 seconds of video you have to do 5 consequent HTTP requests. As we have versions of the same video with different bitrate, we can get first chunk in the worst quality to see how it renders and what time it takes to download it, and then if CPU load is low and network is fast, we can query next 4 chunks with higher bitrate.</p>
@@ -101,13 +89,13 @@ always seamlessly switch to Akamai.</p>
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

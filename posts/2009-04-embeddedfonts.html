@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>Embedded fonts</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>Embedded fonts</h1>
 <p>Long long ago (before IE4, yes, IE4) Microsoft  proposed a standard called EOT (<a href="http://en.wikipedia.org/wiki/Embedded_OpenType">Embedded OpenType</a>) which allowed you to embed any font on your website – all you had to do was to prepare eot fonts in a free <a href="http://www.microsoft.com/typography/web/embedding/weft3/overview.aspx">WEFT tool</a> (see <a href="http://www.sean.co.uk/a/webdesign/embedding_fonts_in_webpages.shtm">nice how-to</a>) and then reference them in your CSS:</p>
@@ -26,13 +15,12 @@
     font-family: myFont;
     src: url(myfont.eot);
 }
-h1 { font-family: myFont; }
-</code></pre><p>It’s interesting to know that support for @font-face property appeared in <a href="http://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions">CSS2.0</a> without specifying of font format, then was suddenly dropped in <a href="http://www.w3.org/TR/CSS21/fonts.html">CSS2.1</a> and now is back in <a href="http://www.w3.org/TR/css3-webfonts/#font-descriptions">CSS3</a>.</p>
+h1 { font-family: myFont; }</code></pre><p>It’s interesting to know that support for @font-face property appeared in <a href="http://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions">CSS2.0</a> without specifying of font format, then was suddenly dropped in <a href="http://www.w3.org/TR/CSS21/fonts.html">CSS2.1</a> and now is back in <a href="http://www.w3.org/TR/css3-webfonts/#font-descriptions">CSS3</a>.</p>
 <p>And now, 10 years later after this feature has been introduced in IE4, all other browsers are slowly starting to implement embedded fonts support. As always, browser vendors talk about compatibility more than actually support this compatibility – while the technology is 10 years old and quite mature, none of popular browsers supports or plans to support EOT – only IE.</p>
 <p>And this silent boycott of EOT looks extremely weird because EOT has got a unique feature – font file in this format can be much smaller than a TTF/OTF file due to subsetting. And EOT is not proprietary any more – <a href="http://www.w3.org/Submission/2008/SUBM-EOT-20080305/">Microsoft has submitted it to W3C</a>.</p>
 <p>The only reason browser vendors say stops them from implementing EOT is DRM, but:</p>
 <ul>
-<li><p>as <a href="http://novemberborn.net/sifr3/web-fonts-eot">Mark Wubben says</a>, using OTF/TTF can be violating fonts EULA while EOT was <strong>designed to follow </strong>the rules.</p>
+<li><p>as <a href="http://novemberborn.net/sifr3/web-fonts-eot">Mark Wubben says</a>, using OTF/TTF can be violating fonts EULA while EOT was *<em>designed to follow *</em>the rules.</p>
 </li>
 <li><p>there&#39;re free fonts that can be embedded.</p>
 </li>
@@ -47,9 +35,8 @@ h1 { font-family: myFont; }
     font-family: myFont;
     src: url(font.ttf) format(&quot;truetype&quot;),
     url(font.eot) format(&quot;embedded-opentype&quot;);
-}
-</code></pre><p>I.e. set the @font-face twice – for IE and other browsers. More crap for us, developers. Thanks to Opera, Mozilla and Safari.</p>
-<p><strong>Update: </strong>Thanks to Philip Taylor, author of great <a href="http://fonts.philip.html5.org/">web fonts application</a>, he pointed in comments that I was wrong saying that TTF/OTF didn’t support subsetting – they did! But my point is still the same – why inventing other standards when there’s a working one?</p>
+}</code></pre><p>I.e. set the @font-face twice – for IE and other browsers. More crap for us, developers. Thanks to Opera, Mozilla and Safari.</p>
+<p>*<em>Update: *</em>Thanks to Philip Taylor, author of great <a href="http://fonts.philip.html5.org/">web fonts application</a>, he pointed in comments that I was wrong saying that TTF/OTF didn’t support subsetting – they did! But my point is still the same – why inventing other standards when there’s a working one?</p>
 <p>Links:</p>
 <ul>
 <li><p><a href="http://en.wikipedia.org/wiki/Embedded_OpenType">Wikipedia article about EOT</a></p>
@@ -84,13 +71,13 @@ h1 { font-family: myFont; }
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

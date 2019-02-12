@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>iframe height auto-resize</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>iframe height auto-resize</h1>
 <p>If you have a page and an iframe in it,  and the iframe viewport height changes, browser adds scrollbars to the iframe.</p>
@@ -32,7 +21,7 @@
 <li><p><a href="https://bitbucket.org/sharovatov/test/src/2bca47aa8b71/iframe-autoheight/iframeHost.php">parent page</a></p>
 </li>
 </ul>
-<p>Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to <em> origin. This might be a serious security breach since the parent page will process a message send from <em>*any</em></em> page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.</p>
+<p>Please note that in this sample no origin check is done for the message on the parent page and the message is sent from the client page to * origin. This might be a serious security breach since the parent page will process a message send from <strong>any</strong> page, but in my case it’s OK because the worst thing that can happen – the iframe height will change. Please don’t use this as a universal solution for cross-iframe communication – there’re plenty of plugins and libraries that do it properly.</p>
 <p>I built it this way just to fit my exact needs – i.e. change height of the iframe object on a parent page.</p>
 
 <div class="comments"><div id="disqus_thread"></div>
@@ -55,13 +44,13 @@
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

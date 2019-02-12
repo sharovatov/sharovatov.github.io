@@ -2,29 +2,17 @@
 <html>
 <head>
     <title>small piece of js code explained</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>small piece of js code explained</h1>
 <p>Today a colleague showed me a piece of js code and asked to explain how it works.</p>
 <p>Here’s the code:</p>
-<pre><code>(function(x) {return x(x);})(function(z){ return function(y){ return z; } })(1)(2)(3) 
-</code></pre><p>For many from non-js background it would be easier if I rewrite first two function expressions as function declarations, turn third function expression into named function expression and break the execution into parts:</p>
+<pre><code>(function(x) {return x(x);})(function(z){ return function(y){ return z; } })(1)(2)(3) </code></pre><p>For many from non-js background it would be easier if I rewrite first two function expressions as function declarations, turn third function expression into named function expression and break the execution into parts:</p>
 <pre><code>function f1(x) {
     return x(x);
 }
@@ -36,20 +24,17 @@ function f2(z) {
 var result1 = f1(f2);
 var result2 = result1(1);
 var result3 = result2(2);
-var result4 = result3(3);
-</code></pre><p>So let&#39;s see what each function does first:</p>
+var result4 = result3(3);</code></pre><p>So let&#39;s see what each function does first:</p>
 <p>Function <strong>f1</strong> accepts one argument and calls this argument as a function and passes it with itself as a parameter.</p>
-<p>Function <strong>f2 </strong>accepts parameter <strong>z </strong>and creates another function. As <strong>f2 </strong>scope gets copied to <strong>f3</strong>, argument <strong>z </strong>is always accessible from within <strong>f3</strong>; and what <strong>f3</strong> does is it returns this argument <strong>z</strong>.</p>
+<p>Function <strong>f2 *<em>accepts parameter *</em>z *<em>and creates another function. As *</em>f2 *<em>scope gets copied to *</em>f3</strong>, argument <strong>z *<em>is always accessible from within *</em>f3</strong>; and what <strong>f3</strong> does is it returns this argument <strong>z</strong>.</p>
 <p>After we grasp the idea of what these functions do, let’s see how everything is executed.</p>
 <p>When <code>var result1 = f1(f2)</code> is executed, <strong>f1</strong> is called with <strong>f2</strong> passed as a parameter. <code>return x(x)</code> means that we need to call <code>f2(f2)</code> and return the result.</p>
-<p>When <strong>f2</strong> is called with <strong>f2</strong> as a parameter, function <strong>f3</strong> will be created and it’s <strong>z</strong> will hold a reference to <strong>f2</strong>. And this <strong>f3</strong> is returned to <strong>result1</strong>.</p>
-<p>Now we know that <strong>result1 </strong>actually holds a reference to <strong>f3</strong> which regardless of the parameters always returns a reference to <strong>f2</strong> which it “remembered” earlier. Hence, when we come to execute <code>var result2 = result1(1)</code>, we actually call <strong>f3(1)</strong> and our <strong>f3</strong> just returns a reference to <strong>f2</strong>.</p>
+<p>When <strong>f2</strong> is called with <strong>f2</strong> as a parameter, function <strong>f3</strong> will be created and it’s <strong>z** will hold a reference to **f2</strong>. And this <strong>f3</strong> is returned to <strong>result1</strong>.</p>
+<p>Now we know that <strong>result1 *<em>actually holds a reference to *</em>f3</strong> which regardless of the parameters always returns a reference to <strong>f2</strong> which it “remembered” earlier. Hence, when we come to execute <code>var result2 = result1(1)</code>, we actually call <strong>f3(1)</strong> and our <strong>f3</strong> just returns a reference to <strong>f2</strong>.</p>
 <p>So, this part of the code </p>
-<pre><code>(function(x) { return x(x) })(function(z){ return function(y) { return z; } })(1)
-</code></pre><p>could be replaced with </p>
-<pre><code>(function(z){ return function(y) { return z; } })
-</code></pre><p>Let&#39;s move on and execute <code>var result3 = result2(2);</code>. We’ve just found out that <strong>result2</strong> holds a reference to <strong>f2</strong>, so it’s rather <strong>f2(2)</strong> that we’re seeing here, which – as we remember – creates <strong>f3</strong> function and stores <strong>z</strong> in it’s context. This <strong>f3</strong> will always return 2, <strong>result3</strong> is a function will always return 2.</p>
-<p>And when we execute <code>var result4 = result3(3)</code>,<strong> f3(3)</strong> is actually called and returns 2 as expected.</p>
+<pre><code>(function(x) { return x(x) })(function(z){ return function(y) { return z; } })(1)</code></pre><p>could be replaced with </p>
+<pre><code>(function(z){ return function(y) { return z; } })</code></pre><p>Let&#39;s move on and execute <code>var result3 = result2(2);</code>. We’ve just found out that <strong>result2</strong> holds a reference to <strong>f2</strong>, so it’s rather <strong>f2(2)</strong> that we’re seeing here, which – as we remember – creates <strong>f3</strong> function and stores <strong>z** in it’s context. This **f3</strong> will always return 2, <strong>result3</strong> is a function will always return 2.</p>
+<p>And when we execute <code>var result4 = result3(3)</code>,** f3(3)** is actually called and returns 2 as expected.</p>
 <p>I think, this again proves that javascript is syntactically very powerful language.</p>
 
 <div class="comments"><div id="disqus_thread"></div>
@@ -72,13 +57,13 @@ var result4 = result3(3);
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>

@@ -2,23 +2,12 @@
 <html>
 <head>
     <title>Common Internet Scheme Syntax</title>
-    <meta name="generator" content="DocPad v6.78.1" />
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovato" href="/atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
-    <nav role="navigation">
-        <ol class="menu">
-            <li class="menu__item">
-                <a class="menu__item__link" href="/">blog posts</a>
-            </li>
-            <li class="menu__item">
-                <a class="menu__item__link" href="/books.html">books read</a>
-            </li>
-        </ol>
-    </nav>
     <div class="wrapper">
         <h1>Common Internet Scheme Syntax</h1>
 <p>I&#39;ve recently read an <a href="http://bolknote.ru/2009/04/04/~2074">extremely interesting post</a> on <a href="http://bolknote.ru/">bolknote.ru</a> about &quot;Common Internet Scheme Syntax&quot;.</p>
@@ -26,6 +15,8 @@
 <p><a href="http://tools.ietf.org/html/rfc1738">RFC 1738</a> Common Internet Scheme Syntax section states the following:</p>
 <blockquote>
 <p>While the syntax for the rest of the URL may vary depending on the particular scheme selected, URL schemes that involve the direct use of an IP-based protocol to a specified host on the Internet use a common syntax for the scheme-specific data:</p>
+</blockquote>
+<blockquote>
 <p><code>**//&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;url-path&gt;**</code></p>
 </blockquote>
 <p>So you don’t actually have to specify HTTP or HTTPS scheme, you just put two slashes and browser adds the current scheme automatically!</p>
@@ -46,27 +37,35 @@
 <p>Now I’d like to describe in detail why and when abovementioned approach is extremely useful.</p>
 <h2 id="problem">Problem</h2>
 <p>If you serve CSS/JS or images from a domain that’s different to the domain of your page, and the page must be accessed from both HTTP and HTTPS, you must’ve already been thinking about this – what protocol scheme to set for these links? HTTP or HTTPS?</p>
-<p>If you set your links’ URLs with HTTP scheme, and the page is accessed over HTTPS, all the resources are suddenly in a non-secure zone. Browsers behave differently, but they warn user in some way that the page contains non-secure content. Here’s <a href="https://www.allrussiantrains.com/schemeTestAdvanced.html">the testcase</a>. As you may see, testcase link points to HTTPS resource on allrussiantrains.com domain. This testcase has <strong>IMG</strong>, <strong>LINK type=&quot;text/css&quot;</strong>, <strong>SCRIPT</strong> and <strong>A</strong> elements pointing to a HTTP locations on <strong>sharovatov.ru</strong> domain.</p>
+<p>If you set your links’ URLs with HTTP scheme, and the page is accessed over HTTPS, all the resources are suddenly in a non-secure zone. Browsers behave differently, but they warn user in some way that the page contains non-secure content. Here’s <a href="https://www.allrussiantrains.com/schemeTestAdvanced.html">the testcase</a>. As you may see, testcase link points to HTTPS resource on allrussiantrains.com domain. This testcase has <strong>IMG</strong>, <strong>LINK type=&quot;text/css&quot;</strong>, <strong>SCRIPT</strong> and <strong>A** elements pointing to a HTTP locations on **sharovatov.ru</strong> domain.</p>
 <p>So if we have HTTP urls on the page that’s served through SSL, we face <strong>the problem of “mixed content security warnings”</strong>.</p>
 <p>IE7 shows a <strong>Security Information</strong> warning asking user if he wants to display non-secure
 content:</p>
-<p><img alt="non-secure content security warning in IE" src="http://sharovatov.ru/screenshots/securityWarning.gif"></p>
+<img alt="non-secure content security warning in IE" src="http://sharovatov.ru/screenshots/securityWarning.gif">
+
 <p>If user presses Yes, all the elements are loaded.</p>
 <p>If user presses No, all the elements are not loaded at all.</p>
 <p>Firefox 3.0.8 silently loads HTTP-referenced content, but shows a small icon in the right-hand corner:</p>
-<p><img alt="security warning in FF" src="http://sharovatov.ru/screenshots/securityWarning-FF.gif"></p>
+<img alt="security warning in FF" src="http://sharovatov.ru/screenshots/securityWarning-FF.gif">
+
 <p>Firefox also changes the address bar as if the connection isn’t secured by SSL, indicating user that the browser is displaying mixed content:</p>
-<p><img src="http://sharovatov.ru/screenshots/securityWarningAddressBar-FF.jpg"></p>
+<img src="http://sharovatov.ru/screenshots/securityWarningAddressBar-FF.jpg">
+
 <p>Compare it to normal address bar interface when secure page is shown:</p>
-<p><img src="http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-FF.jpg"></p>
+<img src="http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-FF.jpg">
+
 <p>Opera 9.62 silently loads HTTP-referenced content, but shows a question mark icon in the address bar:</p>
-<p><img src="http://sharovatov.ru/screenshots/securityWarningAddressBar-OP.gif"></p>
+<img src="http://sharovatov.ru/screenshots/securityWarningAddressBar-OP.gif">
+
 <p>Compare it to the normal address bar when secure page is shown:</p>
-<p><img src="http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-OP.gif"></p>
+<img src="http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-OP.gif">
+
 <p>Google Chrome does a similar thing – displays non-secure content, but shows an icon in the address bar:</p>
-<p><img src="http://sharovatov.ru/screenshots/securityWarningAddressBar-GG.gif"></p>
+<img src="http://sharovatov.ru/screenshots/securityWarningAddressBar-GG.gif">
+
 <p>Compare to the normal secure address bar:</p>
-<p><img src="http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-GG.gif"></p>
+<img src="http://sharovatov.ru/screenshots/noSecurityWarningAddressBar-GG.gif">
+
 <p>So all the browsers <strong>in a very obvious way</strong> alert user that the page has mixed content, and IE even fires an alert. This is clearly not suitable for public websites.</p>
 <h1 id="popular-solutions">Popular solutions</h1>
 <p>Usually people solve this problem by setting all the links to be HTTPS. So whichever way the page is accessed – either by HTTP or HTTPS, all the content is served through HTTPS channel.</p>
@@ -79,12 +78,14 @@ content:</p>
 </ul>
 <p>So though setting all links to HTTPS won’t cause clients any problems, it will increase server load.</p>
 <p><strong>Another way around is to change scheme in the URLs dynamically by a server-side language based on current scheme of the requested page</strong>. But what if you have a static html file? Then you have to edit links’ URLs in javascript. Well, in any way, changing links schemes is right a kerfuffle! :)</p>
-<p>And if you @import some CSS files or serve background images from a different domain, you’ll have to dynamically parse CSS in order to change URL scheme in all @import rules and background-image url’s. Which isn’t always a bad thing, but as your CSS file will be dumped into response stream by your favourite scripting language, default <strong>HTTP conditional GET caching mode </strong>will stop working (while it’s supported and working perfectly fine for static files in all web servers). So you will have to either reinvent the wheel and support caching in your CSS-parsing script, or live with the fact that your CSS is going to be fetched every time your page’s loaded.</p>
+<p>And if you @import some CSS files or serve background images from a different domain, you’ll have to dynamically parse CSS in order to change URL scheme in all @import rules and background-image url’s. Which isn’t always a bad thing, but as your CSS file will be dumped into response stream by your favourite scripting language, default *<em>HTTP conditional GET caching mode *</em>will stop working (while it’s supported and working perfectly fine for static files in all web servers). So you will have to either reinvent the wheel and support caching in your CSS-parsing script, or live with the fact that your CSS is going to be fetched every time your page’s loaded.</p>
 <h1 id="proposed-solution">Proposed solution</h1>
 <p>We’ve got a better option!</p>
 <p><a href="http://tools.ietf.org/html/rfc1738">RFC 1738</a> Common Internet Scheme Syntax section states the following:</p>
 <blockquote>
 <p>While the syntax for the rest of the URL may vary depending on the particular scheme selected, URL schemes that involve the direct use of an IP-based protocol to a specified host on the Internet use a common syntax for the scheme-specific data:</p>
+</blockquote>
+<blockquote>
 <p><code>**//&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;url-path&gt;**</code></p>
 </blockquote>
 <p>And <a href="http://tools.ietf.org/html/rfc3986#section-4.2">RFC 3986 follows</a>:</p>
@@ -132,13 +133,13 @@ content:</p>
 		}
 		else {
 		  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-		  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		  dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
 		  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 		}
 	})();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
     
 </body>
