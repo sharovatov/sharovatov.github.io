@@ -3,13 +3,16 @@ html {
 }
 body {
     font: 16px Helvetica, sans-serif;
-    line-height: 160%;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
 }
 .wrapper {
-    margin: 1em 2em;
+/*    margin: 1em 2em;*/
+	max-width: 830px;
+	margin: 2em auto;
+	padding: 0 1em;
+	font: 105%/1.3em Monaco;
 }
 .postslist {
     margin: 0;
