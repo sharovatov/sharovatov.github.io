@@ -12,7 +12,7 @@
         <h1>Some IE8b1 test results:</h1>
 <h1 id="ie8b1-intitial-tests">IE8b1 intitial tests</h1>
 <ul>
-<li><p>As earlier,<code>alert([1,2,3,].length)</code> shows <strong>4</strong> and 4<sup>th</sup> element has <code>undefined</code> value.</p>
+<li><p>As earlier,<code> alert([1,2,3,].length)</code> shows <strong>4</strong> and 4<sup>th</sup> element has <code>undefined</code> value.</p>
 </li>
 <li><p>Unfortunately no support for so wanted <code>:last-child</code> CSS3 Selector and buggy support for dynamically added elements that match <code>:first-child</code> and should therefore enforce layout to be recalculated. See <a href="http://www.quirksmode.org/css/firstchild.html">PPK&#39;s testcase on quirksmode.org</a>.</p>
 </li>
@@ -24,7 +24,9 @@
 <ul>
 <li><p>First bug I&#39;ve noticed was happening when you set <code>position: relative</code> for the generated content rule. The tab where you have this page opened dies. And then due to newly introduced <a href="http://www.microsoft.com/windows/products/winfamily/ie/ie8/readiness/NewFeatures.htm#crash">crash recovery system</a>, it tries to recover the tab, loads the page and dies again and so on - an infinite loop that you can&#39;t break. But the weird thing is that it doesn&#39;t actually <em>die</em> - it shows a window promting to select a debugger. The kind of window that appears when you have errors in your javascript code.</p>
 <p>  here&#39;s the code sample:</p>
-<pre><code>  p:before {content: &quot;test&quot;; position: relative;}` </code></pre><p>  and <a href="http://sharovatov.ru/testcases/genPosition.html">the testcase</a>.</p>
+<pre><code>  p:before {content: &quot;test&quot;; position: relative;}` 
+</code></pre>
+<p>  and <a href="http://sharovatov.ru/testcases/genPosition.html">the testcase</a>.</p>
 </li>
 <li><p>I noted the bug and continued testing. 
   Next thing I came up with was the fact that if the page doesn&#39;t have IMG/OBJECT/IFRAME elements or an image set as a background for an element, generated content is created <strong>after</strong> <code>window.onload</code>!</p>
@@ -72,7 +74,7 @@ their Selectors API support - it works in IE8b1 except for CSS3 Selectors block 
 <p>Bottom line, <strong>Selectors</strong> is a way to find elements in DOM. All browsers know how do it already when they parse CSS rules and find elements to which these rules have to be applied. So it&#39;s just an existing browser functionality exposed to the developer. And we have to keep in mind that if browser supports a CSS selector, it will allow you to query for this element using <strong>Selectors API</strong>. And obviously if there&#39;s no support for some CSS selector, you won&#39;t be able to get this element using <strong>Selectors</strong>.</p>
 <p>For example, as IE8b1 doesn&#39;t support <code>:last-child</code> CSS3 selector, you can&#39;t style such
 elements in CSS and you can&#39;t query them using <strong>Selectors</strong>.</p>
-<h2 id="notes-">Notes:</h2>
+<h2 id="notes">Notes:</h2>
 <ul>
 <li><p>Unfortunately, IE8b1 doesn&#39;t fully implement the <a href="http://www.w3.org/TR/selectors-api/">Selectors API spec</a>. Here&#39;s the <a href="http://msdn2.microsoft.com/en-us/library/cc288326(VS.85).aspx">MSDN article</a> quotation:</p>
 <blockquote>

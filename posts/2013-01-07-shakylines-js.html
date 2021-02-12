@@ -13,7 +13,9 @@
 <p><a href="http://mrale.ph/">Vyacheslav Egorov</a> recently <a href="http://mrale.ph/blog/2012/11/25/shaky-diagramming.html">showed his useful helper tool that converts handwritten ASCII-based diagrams into images</a> - he wrote it in Dart, adding around 450 kbytes overhead to the code that could perfectly fit in 18 kbytes of heavily commented non-minimized javascript code (or ~8 kbytes of minified code). </p>
 <p>I thought this was a huge waste of resources and <a href="https://github.com/sharovatov/my/tree/master/js_experiments/shaky">rewrote the tool to pure js</a>, I just didn&#39;t see any reason for Dart here.</p>
 <p>To use this in console, run </p>
-<pre><code>node shaky-node.js textfile imagefile.png</code></pre><p>Please note that while <a href="https://github.com/LearnBoost/node-canvas/pull/231">this pull request</a> is not merged, there&#39;s no way to make node-canvas use custom font, so please install the ttf font locally. </p>
+<pre><code>node shaky-node.js textfile imagefile.png
+</code></pre>
+<p>Please note that while <a href="https://github.com/LearnBoost/node-canvas/pull/231">this pull request</a> is not merged, there&#39;s no way to make node-canvas use custom font, so please install the ttf font locally. </p>
 <p>And please use the <code>shaky.html</code> file as a sample of in-browser use.</p>
 
 <div class="comments"><div id="disqus_thread"></div>

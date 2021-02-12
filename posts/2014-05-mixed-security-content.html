@@ -158,7 +158,9 @@
         </tr>
 
 <pre><code>&lt;/tbody&gt;
-&lt;tfoot&gt;&lt;/tfoot&gt;</code></pre></table>
+&lt;tfoot&gt;&lt;/tfoot&gt;
+</code></pre>
+</table>
 
 <p>General notes:</p>
 <ul>
@@ -168,8 +170,6 @@
 </li>
 <li><p>IE starting from version 9 <a href="http://blogs.msdn.com/b/ie/archive/2011/06/23/internet-explorer-9-security-part-4-protecting-consumers-from-malicious-mixed-content.aspx">started handling different types of mixed security content differently</a> based on its type: passive mixed security content is loaded though the padlock icon is removed, active mixed security content is blocked and a special UI informational popup is shown. Chrome and Firefox could not lag behind, and  so they followed IE: <a href="http://googleonlinesecurity.blogspot.ru/2011/06/trying-to-end-mixed-scripting.html">first Chrome</a> and <a href="https://blog.mozilla.org/security/2013/05/16/mixed-content-blocking-in-firefox-aurora/">two years later Firefox</a> started distinguishing passive and active mixed security content, both browsers are now able to detect when mixed security content is loaded and block what they consider active mixed security content; passive mixed security content is loaded with a corresponding UI change. To me, Chrome padlock UI looks cleaner and saner — when passive mixed security content is loaded, padlock icon still persists but a yellow warning sign is shown on top. Both Firefox and Chrome behave similarly on OS X and Windows.</p>
 </li>
-</ul>
-<ul>
 <li><p>Chrome persists user’s choice to load active mixed security content for the site: if user chooses to load HTTP iframe on one page, HTTP-served script will be loaded on another page. Neither IE nor Firefox persist the user’s choice (which makes sense to me). Safari has nothing to persist as it always loads the content.</p>
 </li>
 <li><p>iOS Safari doesn&#39;t have any &quot;insecure mixed content&quot; icon, it just doesn&#39;t show the padlock icon at all if any mixed security content is present on the page while loading all the resources. </p>

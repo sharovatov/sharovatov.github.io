@@ -15,12 +15,14 @@
     font-family: myFont;
     src: url(myfont.eot);
 }
-h1 { font-family: myFont; }</code></pre><p>It’s interesting to know that support for @font-face property appeared in <a href="http://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions">CSS2.0</a> without specifying of font format, then was suddenly dropped in <a href="http://www.w3.org/TR/CSS21/fonts.html">CSS2.1</a> and now is back in <a href="http://www.w3.org/TR/css3-webfonts/#font-descriptions">CSS3</a>.</p>
+h1 { font-family: myFont; }
+</code></pre>
+<p>It’s interesting to know that support for @font-face property appeared in <a href="http://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions">CSS2.0</a> without specifying of font format, then was suddenly dropped in <a href="http://www.w3.org/TR/CSS21/fonts.html">CSS2.1</a> and now is back in <a href="http://www.w3.org/TR/css3-webfonts/#font-descriptions">CSS3</a>.</p>
 <p>And now, 10 years later after this feature has been introduced in IE4, all other browsers are slowly starting to implement embedded fonts support. As always, browser vendors talk about compatibility more than actually support this compatibility – while the technology is 10 years old and quite mature, none of popular browsers supports or plans to support EOT – only IE.</p>
 <p>And this silent boycott of EOT looks extremely weird because EOT has got a unique feature – font file in this format can be much smaller than a TTF/OTF file due to subsetting. And EOT is not proprietary any more – <a href="http://www.w3.org/Submission/2008/SUBM-EOT-20080305/">Microsoft has submitted it to W3C</a>.</p>
 <p>The only reason browser vendors say stops them from implementing EOT is DRM, but:</p>
 <ul>
-<li><p>as <a href="http://novemberborn.net/sifr3/web-fonts-eot">Mark Wubben says</a>, using OTF/TTF can be violating fonts EULA while EOT was *<em>designed to follow *</em>the rules.</p>
+<li><p>as <a href="http://novemberborn.net/sifr3/web-fonts-eot">Mark Wubben says</a>, using OTF/TTF can be violating fonts EULA while EOT was **designed to follow **the rules.</p>
 </li>
 <li><p>there&#39;re free fonts that can be embedded.</p>
 </li>
@@ -35,8 +37,10 @@ h1 { font-family: myFont; }</code></pre><p>It’s interesting to know that suppo
     font-family: myFont;
     src: url(font.ttf) format(&quot;truetype&quot;),
     url(font.eot) format(&quot;embedded-opentype&quot;);
-}</code></pre><p>I.e. set the @font-face twice – for IE and other browsers. More crap for us, developers. Thanks to Opera, Mozilla and Safari.</p>
-<p>*<em>Update: *</em>Thanks to Philip Taylor, author of great <a href="http://fonts.philip.html5.org/">web fonts application</a>, he pointed in comments that I was wrong saying that TTF/OTF didn’t support subsetting – they did! But my point is still the same – why inventing other standards when there’s a working one?</p>
+}
+</code></pre>
+<p>I.e. set the @font-face twice – for IE and other browsers. More crap for us, developers. Thanks to Opera, Mozilla and Safari.</p>
+<p>**Update: **Thanks to Philip Taylor, author of great <a href="http://fonts.philip.html5.org/">web fonts application</a>, he pointed in comments that I was wrong saying that TTF/OTF didn’t support subsetting – they did! But my point is still the same – why inventing other standards when there’s a working one?</p>
 <p>Links:</p>
 <ul>
 <li><p><a href="http://en.wikipedia.org/wiki/Embedded_OpenType">Wikipedia article about EOT</a></p>

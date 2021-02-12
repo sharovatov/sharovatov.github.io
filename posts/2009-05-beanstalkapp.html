@@ -26,11 +26,17 @@
 <li><p>go to your repository setup → integration → fogbugz. All you need to do is follow the instructions – but basically they will just need your fogbugz URL (yourproject.fogbugz.com) and username with password.</p>
 </li>
 <li><p><a href="http://help.beanstalkapp.com/faqs/getting-started-11/choosing-your-subversion-client">choose your subversion client</a>, download it and install. All you’ll have to configure in the client is a repository URL, it will look something like this: </p>
-<pre><code> http://yourproject.svn.beanstalkapp.com/myfirstrepo/ </code></pre><p> and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use <a href="http://en.wikipedia.org/wiki/TortoiseSVN">tortoiseSVN</a> so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!</p>
+<pre><code> http://yourproject.svn.beanstalkapp.com/myfirstrepo/ 
+</code></pre>
+<p> and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use <a href="http://en.wikipedia.org/wiki/TortoiseSVN">tortoiseSVN</a> so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!</p>
 </li>
 <li><p>in Fogbugz – set “<strong>Source Control URL for logs</strong>” and “<strong>Source Control URL for diffs</strong>”. To do this, you need to go to your fogbugz account, to Settings → site → Main. Grab your repository URL from beanstalk, add “browse/^FILE” to it and set it as “<strong>Source Control URL for logs</strong>”. It should look something like that:</p>
-<pre><code> http://yourProject.beanstalkapp.com/yourRepository/browse/^FILE</code></pre><p> And “<strong>Source Control URL for diffs</strong>” will be</p>
-<pre><code> http://yourProject.beanstalkapp.com/yourRepositroy/diff/path/^FILE?from=^R2&amp;amp;to=^R1</code></pre></li>
+<pre><code> http://yourProject.beanstalkapp.com/yourRepository/browse/^FILE
+</code></pre>
+<p> And “<strong>Source Control URL for diffs</strong>” will be</p>
+<pre><code> http://yourProject.beanstalkapp.com/yourRepositroy/diff/path/^FILE?from=^R2&amp;amp;to=^R1
+</code></pre>
+</li>
 </ol>
 <p>Voila! Everything should be working.</p>
 <p>So the workflow will be like that:</p>
@@ -39,7 +45,9 @@
 </li>
 <li><p>When you (or someone else) start working on a bug, you just edit your code and then commit it. When committing, you can add tags to a commit message. For example, if you do a commit with the following message:</p>
 <pre><code> [case:34 status:resolved] 
- fixed IE5.5 lack of .toFixed() support</code></pre><p> Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. <a href="http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/">See here</a> for more commit tags.</p>
+ fixed IE5.5 lack of .toFixed() support
+</code></pre>
+<p> Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. <a href="http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/">See here</a> for more commit tags.</p>
 </li>
 <li><p>Then in Fogbugz bug#34 you will see that it’s been just resolved and you will be able to check what files were changed and look at the diff of the changes.</p>
 </li>

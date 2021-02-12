@@ -47,8 +47,10 @@
     29
     &lt;h1&gt;third chunk loaded and displayed&lt;/h1&gt;
 
-    0</code></pre><p>As you may see, there’s no Content-Length field in the beginning of the message, but there’s a hexadecimal chunk-size before every chunk. And 0 with two CRLFs specifies the end of the payload.</p>
-<p>*<em>So the server doesn’t need to calculate Content-Length before it starts serving data to client. *</em>This is an amazing functionality! It means that the server can start sending the first part of the response while still processing the other parts of it.</p>
+    0
+</code></pre>
+<p>As you may see, there’s no Content-Length field in the beginning of the message, but there’s a hexadecimal chunk-size before every chunk. And 0 with two CRLFs specifies the end of the payload.</p>
+<p>**So the server doesn’t need to calculate Content-Length before it starts serving data to client. **This is an amazing functionality! It means that the server can start sending the first part of the response while still processing the other parts of it.</p>
 <p>Say, you have a dynamic page with two elements, both of which are queried from the database.</p>
 <p>So you can either wait for both queries to finish, populate your template with results and send the whole page to client, or you can get first query result, send it in one chunk to the client, then do the next query and send its results in another chunk. You may not notice the difference between chunked and normal serving mode in most of the cases – but if the page is created from different sources or it takes significant time to prepare the data – user experience may be seriously improved.</p>
 <p>Before the widespread popularization of AJAX (another Microsoft-invented technology) – Chunked Encoding was used as a core for so-called “<a href="http://en.wikipedia.org/wiki/Push_technology">Server Push</a>” approach for building web-chats and other <em>streaming</em> purposes. The idea was simple – server didn’t close the HTTP connection and kept on sending chunk after chunk with new messages or other data. This approach had serious drawbacks – e.g. for each new client server had to instantiate a new connection (which eats resources), browsers had a limit on waiting time, so the page had to be reloaded once in a while and so on. But anyway, Chunked Encoding was widely used.</p>

@@ -36,23 +36,27 @@
 <h3 id="protect-visited-links-programmatically">Protect :visited links programmatically</h3>
 <p>That’s clearly useless. People were suggesting many solutions (which you can get round), like making getComputedStyle return default value for <code>:visited</code> links as if they are not visited – but you can make the case more complex, e.g.</p>
 <pre><code>a:link span {display: none;}
-a:visited span { display: block }</code></pre><p>and then use getComputedStyle to check the span; and all the proposed solutions were weak in some way. But even if you manage to make scripts unaware about the state of your links, there will always be a server-side attack vector – for those links that you want to check you can just specify a unique background-image pointing to some server-side tracking script, e.g.:</p>
+a:visited span { display: block }
+</code></pre>
+<p>and then use getComputedStyle to check the span; and all the proposed solutions were weak in some way. But even if you manage to make scripts unaware about the state of your links, there will always be a server-side attack vector – for those links that you want to check you can just specify a unique background-image pointing to some server-side tracking script, e.g.:</p>
 <pre><code>#alQaedaLnk:visited {
     background: url(http://www.cia.gov/track.pl);
-}</code></pre><p>Like <a href="http://ha.ckers.org/weird/CSS-history.cgi">here</a>, for example. So it clearly shows us that there’s no way (or it’s too troublesome) to fix this “issue” programmatically.</p>
+}
+</code></pre>
+<p>Like <a href="http://ha.ckers.org/weird/CSS-history.cgi">here</a>, for example. So it clearly shows us that there’s no way (or it’s too troublesome) to fix this “issue” programmatically.</p>
 <h3 id="limiting-support-for-visited">Limiting support for <code>:visited</code></h3>
 <p>As I understood from the discussion with startpanic.com author, he wants to limit <code>:visited</code> support so that only links to pages to the same domain are applied with <code>:visited</code> pseudo class.</p>
 <p>But this would hurt user experience so much! First example that comes to my head is Google and other search engines – they all colour visited links differently so you can clearly see which pages you’ve already been on and which not. If same-domain policy is applied, all the links in Google search results will be plain blue. This sounds awful to me.</p>
 <p>Guys from <a href="http://crypto.stanford.edu/sameorigin/">Stanford security group</a> suggest applying <code>:visited</code> only to those links that were visited from the current domain. This approach was used in Firefox add-on called <a href="https://addons.mozilla.org/en/firefox/addon/1502">SafeHistory</a> (it doesn’t work any more). So if you do a search in Google and visit some pages, <code>:visited</code> will be applied to these pages only in Google search results. So if you then do a search on MSN Live Search, all the links there will be plain blue and <code>:visited</code> won’t be applied to them. To me this solution looks weird as well. And Firefox developers said that it would be a problem to support this; and </p>
 <p>I don’t think other browser vendors will fix this privacy “issue” in that way. Keep on reading, I will explain why.</p>
 <p>So from technical prospective the only easy solution would be to completely remove support for <code>:visited</code> pseudo class, which nobody will do because user experience will suffer and people will complain.</p>
-<h3 id="best-solution-find-a-way-around">Best solution – find a way around</h3>
+<h3 id="best-solution--find-a-way-around">Best solution – find a way around</h3>
 <p>You may think – why not make <code>:visited</code> support configurable in the browser UI?  But that’s what all browsers already have! <strong>You can specify that you don’t want to keep history at all, you won’t see visited links anywhere, you will feel that you’re “safe”</strong> :).</p>
-<h3 id="another-solution-private-browsing-mode">Another solution – Private Browsing mode</h3>
+<h3 id="another-solution--private-browsing-mode">Another solution – Private Browsing mode</h3>
 <p>Another nice option is to use Private Browsing mode that’s supported by all modern browsers <a href="http://blogs.msdn.com/ie/archive/2008/08/25/ie8-and-privacy.aspx">IE8</a>, <a href="http://www.apple.com/pro/tips/privacy_safari.html">Safari</a>, <a href="http://www.google.com/support/chrome/bin/answer.py?hl=en&amp;answer=95464">Google Chrome</a> (and then <a href="https://wiki.mozilla.org/PrivateBrowsing">FF3.1</a> joined). <strong>When you visit a site that you don’t want to appear in the history – use Private Browsing mode and you’re safe.</strong></p>
 <p><strong>Note</strong>: currently Google Chrome has a bug – it applies <code>:visited</code> pseudo class to
 links in Incognito Mode. However, <a href="http://codereview.chromium.org/42114">the bug is fixed</a> and the bugfix will be included in one of new updates.</p>
-<h2 id="-private-browsing-browser-feature-is-the-only-true-solution-to-this-issue-">“Private Browsing” browser feature is the only true solution to this issue.</h2>
+<h2 id="private-browsing-browser-feature-is-the-only-true-solution-to-this-issue">“Private Browsing” browser feature is the only true solution to this issue.</h2>
 <p>Here’s a <u><a href="http://sharovatov.ru/testcases/visitedIssueTest.html">testcase</a></u>. I visited both <a href="http://ya.ru">http://ya.ru</a> and <a href="http://www.google.com">http://www.google.com</a> links in IE8 InPrivate mode, then went to the <a href="http://sharovatov.ru/testcases/visitedIssueTest.html">testcase page</a> and it didn’t tell anything as if I hadn’t visited these URLs.</p>
 <img src="http://sharovatov.ru/screenshots/visitedIssueIE8.png">
 
@@ -72,7 +76,7 @@ links in Incognito Mode. However, <a href="http://codereview.chromium.org/42114"
 <li><p><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=147777">This bugzilla entry</a> contains main discussion about the issue.</p>
 </li>
 </ul>
-<h1 id="-visited-links-privacy-issue-revisited-2010-03">:visited links privacy issue revisited <em>2010-03</em></h1>
+<h1 id="visited-links-privacy-issue-revisited-2010-03">:visited links privacy issue revisited <em>2010-03</em></h1>
 <p>This is a follow up. I thought the best solution for this issue would be educating users about the problem and promoting Private mode as a solution. I think I was wrong. See below why.</p>
 <p>It’s worthy to note that all browsers now support Private mode – IE8, Fx, Opera, Safari, Chrome. Opera 10.50 can even open a “private” tab in the existing window. Flash player did a good catch-up – with its version 10.1 release flash cookies are not stored when a browser runs in the Private mode (so updating to latest flash player is highly recommended if you use Private mode).</p>
 <p>But browser vendors clearly failed to promote this feature. I asked few general internet users, nobody even knew about Private browsing mode in their browser. (However, most of my interviewees knew about HTTPS, so security concerns weren’t completely new to them). If my small poll doesn’t seem a representative sample for you, do your own and share results!</p>

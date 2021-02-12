@@ -11,11 +11,11 @@
     <div class="wrapper">
         <h1>Javascript on XHTML pages</h1>
 <p>There are lots of rumours about Javascript in XHTML served as different MIME types. I&#39;ll try to explain what&#39;s really going on. Shortly, <var>innerHTML</var> works everywhere (even for XHTML served as <var>text/xml</var>); <var>document.*</var> collections work identically for <var>application/xhtml+xml</var> and <var>text/html</var>.</p>
-<h3 id="xhtml-served-as-var-text-html-var-">XHTML served as <var>text/html</var></h3>
+<h3 id="xhtml-served-as-texthtml">XHTML served as <var>text/html</var></h3>
 <p>There are two main differences in DOM between <strong>valid</strong> HTML and XHTML served as <var>text/html</var> - in XHTML all elements are in lowercase and UAs don&#39;t create implicit elements such as <var>tbody</var> in XHTML. That&#39;s all! You don&#39;t need to put inline styles and scripts in <var>CDATA</var> sections. UAs handle these XHTML pages practically the same as they handle HTML ones, xml well-formedness is not checked. And of course, all <var>document.*</var> collections work, innerHTML works either. And yes, <var>document.all</var> works even in Firefox (since version 1.5).</p>
 <p>Yes, there&#39;s also a problem of marking inline scripts and style as CDATA sections, but with well-coded unobtrusive javascript there&#39;s no need for inline scripts, and there&#39;s definately no need for inline styles except rare cases (even LJ allows using external CSS
 files).</p>
-<h3 id="xhtml-served-as-var-application-xhtml-xml-var-">XHTML served as <var>application/xhtml+xml</var></h3>
+<h3 id="xhtml-served-as-applicationxhtmlxml">XHTML served as <var>application/xhtml+xml</var></h3>
 <p>That is the preferred MIME-type for XHTML pages. Commonly it is used with content-negotiation mechanism to serve pages as <var>application/xhtml+xml</var> for browsers that support it and to serve pages as <var>text/html</var> for <a href="http://microsoft.com/windows/ie">browser</a> that doesn&#39;t support <var>application/xhtml+xml</var>. Some people say that most of neat DOM methods and properties do not work in XHTML document served as <var>application/xhtml+xml</var>. They say:</p>
 <ul>
 <li><p>document.write doesn&#39;t work</p>
@@ -29,20 +29,20 @@ files).</p>
 <li><p>document.body and all other properties of <var>document</var> don&#39;t work</p>
 </li>
 </ul>
-<h3 id="they-are-completely-wrong-">They are completely wrong.</h3>
+<h3 id="they-are-completely-wrong">They are completely wrong.</h3>
 <p>XHTML document served as <var>application/xhtml+xml</var> has <strong>the same DOM</strong> as XHMTL served as <var>text/html</var>.</p>
 <p>At first Mozilla has been creating XMLDocument object for pages served as <var>application/xhtml+xml</var>, but then there was opened a <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=111514">Bug</a> in December 2001, and the first fix was proposed in March 2003 and in two monthes final fix was accepted. Since that time Mozilla started creating HTMLDocument object for XHTML pages served as <var>application/xhtml+xml</var> and therefore they had to support all that HTML stuff: 
     document.write, document.applets, HTMLElement.innerHTML, document.forms, document.anchors, document.images, document.links, document.cookie</p>
 <p>The only thing they didn&#39;t support is <var>document.all</var>, it&#39;s only supported in quirks mode of document served as <var>text/html</var>. </p>
 <p>As for Opera: it checks <var>namespace</var> of <var><html></var> element to understand if it is xhtml and therefore there should be a HTML DOM or if it is a xml document and there should be XML DOM. And yes, Opera provides HTML DOM for ALL MIME types that XHTML can be served as.</p>
-<h3 id="xhtml-served-as-var-application-xml-var-or-var-text-xml-var-">XHTML served as <var>application/xml</var> or <var>text/xml</var></h3>
+<h3 id="xhtml-served-as-applicationxml-or-textxml">XHTML served as <var>application/xml</var> or <var>text/xml</var></h3>
 <p>Mozilla creates XMLDocument for XHTML served as <var>application/xml</var> or <var>text/xml</var>, so it doesn&#39;t provide HTML DOM for such documents. But Opera does.</p>
-<h3 id="-var-innerhtml-var-"><var>innerHTML</var></h3>
+<h3 id="innerhtml"><var>innerHTML</var></h3>
 <p>Yes, that may sound strange, but it&#39;s a fact - <var>innerHTML</var> is supported everywhere, FOR EVERY XHTML MIME-TYPE.</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>There&#39;s quite little amount of problems concerned XHTML served as <var>application/xhtml+xml</var>, javascript works fine since there&#39;s the same HTML DOM as it would have being served as <var>text/html</var>. When you serve XHTML as <var>text/html</var> or <var>application/xhtml+xml</var>, in both case you will have eqaul HTML DOMs. So don&#39;t be afraid
 of all those scary stories of not working <var>innerHTML</var> or <var>document.forms</var> - it&#39;s all a lie.</p>
-<h3 id="-a-href-http-nix-vlz-ru-test-for-those-who-don-t-believe-me-a-"><a href="http://nix.vlz.ru/test/">For those who don&#39;t believe me.</a></h3>
+<h3 id="for-those-who-dont-believe-me"><a href="http://nix.vlz.ru/test/">For those who don&#39;t believe me.</a></h3>
 
 <div class="comments"><div id="disqus_thread"></div>
 <script>

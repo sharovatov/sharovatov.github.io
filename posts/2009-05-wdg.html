@@ -25,7 +25,9 @@
     &lt;body&gt;
         &lt;!-- some html --&gt;
     &lt;/body&gt;
-&lt;/html&gt;</code></pre><p>You could access all ActiveX objects that your system provided – Scripting FileSystemObject, UserAccounts, <a href="http://msdn.microsoft.com/en-us/library/aa393260(VS.85).aspx">WMI</a> etc. – basically everything that was supported in <a href="http://en.wikipedia.org/wiki/Windows_Script_Host">WSH</a> and <a href="http://msdn.microsoft.com/en-us/library/bstcxhf7(VS.85).aspx">Script Runtime</a>. If you were using classic ASP on the server, you could switch to writing HTAs with zero effort – language and all the objects would be the same. While any web-development IDEs could be used, there even was a special IDE for building HTAs – <a href="http://www.htaedit.com/">HTAEDIT</a>.</p>
+&lt;/html&gt;
+</code></pre>
+<p>You could access all ActiveX objects that your system provided – Scripting FileSystemObject, UserAccounts, <a href="http://msdn.microsoft.com/en-us/library/aa393260(VS.85).aspx">WMI</a> etc. – basically everything that was supported in <a href="http://en.wikipedia.org/wiki/Windows_Script_Host">WSH</a> and <a href="http://msdn.microsoft.com/en-us/library/bstcxhf7(VS.85).aspx">Script Runtime</a>. If you were using classic ASP on the server, you could switch to writing HTAs with zero effort – language and all the objects would be the same. While any web-development IDEs could be used, there even was a special IDE for building HTAs – <a href="http://www.htaedit.com/">HTAEDIT</a>.</p>
 <p>So Microsoft had two nice technologies that weren’t actively used &#8211; Active Desktop as a way to integrate web-application with desktop and HTA as a core for writing standalone client-side web applications. Both technologies combined both to create <strong>Microsoft Desktop Gadgets</strong> - small standalone client-side web applications that run as dockable widgets on your desktop – pure HTML,CSS and JS packed with manifest file in an archive.</p>
 <h2 id="usage">Usage</h2>
 <p>If you double-click on this archive, gadget will get installed and can be moved to any place of your desktop. IE8 core is used to run them, so you get full support for CSS2.1, great level of javascript and other IE8 goodness.</p>
@@ -46,7 +48,9 @@ comments. So Windows 7 Desktop Gadget with my blog comments feed would perfectly
 <p>First of all, as I’ve already said, Windows 7 Gadget is nothing more than just a HTML page with Javascript and CSS. So I use the same approach as if I had to parse my blog comments on a website – a simple HTML, a bit of CSS and a bit of AJAX. So gadget building comes down to building a client-side web-app and packing it.</p>
 <h2 id="creating-a-web-app">Creating a web-app</h2>
 <p>I created a <a href="http://sharovatov.ru/gadgets/main.html">simple page</a> with a pretty <a href="http://sharovatov.ru/gadgets/rss.js">straight-forward javascript</a>. If you take a look at window.onload js code, you’ll see the following:</p>
-<pre><code>window.setInterval( function(){ getRSS(url); }, 5*60*1000); </code></pre><p>meaning that every five minutes getRSS function is called.</p>
+<pre><code>window.setInterval( function(){ getRSS(url); }, 5*60*1000); 
+</code></pre>
+<p>meaning that every five minutes getRSS function is called.</p>
 <p>This is the “main loop” of our program. As our gadget is a desktop program written in javascript and since Javascript blocks UI when being executed, setInterval/setTimeout is the only one way to set the “main loop”.</p>
 <p>That’s how the javascript in this web-app works:</p>
 <ol>
@@ -70,7 +74,7 @@ keep on writing about gadgets and in the next post I’ll show what my comments 
 <p><a href="http://sharovatov.files.wordpress.com/2009/05/image1.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/05/image_thumb1.png?w=193&#038;h=318" width="193" height="318"></a> <a href="http://sharovatov.files.wordpress.com/2009/05/image2.png"><img title="image" border="0" alt="image"
 src="http://sharovatov.files.wordpress.com/2009/05/image_thumb2.png?w=186&#038;h=331" width="186" height="331"></a></p>
 <p>Every five minutes the gadget is updated so I can clearly see whose comment is the last one and reply if needed. Very handy :)</p>
-<h1 id="exploring-windows-desktop-gadgets-2-security-and-limitations">Exploring Windows Desktop Gadgets #2 - security and limitations</h1>
+<h1 id="exploring-windows-desktop-gadgets-2---security-and-limitations">Exploring Windows Desktop Gadgets #2 - security and limitations</h1>
 <p>First of all, let me repeat that gadget is a client-side web-application running in chromeless mode on your desktop. It’s similar to <a href="http://msdn.microsoft.com/en-us/library/ms536496(VS.85).aspx">HTA</a> but provides a whole new set of functionality and also has some restrictions compared to HTA.</p>
 <h2 id="gadgets-security-model">Gadgets security model</h2>
 <p>IE has always been the de-facto-standard platform for building powerful applications that require access to file system, <a href="http://msdn.microsoft.com/en-us/library/aa380245.aspx">Cryptographic Service Provider</a>, WMI and other OS functionality. This functionality is achieved by using ActiveX controls.</p>
@@ -83,8 +87,8 @@ src="http://sharovatov.files.wordpress.com/2009/05/image_thumb2.png?w=186&#038;h
 <p>And of course, as any other Microsoft technology, Gadgets can be fully controlled by Group Policy.</p>
 <p>For more information on Gadgets security please read <a href="http://msdn.microsoft.com/en-gb/library/bb508510(VS.85).aspx">this</a> and <a href="http://msdn.microsoft.com/en-us/library/bb498012.aspx">this</a> MSDN article.</p>
 <h2 id="gadgets-limitations">Gadgets limitations</h2>
-<p>The main limitation to me is that *<em>there’re no modal dialogs. *</em>No alerts, no window.confirm, nothing. So if you want to do a quick debug, you have to dump data to the document itself or use a script debugger.</p>
-<h1 id="exploring-windows-desktop-gadgets-3-settings-storage">Exploring Windows Desktop Gadgets #3 - settings storage</h1>
+<p>The main limitation to me is that **there’re no modal dialogs. **No alerts, no window.confirm, nothing. So if you want to do a quick debug, you have to dump data to the document itself or use a script debugger.</p>
+<h1 id="exploring-windows-desktop-gadgets-3---settings-storage">Exploring Windows Desktop Gadgets #3 - settings storage</h1>
 <p>This is the third post in Exploring Windows Desktop Gadgets series and it will be devoted to improving our comments feed reader gadget by adding settings storage functionality.</p>
 <h2 id="settings-storage-theory">Settings storage theory</h2>
 <p>Any desktop program has its own settings storage (ini files, xml files, etc.) or uses a global OS storage (registry).</p>
@@ -109,7 +113,9 @@ src="http://sharovatov.files.wordpress.com/2009/05/image_thumb2.png?w=186&#038;h
 <p>There’s a <a href="http://msdn.microsoft.com/en-us/library/bb508511(VS.85).aspx">complete reference of Gadget platform events and properties on MSDN</a>, but for our simple case it’s enough to say that <strong>System.Gadget.Settings.read</strong> reads object from the storage by its name, <strong>System.Gadget.Settings.write</strong> writes object to the storage with its name and <strong>System.Gadget.onSettingsClosing</strong> event fires when the settings dialog is closing. Settings store is separate for each gadget so don’t be afraid that your settings names can be accessed from other gadgets.</p>
 <p>So in the <strong>window.onload</strong> handler of settings.html I try to get the data from the storage and set inputs values accordingly, and when the gadget is closing, I check if OK was pressed (<strong>e.closeAction == e.Action.commit</strong>) and if so, save inputs values into the storage. Dead easy.</p>
 <p>Now we have to attach settings.html page to our gadget. This is done by adding the following javascript code to main.html file:</p>
-<pre><code>System.Gadget.settingsUI = &quot;settings.html&quot;;</code></pre><p>Now our Gadget will show this button in the control area:</p>
+<pre><code>System.Gadget.settingsUI = &quot;settings.html&quot;;
+</code></pre>
+<p>Now our Gadget will show this button in the control area:</p>
 <p><a href="http://sharovatov.files.wordpress.com/2009/05/image5.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/05/image_thumb5.png?w=211&#038;h=321" width="211" height="321"></a></p>
 <p>And if you click on it, you’ll see your settings.html page rendered in a nice UI:</p>
 <p><a href="http://sharovatov.files.wordpress.com/2009/05/image3.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/05/image_thumb3.png?w=317&#038;h=345" width="317" height="345"></a></p>
@@ -128,12 +134,16 @@ did the following:</p>
      else document.body.innerHTML = &quot;&lt;b&gt;Please make sure you&quot;+
      &quot;configured everything properly&lt;/b&gt;&quot;;
 
- };</code></pre></li>
-<li><p>*<em>System.Gadget.onSettingsClosed *</em>event handler is used to restart main loop with new settings:</p>
+ };
+</code></pre>
+</li>
+<li><p>**System.Gadget.onSettingsClosed **event handler is used to restart main loop with new settings:</p>
 <pre><code> System.Gadget.onSettingsClosed = function(){
      var data = getDataFromStorage();
      startLoop(data);
- };</code></pre></li>
+ };
+</code></pre>
+</li>
 <li><p>And startLoop function has been rewritten to allow only one main loop (but that&#39;s pretty irrelevant to Gadgets platform):</p>
 <pre><code> var startLoop = function(data){
      //clear existing interval (if present)
@@ -145,7 +155,9 @@ did the following:</p>
      arguments.callee.intervalHandler = window.setInterval(
          function(){ getRSS(data.url); }, data.frequency * 1000
      );
- };</code></pre></li>
+ };
+</code></pre>
+</li>
 </ol>
 <p>And here we go – <a href="http://sharovatov.ru/gadgets/v0.3/rss-comments.gadget">gadget’s ready</a> :)</p>
 <p>Save it as <strong>rss-comments.gadget</strong> to your computer and install it – you will be able to set comments feed URL (so you can start using it to watch comments on your own blog) and refresh frequency in seconds.</p>
@@ -172,7 +184,7 @@ href="http://blog.orbmu2k.de/">http://blog.orbmu2k.de/</a></p>
 </li>
 <li><p><a href="http://sharovatov.wordpress.com/2009/05/27/exploring-windows-desktop-gadgets/">Exploring Windows Desktop Gadgets</a></p>
 </li>
-<li><p><a href="http://sharovatov.wordpress.com/2009/05/28/exploring-windows-desktop-gadgets-2-security-and-limitations/">Exploring Windows Desktop Gadgets #2 – security and limitations</a></p>
+<li><p> <a href="http://sharovatov.wordpress.com/2009/05/28/exploring-windows-desktop-gadgets-2-security-and-limitations/">Exploring Windows Desktop Gadgets #2 – security and limitations</a></p>
 </li>
 <li><p><a href="http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/">Exploring Windows Desktop Gadgets #3 – settings storage</a></p>
 </li>
@@ -188,10 +200,14 @@ href="http://blog.orbmu2k.de/">http://blog.orbmu2k.de/</a></p>
 <p>The great example of flyout use case is standard Windows 7 Stocks gadget – it shows basic stocks rates information in the main window and the if you click on the stock rate you’re interested, MSN Money chart for this stock rate is shown in a flyout. Here’s how it looks:</p>
 <p><a href="http://sharovatov.files.wordpress.com/2009/06/image.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image_thumb.png?w=415&#038;h=170" width="415" height="170"/></a></p>
 <p>Flyout is a separate HTML page which you attach to your gadget similarly to <a href="http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/">settings window</a> – by specifying the following:</p>
-<pre><code>System.Gadget.Flyout.file = &#39;flyout.html&#39;; </code></pre><p>Another difference from settings dialog is that settings dialog is only accessible by clicking on a options button:</p>
+<pre><code>System.Gadget.Flyout.file = &#39;flyout.html&#39;; 
+</code></pre>
+<p>Another difference from settings dialog is that settings dialog is only accessible by clicking on a options button:</p>
 <p><a href="http://sharovatov.files.wordpress.com/2009/06/image1.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image_thumb1.png?w=162&#038;h=151" width="162" height="151"></a> and flyout is shown/hidden programmatically by setting its <strong>show</strong> property to <strong>true</strong>/<strong>false</strong>:</p>
 <pre><code>//show flyout
-System.Gadget.Flyout.show = true;</code></pre><p>When you set <strong>show</strong> to <strong>true</strong>, flyout html will be rendered and its window will be automatically positioned depending on the content size and gadget’s position.</p>
+System.Gadget.Flyout.show = true;
+</code></pre>
+<p>When you set <strong>show</strong> to <strong>true</strong>, flyout html will be rendered and its window will be automatically positioned depending on the content size and gadget’s position.</p>
 <p>Flyout provides two events - <strong>System.Gadget.Flyout.onShow</strong> which is fired when the flyout is shown and <strong>System.Gadget.Flyout.onHide</strong> which is fired when the flyout is closed.</p>
 <p>To set flyout content to something meaningful, you have to get access to flyout’s document from your gadget main window javascript. This is achieved by using <strong>System.Gadget.Flyout.document</strong> property – but the call to it will throw an exception if flyout is hidden, so make sure you either check <strong>System.Gadget.Flyout.show</strong> property for <strong>true</strong> or wrap the code which uses <strong>System.Gadget.Flyout.document</strong> in try-catch block.</p>
 <p>Note that you can also access main gadget page from the flyout by using <strong>System.Gadget.document</strong> property which is always available.</p>
@@ -205,12 +221,12 @@ System.Gadget.Flyout.show = true;</code></pre><p>When you set <strong>show</stro
 </li>
 <li><p>modified <strong>displayRSS</strong> function to store current comment object in paragraph’s expando property</p>
 </li>
-<li><p>added <strong>toggleFlyout</strong> function to the <a href="http://sharovatov.ru/gadgets/v0.4/rss.js">rss.js</a> file which passes the comment object from the <strong><code>&lt;p&gt;</code></strong>’s expando property to <code>System.Gadget.Flyout.document</code> and displays the flyout</p>
+<li><p>added <strong>toggleFlyout</strong> function to the <a href="http://sharovatov.ru/gadgets/v0.4/rss.js">rss.js</a> file which passes the comment object from the **<code>&lt;p&gt;</code>**’s expando property to <code>System.Gadget.Flyout.document</code> and displays the flyout</p>
 </li>
 </ol>
 <p>The resulting files and the compressed gadget are <a href="http://sharovatov.ru/gadgets/v0.4/">here</a>.</p>
 <p>In the next posts I’ll show what styling options we’ve got in Gadgets Platform, will proceed talking about gadgets security and talk about advanced javascript techniques that can be used in gadgets.</p>
-<h1 id="pomodoro-windows-7-gadget">Pomodoro Windows 7 gadget</h1>
+<h1 id="pomodoro-windows-7-gadget-1">Pomodoro Windows 7 gadget</h1>
 <p>I was really inspired by <a href="http://tomatoi.st/">http://tomatoi.st/</a> web service which provides an easy to use web interface for <a href="http://www.pomodorotechnique.com/">Pomodoro time management technique</a>.</p>
 <p>But unfortunately, tomatoi.st is down due to overload too often, so I spent 20 minutes and prepared a <a href="http://sharovatov.ru/pomodoro.gadget">simple Windows 7 pomodoro gadget</a>. It does just what’s needed – showing timers:</p>
 <img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/12/image.png?w=188&#038;h=158" width="188" height="158">

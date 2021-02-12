@@ -33,11 +33,11 @@
 </blockquote>
 <p>However, I don’t think that any browser vendor will stop support for this functionality as it’s quite useful and there’s no problem in supporting it.</p>
 <p><strong>UPDATE</strong>: Google and Nigma.ru said their robots would follow and index such a link.</p>
-<h1 id="common-internet-scheme-syntax-detailed-post">Common Internet Scheme Syntax – detailed post</h1>
+<h1 id="common-internet-scheme-syntax--detailed-post">Common Internet Scheme Syntax – detailed post</h1>
 <p>Now I’d like to describe in detail why and when abovementioned approach is extremely useful.</p>
 <h2 id="problem">Problem</h2>
 <p>If you serve CSS/JS or images from a domain that’s different to the domain of your page, and the page must be accessed from both HTTP and HTTPS, you must’ve already been thinking about this – what protocol scheme to set for these links? HTTP or HTTPS?</p>
-<p>If you set your links’ URLs with HTTP scheme, and the page is accessed over HTTPS, all the resources are suddenly in a non-secure zone. Browsers behave differently, but they warn user in some way that the page contains non-secure content. Here’s <a href="https://www.allrussiantrains.com/schemeTestAdvanced.html">the testcase</a>. As you may see, testcase link points to HTTPS resource on allrussiantrains.com domain. This testcase has <strong>IMG</strong>, <strong>LINK type=&quot;text/css&quot;</strong>, <strong>SCRIPT</strong> and <strong>A** elements pointing to a HTTP locations on **sharovatov.ru</strong> domain.</p>
+<p>If you set your links’ URLs with HTTP scheme, and the page is accessed over HTTPS, all the resources are suddenly in a non-secure zone. Browsers behave differently, but they warn user in some way that the page contains non-secure content. Here’s <a href="https://www.allrussiantrains.com/schemeTestAdvanced.html">the testcase</a>. As you may see, testcase link points to HTTPS resource on allrussiantrains.com domain. This testcase has <strong>IMG</strong>, <strong>LINK type=&quot;text/css&quot;</strong>, <strong>SCRIPT</strong> and <strong>A</strong> elements pointing to a HTTP locations on <strong>sharovatov.ru</strong> domain.</p>
 <p>So if we have HTTP urls on the page that’s served through SSL, we face <strong>the problem of “mixed content security warnings”</strong>.</p>
 <p>IE7 shows a <strong>Security Information</strong> warning asking user if he wants to display non-secure
 content:</p>
@@ -78,7 +78,7 @@ content:</p>
 </ul>
 <p>So though setting all links to HTTPS won’t cause clients any problems, it will increase server load.</p>
 <p><strong>Another way around is to change scheme in the URLs dynamically by a server-side language based on current scheme of the requested page</strong>. But what if you have a static html file? Then you have to edit links’ URLs in javascript. Well, in any way, changing links schemes is right a kerfuffle! :)</p>
-<p>And if you @import some CSS files or serve background images from a different domain, you’ll have to dynamically parse CSS in order to change URL scheme in all @import rules and background-image url’s. Which isn’t always a bad thing, but as your CSS file will be dumped into response stream by your favourite scripting language, default *<em>HTTP conditional GET caching mode *</em>will stop working (while it’s supported and working perfectly fine for static files in all web servers). So you will have to either reinvent the wheel and support caching in your CSS-parsing script, or live with the fact that your CSS is going to be fetched every time your page’s loaded.</p>
+<p>And if you @import some CSS files or serve background images from a different domain, you’ll have to dynamically parse CSS in order to change URL scheme in all @import rules and background-image url’s. Which isn’t always a bad thing, but as your CSS file will be dumped into response stream by your favourite scripting language, default **HTTP conditional GET caching mode **will stop working (while it’s supported and working perfectly fine for static files in all web servers). So you will have to either reinvent the wheel and support caching in your CSS-parsing script, or live with the fact that your CSS is going to be fetched every time your page’s loaded.</p>
 <h1 id="proposed-solution">Proposed solution</h1>
 <p>We’ve got a better option!</p>
 <p><a href="http://tools.ietf.org/html/rfc1738">RFC 1738</a> Common Internet Scheme Syntax section states the following:</p>

@@ -14,7 +14,9 @@
 <p>Data URI&#39;es is an <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC 2397</a> published in 1998. It&#39;s a URL scheme which is used to embed small resources right into the (X)HTML page.</p>
 <p>Syntax is quite simple: <code>data:[&lt;mediatype&gt;][;base64],&lt;data&gt;</code></p>
 <p>To see how it works let&#39;s take the following code (<a href="http://sharovatov.ru/testcases/dataURI_extCSS.html">testcase</a>):</p>
-<pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;data:text/css;base64,Ym9keXtiYWNrZ3JvdW5kOmdyZWVuO30=&quot;&gt;</code></pre><p>Browser supporting data URI will base64-decode the encoded string <code>Ym9keXtiYWNrZ3JvdW5kOmdyZWVuO30=</code> to <code>body{background:green;}</code> and then <em>load</em> this string as if it was a result of an http request to an external file containing this CSS code.</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;data:text/css;base64,Ym9keXtiYWNrZ3JvdW5kOmdyZWVuO30=&quot;&gt;
+</code></pre>
+<p>Browser supporting data URI will base64-decode the encoded string <code>Ym9keXtiYWNrZ3JvdW5kOmdyZWVuO30=</code> to <code>body{background:green;}</code> and then <em>load</em> this string as if it was a result of an http request to an external file containing this CSS code.</p>
 <p>According to the RFC we can embed any small resource into our page, e.g:</p>
 <ul>
 <li><p><a href="http://sharovatov.ru/testcases/dataURI_img.html">images</a> (as <var>img</var> elements and CSS backgrounds)</p>
@@ -80,9 +82,11 @@ header(&#39;Content-type: text/css&#39;);
 
 div.menu {
     background-image:url(&lt;?php echo data_url(&#39;menu_background.png&#39;,&#39;image/png&#39;)?&gt;);
-}</code></pre><p>Unless accompanied with correct HTTP caching algorythm, this CSS file will be downloaded <strong>every time the page that references this CSS file is loaded</strong>! So every time user accesses the page referencing this CSS file, server will get a request, initiate script parsing, base64-encode the image and send it back to client. So you get rid of one simple request for an image (that in case of being a static file will be perfectly cached) but have one heavy request that will be run every time user requests a page! Not a fair change I think. So again, if you decide to use data URI scheme for your resources, encode and embed them beforehand or implement proper server-side HTTP caching and compressing support.</p>
+}
+</code></pre>
+<p>Unless accompanied with correct HTTP caching algorythm, this CSS file will be downloaded <strong>every time the page that references this CSS file is loaded</strong>! So every time user accesses the page referencing this CSS file, server will get a request, initiate script parsing, base64-encode the image and send it back to client. So you get rid of one simple request for an image (that in case of being a static file will be perfectly cached) but have one heavy request that will be run every time user requests a page! Not a fair change I think. So again, if you decide to use data URI scheme for your resources, encode and embed them beforehand or implement proper server-side HTTP caching and compressing support.</p>
 <p><strong>Note for russian-speaking users</strong>: - there&#39;s <a href="http://bolknote.ru/2006/08/25/~314">a way to embed images even for IE6/IE7</a>. Though it&#39;s rather a proof-of-concept - it doesn&#39;t support HTTP caching/compressing, but it works!</p>
-<h2 id="links-and-resources-">Links and resources:</h2>
+<h2 id="links-and-resources">Links and resources:</h2>
 <ul>
 <li><p><a href="http://www.ietf.org/rfc/rfc2397.txt">RFC 2397 - The &ldquo;data&rdquo; URL scheme</a></p>
 </li>
