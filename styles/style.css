@@ -39,26 +39,11 @@ a:visited {
 #links-holder {margin-left:6px;}
 #links-holder img {display:inline-block; vertical-align:middle}
 
-/* gray overlay */
-#overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 8000;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 #donateModal {
   display: none;
-  position: absolute;
-  top: 50%;
-  z-index: 9000;
-  width: 423px;
-  margin-top: -120px;
+  position: relative;
+  width: 421px;
+  margin-top:10px;
 }
 
 #donateModal.is-active {

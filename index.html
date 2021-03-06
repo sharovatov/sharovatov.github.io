@@ -13,30 +13,25 @@
 
 <h1>Виталий Шароватов</h1>
 <script>
-  var overlay = document.createElement('div');
-  overlay.id = 'overlay';
-
-  function showDonate() {
-    document.getElementById('donateModal').classList.add('is-active');
-    document.body.appendChild(overlay);
-  }
-  function closeDonate(e) {
-    document.getElementById('donateModal').classList.remove('is-active');
-    document.body.removeChild(overlay);
+  function toggleDonate() {
+    var modal = document.getElementById('donateModal');
+    modal.classList[modal.classList.contains('is-active')? 'remove': 'add']('is-active');
+    return false;
   }
 </script>
 <div><img src="me.jpg" style="height:230px; width:230px; border: 1px solid gray"></div>
-<section id="donateModal">
-    <span id="donateCloseHandle" onclick="closeDonate()">x</span>
-<iframe src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%B8%D1%82%D1%8C&targets-hint=&default-sum=&button-text=14&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=4100116552285335" width="423" height="222" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
-</section>
 <div id="links-holder">
 <a href="https://github.com/sharovatov"><img src="logo_github.png" width="28" height="28" alt="github"></a>
 <a href="http://t.me/vitaly19842"><img src="logo_tg.png" width="26" height="26" style="opacity: 0.6" alt="telegram"></a>
 <a href="https://www.youtube.com/playlist?list=PLFtS8Ah0wZvWS37oveJ0-D5K6V7GWUpqY"><img src="logo_youtube.png" width="32" height="32" alt="youtube"></a>
-<a onclick="return showDonate()"><img src="logo_donate.png" width="32" height="32" alt="donate"></a>
+<a onclick="return toggleDonate()"><img src="logo_donate.png" width="32" height="32" alt="donate"></a>
 <a href="mailto:vitaly.sharovatov@gmail.com"><img src="logo_email.png" width="32" height="32" alt="email"></a>
 </div>
+<div id="donateModal">
+    <span id="donateCloseHandle" onclick="toggleDonate()">x</span>
+<iframe src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%B8%D1%82%D1%8C&targets-hint=%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%BD%D0%BE%D1%81%D1%82%D1%8C&default-sum=&button-text=14&payment-type-choice=on&mobile-payment-type-choice=on&comment=on&hint=%D0%B7%D0%B0%20%D1%87%D1%82%D0%BE%20%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D0%B0%D1%80%D0%B8%D1%82%D0%B5&successURL=https%3A%2F%2Fsharovatov.github.io&quickpay=shop&account=4100116552285335" width="100%" height="313" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+</div>
+
 <h1>Обо мне</h1>
 <p>В IT я с 2001 года, начал с системного администрирования сетей и домена Active Directory.</p>
 <p>С 2004 в веб-программировании. Много программировал на javascript, о чём сохранились записи тут в архиве ниже.</p>
@@ -82,9 +77,9 @@
 <h1>Доклады и лекции</h1>
 <ul class="postslist">
 
-    <li><a href="/talks/2019-02-growth.html">career growth plans for developers</a> @ devleads meetup <span class="date">February 2019</span></li>
-
     <li><a href="/talks/2019-02-process-comms-audit.html">processes and communication overview</a> @ GetIT Community meetup <span class="date">February 2019</span></li>
+
+    <li><a href="/talks/2019-02-growth.html">career growth plans for developers</a> @ devleads meetup <span class="date">February 2019</span></li>
 
     <li><a href="/talks/2018-01-softskills-podcast.html">Soft skills, their importance and how to grow them</a> @ IT Recruiter school podcast <span class="date">January 2019</span></li>
 
@@ -137,55 +132,55 @@
 
     <li><a href="/posts/2011-01-jsexplained.html">small piece of js code explained</a> <span class="date">January 2011</span></li>
 
-    <li><a href="/posts/2010-03-wp7.html">Windows Phone 7 Internet Explorer IEMobile 7.0</a> <span class="date">March 2010</span></li>
-
     <li><a href="/posts/2010-03-wp7emul.html">Windows Phone 7 emulator, updates and app blacklist</a> <span class="date">March 2010</span></li>
-
-    <li><a href="/posts/2010-03-ie9-sucksmuchless.html">IE9 - sucks much less than other browsers</a> <span class="date">March 2010</span></li>
 
     <li><a href="/posts/2010-03-link-toqrcode.html">link-to-QRCode IE8 accelerator</a> <span class="date">March 2010</span></li>
 
-    <li><a href="/posts/2009-12-iisvuln.html">critical IIS vulnerability</a> <span class="date">December 2009</span></li>
+    <li><a href="/posts/2010-03-wp7.html">Windows Phone 7 Internet Explorer IEMobile 7.0</a> <span class="date">March 2010</span></li>
+
+    <li><a href="/posts/2010-03-ie9-sucksmuchless.html">IE9 - sucks much less than other browsers</a> <span class="date">March 2010</span></li>
 
     <li><a href="/posts/2009-12-httpbis.html">HTTPBis group is awesome!</a> <span class="date">December 2009</span></li>
 
-    <li><a href="/posts/2009-11-devtools.html">Browsers' developer tools evolution</a> <span class="date">November 2009</span></li>
-
-    <li><a href="/posts/2009-11-php-xml.html">PHP loadHTMLFile and a html file without DOCTYPE</a> <span class="date">November 2009</span></li>
-
-    <li><a href="/posts/2009-11-beanstalk.html">Beanstalkapp, FogBugz and now Case Tracker</a> <span class="date">November 2009</span></li>
+    <li><a href="/posts/2009-12-iisvuln.html">critical IIS vulnerability</a> <span class="date">December 2009</span></li>
 
     <li><a href="/posts/2009-11-http-pipeline.html">HTTP persistent connections, pipelining and chunked encoding</a> <span class="date">November 2009</span></li>
 
-    <li><a href="/posts/2009-06-ie-version-targeting.html">Efficient IE version targeting</a> <span class="date">June 2009</span></li>
+    <li><a href="/posts/2009-11-php-xml.html">PHP loadHTMLFile and a html file without DOCTYPE</a> <span class="date">November 2009</span></li>
 
-    <li><a href="/posts/2009-06-opera-rev-fail.html">Opera revolution fail</a> <span class="date">June 2009</span></li>
+    <li><a href="/posts/2009-11-devtools.html">Browsers' developer tools evolution</a> <span class="date">November 2009</span></li>
 
-    <li><a href="/posts/2009-06-intelmb.html">Intel mini ITX D945GCLF2D motherboard</a> <span class="date">June 2009</span></li>
-
-    <li><a href="/posts/2009-06-html5video.html">HTML5 video tag and Internet Explorer</a> <span class="date">June 2009</span></li>
-
-    <li><a href="/posts/2009-06-opera-reinvent.html">Opera to reinvent the web?</a> <span class="date">June 2009</span></li>
+    <li><a href="/posts/2009-11-beanstalk.html">Beanstalkapp, FogBugz and now Case Tracker</a> <span class="date">November 2009</span></li>
 
     <li><a href="/posts/2009-06-ie6-universal.html">Universal Internet Explorer 6 CSS</a> <span class="date">June 2009</span></li>
 
-    <li><a href="/posts/2009-06-fx-poor-ieak.html">Firefox Build Your Own Browser – a poor copy of IEAK?</a> <span class="date">June 2009</span></li>
+    <li><a href="/posts/2009-06-intelmb.html">Intel mini ITX D945GCLF2D motherboard</a> <span class="date">June 2009</span></li>
 
-    <li><a href="/posts/2009-06-skype-blocking.html">Skype blocking 80 and 443 ports</a> <span class="date">June 2009</span></li>
+    <li><a href="/posts/2009-06-ie-version-targeting.html">Efficient IE version targeting</a> <span class="date">June 2009</span></li>
 
     <li><a href="/posts/2009-06-getboundingrect.html">Useful JS tips - getBoundingClientRect()</a> <span class="date">June 2009</span></li>
 
     <li><a href="/posts/2009-06-win7woie8.html">Windows 7 will be shipped without IE8 in Europe?</a> <span class="date">June 2009</span></li>
 
-    <li><a href="/posts/2009-05-ie8renderingmodes.html">IE8 Rendering Modes theory and practice</a> <span class="date">May 2009</span></li>
+    <li><a href="/posts/2009-06-html5video.html">HTML5 video tag and Internet Explorer</a> <span class="date">June 2009</span></li>
 
-    <li><a href="/posts/2009-05-gtc.html">Googletranslateclient.com and Windows Accelerator Platform</a> <span class="date">May 2009</span></li>
+    <li><a href="/posts/2009-06-opera-reinvent.html">Opera to reinvent the web?</a> <span class="date">June 2009</span></li>
 
-    <li><a href="/posts/2009-05-win7taskbar.html">Windows 7 taskbar - new approach</a> <span class="date">May 2009</span></li>
+    <li><a href="/posts/2009-06-opera-rev-fail.html">Opera revolution fail</a> <span class="date">June 2009</span></li>
+
+    <li><a href="/posts/2009-06-fx-poor-ieak.html">Firefox Build Your Own Browser – a poor copy of IEAK?</a> <span class="date">June 2009</span></li>
+
+    <li><a href="/posts/2009-06-skype-blocking.html">Skype blocking 80 and 443 ports</a> <span class="date">June 2009</span></li>
+
+    <li><a href="/posts/2009-05-itil.html">ITIL Conference</a> <span class="date">May 2009</span></li>
+
+    <li><a href="/posts/2009-05-applelivestreaming.html">Apple submitted HTTP Live Streaming spec to IETF</a> <span class="date">May 2009</span></li>
 
     <li><a href="/posts/2009-05-wdg.html">Windows 7 Desktop Gadgets</a> <span class="date">May 2009</span></li>
 
-    <li><a href="/posts/2009-05-applelivestreaming.html">Apple submitted HTTP Live Streaming spec to IETF</a> <span class="date">May 2009</span></li>
+    <li><a href="/posts/2009-05-ie8renderingmodes.html">IE8 Rendering Modes theory and practice</a> <span class="date">May 2009</span></li>
+
+    <li><a href="/posts/2009-05-htmlcssjsplatform.html">HTML+CSS+JS Widgets - future cross-platform environment</a> <span class="date">May 2009</span></li>
 
     <li><a href="/posts/2009-05-ie8news.html">IE8 news - MUI packs, compatibility view for intranet</a> <span class="date">May 2009</span></li>
 
@@ -193,45 +188,45 @@
 
     <li><a href="/posts/2009-05-win7acclplatfm.html">Windows 7 Accelerators Platform</a> <span class="date">May 2009</span></li>
 
-    <li><a href="/posts/2009-05-itil.html">ITIL Conference</a> <span class="date">May 2009</span></li>
+    <li><a href="/posts/2009-05-gtc.html">Googletranslateclient.com and Windows Accelerator Platform</a> <span class="date">May 2009</span></li>
+
+    <li><a href="/posts/2009-05-win7taskbar.html">Windows 7 taskbar - new approach</a> <span class="date">May 2009</span></li>
 
     <li><a href="/posts/2009-05-hostingissues.html">Hosting issues</a> <span class="date">May 2009</span></li>
 
-    <li><a href="/posts/2009-05-htmlcssjsplatform.html">HTML+CSS+JS Widgets - future cross-platform environment</a> <span class="date">May 2009</span></li>
-
-    <li><a href="/posts/2009-04-httpchunked.html">HTTP Chunked Encoding</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-wl.html">Windows Live</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-commoninternetscheme.html">Common Internet Scheme Syntax</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-raphael.html">Raphaёl – excellent JS vector graphics library</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-ie8accels.html">Various IE8 Accelerators - thepiratebay, php.net, pagerank, alexa</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-visited.html">startpanic.com and :visited links privacy issue</a> <span class="date">April 2009</span></li>
-
     <li><a href="/posts/2009-04-fxdesignmode.html">designMode and Firefox</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-canonical.html">rel=&quot;canonical&quot;</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-ie8impupd.html">IE8 - important update!</a> <span class="date">April 2009</span></li>
 
     <li><a href="/posts/2009-04-ie7weirdcolbug.html">Weird bug with hiding columns in IE7</a> <span class="date">April 2009</span></li>
 
     <li><a href="/posts/2009-04-wlwaddsremoval.html">Windows Live Messenger adds removal</a> <span class="date">April 2009</span></li>
 
+    <li><a href="/posts/2009-04-ie8accels.html">Various IE8 Accelerators - thepiratebay, php.net, pagerank, alexa</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-wl.html">Windows Live</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-httpchunked.html">HTTP Chunked Encoding</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-exchange2010.html">Microsoft Exchange 2010</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-sync-wlw.html">Synchronize posts drafts between laptop and home PC? Easy to do with Windows Live Sync!</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-visited.html">startpanic.com and :visited links privacy issue</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-ie8impupd.html">IE8 - important update!</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-canonical.html">rel=&quot;canonical&quot;</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-commoninternetscheme.html">Common Internet Scheme Syntax</a> <span class="date">April 2009</span></li>
+
+    <li><a href="/posts/2009-04-raphael.html">Raphaёl – excellent JS vector graphics library</a> <span class="date">April 2009</span></li>
+
     <li><a href="/posts/2009-04-embeddedfonts.html">Embedded fonts</a> <span class="date">April 2009</span></li>
 
     <li><a href="/posts/2009-04-sl-smooth-and-http.html">Silverlight smooth streaming and HTTP</a> <span class="date">April 2009</span></li>
 
-    <li><a href="/posts/2009-04-sync-wlw.html">Synchronize posts drafts between laptop and home PC? Easy to do with Windows Live Sync!</a> <span class="date">April 2009</span></li>
-
-    <li><a href="/posts/2009-04-exchange2010.html">Microsoft Exchange 2010</a> <span class="date">April 2009</span></li>
+    <li><a href="/posts/2008-12-ie8b2.html">Internet Explorer 8 beta 2 — new tests</a> <span class="date">December 2008</span></li>
 
     <li><a href="/posts/2008-12-migratinglivesite.html">Migrating live website</a> <span class="date">December 2008</span></li>
-
-    <li><a href="/posts/2008-12-ie8b2.html">Internet Explorer 8 beta 2 — new tests</a> <span class="date">December 2008</span></li>
 
     <li><a href="/posts/2008-06-http-historylist.html">HTTP History Lists and Back Button</a> <span class="date">June 2008</span></li>
 
@@ -243,11 +238,11 @@
 
     <li><a href="/posts/2006-09-jsonxhtml.html">Javascript on XHTML pages</a> <span class="date">September 2006</span></li>
 
+    <li><a href="/posts/2006-08-http-caching.html">Кэширование и сжатие: теория</a> <span class="date">August 2006</span></li>
+
     <li><a href="/posts/2006-08-ie7-first-impressions.html">IE7, standalone, впечатления.</a> <span class="date">August 2006</span></li>
 
     <li><a href="/posts/2006-08-jsonoff.html">разные стили при js on/off</a> <span class="date">August 2006</span></li>
-
-    <li><a href="/posts/2006-08-http-caching.html">Кэширование и сжатие: теория</a> <span class="date">August 2006</span></li>
 
     <li><a href="/posts/2006-07-jsevents.html">Javascript Events</a> <span class="date">July 2006</span></li>
 
