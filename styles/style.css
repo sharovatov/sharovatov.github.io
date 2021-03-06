@@ -36,3 +36,44 @@ a {
 a:visited {
     color: rgb(32, 0, 127);
 }
+#links-holder {margin-left:6px;}
+#links-holder img {display:inline-block; vertical-align:middle}
+
+/* gray overlay */
+#overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 8000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#donateModal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 9000;
+  width: 423px;
+  margin-top: -120px;
+}
+
+#donateModal.is-active {
+  display: block;
+}
+
+#donateCloseHandle {
+  position: absolute;
+  cursor: pointer;
+  z-index: 9950;
+  width: 30px; height: 28px;
+  text-align: center;
+  top: 8px; right: 10px;
+  font-family: monospace;
+  font-size: 1.2em;
+  background:#efefef;
+  border:1px solid #ddd;
+}
