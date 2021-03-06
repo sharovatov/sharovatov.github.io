@@ -28,6 +28,7 @@ body {
 h1 {
     font-weight: normal;
     font-size: 1.5em;
+	margin-top: 1.2em;
 }
 a {
     color: rgb(65, 110, 210);
