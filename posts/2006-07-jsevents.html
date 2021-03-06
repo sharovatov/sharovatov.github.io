@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Javascript Events</title>
-	<meta property="og:title" value="Виталий Шароватов о разработке и людях">
-	<meta property="og:description" value="Социально-технические системы — не только просто, но и сложно">
-	<meta property="og:type" value="website">
-	<meta property="og:image" value="https://sharovatov.github.io/me.jpg">
-	<meta property="og:url" value="https://sharovatov.github.io">
+	<meta property="og:title" content="Виталий Шароватов о разработке и людях">
+	<meta property="og:description" content="Социально-технические системы — не только просто, но и сложно">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
+	<meta property="og:url" content="https://sharovatov.github.io">
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
@@ -24,7 +24,7 @@
 
 <pre><code>&lt;a href=&quot;javascript:alert(&#39;got click!&#39;)&quot;&gt;link&lt;/a&gt;
 </code></pre>
-<p>Изначально этот протокол был создан для тестов - и до сих пор удобно проверять что-то по-быстрому, вписав в адресную строку выражение (например, в IE я раньше проверял hasLayout таким образом - писал в адресную строку <code>javascript:alert(someElement.currentStyle.hasLayout)</code>). Этот протокол никогда не был предназначен для навешивания обработчиков событий. Но люди поняли, что при нажатии на ссылку происходит выполнение содержимого её атрибута <var>href</var> (вспомните, что происходит при нажатии на ссылку, имеющую <var>href=&quot;mailto:<a href="mailto:&#x73;&#111;&#x6d;&#101;&#109;&#97;&#105;&#x6c;&#64;&#x73;&#101;&#x72;&#x76;&#x2e;&#99;&#111;&#x6d;">&#x73;&#111;&#x6d;&#101;&#109;&#97;&#105;&#x6c;&#64;&#x73;&#101;&#x72;&#x76;&#x2e;&#99;&#111;&#x6d;</a>&quot;</var>), и стали использовать псевдопротокол <var>javascript:</var> для <strong>замены</strong> основного предназначения ссылки (исполнения роли идентификатора связанного документа посредством универсального локатора ресурса (URL)).</p>
+<p>Изначально этот протокол был создан для тестов - и до сих пор удобно проверять что-то по-быстрому, вписав в адресную строку выражение (например, в IE я раньше проверял hasLayout таким образом - писал в адресную строку <code>javascript:alert(someElement.currentStyle.hasLayout)</code>). Этот протокол никогда не был предназначен для навешивания обработчиков событий. Но люди поняли, что при нажатии на ссылку происходит выполнение содержимого её атрибута <var>href</var> (вспомните, что происходит при нажатии на ссылку, имеющую <var>href=&quot;mailto:<a href="mailto:&#x73;&#111;&#109;&#x65;&#x6d;&#x61;&#105;&#x6c;&#x40;&#x73;&#x65;&#x72;&#x76;&#46;&#99;&#111;&#x6d;">&#x73;&#111;&#109;&#x65;&#x6d;&#x61;&#105;&#x6c;&#x40;&#x73;&#x65;&#x72;&#x76;&#46;&#99;&#111;&#x6d;</a>&quot;</var>), и стали использовать псевдопротокол <var>javascript:</var> для <strong>замены</strong> основного предназначения ссылки (исполнения роли идентификатора связанного документа посредством универсального локатора ресурса (URL)).</p>
 <p>Стоит отметить, что <a href="http://www.iana.org/assignments/uri-schemes.html">ни</a> <a href="http://www.gbiv.com/protocols/uri/rfc/rfc3986.html">в</a> <a href="http://www.ietf.org/rfc/rfc2718.txt">одной</a> <a href="http://www.ietf.org/rfc/rfc2396.txt">спецификации</a> не сказано про наличие протокола <var>javascript:</var>, потому я и называю его &quot;псевдопротоколом&quot; (в то же время <var>mailto:</var> <a href="ftp://ds.internic.net/rfc/rfc1738.txt">как раз</a> <a href="http://www.w3.org/Addressing/URL/url-spec.html">описан</a>).</p>
 <p>Более того, WCAG <a href="http://www.w3.org/WAI/GL/WCAG20/tests/test181.html">говорит</a> о том, что псевдопротокол <var>javascript:</var> использовать вообще нельзя, и в этом случае я с ними полностью согласен.</p>
 <p>Однако авторы браузеров из соображений обратной совместимости продолжают поддерживать эту пакость, а колхозные веб-девелоперы продолжают пользоваться этой дрянью. Основное неудобство и контрпродуктивность такого подхода в том, что теряется сам смысл ссылки. Ведь со ссылкой можно сделать множество различных вещей - добавить в закладки, открыть в новом окне, распечатать содержимое, сохранить содержимое. Весь этот функционал теряется при использовании этого псевдопротокола. Вообще же этот способ не является полноценным методом установки обработчика события, потому что этот метод может быть примёнен только для элементов, имеющих атрибуты src/href.</p>
