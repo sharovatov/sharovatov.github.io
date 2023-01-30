@@ -7,6 +7,9 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
@@ -29,14 +32,14 @@
 <p>Более того, WCAG <a href="http://www.w3.org/WAI/GL/WCAG20/tests/test181.html">говорит</a> о том, что псевдопротокол <var>javascript:</var> использовать вообще нельзя, и в этом случае я с ними полностью согласен.</p>
 <p>Однако авторы браузеров из соображений обратной совместимости продолжают поддерживать эту пакость, а колхозные веб-девелоперы продолжают пользоваться этой дрянью. Основное неудобство и контрпродуктивность такого подхода в том, что теряется сам смысл ссылки. Ведь со ссылкой можно сделать множество различных вещей - добавить в закладки, открыть в новом окне, распечатать содержимое, сохранить содержимое. Весь этот функционал теряется при использовании этого псевдопротокола. Вообще же этот способ не является полноценным методом установки обработчика события, потому что этот метод может быть примёнен только для элементов, имеющих атрибуты src/href.</p>
 <p>При использовании ссылок с таким обработчиком необходимо помнить, что функция ни в коем случае ничего не должна возвращать, иначе произойдёт &quot;переход&quot; на страницу, содержимое которой будет состоять из возвращённого значения.</li></p>
-<li id="inlinemethod">**inline-метод**. Запись атрибута on**event** html-элемента. Пример: 
+<li id="inlinemethod">**inline-метод**. Запись атрибута on**event** html-элемента. Пример:
 
 <pre><code>&lt;a href=&quot;someurl.html&quot; onclick=&quot;alert(&#39;got click!&#39;)&quot;&gt;link&lt;/a&gt;
 </code></pre>
 <p>Этот метод появился самым первым, и поддерживается <strong>абсолютно везде</strong>. Недостаток его заключается в том, что логика смешивается с содержимым. (если вдруг придётся изменить обработчики, придётся лезть в код (х)html). Применять же его можно, как мне кажется, лишь в самых простых сайтах-визитках, где весь js-функционал заключается, например, в открытии/скрытии какой-нибудь карты проезда. Ссылка сохраняет свой основной функционал, её можно положить в закладки и т.д. Если же Вы не можете держать в памяти все установленные обработчики в проекте, то этот способ неприемлим.</li></p>
-<li id="elementattribute">**Установка element.onclick в js**. Данный метод сообразен предыдущему за тем исключением, что установка обработчика происходит не непосредственно в (x)html, а в скрипте, и это удобнее. Пример: 
+<li id="elementattribute">**Установка element.onclick в js**. Данный метод сообразен предыдущему за тем исключением, что установка обработчика происходит не непосредственно в (x)html, а в скрипте, и это удобнее. Пример:
 
-<pre><code>где-то в html: 
+<pre><code>где-то в html:
 &lt;a href=&quot;someurl&quot; id=&quot;myhref&quot;&gt;link&lt;/a&gt;
 
 где-то в javascript:
@@ -310,6 +313,6 @@ window.onload = function(e) {
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>

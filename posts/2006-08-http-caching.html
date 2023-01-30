@@ -7,10 +7,13 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
-    <link  rel="stylesheet" href="/styles/style.css" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link  rel="stylesheet" href="/styles/style.css" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
     <div class="wrapper">
@@ -18,7 +21,7 @@
 <p>Я не претендую на полноту рассказа о кэшировании — для этого есть спецификация, но расскажу лишь то, что необходимо для реализации кэширования динамически создаваемых или изменяемых документов.</p>
 <p>Когда клиент скачивает по протоколу HTTP какую-либо полезную информацию, он сохраняет её в памяти и затем отображает пользователю. При разработке стандарта HTTP Тим Бернерс Ли предложил способ сократить количество передаваемых данных за счёт системы кэширования, целью которой было предотвращение повторной загрузки ресурса, который уже был загружен клиентом и не изменился.</p>
 <h3 id="основа-кэширования">Основа кэширования</h3>
-<p>Кэширование всегда инициируется сервером, и поддерживается клиентом. Самый простой способ кэширования выглядит так: 
+<p>Кэширование всегда инициируется сервером, и поддерживается клиентом. Самый простой способ кэширования выглядит так:
 Клиент запрашивает какой-то ресурс, сервер включает в заголовки ответа заголовок <var>Expires</var> со значением какой-либо даты. Этот заголовок &quot;говорит&quot; клиенту о том, что данный ресурс будет актуальным до даты, указанной в нём. Если указать некоторую дату в будущем, клиент будет вправе до этой даты при запросе пользователя выдавать ресурс из своего кэша. Если указать <var>0</var>, текущую дату или дату в прошлом, клиент будет при каждом запросе заново скачивать весь ресурс, так как будет полагать, что &quot;срок годности&quot; ресурса истёк и следует получить его свежую версию.</p>
 <h4 id="механизм-метода-устаревания-документа">Механизм метода устаревания документа</h4>
 <ul>
@@ -281,6 +284,6 @@
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>

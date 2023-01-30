@@ -7,10 +7,13 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
-    <link  rel="stylesheet" href="/styles/style.css" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link  rel="stylesheet" href="/styles/style.css" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
     <div class="wrapper">
@@ -36,7 +39,7 @@ files).</p>
 </ul>
 <h3 id="they-are-completely-wrong">They are completely wrong.</h3>
 <p>XHTML document served as <var>application/xhtml+xml</var> has <strong>the same DOM</strong> as XHMTL served as <var>text/html</var>.</p>
-<p>At first Mozilla has been creating XMLDocument object for pages served as <var>application/xhtml+xml</var>, but then there was opened a <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=111514">Bug</a> in December 2001, and the first fix was proposed in March 2003 and in two monthes final fix was accepted. Since that time Mozilla started creating HTMLDocument object for XHTML pages served as <var>application/xhtml+xml</var> and therefore they had to support all that HTML stuff: 
+<p>At first Mozilla has been creating XMLDocument object for pages served as <var>application/xhtml+xml</var>, but then there was opened a <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=111514">Bug</a> in December 2001, and the first fix was proposed in March 2003 and in two monthes final fix was accepted. Since that time Mozilla started creating HTMLDocument object for XHTML pages served as <var>application/xhtml+xml</var> and therefore they had to support all that HTML stuff:
     document.write, document.applets, HTMLElement.innerHTML, document.forms, document.anchors, document.images, document.links, document.cookie</p>
 <p>The only thing they didn&#39;t support is <var>document.all</var>, it&#39;s only supported in quirks mode of document served as <var>text/html</var>. </p>
 <p>As for Opera: it checks <var>namespace</var> of <var><html></var> element to understand if it is xhtml and therefore there should be a HTML DOM or if it is a xml document and there should be XML DOM. And yes, Opera provides HTML DOM for ALL MIME types that XHTML can be served as.</p>
@@ -77,6 +80,6 @@ of all those scary stories of not working <var>innerHTML</var> or <var>document.
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>

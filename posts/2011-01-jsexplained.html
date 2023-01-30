@@ -7,17 +7,20 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
-    <link  rel="stylesheet" href="/styles/style.css" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link  rel="stylesheet" href="/styles/style.css" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
     <div class="wrapper">
         <h1>small piece of js code explained</h1>
 <p>Today a colleague showed me a piece of js code and asked to explain how it works.</p>
 <p>Here’s the code:</p>
-<pre><code>(function(x) {return x(x);})(function(z){ return function(y){ return z; } })(1)(2)(3) 
+<pre><code>(function(x) {return x(x);})(function(z){ return function(y){ return z; } })(1)(2)(3)
 </code></pre>
 <p>For many from non-js background it would be easier if I rewrite first two function expressions as function declarations, turn third function expression into named function expression and break the execution into parts:</p>
 <pre><code>function f1(x) {
@@ -78,6 +81,6 @@ var result4 = result3(3);
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>
