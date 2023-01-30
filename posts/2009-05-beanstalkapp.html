@@ -7,10 +7,13 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
-    <link  rel="stylesheet" href="/styles/style.css" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link  rel="stylesheet" href="/styles/style.css" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
     <div class="wrapper">
@@ -31,7 +34,7 @@
 <li><p>go to your repository setup → integration → fogbugz. All you need to do is follow the instructions – but basically they will just need your fogbugz URL (yourproject.fogbugz.com) and username with password.</p>
 </li>
 <li><p><a href="http://help.beanstalkapp.com/faqs/getting-started-11/choosing-your-subversion-client">choose your subversion client</a>, download it and install. All you’ll have to configure in the client is a repository URL, it will look something like this: </p>
-<pre><code> http://yourproject.svn.beanstalkapp.com/myfirstrepo/ 
+<pre><code> http://yourproject.svn.beanstalkapp.com/myfirstrepo/
 </code></pre>
 <p> and your username/password (usually username is the email you entered when registering). That’s it, you can delete all files from the working directory on your computer (do a backup before deleting!) and check-out files from your repository there. I use <a href="http://en.wikipedia.org/wiki/TortoiseSVN">tortoiseSVN</a> so I just stopped IIS, removed everything from my c:\inetpub\testproject directory, right-clicked on it and chose “Check-out” from TortoiseSVN menu. In a minute I had all my files fetched from beanstalk repository. I started IIS and had my test project up and running, but now with full source control!</p>
 </li>
@@ -49,7 +52,7 @@
 <li><p>If you have a bug or a feature request, you enter it to Fogbugz, it will get a number assigned.</p>
 </li>
 <li><p>When you (or someone else) start working on a bug, you just edit your code and then commit it. When committing, you can add tags to a commit message. For example, if you do a commit with the following message:</p>
-<pre><code> [case:34 status:resolved] 
+<pre><code> [case:34 status:resolved]
  fixed IE5.5 lack of .toFixed() support
 </code></pre>
 <p> Beanstalk will go to FogBugz, find bug #34, add the message to it and mark the bug as resolved. <a href="http://www.wildbit.com/blog/2008/01/21/beanstalk-major-update-today/">See here</a> for more commit tags.</p>
@@ -89,6 +92,6 @@
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>

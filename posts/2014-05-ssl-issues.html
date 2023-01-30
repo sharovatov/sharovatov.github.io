@@ -7,10 +7,13 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
-    <link  rel="stylesheet" href="/styles/style.css" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link  rel="stylesheet" href="/styles/style.css" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
     <div class="wrapper">
@@ -26,7 +29,7 @@
 <li><p>wildcard can only be used as the left-most label, *.sub.mydomain.com will do, sub.*.mydomain.com is not supported</p>
 </li>
 <li><p>Google Chrome violates the <a href="http://tools.ietf.org/html/rfc6125#section-6.6.2">RFC6125 requirement to trust a pinned certificate</a> and will only show a padlock icon (i.e. truly accept the certificate — “pin the certificate” in the <a href="http://tools.ietf.org/html/rfc6125">RFC</a> terms) if Common Name or one of SANs  matches the FQDN (wildcard will do).
-All other browsers follow the RFC and a user can manually pin an arbitrary certificate to the site he’s testing. Here’s a screenshot of a pinned self-signed certificate applied to a host not matching the certificate’s Common Name: 
+All other browsers follow the RFC and a user can manually pin an arbitrary certificate to the site he’s testing. Here’s a screenshot of a pinned self-signed certificate applied to a host not matching the certificate’s Common Name:
  <img src="http://sharovatov.ru/screenshots/ssl-chrome-selfsigned.png" alt="chrome self-signed certificate">
  So if you use self-signed certificate on your test environment, be sure to generate it correctly and list all domain variations in certificate’s SAN list.</p>
 </li>
@@ -62,6 +65,6 @@ All other browsers follow the RFC and a user can manually pin an arbitrary certi
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>

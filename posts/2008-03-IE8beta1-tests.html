@@ -7,10 +7,13 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
-    <link  rel="stylesheet" href="/styles/style.css" />
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link  rel="stylesheet" href="/styles/style.css" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 <body>
     <div class="wrapper">
@@ -29,11 +32,11 @@
 <ul>
 <li><p>First bug I&#39;ve noticed was happening when you set <code>position: relative</code> for the generated content rule. The tab where you have this page opened dies. And then due to newly introduced <a href="http://www.microsoft.com/windows/products/winfamily/ie/ie8/readiness/NewFeatures.htm#crash">crash recovery system</a>, it tries to recover the tab, loads the page and dies again and so on - an infinite loop that you can&#39;t break. But the weird thing is that it doesn&#39;t actually <em>die</em> - it shows a window promting to select a debugger. The kind of window that appears when you have errors in your javascript code.</p>
 <p>  here&#39;s the code sample:</p>
-<pre><code>  p:before {content: &quot;test&quot;; position: relative;}` 
+<pre><code>  p:before {content: &quot;test&quot;; position: relative;}`
 </code></pre>
 <p>  and <a href="http://sharovatov.ru/testcases/genPosition.html">the testcase</a>.</p>
 </li>
-<li><p>I noted the bug and continued testing. 
+<li><p>I noted the bug and continued testing.
   Next thing I came up with was the fact that if the page doesn&#39;t have IMG/OBJECT/IFRAME elements or an image set as a background for an element, generated content is created <strong>after</strong> <code>window.onload</code>!</p>
 <p>  Please have a look on the following testcases:</p>
 <ul>
@@ -145,6 +148,6 @@ elements in CSS and you can&#39;t query them using <strong>Selectors</strong>.</
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>

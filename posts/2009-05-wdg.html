@@ -7,6 +7,9 @@
 	<meta property="og:type" content="website">
 	<meta property="og:image" content="https://sharovatov.github.io/me.jpg">
 	<meta property="og:url" content="https://sharovatov.github.io">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link  rel="stylesheet" href="/styles/style.css" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="alternate" type="application/atom+xml" title="Vitaly Sharovatov" href="/atom.xml">
@@ -53,7 +56,7 @@ comments. So Windows 7 Desktop Gadget with my blog comments feed would perfectly
 <p>First of all, as I’ve already said, Windows 7 Gadget is nothing more than just a HTML page with Javascript and CSS. So I use the same approach as if I had to parse my blog comments on a website – a simple HTML, a bit of CSS and a bit of AJAX. So gadget building comes down to building a client-side web-app and packing it.</p>
 <h2 id="creating-a-web-app">Creating a web-app</h2>
 <p>I created a <a href="http://sharovatov.ru/gadgets/main.html">simple page</a> with a pretty <a href="http://sharovatov.ru/gadgets/rss.js">straight-forward javascript</a>. If you take a look at window.onload js code, you’ll see the following:</p>
-<pre><code>window.setInterval( function(){ getRSS(url); }, 5*60*1000); 
+<pre><code>window.setInterval( function(){ getRSS(url); }, 5*60*1000);
 </code></pre>
 <p>meaning that every five minutes getRSS function is called.</p>
 <p>This is the “main loop” of our program. As our gadget is a desktop program written in javascript and since Javascript blocks UI when being executed, setInterval/setTimeout is the only one way to set the “main loop”.</p>
@@ -205,7 +208,7 @@ href="http://blog.orbmu2k.de/">http://blog.orbmu2k.de/</a></p>
 <p>The great example of flyout use case is standard Windows 7 Stocks gadget – it shows basic stocks rates information in the main window and the if you click on the stock rate you’re interested, MSN Money chart for this stock rate is shown in a flyout. Here’s how it looks:</p>
 <p><a href="http://sharovatov.files.wordpress.com/2009/06/image.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image_thumb.png?w=415&#038;h=170" width="415" height="170"/></a></p>
 <p>Flyout is a separate HTML page which you attach to your gadget similarly to <a href="http://sharovatov.wordpress.com/2009/05/29/exploring-windows-desktop-gadgets-3-settings-storage/">settings window</a> – by specifying the following:</p>
-<pre><code>System.Gadget.Flyout.file = &#39;flyout.html&#39;; 
+<pre><code>System.Gadget.Flyout.file = &#39;flyout.html&#39;;
 </code></pre>
 <p>Another difference from settings dialog is that settings dialog is only accessible by clicking on a options button:</p>
 <p><a href="http://sharovatov.files.wordpress.com/2009/06/image1.png"><img title="image" border="0" alt="image" src="http://sharovatov.files.wordpress.com/2009/06/image_thumb1.png?w=162&#038;h=151" width="162" height="151"></a> and flyout is shown/hidden programmatically by setting its <strong>show</strong> property to <strong>true</strong>/<strong>false</strong>:</p>
@@ -284,6 +287,6 @@ System.Gadget.Flyout.show = true;
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
     </div>
-    
+
 </body>
 </html>
