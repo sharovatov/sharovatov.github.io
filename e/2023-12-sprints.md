@@ -28,7 +28,7 @@ Scientific evidence suggests otherwise. Urgency hinders creativity, increases th
 
 So while I agree with Mike that sprints can help a team focus on a goal, I would argue that there is a lot more to it than a sense of urgency.
 
-References:
+**References**:
 
 1. https://qase.io/blog/quality-and-interest/
 2. https://hbswk.hbs.edu/item/does-time-pressure-help-or-hinder-creativity-at-work
