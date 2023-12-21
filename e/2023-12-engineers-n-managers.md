@@ -2,7 +2,7 @@ On engineers, managers and decision making
 
 Engineers often blame managers for making irrational or suboptimal decisions, labeling them as inept, often in jest. Yet, these managers aren’t born overnight; many were once engineers. This begs the question: Do we engineers consistently make sound decisions before transitioning into managerial roles?
 
-I remember presenting a talk on Process Decision Records (PDR). The concept was straightforward:
+I remember presenting [a talk on Process Decision Records (PDR)](https://www.youtube.com/watch?v=oxHzIdpLjmc&list=PLFtS8Ah0wZvWS37oveJ0-D5K6V7GWUpqY&index=6). The concept was straightforward:
 
 1️⃣ Before implementing any solution, technical or process-related, ensure a thorough understanding of the problem. Ascertain that your proposed solution truly addresses the issue, is optimal, and that its side effects or costs don't outweigh the problem.
 
