@@ -34,7 +34,47 @@ Do we have other, cheaper ways to measure speed without a speedometer? Sure, we 
 
 Do we have other ways to make the driving safer? Certainly, we can create a system where the car would limit the speed automatically in certain city areas. Alternatively, we can separate car and pedestrian traffic physically, and mandate installing serious crash protection and impact absorption systems in all the cars. These two ways, even though much more effective, seem way more expensive and complex than the speedometer and the drivers attention to it.
 
-**The purpose of metrics is to change our decision making process.**
+**The purpose of metrics is to change our behaviour or decision making process.**
+
+With speedometer, things are easy: we see speed measurement and slow down when needed.
+
+Let's now consider a measurement we've all heard of: lines of code.
+
+This metric was quite popular ages ago to track developer productivity and the progress of the project.
+
+The metric was designed to change the behaviour of developers: to _incentivise them to produce more lines of code_.
+
+The idea behind this metric was simple: managers saw that the more the developers add features, the more lines of code appeared.
+
+You might now understand that focusing on increasing the number of lines of code in the project might lead to unintended negative results. See the simple for loop optimised for the number of lines of code below:
+
+```javascript
+let start;
+start = 0;
+let condition;
+condition = function(i) {
+  let result;
+  result = i < 10;
+  return result;
+};
+let increment;
+increment = function(i) {
+  let result ;
+  result = i + 1;
+  return result;
+};
+for (
+    let i = start;
+    condition(i);
+    i = increment(i)
+) {
+    {
+        console.log(i);
+    }
+}
+```
+
+There was a 
 
 
 
@@ -42,4 +82,7 @@ Do we have other ways to make the driving safer? Certainly, we can create a syst
 
 
 
-When we introduce a metric to measure something which isn't possible to reduce to just one metric, we might 
+**References**:
+- [Der Kobra- Effekt. Wie man Irrwege der Wirtschaftspolitik vermeidet](https://www.amazon.com/Kobra-Effekt-Irrwege-Wirtschaftspolitik-vermeidet/dp/3421056781)
+- [The Law of Unintended Consequences](https://themindcollection.com/law-of-unintended-consequences/)
+
