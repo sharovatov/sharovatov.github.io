@@ -57,6 +57,29 @@ The requirements must be validated: do they list all the work which is really ne
 
 Then we need to decide what checks we need to execute in order to see if the person is the right fit for our requirements? How do we design a test plan for the interview?
 
+### 1. Let's say we are hiring a manual tester to the team where there's already one manual tester.
+
+As we already have one manual tester in the team, it means that this hiring is only viable when the constraint is the performance: when our manual tester can't cope with the load.
+
+**NB**: We assume here that there's no more optimal way to deal with the load on our tester
+
+Let's say that our manual tester is most occupied with two kinds of activities: regular regression testing for each release (every two weeks) and testing new features.
+
+To test the new features, our manual tester participates in two kinds of activities: 
+- requirements testing and creating test plans and test cases for the feature before the development phase
+- Testing the feature after the development according to the test plan
+
+To do regression testing, our manual tester goes through the whole project’s test documentation and reruns manually all the testplans. 
+
+These are the requirements, and we tested them to see if they make sense.
+
+Essentially, we are hiring a person who would help with handling these tasks.
+
+This means that we need to test the candidate’s ability to handle these tasks, we need to 
+
+- list tasks required for this type of testing
+- from this list of tasks come up with questions
+
 
 
 
@@ -85,29 +108,6 @@ Testing "too much" means the code is delayed and too much efforts are spent: the
 Interviewing "too much" means the hiring process takes longer, the company wastes resources and if the candidate is hired, they start later: the value for the clent takes longer to build and deploy.
 
 
-
-### 1. Let's say we are hiring a manual tester to the team where there's already one manual tester.
-
-As we already have one manual tester in the team, it means that this hiring is only viable when the constraint is the performance: when our manual tester can't cope with the load.
-
-**NB**: We assume here that there's no more optimal way to deal with the load on our tester
-
-Let's say that our manual tester is most occupied with two kinds of activities: regular regression testing for each release (every two weeks) and testing new features.
-
-To test the new features, our manual tester participates in two kinds of activities: 
-- requirements testing and creating test plans and test cases for the feature before the development phase
-- Testing the feature after the development according to the test plan
-
-To do regression testing, our manual tester goes through the whole project’s test documentation and reruns manually all the testplans. 
-
-These are the requirements, and we tested them to see if they make sense.
-
-Essentially, we are hiring a person who would help with handling these tasks.
-
-This means that we need to test the candidate’s ability to handle these tasks, we need to 
-
-- list tasks required for this type of testing
-- from this list of tasks come up with questions
 
 
 H4 example questions
