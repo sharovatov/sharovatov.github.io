@@ -57,28 +57,29 @@ The requirements must be validated: do they list all the work which is really ne
 
 Then we need to decide what checks we need to execute in order to see if the person is the right fit for our requirements? How do we design a test plan for the interview?
 
-### 1. Let's say we are hiring a manual tester to the team where there's already one manual tester.
+### 1. Let's say we are hiring a manual tester to the team where we already have one.
 
 As we already have one manual tester in the team, it means that this hiring is only viable when the constraint is the performance: when our manual tester can't cope with the load.
 
 **NB**: We assume here that there's no more optimal way to deal with the load on our tester
 
-Let's say that our manual tester is most occupied with two kinds of activities: regular regression testing for each release (every two weeks) and testing new features.
+Doing the job analysis reveals that our manual tester is most occupied with two kinds of activities: regular regression testing for the release every two weeks and testing new features.
 
-To test the new features, our manual tester participates in two kinds of activities: 
-- requirements testing and creating test plans and test cases for the feature before the development phase
-- Testing the feature after the development according to the test plan
+To do regression testing, our manual tester goes through the whole project’s test documentation and reruns manually all the testplans.
 
-To do regression testing, our manual tester goes through the whole project’s test documentation and reruns manually all the testplans. 
-
-These are the requirements, and we tested them to see if they make sense.
+To test the new features, our manual tester participates in two kinds of activities:
+- requirements testing and creating test plans and test cases for the feature before the development phase,
+- testing the feature after the development according to the test plan.
 
 Essentially, we are hiring a person who would help with handling these tasks.
 
-This means that we need to test the candidate’s ability to handle these tasks, we need to 
+In order to test the candidate’s ability to handle requirements testing, we can present them with a couple of user stories exactly as they would come to our manual tester. We then just ask the candidate to prepare a test plan for the requirements.
 
-- list tasks required for this type of testing
-- from this list of tasks come up with questions
+To test the candidate's ability of testing the feature according to the test plan, we just ask them to test the feature according to the provided test plan.
+
+To verify their proficiency in regression testing, we ask the person to do the regression testing but limit the scope of testing to critical features only.
+
+This way we check candidate's abilities against the actual requirements devised from our real work tasks.
 
 
 
