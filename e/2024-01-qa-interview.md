@@ -1,11 +1,7 @@
-
-This is the first post in a series of two:
-- designing the interview process
-- how to prep for an interview [QA engineer - candidate]
-
 This is another article in the series on hiring. The [first one](https://qase.io/blog/hiring-quality-cvs/) was about the JDs and CVs.
 
-This one is devoted to designing an interview.
+This one is devoted to designing an interview. Next post will be on how to prep for an interview [QA engineer - candidate]
+
 
 Before even starting to think about the interview, check if the hiring decision is an optimal one. In many cases it's sufficient and more optimal to optimize the processes (but this is a topic for another article).
 
@@ -21,7 +17,7 @@ Hiring, as any other activity, should be done for a reason. Usual hiring reasons
 
 The goal of this article is to provoke rational thought in the design of an interview process.
 
-The symptom I see often is that many interviews are just blindly copied from the "successful companies" or designed "intuitively". In many cases I see:
+The symptom I often see is that many interviews are just blindly copied from the "successful companies" or designed "intuitively". In many cases I see:
 
 - irrelevant questions copied from somewhere or even compiled from multiple sources
 - too many steps in the interview process with the rationale "it's better to be safe than sorry" or "google does, we'll do it too"
@@ -33,9 +29,7 @@ All the companies are different, all the teams and domain areas are unique, ther
 
 [todo: think of a good video on cargo cults]
 
-**The interview process has a specific reason and should be designed rationally to provide an optimal way to check the candidate against the requirements for the role.**
-
-To solve the problem we need to understand the particular requirements for the role and design the optimal set of checks to verify that the candidate fits these requirements.
+**The interview process has a specific reason and should be designed rationally to provide an optimal way to check the candidate against the actual requirements for the role.**
 
 I believe that the interview process is very similar to quality control: during the interview we need to quickly and efficiently verify if the candidate matches the requirements. Similarly, in software testing, we need to quickly and efficiently verify if the completed task matches the requirements.
 
@@ -55,7 +49,7 @@ The process of defining the requirements for the job is called [job analysis](ht
 
 The requirements must be validated: do they list all the work which is really needed? Don't they list too much? See [requirements testing article](https://qase.io/blog/working-with-requirements-in-testing/) for inspiration.
 
-Then we need to decide what checks we need to execute in order to see if the person is the right fit for our requirements? How do we design a test plan for the interview?
+Then we need to decide what checks we need to execute in order to see if the person is the right fit for our requirements. How do we design a test plan for the interview?
 
 ### 1. Let's say we are hiring a manual tester to the team where we already have one.
 
@@ -63,7 +57,7 @@ As we already have one manual tester in the team, it means that this hiring is o
 
 **NB**: We assume here that there's no more optimal way to deal with the load on our tester
 
-Doing the job analysis reveals that our manual tester is most occupied with two kinds of activities: regular regression testing for the release every two weeks and testing new features.
+The job analysis reveals that our manual tester is most occupied with two kinds of activities: regular regression testing for the release every two weeks and testing new features.
 
 To do regression testing, our manual tester goes through the whole project’s test documentation and reruns manually all the test plans.
 
@@ -71,7 +65,7 @@ To test the new features, our manual tester participates in two kinds of activit
 - requirements testing and creating test plans and test cases for the feature before the development phase,
 - testing the feature after the development according to the test plan.
 
-Essentially, we are hiring a person who would help with handling these tasks.
+Essentially, we are hiring a person who would help our manual tester with handling these tasks.
 
 In order to test the candidate’s ability to handle requirements testing, we can present them with a couple of user stories exactly as they would come to our manual tester. We then just ask the candidate to prepare a test plan for the requirements.
 
@@ -79,7 +73,11 @@ To test the candidate's ability of testing the feature according to the test pla
 
 To verify their proficiency in regression testing, we ask the person to do the regression testing but limit the scope of testing to critical features only.
 
+If you have difficulties choosing the relevant user stories or test plans, do it your manual tester.
+
 This way we check candidate's abilities against the actual requirements devised from our real work tasks.
+
+This interview will also be the shortest possible, the most relevant to your job, and therefore the optimal one.
 
 ### 2. Let's say we are hiring a manual tester to the team where there're no manual testers.
 
