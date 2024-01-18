@@ -65,7 +65,7 @@ As we already have one manual tester in the team, it means that this hiring is o
 
 Doing the job analysis reveals that our manual tester is most occupied with two kinds of activities: regular regression testing for the release every two weeks and testing new features.
 
-To do regression testing, our manual tester goes through the whole project’s test documentation and reruns manually all the testplans.
+To do regression testing, our manual tester goes through the whole project’s test documentation and reruns manually all the test plans.
 
 To test the new features, our manual tester participates in two kinds of activities:
 - requirements testing and creating test plans and test cases for the feature before the development phase,
@@ -80,6 +80,10 @@ To test the candidate's ability of testing the feature according to the test pla
 To verify their proficiency in regression testing, we ask the person to do the regression testing but limit the scope of testing to critical features only.
 
 This way we check candidate's abilities against the actual requirements devised from our real work tasks.
+
+### 2. Let's say we are hiring a manual tester to the team where there're no manual testers.
+
+### 3. Let's say we are hiring a SDET to the team where there're  manual testers.
 
 
 
@@ -114,13 +118,8 @@ Interviewing "too much" means the hiring process takes longer, the company waste
 H4 example questions
 …
 
-2. Let's say we are hiring a manual tester to the team where there're no manual testers.
-
 …
 H4 example questions
-
-
-3. Let's say we are hiring a SDET to the team where there're  manual testers.
 
 …
 H4 example questions
