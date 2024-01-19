@@ -10,9 +10,6 @@ Hiring, as any other activity, should be done for a reason. Usual hiring reasons
 - to remove a constraint (see ToC) in knowledge and skills — e.g. the team doesn't know how to do certain things,
 - to remove a constraint in productivity — e.g. the team knows how to do certain things but the performance is not good enough.
 
-[todo: double check!]
-**NB**: If hiring is done to remove the knowledge/skills constraint, you will need external consultant (the person who knows how to set up  help to design the interview process as your team doesn’t possess the skills to check if the candidate can do the job.
-
 # Post 1: How a QA engineer would design an interview for a QA engineer
 
 The goal of this article is to provoke rational thought in the design of an interview process.
@@ -23,9 +20,9 @@ The symptom I often see is that many interviews are just blindly copied from the
 - too many steps in the interview process with the rationale "it's better to be safe than sorry" or "google does, we'll do it too"
 - enormous irrelevant take-home exercise given out because "the interviewers are too busy"
 
-I believe that that symptom signifies a problem: **interviewers and managers rarely know how to check if the person is a good fit for their role**.
+I believe that this symptom signifies a problem: **interviewers and managers rarely know how to check if the person is a good fit for their role**.
 
-All the companies are different, all the teams and domain areas are unique, therefore copying the process, or even the list of questions from some other context is at least not optimal, if not harmful.
+All the companies are different, all the teams and domain areas are unique, therefore copying the process, or even the list of questions from some other context is at least not optimal, if not harmful — you will be checking for something you don't need and therefore either reject good candidates or hire wrong ones.
 
 [todo: think of a good video on cargo cults]
 
@@ -45,11 +42,11 @@ Interview process design, similarly to software testing, must start with underst
 
 The process of defining the requirements for the job is called [job analysis](https://us.sagepub.com/en-us/nam/job-and-work-analysis/book258522): we may simply collect the tasks and activities which represent our candidate's work and extract the most common and the most important ones.
 
-**NB**: If we are going to interview a person to a big conservative corporation, chances are all their tasks are just Jira tickets with predefined sets of activities. If we want to interview a person for a small agile startup, it's likely that the desired tasks and activities will also imply a big deal of proactivity.
-
 The requirements must be validated: do they list all the work which is really needed? Don't they list too much? See [requirements testing article](https://qase.io/blog/working-with-requirements-in-testing/) for inspiration.
 
 Then we need to decide what checks we need to execute in order to see if the person is the right fit for our requirements. How do we design a test plan for the interview?
+
+**NB**: Please not forget that this article is devoted only to interview design from the skills perspective. Make sure you understand the profile of the candidate you're looking for and that you understand your company culture and how to verify if the person is a good fit for the culture. For instance, in some companies all QA tasks are just Jira tickets with predefined sets of activities while in others the desired tasks and activities also imply a big deal of proactivity.
 
 ### 1. Let's say we are hiring a manual tester to the team where we already have one.
 
@@ -67,6 +64,8 @@ To test the new features, our manual tester participates in two kinds of activit
 
 Essentially, we are hiring a person who would help our manual tester with handling these tasks.
 
+Our manual tester should be invited to the interview so that they can validate the candidate answers.
+
 In order to test the candidate’s ability to handle requirements testing, we can present them with a couple of user stories exactly as they would come to our manual tester. We then just ask the candidate to prepare a test plan for the requirements.
 
 To test the candidate's ability of testing the feature according to the test plan, we just ask them to test the feature according to the provided test plan.
@@ -79,7 +78,16 @@ This way we check candidate's abilities against the actual requirements devised 
 
 This interview will also be the shortest possible, the most relevant to your job, and therefore the optimal one.
 
+As the interview will not take much time, there's no reason to give any take-home exercise.
+
 ### 2. Let's say we are hiring a manual tester to the team where there're no manual testers.
+
+When we are hiring a manual tester to the team where there are no manual testers, we need to 
+
+[todo: double check!]
+**NB**: If hiring is done to remove the knowledge/skills constraint, you will need external consultant (the person who knows how to set up  help to design the interview process as your team doesn’t possess the skills to check if the candidate can do the job.
+
+
 
 ### 3. Let's say we are hiring a SDET to the team where there're  manual testers.
 
