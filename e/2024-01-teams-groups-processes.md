@@ -16,13 +16,7 @@ Individually distributed bonuses make the situation even worse. Individual bonus
 
 As soon as the individual input is measured, the interactions are neglected. When bonuses are granted for "individual performance", they work as social appreciation of the efforts for which the bonus is granted. Humans are social animals, we are motivated by the social appreciation. The motivation brought by bonuses is short-term and deteriorates quickly, and it inevitably changes our behaviour to achieve exactly what the bonuses are granted for. When the hunter is granted bonus for, say, number of spear strikes delivered to the mammoth, his main motivation becomes to deliver as many strikes as possible, at the expense of helping his team mate. Hence, the interactions are neglected, interdependence and trust weakens, the team deteriorates to the mere group, the emergent quality of super-result disappears. It is much harder to maintain a team in presence of individual bonuses.
 
-- Grades
-- KPIs
-- Bonuses
-- individual performance reviews
-- Gamification
-
-All practices and approaches focusing 
+Some companies also practice [gamification](https://sharovatov.github.io/e/2023-12-gamification.html), which is also detrimental to team dynamics due to fostering the individual competition.
 
 ## Full control of individual efforts and their coordination done by the manager
 
