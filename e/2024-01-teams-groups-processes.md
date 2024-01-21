@@ -2,10 +2,18 @@
 https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf/
 http://sharovatov.github.io/e/2024-01-teams-groups.html
 
+%GAMIFICATION%
+https://www.linkedin.com/pulse/gamification-good-bad-vitaly-sharovatov-lbpoe/
+https://sharovatov.github.io/e/2023-12-gamification.html
+
+%1-1S%
+https://www.linkedin.com/pulse/your-regular-11s-actually-effective-vitaly-sharovatov
+https://sharovatov.github.io/e/2023-08-oneonone.html
+
 
 As mentioned in the [previous article](%PREVIOUS_ARTICLE%), organizational psychology knows a great deal about processes with negative impact on trust, cooperation and collaboration.
 
-This article is devoted to the practices and approaches which turn teams into groups.
+This article is devoted to the practices and approaches which turn teams into groups by hurting interdependence, cooperation and trust.
 
 ## Focus on individual performance and competition
 
@@ -13,7 +21,7 @@ Dr. W. Edwards Deming called focus on individual performance one of the seven de
 
 > Evaluation of performance, merit rating, or annual review… The idea of a merit rating is alluring. the sound of the words captivates the imagination: pay for what you get; get what you pay for; motivate people to do their best, for their own good. The effect is exactly the opposite of what the words promise.
 
-The reason for such a harsh description was that focusing on individual performance introduces competition between members of the group, which, as stated in the [previous article](%PREVIOUS_ARTICLE%), is detrimental to teamwork.
+The reason for such a harsh description was that focusing on individual performance introduces competition between members of the group, which, as stated in the [previous article](%PREVIOUS_ARTICLE%), is detrimental to cooperation and therefore teamwork.
 
 Imagine a hunting team aiming to kill a mammoth: what are the chances the team could succeed if the individuals were competing instead of cooperation?
 
@@ -21,20 +29,50 @@ Individually distributed bonuses make the situation even worse. The calculation 
 
 As soon as individual input is measured, the interactions are neglected. When bonuses are granted for “individual performance”, they work as social appreciation for the efforts for which the bonus is granted. Humans are social animals; we are motivated by social appreciation. The motivation brought by bonuses is short-term and deteriorates quickly, and it inevitably changes our behavior to achieve exactly what the bonuses are granted for. When the hunter is granted a bonus for, say, the number of spear strikes delivered to the mammoth, his main motivation becomes to deliver as many strikes as possible, at the expense of helping his teammate. Hence, the interactions are neglected, interdependence and trust weaken, the team deteriorates to a mere group, and the emergent quality of a super-result disappears. It is much harder to maintain a team in the presence of individual bonuses.
 
-Additionally, interactions can’t be reduced to actions. When the distraction specialist in the team is set with a KPI of the number of times he jumped and waved his hands, he will be focused on achieving that number instead of interacting with the attacking specialists to achieve the common goal. Even the commonality of the goal is diminished by the mere presence of individual KPIs.
+Additionally, interactions can’t be reduced to actions. When the distraction specialist in the team is set with a KPI of the number of times he jumped and waved his hands, he will be focused on achieving that number instead of interacting with the attacking specialists to achieve the common goal through cooperation. Even the commonality of the goal is diminished by the mere presence of individual KPIs.
+
+Some companies also practice [gamification](%GAMIFICATION%), which is also detrimental to cooperation since it fosters individual competition.
+
+With regards to trust, KPIs are also detrimental. Trust by definition means that the reciprocity is only _expected_ by the trustor: there's no way for the attacking hunter to sign a contract with the distracting specialist with all the types of actions he expects. The attacking hunter simply presumes they both cooperate and that the distracting hunter can be _trusted_ to act in the best interests of the team.
+
+A manager providing individual employees with KPIs shows their distrust in employees. Employees seeing they aren't trusted, will play along, and the team will reduce to a mere group of individuals.
 
 In social sciences, the effects of KPIs and other reductionist interventions are well-described in the [Law Of Unintended Consequences](https://www.econlib.org/library/Enc/UnintendedConsequences.html).
 
-Some companies also practice [gamification](https://sharovatov.github.io/e/2023-12-gamification.html), which is also detrimental to team dynamics since it fosters individual competition.
 
-## Efforts coordination done by the manager
+
+
+## Interventions and micromanagement
+
+- regular 1-1s %1-1S%
+
+trust is diminished by:
+- time trackers, imposed deadlines, hyper-control (micromanagement)
+
+
+micromanagement https://pubmed.ncbi.nlm.nih.gov/26241568/
+
+> some managers will respond to complexity by increasing levels of control over team members and workplace practices (Chuang, Kendra, & Craft, 2011). Managers with such controlling behaviors are sometimes known as micromanagers, especially when the control they wield over staff is preoccupied with the minutiae or minor details of day-to-day workplace operations (White, 2010)
+
 
 The manager is the driver of the coordination, which reduces internal team coordination and cooperation:
 - The manager assigns tasks to individuals, plans the workload and the workflow between the individuals (the boss is the head, the group is the body executing orders), manager defines the processes for the team to work
 - Manager providing individual feedback during regular 1-1s influences the individuals instead of the team doing that themselves, or manager helping the whole team to find a way to resolve issues within the team themselves
 - In the extreme form — micromanagement
 
+### Efforts coordination done by the manager
+
+Trust is fundamentally based on autonomy, as [research indicates](https://www.jstor.org/stable/30034987) that controlling behavior is interpreted as a lack of trust and an infringement on individual autonomy.
+
+Professionalism necessitates autonomy, but not in an unstructured manner that permits anything to be done. Rather, it involves working within the provided constraints of the market, professional knowledge and ethics to deliver high-value outcomes for clients.
+
+The era of simplistic, mechanistic Taylor-style reductionist management has long since passed, and imposing decisions on the process of work is a clear indicator of an attempt to control and a lack of trust.
+
+
+
 ## Lack of reciprocity
+
+
 
 When the manager promises something and the employee trusts them, but then the manager doesn’t fulfill the promise, there’s a lack of reciprocity or a breach of trust. The trust is gained slowly and destroyed easily by:
 - Layoffs
@@ -70,12 +108,6 @@ It is evident that layoffs are generally perceived as unjust and erode trust in 
 ![trust-distrust](trust-distrust.png)
 
 ## 3. Process or architecture decisions imposed upon teams
-
-Trust is fundamentally based on autonomy, as [research indicates](https://www.jstor.org/stable/30034987) that controlling behavior is interpreted as a lack of trust and an infringement on individual autonomy.
-
-Professionalism necessitates autonomy, but not in an unstructured manner that permits anything to be done. Rather, it involves working within the provided constraints of the market, professional knowledge and ethics to deliver high-value outcomes for clients.
-
-The era of simplistic, mechanistic Taylor-style reductionist management has long since passed, and imposing decisions on the process of work is a clear indicator of an attempt to control and a lack of trust.
 
 **References**:
 - [Out of the crisis](https://www.amazon.com/Out-Crisis-Press-Edwards-Deming-dp-0262535947/dp/0262535947/)
