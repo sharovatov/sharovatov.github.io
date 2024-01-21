@@ -1,4 +1,9 @@
-As mentioned in the [previous article](https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf), organizational psychology knows a great deal about processes with negative impact on trust, cooperation and collaboration.
+%PREVIOUS_ARTICLE%
+https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf/
+http://sharovatov.github.io/e/2024-01-teams-groups.html
+
+
+As mentioned in the [previous article](%PREVIOUS_ARTICLE%), organizational psychology knows a great deal about processes with negative impact on trust, cooperation and collaboration.
 
 This article is devoted to the practices and approaches which turn teams into groups.
 
@@ -8,17 +13,17 @@ Dr. W. Edwards Deming called focus on individual performance one of the seven de
 
 > Evaluation of performance, merit rating, or annual review… The idea of a merit rating is alluring. the sound of the words captivates the imagination: pay for what you get; get what you pay for; motivate people to do their best, for their own good. The effect is exactly the opposite of what the words promise.
 
-The reason for such harsh description was that the focus on individual performance introduces competition between members of the group, which, as stated in the previous article, is detrimental to team work.
+The reason for such a harsh description was that focusing on individual performance introduces competition between members of the group, which, as stated in the [previous article](%PREVIOUS_ARTICLE%), is detrimental to teamwork.
 
 Imagine a hunting team aiming to kill a mammoth: what are the chances the team could succeed if the individuals were competing instead of cooperation?
 
-Individually distributed bonuses make the situation even worse. Individual bonuses calculation is based on determining the individual contribution into the common result, which is only possible in the group setting (remember the hunting group?). It is not possible to calculate individual contribution in the team setting where the common result is a _synergistic_ product of collaborative efforts of inter-dependent actors (the hunting team). In the hunting team, any individual's input is interwoven with the inputs of others, and is amplified or diminished by these interactions. There's no way to _measure_ how hard hunter 1 helped hunter 2 realise his plan, or how quickly hunter 3 noticed the mammoth needed more distraction since hunter 4 was just going to attack.
+Individually distributed bonuses make the situation even worse. The calculation of individual bonuses is based on determining the individual contribution to the common result, which is only possible in a group setting (remember the hunting group?). It is not possible to calculate individual contribution in a team setting where the common result is a _synergistic_ product of collaborative efforts of interdependent actors (the hunting team). In the hunting team, any individual’s input is interwoven with the inputs of others and is amplified or diminished by these interactions. There’s no way to _measure_ how much hunter 1 helped hunter 2 realize his plan, or how quickly hunter 3 noticed the mammoth needed more distraction since hunter 4 was just about to attack.
 
-As soon as the individual input is measured, the interactions are neglected. When bonuses are granted for "individual performance", they work as social appreciation of the efforts for which the bonus is granted. Humans are social animals, we are motivated by the social appreciation. The motivation brought by bonuses is short-term and deteriorates quickly, and it inevitably changes our behaviour to achieve exactly what the bonuses are granted for. When the hunter is granted bonus for, say, number of spear strikes delivered to the mammoth, his main motivation becomes to deliver as many strikes as possible, at the expense of helping his team mate. Hence, the interactions are neglected, interdependence and trust weakens, the team deteriorates to the mere group, the emergent quality of super-result disappears. It is much harder to maintain a team in presence of individual bonuses.
+As soon as individual input is measured, the interactions are neglected. When bonuses are granted for “individual performance”, they work as social appreciation for the efforts for which the bonus is granted. Humans are social animals; we are motivated by social appreciation. The motivation brought by bonuses is short-term and deteriorates quickly, and it inevitably changes our behavior to achieve exactly what the bonuses are granted for. When the hunter is granted a bonus for, say, the number of spear strikes delivered to the mammoth, his main motivation becomes to deliver as many strikes as possible, at the expense of helping his teammate. Hence, the interactions are neglected, interdependence and trust weaken, the team deteriorates to a mere group, and the emergent quality of a super-result disappears. It is much harder to maintain a team in the presence of individual bonuses.
 
-Additionally, interactions can't be reduced to actions. When the distracting specialist in the team is set with a KPI of the number of times he jumped and waved his hands, he will be focused on achieving that number instead of interacting with the attacking specialists to achieve the common goal. Even the commonality of the goal is diminished by the mere presence of the individual KPIs.
+Additionally, interactions can’t be reduced to actions. When the distraction specialist in the team is set with a KPI of the number of times he jumped and waved his hands, he will be focused on achieving that number instead of interacting with the attacking specialists to achieve the common goal. Even the commonality of the goal is diminished by the mere presence of individual KPIs.
 
-In social sciences, the effects of KPIs and other reductionist interventions are well-studied in the [Law Of Unintended Consequences](https://www.econlib.org/library/Enc/UnintendedConsequences.html).
+In social sciences, the effects of KPIs and other reductionist interventions are well-described in the [Law Of Unintended Consequences](https://www.econlib.org/library/Enc/UnintendedConsequences.html).
 
 Some companies also practice [gamification](https://sharovatov.github.io/e/2023-12-gamification.html), which is also detrimental to team dynamics since it fosters individual competition.
 
