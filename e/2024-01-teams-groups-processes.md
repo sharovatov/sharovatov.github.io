@@ -2,7 +2,7 @@ As mentioned in the [previous article](https://www.linkedin.com/pulse/you-workin
 
 This article is devoted to the practices and approaches which turn teams into groups.
 
-## Focus on individual performance
+## Focus on individual performance and competition
 
 Dr. W. Edwards Deming called focus on individual performance one of the seven deadly diseases:
 
@@ -16,11 +16,15 @@ Individually distributed bonuses make the situation even worse. Individual bonus
 
 As soon as the individual input is measured, the interactions are neglected. When bonuses are granted for "individual performance", they work as social appreciation of the efforts for which the bonus is granted. Humans are social animals, we are motivated by the social appreciation. The motivation brought by bonuses is short-term and deteriorates quickly, and it inevitably changes our behaviour to achieve exactly what the bonuses are granted for. When the hunter is granted bonus for, say, number of spear strikes delivered to the mammoth, his main motivation becomes to deliver as many strikes as possible, at the expense of helping his team mate. Hence, the interactions are neglected, interdependence and trust weakens, the team deteriorates to the mere group, the emergent quality of super-result disappears. It is much harder to maintain a team in presence of individual bonuses.
 
-Some companies also practice [gamification](https://sharovatov.github.io/e/2023-12-gamification.html), which is also detrimental to team dynamics due to fostering the individual competition.
+Additionally, interactions can't be reduced to actions. When the distracting specialist in the team is set with a KPI of the number of times he jumped and waved his hands, he will be focused on achieving that number instead of interacting with the attacking specialists to achieve the common goal. Even the commonality of the goal is diminished by the mere presence of the individual KPIs.
 
-## Full control of individual efforts and their coordination done by the manager
+In social sciences, the effects of KPIs and other reductionist interventions are well-studied in the [Law Of Unintended Consequences](https://www.econlib.org/library/Enc/UnintendedConsequences.html).
 
-The manager is the driver of the coordination, which reduces internal horizontal team coordination and cooperation:
+Some companies also practice [gamification](https://sharovatov.github.io/e/2023-12-gamification.html), which is also detrimental to team dynamics since it fosters individual competition.
+
+## Efforts coordination done by the manager
+
+The manager is the driver of the coordination, which reduces internal team coordination and cooperation:
 - The manager assigns tasks to individuals, plans the workload and the workflow between the individuals (the boss is the head, the group is the body executing orders), manager defines the processes for the team to work
 - Manager providing individual feedback during regular 1-1s influences the individuals instead of the team doing that themselves, or manager helping the whole team to find a way to resolve issues within the team themselves
 - In the extreme form — micromanagement
