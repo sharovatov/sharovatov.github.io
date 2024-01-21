@@ -55,13 +55,7 @@ Regular 1-1 meetings resemble [micromanagement](https://pubmed.ncbi.nlm.nih.gov/
 
 Traditional ways of working in project management and software engineering involve breaking projects or problems into individual tasks, assigning them to their respective disciplines to work on **independently**, and then merging the finished work together. **MENTION TIM!!!!**  Tim Ottinger explains the inherent problems of such an approach in his ["Scatter-gather" piece](https://www.industriallogic.com/blog/scatter-gather/) from the productivity perspective, but I believe that effort coordination is so inefficient partly because it reduces the team to a group.
 
-Remember, one of the characteristics of a team is interdependence? Independent work is exactly what describes a group. A hunting team will only be able to kill a mammoth if they do it altogether. See my article on [mob programming](https://qase.io/blog/mob-programming/).
-
-- manager defines the processes for the team to work
-- Manager providing individual feedback during regular 1-1s influences the individuals instead of the team doing that themselves, or manager helping the whole team to find a way to resolve issues within the team themselves
-- In the extreme form — micromanagement
-
-### Efforts coordination done by the manager
+Remember, one of the characteristics of a team is interdependence? Independent work is exactly what describes a group. A hunting team will only be able to kill a mammoth if they do it together. See my article on [mob programming](https://qase.io/blog/mob-programming/).
 
 Trust is fundamentally based on autonomy, as [research indicates](https://www.jstor.org/stable/30034987) that controlling behavior is interpreted as a lack of trust and an infringement on individual autonomy.
 
