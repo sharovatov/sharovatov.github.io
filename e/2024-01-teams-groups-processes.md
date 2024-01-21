@@ -39,24 +39,25 @@ A manager providing individual employees with KPIs shows their distrust in emplo
 
 In social sciences, the effects of KPIs and other reductionist interventions are well-described in the [Law Of Unintended Consequences](https://www.econlib.org/library/Enc/UnintendedConsequences.html).
 
-
-
-
 ## Interventions and micromanagement
 
-- regular 1-1s %1-1S%
+### Regular 1-1 meetings
 
-trust is diminished by:
-- time trackers, imposed deadlines, hyper-control (micromanagement)
+Regular 1-1s interventions are usually done for a reason: the manager wants to "help the team". However, the manager does 1-1s with individuals, hence the name "one on one". As soon as the manager establishes that an employee’s problems are being resolved in 1-1 sessions with the manager, and then goes on to solve these emerging problems, they reinforce the pattern of employees solving problems with the manager rather than the team solving problems together. No matter how hard the manager tries to "build a team", if the manager's actions show that problems are effectively solved by the manager-employee pair, there’s a high probability that the group will never become a team.
 
+Imagine the hunting team needing a manager to help with their interactions, such a team would not only be unfit for hunting, it will simply be killed by the first mammoth they encounter.
 
-micromanagement https://pubmed.ncbi.nlm.nih.gov/26241568/
+Regular 1-1 meetings resemble [micromanagement](https://pubmed.ncbi.nlm.nih.gov/26241568/):
 
 > some managers will respond to complexity by increasing levels of control over team members and workplace practices (Chuang, Kendra, & Craft, 2011). Managers with such controlling behaviors are sometimes known as micromanagers, especially when the control they wield over staff is preoccupied with the minutiae or minor details of day-to-day workplace operations (White, 2010)
 
+### Effort coordination done by the manager
 
-The manager is the driver of the coordination, which reduces internal team coordination and cooperation:
-- The manager assigns tasks to individuals, plans the workload and the workflow between the individuals (the boss is the head, the group is the body executing orders), manager defines the processes for the team to work
+Traditional ways of working in project management and software engineering involve breaking projects or problems into individual tasks, assigning them to their respective disciplines to work on **independently**, and then merging the finished work together. **MENTION TIM!!!!**  Tim Ottinger explains the inherent problems of such an approach in his ["Scatter-gather" piece](https://www.industriallogic.com/blog/scatter-gather/) from the productivity perspective, but I believe that effort coordination is so inefficient partly because it reduces the team to a group.
+
+Remember, one of the characteristics of a team is interdependence? Independent work is exactly what describes a group. A hunting team will only be able to kill a mammoth if they do it altogether. See my article on [mob programming](https://qase.io/blog/mob-programming/).
+
+- manager defines the processes for the team to work
 - Manager providing individual feedback during regular 1-1s influences the individuals instead of the team doing that themselves, or manager helping the whole team to find a way to resolve issues within the team themselves
 - In the extreme form — micromanagement
 
