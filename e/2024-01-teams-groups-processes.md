@@ -57,14 +57,6 @@ Traditional ways of working in project management and software engineering invol
 
 Remember, one of the characteristics of a team is interdependence? Independent work is exactly what describes a group. A hunting team will only be able to kill a mammoth if they do it together. See my article on [mob programming](https://qase.io/blog/mob-programming/).
 
-Trust is fundamentally based on autonomy, as [research indicates](https://www.jstor.org/stable/30034987) that controlling behavior is interpreted as a lack of trust and an infringement on individual autonomy.
-
-Professionalism necessitates autonomy, but not in an unstructured manner that permits anything to be done. Rather, it involves working within the provided constraints of the market, professional knowledge and ethics to deliver high-value outcomes for clients.
-
-The era of simplistic, mechanistic Taylor-style reductionist management has long since passed, and imposing decisions on the process of work is a clear indicator of an attempt to control and a lack of trust.
-
-
-
 ## Lack of reciprocity
 
 
