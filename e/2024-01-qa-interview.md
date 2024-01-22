@@ -93,53 +93,11 @@ In his [seminal paper on information assymetry](https://www.jstor.org/stable/187
 
 3. **Candidate Reputation** can be a powerful tool for reducing information asymmetry. It might be viable to just hire a manual tester the team already knows is capable and a good fit.
 
+I'd say that the third option is the most optimal one in many cases as we don't need to control the quality of the candidate (interview them) — their quality is assured by our previous work with them.
 
-[todo: double check!]
-**NB**: If hiring is done to remove the knowledge/skills constraint, you will need external consultant (the person who knows how to set up  help to design the interview process as your team doesn’t possess the skills to check if the candidate can do the job.
-
-
-
----
+Signaling might work well if we modify it slightly by inviting an external consultant we trust to do the job we need for a while. This would allow to define the requirements for the candidate. Also, the consultant would be able to help us verify the candidate's abilities during the interview.
 
 Following this method should make designing interviews easier and more efficient.
-
-Testing the candidate 
-
-
-When you are the tester, you don't really need to check how the task is programmed, you need to understand if the task does what it is intended to do - if its behavior matches the requirements.
-
-Similarly, when designing an interview, you don't really need to check what the person _knows_, you need to understand if they can do the work they are intended to do — if their behavior matches the requirements.
-
-_Understanding how the task is programmed can be beneficial in debugging it — i.e. when the task is not working as per the requirements and you want to help the developer understand why. 
-
-Similarly, understanding what the person knows can be beneficial in figuring out how to help them do certain work they can't do now._
-
-
-[todo: move or delete]
-The interview design process follows the same principles as the QC procedures design in software engineering.
-
-[todo: move or delete]
-Even the procedures are very similar:
-1. Smoke testing — HR screening
-2. Unit testing — automated coding testcases in the interview
-3. End-to-end testing — to full-blown interview run by a good interviewer
-
-Testing "too much" means the code is delayed and too much efforts are spent: the value for the client takes longer to deploy.
-
-Interviewing "too much" means the hiring process takes longer, the company wastes resources and if the candidate is hired, they start later: the value for the clent takes longer to build and deploy.
-
-
-
-
-H4 example questions
-…
-
-…
-H4 example questions
-
-…
-H4 example questions
-
 
 **References**:
 - [The Market for "Lemons": Quality Uncertainty and the Market Mechanism](https://www.jstor.org/stable/1879431)
