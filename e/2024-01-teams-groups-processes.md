@@ -61,7 +61,8 @@ Remember, one of the characteristics of a team is interdependence? Independent w
 
 When the manager promises something but doesn’t fulfill the promise, there’s a lack of reciprocity or a _breach of trust_. The trust is gained slowly and destroyed easily by things like layoffs, or promising certain work conditions (or a promotion) and not keeping the promise.
 
-Layoffs in most cases are [not economically justified](https://www.careerusa.org/resources/career-files/158-resources/career-files/16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
+Layoffs in most cases are [not economically justified](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
+
 
 [Current research on trust and distrust in organizational settings](https://www.jstor.org/stable/259288) identifies fear as one of the primary indicators of the highest degree of distrust:
 
@@ -69,7 +70,7 @@ Layoffs in most cases are [not economically justified](https://www.careerusa.org
 
 As soon as one or few of the hunting team are expelled for some ridiculous reason (which could be avoided), the team is shattered and will likely reduce to a group.
 
-## Process activities or cultural peculiarities promoting negative or conflictual social dynamics.
+## Process activities or organisation design peculiarities promoting negative or conflictual social dynamics.
 
 Certain process activities and are well-known for provoking conflict or other types of negative social dynamics with teams.
 
@@ -83,9 +84,20 @@ Imagine someone from outside of a hunting team asking the team members to rememb
 
 Organising chapters and guilds based on employees specialization might negatively affect teams. Interdependence, trust and cooperation heavily rely on team bonding. When employees of a certain specialization start valuing their chapter or guild more than the product team they are in, there's a probability that they will associate themselves to the chapter or guild more than the team, which would toggle [silo mentality](https://www.investopedia.com/terms/s/silo-mentality.asp) or even [outgroup prejudice](https://opentextbc.ca/socialpsychology/chapter/ingroup-favoritism-and-prejudice/) to their team.
 
-## 3. Process or architecture decisions imposed upon teams
-
 **References**:
 - [Out of the crisis](https://www.amazon.com/Out-Crisis-Press-Edwards-Deming-dp-0262535947/dp/0262535947/)
 - [Drive: The surprising truth about what motivates us](https://www.amazon.com/Drive-Surprising-Truth-About-Motivates/dp/1594484805)
 - [Punished By Rewards: Twenty-Fifth Anniversary Edition: The Trouble with Gold Stars, Incentive Plans, A's, Praise, and Other Bribes](https://www.amazon.com/Punished-Rewards-Twenty-fifth-Anniversary-Incentive-ebook/dp/B004MYFLDG/)
+- [Karl W. Deutsch, The Nerves of Government. Models of Political Communication and Control](https://link.springer.com/chapter/10.1007/978-3-531-90400-9_26)
+- [Silo mentality](https://www.investopedia.com/terms/s/silo-mentality.asp)
+- [Ingroup favouritism and outgroup prejudice](https://opentextbc.ca/socialpsychology/chapter/ingroup-favoritism-and-prejudice/)
+- [On code reviews](https://qase.io/blog/code-review-alternatives/)
+- [Lay Off the Layoffs](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html)
+- [Differences in psychological and physical health among layoff survivors: the effect of layoff contact](https://pubmed.ncbi.nlm.nih.gov/11199253/)
+- [The effects of involuntary job loss on suicide and suicide attempts among young adults: Evidence from a matched case–control study](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)
+- [Managers' reactions to implementing layoffs: Relationship to health problems and withdrawal behaviors](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102)
+- [Measuring Indirect Effects of Unfair Employer Behavior on Worker Productivity: A Field Experiment](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf)
+- [Scatter-gather](https://www.industriallogic.com/blog/scatter-gather/)
+- [Towards Effective Management in Psychiatric-Mental Health Nursing: The Dangers and Consequences of Micromanagement](https://pubmed.ncbi.nlm.nih.gov/26241568/)
+- [The law of unintended consequences](https://www.econlib.org/library/Enc/UnintendedConsequences.html)
+
