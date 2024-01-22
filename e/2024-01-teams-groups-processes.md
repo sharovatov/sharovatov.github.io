@@ -59,9 +59,7 @@ Remember, one of the characteristics of a team is interdependence? Independent w
 
 ## Lack of reciprocity
 
-When the manager promises something and the employee trusts them, but then the manager doesn’t fulfill the promise, there’s a lack of reciprocity or a breach of trust. The trust is gained slowly and destroyed easily by:
-- Layoffs
-- Promising certain work conditions (or a promotion) and not keeping the promise
+When the manager promises something and the employee trusts them, but then the manager doesn’t fulfill the promise, there’s a lack of reciprocity or a breach of trust. The trust is gained slowly and destroyed easily by things like layoffs, or promising certain work conditions (or a promotion) and not keeping the promise.
 
 Layoffs in most cases are [not economically justified](https://www.careerusa.org/resources/career-files/158-resources/career-files/16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf).
 
@@ -69,10 +67,9 @@ It is evident that layoffs are generally perceived as unjust and erode trust in 
 
 [Current research on trust and distrust in organizational settings](https://www.jstor.org/stable/259288) identifies fear as one of the primary indicators of the highest degree of distrust:
 
-![trust-distrust](trust-distrust.png)
+![trust-distrust](https://raw.githubusercontent.com/sharovatov/private/main/articles/team_quality/trust-distrust.png?token=GHSAT0AAAAAABM76NKXNBA7MVIGWMCYBYGYZNOHAEQ)
 
-As soon as a few of the hunting team are expelled from the team for some ridiculous reason (which could be avoided), the team is shattered and will likely reduce to a group.
-
+As soon as one or few of the hunting team are expelled for some ridiculous reason (which could be avoided), the team is shattered and will likely reduce to a group.
 
 ## Process activities or cultural peculiarities promoting negative or conflictual social dynamics.
 
