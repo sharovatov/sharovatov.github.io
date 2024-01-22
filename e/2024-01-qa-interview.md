@@ -81,17 +81,17 @@ As the interview will not take much time, there's no reason to give any take-hom
 
 Job analysis only works when certain job is already being performed. If you have someone (developers?) doing the job of the manual QA, just use the advice from the previous point.
 
-If the team doesn't perform this job due to the lack of knowledge and skills, we face the classical problem of [information assymetry](https://www.sciencedirect.com/topics/economics-econometrics-and-finance/information-asymmetry): the team possess less information than the candidates, it can neither define the requirements nor verify the candidates abilities to fulfil the requirements.
+If the team doesn't perform this job due to the lack of knowledge and skills, we face the classical problem of [information assymetry](https://www.sciencedirect.com/topics/economics-econometrics-and-finance/information-asymmetry): the team possess less information than the candidates, it can neither define the requirements nor verify the candidates abilities to fulfil the requirements. Imagine a situation when a manual tester is presented with a task with no requirements and no way to test it. The tester would certainly say they cannot control the quality of such a task.
 
-This is the classical problem of [information assymetry](https://medium.com/@boundeast/why-is-information-asymmetry-relevant-to-hiring-managers-a4bc8e2af7a0).
+This is the classical problem of [information assymetry](https://medium.com/@boundeast/why-is-information-asymmetry-relevant-to-hiring-managers-a4bc8e2af7a0): the team possesses less information than the candidates.
 
 In his [seminal paper on information assymetry](https://www.jstor.org/stable/1879431) Akerlof suggested a few ways to deal with this problem:
 
-1. **Signaling** involves the informed party (usually the seller) sending a signal to the uninformed party (the buyer) about the quality of the product. In the job market, signals might include educational qualifications, certifications, or references that candidates present to potential employers. However, it's doubtful that one can rely just on any certification as a method of employee's verification.
+1. Signaling involves the informed party sending a signal to the uninformed party about the quality of the product. In the job market, signals might include educational qualifications, certifications, or references that candidates present to potential employers. However, it's doubtful that one can rely just on any certification as a method of employee's verification.
 
-2. **Warranties and Guarantees** as a sign of quality. In a labor market, this might be analogous to a probation period or a performance-based contract, where the continuation of employment is contingent on demonstrated performance. However, this method suits products better than people, since in many cases the cost of re-hire [is usually very high](https://www.scribd.com/document/112707536/There-Are-Significant-Business-Costs-to-Replacing-Employees).
+2. Warranties and Guarantees as a sign of quality. In a labor market, this might be analogous to a probation period or a performance-based contract, where the continuation of employment is contingent on demonstrated performance. However, this method suits products better than people, since in many cases the cost of re-hire [is usually very high](https://www.scribd.com/document/112707536/There-Are-Significant-Business-Costs-to-Replacing-Employees).
 
-3. **Candidate Reputation** can be a powerful tool for reducing information asymmetry. It might be viable to just hire a manual tester the team already knows is capable and a good fit.
+3. Candidate Reputation can be a powerful tool for reducing information asymmetry. It might be viable to just hire a manual tester the team already knows is capable and a good fit.
 
 I'd say that the third option is the most optimal one in many cases as we don't need to control the quality of the candidate (interview them) — their quality is assured by our previous work with them.
 
