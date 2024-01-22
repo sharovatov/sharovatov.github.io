@@ -2,7 +2,6 @@ This is another article in the series on hiring. The [first one](https://qase.io
 
 This one is devoted to designing an interview. Next post will be on how to prep for an interview [QA engineer - candidate]
 
-
 Before even starting to think about the interview, check if the hiring decision is an optimal one. In many cases it's sufficient and more optimal to optimize the processes (but this is a topic for another article).
 
 Hiring, as any other activity, should be done for a reason. Usual hiring reasons are:
@@ -46,13 +45,11 @@ The requirements must be validated: do they list all the work which is really ne
 
 Then we need to decide what checks we need to execute in order to see if the person is the right fit for our requirements. How do we design a test plan for the interview?
 
-**NB**: Please not forget that this article is devoted only to interview design from the skills perspective. Make sure you understand the profile of the candidate you're looking for and that you understand your company culture and how to verify if the person is a good fit for the culture. For instance, in some companies all QA tasks are just Jira tickets with predefined sets of activities while in others the desired tasks and activities also imply a big deal of proactivity.
+**NB**: This article is devoted only to interview design from the skills perspective. Make sure you understand the profile of the candidate you're looking for and that you understand your company culture and how to verify if the person is a good fit for the culture. For instance, in some companies all QA tasks are just Jira tickets with predefined sets of activities while in others the desired tasks and activities also imply a big deal of proactivity.
 
 ### 1. Let's say we are hiring a manual tester to the team where we already have one.
 
-As we already have one manual tester in the team, it means that this hiring is only viable when the constraint is the performance: when our manual tester can't cope with the load.
-
-**NB**: We assume here that there's no more optimal way to deal with the load on our tester
+As we already have one manual tester in the team, it means that this hiring is only viable when the constraint is the performance: when our manual tester can't cope with the load. We also assume that there's no more optimal way to deal with the load on our tester
 
 The job analysis reveals that our manual tester is most occupied with two kinds of activities: regular regression testing for the release every two weeks and testing new features.
 
@@ -64,25 +61,28 @@ To test the new features, our manual tester participates in two kinds of activit
 
 Essentially, we are hiring a person who would help our manual tester with handling these tasks.
 
-Our manual tester should be invited to the interview so that they can validate the candidate answers.
+As we already have a manual tester performing these job activities, they know how these activities should be performed and will be able to validate the candidate answers.
 
-In order to test the candidate’s ability to handle requirements testing, we can present them with a couple of user stories exactly as they would come to our manual tester. We then just ask the candidate to prepare a test plan for the requirements.
+The test plan for the interview is simple:
 
-To test the candidate's ability of testing the feature according to the test plan, we just ask them to test the feature according to the provided test plan.
+1. In order to test the candidate’s ability to handle requirements testing, we can present them with a couple of user stories exactly as they would come to our manual tester. We then just ask the candidate to prepare a test plan for the requirements.
 
-To verify their proficiency in regression testing, we ask the person to do the regression testing but limit the scope of testing to critical features only.
+2. To test the candidate's ability of testing the feature according to the test plan, we just ask them to test the feature according to the provided test plan.
 
-If you have difficulties choosing the relevant user stories or test plans, do it your manual tester.
+3. To verify their proficiency in regression testing, we ask the person to do the regression testing but limit the scope of testing to critical features only.
 
 This way we check candidate's abilities against the actual requirements devised from our real work tasks.
 
 This interview will also be the shortest possible, the most relevant to your job, and therefore the optimal one.
 
-As the interview will not take much time, there's no reason to give any take-home exercise.
+As the interview will not take much time, there's no reason to give any take-home exercise or split the interview into multiple steps.
 
 ### 2. Let's say we are hiring a manual tester to the team where there're no manual testers.
 
-When we are hiring a manual tester to the team where there are no manual testers, we need to 
+Job analysis only works when certain job is already being performed. If you have someone (developers?) doing the job of the manual QA and you don't need the job to be done better, you just use the advice from the previous point.
+
+
+When we are hiring a manual tester to the team where there are no manual testers, no one was doing we don't have established tasks or activities whic
 
 [todo: double check!]
 **NB**: If hiring is done to remove the knowledge/skills constraint, you will need external consultant (the person who knows how to set up  help to design the interview process as your team doesn’t possess the skills to check if the candidate can do the job.
