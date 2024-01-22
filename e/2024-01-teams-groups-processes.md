@@ -59,11 +59,20 @@ Remember, one of the characteristics of a team is interdependence? Independent w
 
 ## Lack of reciprocity
 
-
-
 When the manager promises something and the employee trusts them, but then the manager doesn’t fulfill the promise, there’s a lack of reciprocity or a breach of trust. The trust is gained slowly and destroyed easily by:
 - Layoffs
 - Promising certain work conditions (or a promotion) and not keeping the promise
+
+Layoffs in most cases are [not economically justified](https://www.careerusa.org/resources/career-files/158-resources/career-files/16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf).
+
+It is evident that layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
+
+[Current research on trust and distrust in organizational settings](https://www.jstor.org/stable/259288) identifies fear as one of the primary indicators of the highest degree of distrust:
+
+![trust-distrust](trust-distrust.png)
+
+As soon as a few of the hunting team are expelled from the team for some ridiculous reason (which could be avoided), the team is shattered and will likely reduce to a group.
+
 
 ## Process activities or cultural peculiarities promoting negative or conflictual social dynamics.
 
@@ -71,28 +80,6 @@ When the manager promises something and the employee trusts them, but then the m
 - Departmental silos with incentives on reductionist work results: if a QA engineer is in a separate department from the developer, and is incentivized to find more bugs, then they aren’t going to form a team with the developer.
 - HR having KPIs on bringing more candidates to the interview process will have hard times focusing on the company goal rather than their individual one.
 
-
-## 1. KPIs, OKRs and performance reviews
-
-Each of these practices involves establishing quantifiable and measurable objectives for employees as a form of control.
-
-When predefined metrics are put in place to assess performance, there is no trust in the employee's ability to achieve the desired outcomes without the control.
-
-As [the Tyranny of Metrics](https://www.amazon.com/gp/product/B07K458MZG) book says:
-
-> When metrics are used by managers as a tool to control professionals, it often creates a tension between the managers who seek to measure and reward performance, and the ethos of the professionals (doctors, nurses, policemen, teachers, professors, etc.). The professional ethos is based on mastery of a body of specialized knowledge acquired through an extended process of education and training; autonomy and control over work; an identification with one’s professional group and a sense of responsibility toward colleagues; a high valuation of intrinsic rewards; and a commitment to the interests of clients above considerations of cost.
-
-The inherent lack of trust induced by the pre-set control triggers Control Aversion effect. [Studies prove](https://www.jstor.org/stable/30034987) that control costs generate an overall negative effect, introducing the feeling that the employee is _not trusted_. When a manager sets a minimum performance requirement before the employee chooses a productive activity, the employee delivers less.
-
-## 2. Layoffs
-
-Layoffs in most cases are [not economically justified](https://www.careerusa.org/resources/career-files/158-resources/career-files/16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoking suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf).
-
-It is evident that layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
-
-[Current research on trust and distrust in organizational settings](https://www.jstor.org/stable/259288) identifies fear as one of the primary indicators of the highest degree of distrust:
-
-![trust-distrust](trust-distrust.png)
 
 ## 3. Process or architecture decisions imposed upon teams
 
