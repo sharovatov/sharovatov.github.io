@@ -47,7 +47,7 @@ Then we need to decide what checks we need to execute in order to see if the per
 
 **NB**: This article is devoted only to interview design from the skills perspective. Make sure you understand the profile of the candidate you're looking for and that you understand your company culture and how to verify if the person is a good fit for the culture. For instance, in some companies all QA tasks are just Jira tickets with predefined sets of activities while in others the desired tasks and activities also imply a big deal of proactivity.
 
-### 1. Let's say we are hiring a manual tester to the team where we already have one.
+### 1. Hiring a manual tester to the team where we already have one.
 
 As we already have one manual tester in the team, it means that this hiring is only viable when the constraint is the performance: when our manual tester can't cope with the load. We also assume that there's no more optimal way to deal with the load on our tester
 
@@ -65,7 +65,7 @@ As we already have a manual tester performing these job activities, they know ho
 
 The test plan for the interview is simple:
 
-1. In order to test the candidate’s ability to handle requirements testing, we can present them with a couple of user stories exactly as they would come to our manual tester. We then just ask the candidate to prepare a test plan for the requirements.
+1. To test the candidate’s ability to handle requirements testing, we can present them with a couple of user stories exactly as they would come to our manual tester. We then just ask the candidate to prepare a test plan for the requirements.
 
 2. To test the candidate's ability of testing the feature according to the test plan, we just ask them to test the feature according to the provided test plan.
 
@@ -77,7 +77,7 @@ This interview will also be the shortest possible, the most relevant to your job
 
 As the interview will not take much time, there's no reason to give any take-home exercise or split the interview into multiple steps.
 
-### 2. Let's say we are hiring a manual tester to the team where there're no manual testers.
+### 2. Hiring a manual tester to the team where there're no manual testers.
 
 Job analysis only works when certain job is already being performed. If you have someone (developers?) doing the job of the manual QA and you don't need the job to be done better, you just use the advice from the previous point.
 
@@ -94,6 +94,12 @@ When we are hiring a manual tester to the team where there are no manual testers
 
 
 
+
+---
+
+Following this method should make designing interviews easier and more efficient.
+
+Testing the candidate 
 
 
 When you are the tester, you don't really need to check how the task is programmed, you need to understand if the task does what it is intended to do - if its behavior matches the requirements.
