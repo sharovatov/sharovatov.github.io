@@ -59,11 +59,9 @@ Remember, one of the characteristics of a team is interdependence? Independent w
 
 ## Lack of reciprocity
 
-When the manager promises something and the employee trusts them, but then the manager doesn’t fulfill the promise, there’s a lack of reciprocity or a breach of trust. The trust is gained slowly and destroyed easily by things like layoffs, or promising certain work conditions (or a promotion) and not keeping the promise.
+When the manager promises something but doesn’t fulfill the promise, there’s a lack of reciprocity or a _breach of trust_. The trust is gained slowly and destroyed easily by things like layoffs, or promising certain work conditions (or a promotion) and not keeping the promise.
 
-Layoffs in most cases are [not economically justified](https://www.careerusa.org/resources/career-files/158-resources/career-files/16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf).
-
-It is evident that layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
+Layoffs in most cases are [not economically justified](https://www.careerusa.org/resources/career-files/158-resources/career-files/16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
 
 [Current research on trust and distrust in organizational settings](https://www.jstor.org/stable/259288) identifies fear as one of the primary indicators of the highest degree of distrust:
 
@@ -73,10 +71,17 @@ As soon as one or few of the hunting team are expelled for some ridiculous reaso
 
 ## Process activities or cultural peculiarities promoting negative or conflictual social dynamics.
 
-- Activities like PR-based code-reviews, which force people to judge the work of each other and pinpoint “the mistakes”
-- Departmental silos with incentives on reductionist work results: if a QA engineer is in a separate department from the developer, and is incentivized to find more bugs, then they aren’t going to form a team with the developer.
-- HR having KPIs on bringing more candidates to the interview process will have hard times focusing on the company goal rather than their individual one.
+Certain process activities and are well-known for provoking conflict or other types of negative social dynamics with teams.
 
+### PR-based code reviews
+
+As [described in my article on code reviews](https://qase.io/blog/code-review-alternatives/#social-dynamics), PR-based code reviews might toggle negative social dynamics or even toggle conflict in the team due to the innate subjectivity of the criticism and the impossibility of separating of self and work.
+
+Imagine someone from outside of a hunting team asking the team members to remember each interaction and find mistakes and inefficiencies in each one.
+
+### "Chapters" and "Guilds"
+
+Organising chapters and guilds based on employees specialization might negatively affect teams. Interdependence, trust and cooperation heavily rely on team bonding. When employees of a certain specialization start valuing their chapter or guild more than the product team they are in, there's a probability that they will associate themselves to the chapter or guild more than the team, which would toggle [silo mentality](https://www.investopedia.com/terms/s/silo-mentality.asp) or even [outgroup prejudice](https://opentextbc.ca/socialpsychology/chapter/ingroup-favoritism-and-prejudice/) to their team.
 
 ## 3. Process or architecture decisions imposed upon teams
 
