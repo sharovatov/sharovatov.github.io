@@ -1,17 +1,4 @@
-%PREVIOUS_ARTICLE%
-https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf/
-http://sharovatov.github.io/e/2024-01-teams-groups.html
-
-%GAMIFICATION%
-https://www.linkedin.com/pulse/gamification-good-bad-vitaly-sharovatov-lbpoe/
-https://sharovatov.github.io/e/2023-12-gamification.html
-
-%1-1S%
-https://www.linkedin.com/pulse/your-regular-11s-actually-effective-vitaly-sharovatov
-https://sharovatov.github.io/e/2023-08-oneonone.html
-
-
-As mentioned in the [previous article](%PREVIOUS_ARTICLE%), organizational psychology knows a great deal about processes with negative impact on trust, cooperation and collaboration.
+As mentioned in the [previous article](http://sharovatov.github.io/e/2024-01-teams-groups.html), organizational psychology knows a great deal about processes with negative impact on trust, cooperation and collaboration.
 
 This article is devoted to the practices and approaches which turn teams into groups by hurting interdependence, cooperation and trust.
 
@@ -21,7 +8,7 @@ Dr. W. Edwards Deming called focus on individual performance one of the seven de
 
 > Evaluation of performance, merit rating, or annual review… The idea of a merit rating is alluring. the sound of the words captivates the imagination: pay for what you get; get what you pay for; motivate people to do their best, for their own good. The effect is exactly the opposite of what the words promise.
 
-The reason for such a harsh description was that focusing on individual performance introduces competition between members of the group, which, as stated in the [previous article](%PREVIOUS_ARTICLE%), is detrimental to cooperation and therefore teamwork.
+The reason for such a harsh description was that focusing on individual performance introduces competition between members of the group, which, as stated in the [previous article](http://sharovatov.github.io/e/2024-01-teams-groups.html), is detrimental to cooperation and therefore teamwork.
 
 Imagine a hunting team aiming to kill a mammoth: what are the chances the team could succeed if the individuals were competing instead of cooperation?
 
@@ -31,7 +18,7 @@ As soon as individual input is measured, the interactions are neglected. When bo
 
 Additionally, interactions can’t be reduced to actions. When the distraction specialist in the team is set with a KPI of the number of times he jumped and waved his hands, he will be focused on achieving that number instead of interacting with the attacking specialists to achieve the common goal through cooperation. Even the commonality of the goal is diminished by the mere presence of individual KPIs.
 
-Some companies also practice [gamification](%GAMIFICATION%), which is also detrimental to cooperation since it fosters individual competition.
+Some companies also practice [gamification](https://sharovatov.github.io/e/2023-12-gamification.html), which is also detrimental to cooperation since it fosters individual competition.
 
 With regards to trust, KPIs are also detrimental. Trust by definition means that the reciprocity is only _expected_ by the trustor: there's no way for the attacking hunter to sign a contract with the distracting specialist with all the types of actions he expects. The attacking hunter simply presumes they both cooperate and that the distracting hunter can be _trusted_ to act in the best interests of the team.
 
@@ -98,4 +85,4 @@ Organizing employees into chapters and guilds based on their specialization migh
 - [Scatter-gather](https://www.industriallogic.com/blog/scatter-gather/)
 - [Towards Effective Management in Psychiatric-Mental Health Nursing: The Dangers and Consequences of Micromanagement](https://pubmed.ncbi.nlm.nih.gov/26241568/)
 - [The law of unintended consequences](https://www.econlib.org/library/Enc/UnintendedConsequences.html)
-
+- [On 1-1s](https://sharovatov.github.io/e/2023-08-oneonone.html)
