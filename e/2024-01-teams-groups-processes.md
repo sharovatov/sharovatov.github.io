@@ -43,9 +43,9 @@ In social sciences, the effects of KPIs and other reductionist interventions are
 
 ### Regular 1-1 meetings
 
-Regular 1-1s interventions are usually done for a reason: the manager wants to "help the team". However, the manager does 1-1s with individuals, hence the name "one on one". As soon as the manager establishes that an employee’s problems are being resolved in 1-1 sessions with the manager, and then goes on to solve these emerging problems, they reinforce the pattern of employees solving problems with the manager rather than the team solving problems together. No matter how hard the manager tries to "build a team", if the manager's actions show that problems are effectively solved by the manager-employee pair, there’s a high probability that the group will never become a team.
+Regular 1-1 interventions are usually conducted for a reason: the manager aims to "help the team." However, these meetings are with individuals, hence the term "one on one." As soon as a manager establishes that an employee's problems are being resolved in 1-1 sessions with them, and then proceeds to solve these emerging problems, they reinforce the pattern of employees solving problems with the manager rather than the team solving problems together. No matter how hard the manager tries to "build a team", if their actions demonstrate that problems are effectively solved by the manager-employee pair, there's a high probability that the group will never evolve into a cohesive team.
 
-Imagine the hunting team needing a manager to help with their interactions, such a team would not only be unfit for hunting, it will simply be killed by the first mammoth they encounter.
+Imagine a hunting team needing a manager to facilitate their interactions; such a team would not only be unfit for hunting but would also be easily overwhelmed by the first mammoth they encounter.
 
 Regular 1-1 meetings resemble [micromanagement](https://pubmed.ncbi.nlm.nih.gov/26241568/):
 
@@ -53,36 +53,34 @@ Regular 1-1 meetings resemble [micromanagement](https://pubmed.ncbi.nlm.nih.gov/
 
 ### Effort coordination done by the manager
 
-Traditional ways of working in project management and software engineering involve breaking projects or problems into individual tasks, assigning them to their respective disciplines to work on **independently**, and then merging the finished work together. **MENTION TIM!!!!**  Tim Ottinger explains the inherent problems of such an approach in his ["Scatter-gather" piece](https://www.industriallogic.com/blog/scatter-gather/) from the productivity perspective, but I believe that effort coordination is so inefficient partly because it reduces the team to a group.
+Traditional methods in project management and software engineering typically involve breaking projects or problems into individual tasks, assigning them to specific disciplines to work on independently, and then merging the completed work. Tim Ottinger **MENTION TIM!!!!**  discusses the inherent problems of such an approach in his ["Scatter-gather" piece](https://www.industriallogic.com/blog/scatter-gather/), particularly from a productivity perspective. However, I believe that this effort coordination is inefficient partly because it reduces a team to a mere group.
 
-Remember, one of the characteristics of a team is interdependence? Independent work is exactly what describes a group. A hunting team will only be able to kill a mammoth if they do it together. See my article on [mob programming](https://qase.io/blog/mob-programming/).
+Remember, one of the defining characteristics of a team is interdependence. Independent work is what typically characterizes a group. A hunting team, for example, can only successfully hunt a mammoth if they work cohesively. Refer to [my article on mob programming](https://qase.io/blog/mob-programming/) for further insight.
 
 ## Lack of reciprocity
 
-When the manager promises something but doesn’t fulfill the promise, there’s a lack of reciprocity or a _breach of trust_. The trust is gained slowly and destroyed easily by things like layoffs, or promising certain work conditions (or a promotion) and not keeping the promise.
+When a manager makes a promise but fails to fulfill it, this creates a lack of reciprocity or a _breach of trust_. Trust is built slowly and can be easily destroyed by actions such as layoffs, or by promising certain work conditions (or a promotion) and not delivering on these promises.
 
 Layoffs in most cases are [not economically justified](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
 
-
 [Current research on trust and distrust in organizational settings](https://www.jstor.org/stable/259288) identifies fear as one of the primary indicators of the highest degree of distrust:
 
-![trust-distrust](https://raw.githubusercontent.com/sharovatov/private/main/articles/team_quality/trust-distrust.png?token=GHSAT0AAAAAABM76NKXNBA7MVIGWMCYBYGYZNOHAEQ)
+![trust-distrust](/img/trust-distrust.png)
 
-As soon as one or few of the hunting team are expelled for some ridiculous reason (which could be avoided), the team is shattered and will likely reduce to a group.
+As soon as one or a few members of the hunting team are expelled for a seemingly trivial reason (which could have been avoided), the team is likely to disintegrate and revert to a mere group.
 
 ## Process activities or organisation design peculiarities promoting negative or conflictual social dynamics.
 
-Certain process activities and are well-known for provoking conflict or other types of negative social dynamics with teams.
+Certain process activities and organisational design peculiarities are well-known for provoking conflict or other types of negative social dynamics within teams.
 
 ### PR-based code reviews
 
-As [described in my article on code reviews](https://qase.io/blog/code-review-alternatives/#social-dynamics), PR-based code reviews might toggle negative social dynamics or even toggle conflict in the team due to the innate subjectivity of the criticism and the impossibility of separating of self and work.
-
-Imagine someone from outside of a hunting team asking the team members to remember each interaction and find mistakes and inefficiencies in each one.
+As I described in [my article on code reviews](https://qase.io/blog/code-review-alternatives/#social-dynamics), PR-based code reviews can trigger negative social dynamics or even conflict within a team. This is due to the inherent subjectivity of criticism and the difficulty in separating self from work. Imagine someone from outside a hunting team asking its members to recall each interaction and pinpoint mistakes and inefficiencies in each one.
 
 ### "Chapters" and "Guilds"
 
-Organising chapters and guilds based on employees specialization might negatively affect teams. Interdependence, trust and cooperation heavily rely on team bonding. When employees of a certain specialization start valuing their chapter or guild more than the product team they are in, there's a probability that they will associate themselves to the chapter or guild more than the team, which would toggle [silo mentality](https://www.investopedia.com/terms/s/silo-mentality.asp) or even [outgroup prejudice](https://opentextbc.ca/socialpsychology/chapter/ingroup-favoritism-and-prejudice/) to their team.
+Organizing employees into chapters and guilds based on their specialization might negatively affect teams. Interdependence, trust, and cooperation heavily rely on team bonding. When employees of a certain specialization begin to value their chapter or guild more than the product team they are part of, there's a probability that they will associate themselves more with the chapter or guild than the team. This can lead to a [silo mentality](https://www.investopedia.com/terms/s/silo-mentality.asp) or even [outgroup prejudice](https://opentextbc.ca/socialpsychology/chapter/ingroup-favoritism-and-prejudice/) within their team.
+
 
 **References**:
 - [Out of the crisis](https://www.amazon.com/Out-Crisis-Press-Edwards-Deming-dp-0262535947/dp/0262535947/)
