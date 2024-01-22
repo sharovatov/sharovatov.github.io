@@ -79,19 +79,23 @@ As the interview will not take much time, there's no reason to give any take-hom
 
 ### 2. Hiring a manual tester to the team where there're no manual testers.
 
-Job analysis only works when certain job is already being performed. If you have someone (developers?) doing the job of the manual QA and you don't need the job to be done better, you just use the advice from the previous point.
+Job analysis only works when certain job is already being performed. If you have someone (developers?) doing the job of the manual QA, just use the advice from the previous point.
 
+If the team doesn't perform this job due to the lack of knowledge and skills, we face the classical problem of [information assymetry](https://www.sciencedirect.com/topics/economics-econometrics-and-finance/information-asymmetry): the team possess less information than the candidates, it can neither define the requirements nor verify the candidates abilities to fulfil the requirements.
 
-When we are hiring a manual tester to the team where there are no manual testers, no one was doing we don't have established tasks or activities whic
+This is the classical problem of [information assymetry](https://medium.com/@boundeast/why-is-information-asymmetry-relevant-to-hiring-managers-a4bc8e2af7a0).
+
+In his [seminal paper on information assymetry](https://www.jstor.org/stable/1879431) Akerlof suggested a few ways to deal with this problem:
+
+1. **Signaling** involves the informed party (usually the seller) sending a signal to the uninformed party (the buyer) about the quality of the product. In the job market, signals might include educational qualifications, certifications, or references that candidates present to potential employers. However, it's doubtful that one can rely just on any certification as a method of employee's verification.
+
+2. **Warranties and Guarantees** as a sign of quality. In a labor market, this might be analogous to a probation period or a performance-based contract, where the continuation of employment is contingent on demonstrated performance. However, this method suits products better than people, since in many cases the cost of re-hire [is usually very high](https://www.scribd.com/document/112707536/There-Are-Significant-Business-Costs-to-Replacing-Employees).
+
+3. **Candidate Reputation** can be a powerful tool for reducing information asymmetry. It might be viable to just hire a manual tester the team already knows is capable and a good fit.
+
 
 [todo: double check!]
 **NB**: If hiring is done to remove the knowledge/skills constraint, you will need external consultant (the person who knows how to set up  help to design the interview process as your team doesn’t possess the skills to check if the candidate can do the job.
-
-
-
-### 3. Let's say we are hiring a SDET to the team where there're  manual testers.
-
-
 
 
 
@@ -137,3 +141,5 @@ H4 example questions
 H4 example questions
 
 
+**References**:
+- [The Market for "Lemons": Quality Uncertainty and the Market Mechanism](https://www.jstor.org/stable/1879431)
