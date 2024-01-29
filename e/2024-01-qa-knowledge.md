@@ -22,6 +22,10 @@ This leaves us with the option 2: decreasing the quality and extensiveness of th
 
 If the interview is short, it will not deter candidates, but if it's not possible to fully perform the jobs we need to verify during the short interview, the interview design should change.
 
+In QC, we design smoke test plan to cover just the most critical verification scenarios. Similarly to our case, smoke testing doesn't provide extensive verification coverage, but can be performed faster than the detailed test plan.
+
+## Designing a -smoke test plan- short interview for a job type
+
 
 
 (тимлид? программист?)
