@@ -18,6 +18,10 @@ This leads to choosing between two options:
 
 Improving the EVP always sounds like a good plan, but not all companies allow EMs to influence the budgeting unfortunately.
 
+This leaves us with the option 2: decreasing the quality and extensiveness of the verification process.
+
+If the interview is short, it will not deter candidates, but if it's not possible to fully perform the jobs we need to verify during the short interview, the interview design should change.
+
 
 
 (тимлид? программист?)
