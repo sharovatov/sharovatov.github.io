@@ -8,15 +8,17 @@ This is another article in the series on hiring. The [first one](https://qase.io
 
 In the previous article I postulated that the best way to verify the candidate's proficiency in doing a certain job is to actually let them perform that job, observe the process and check the results.
 
-However, some work types demand significant time, and increasing interview time to, say, 3 days, will considerably decrease the attractiveness of the position. Candidates rarely choose companies with extremely lengthy interviews.
+However, some work types demand significant time. Imagine we want to hire a proper QA engineer and one of the types of work we want them to perform is to prepare the risk assessment strategy. Preparing risk assessment strategy involves many steps, each of them is quite significant. Even understanding the project scope and objectives along with identifying potential risks would likely take days if not weeks.
+
+Increasing interview time to a week will considerably decrease the attractiveness of the position. Candidates rarely choose companies with extremely lengthy interviews.
 
 This leads to choosing between two options:
-- invest in improving the EVP so that candidates will still desire to pass lengthy interviews
-- decreasing the quality and extensiveness of the verification process
+1. invest in improving the EVP so that candidates will still desire to pass lengthy interviews
+2. decreasing the quality and extensiveness of the verification process
+
+Improving the EVP always sounds like a good plan, but not all companies allow EMs to influence the budgeting unfortunately.
 
 
-
-не всю работу можно успеть проверить на собесе 
 
 (тимлид? программист?)
 
