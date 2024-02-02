@@ -6,9 +6,9 @@ This article focus on the negative social dynamics triggered by various aspects 
 
 ## Lack of reciprocity
 
-When a manager makes a promise but fails to fulfill it, this creates a lack of reciprocity or a _breach of trust_. Trust is built slowly and can be easily destroyed by actions such as layoffs, or by promising certain work conditions (or a promotion) and not delivering on these promises.
+When a manager makes a promise but fails to fulfill it, this creates a lack of reciprocity or a _breach of trust_.
 
-The interesting thing here is that social behaviour exhibit "tipping points" or "threshold effect": the effect of certain actions may not be visible straight away, but will accumulate, leading to a significant change of system state. Each breach of trust adds to the perception of the decreasing reciprocity until the moment when the team can no longer trust the manager and therefore will deteriorate.
+Our social behaviour exhibit "tipping points" or "threshold effect": the effect of certain actions may not be visible straight away, but will accumulate, leading to a significant change of system state. Each breach of trust adds to the perception of the decreasing reciprocity until the moment when the team can no longer trust the manager and therefore will deteriorate. Trust is built slowly and can be easily destroyed by actions such as layoffs, or by promising certain work conditions (or a promotion) and not delivering on these promises.
 
 Layoffs in most cases are [not economically justified](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
 
