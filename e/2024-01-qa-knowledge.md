@@ -8,7 +8,7 @@ This is another article in the series on hiring. The [first one](https://qase.io
 
 In the previous article I postulated that the best way to verify the candidate's proficiency in doing a certain job is to actually let them perform that job, observe the process and check the results.
 
-However, some work types demand significant time to be performed. Imagine we want to hire a proper QA engineer and one of the types of work we want them to perform is to prepare the risk assessment strategy. Performing risk assessment strategy preparation involves many steps, and each of them is quite significant. Even understanding the project scope and objectives along with identifying potential risks would likely take days if not weeks.
+However, some work types demand significant time to be performed. Imagine we want to hire a proper QA engineer and one of the types of work we want them to perform is to prepare the risk assessment strategy and execute upon it later. Performing risk assessment strategy preparation involves many steps, and each of them is quite significant. Even understanding the project scope and objectives along with identifying potential risks would likely take days if not weeks.
 
 Increasing interview time to a week will considerably decrease the attractiveness of the position. Candidates rarely choose companies with extremely lengthy interviews.
 
@@ -26,7 +26,7 @@ In QC, we design smoke test plan to cover just the most critical verification sc
 
 ## Designing a ~~smoke test plan~~ shorter interview for a job type
 
-When [designing a smoke test plan](https://qase.io/blog/smoke-testing/), the first thing to do is to identify the critical functionality — something that we believe the product **must** do.
+When [designing a smoke test plan](https://qase.io/blog/smoke-testing/), the first thing to do is to identify the critical functionality — something that we believe the product **must** do. This critical functionality will be the object of the smoke test, while all other functionality will not be checked at all.
 
 Similarly, when designing the shorter interview, we consciously reduce the extensiveness of the verification, and the first step would be to define everything which is not critical for performing this job type.
 
@@ -40,7 +40,7 @@ First step, as discussed in the [previous article](), would be to identify what 
 
 1. identify and define potential risks
 2. analyze and evaluate them
-3. define migration strategies
+3. define mitigation strategies
 4. plan for risk monitoring and reporting
 5. implement risk management practices
 6. review and reevaluate this strategy regularly
