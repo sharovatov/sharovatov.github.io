@@ -32,8 +32,20 @@ Similarly, when designing the shorter interview, we consciously reduce the exten
 
 Then we leave all the non-critical checks out, potentially noting them so that they can be checked later during the probation period.
 
-For example, if we are abo
+### Smoke test plan for a QA engineer
 
+Let's proceed with the case of hiring a QA engineer who has among other duties to prepare a risk assessment strategy. Let's try to come up with a way to reduce the extensiveness of the verification process of skills required for this task.
+
+First step, as discussed in the [previous article](), would be to identify what exactly this type of work comprises:
+
+1. identify and define potential risks
+2. analyze and evaluate them
+3. define migration strategies
+4. plan for risk monitoring and reporting
+5. implement risk management practices
+6. review and reevaluate this strategy regularly
+
+Each item on the list has to be reviewed 
 
 
 Second, we prepare the list of things which are very hard to check, and decide whether to find proxy methods of checking what is in that list, or simply skip these checks (which will reduce the overall extensiveness even further).
