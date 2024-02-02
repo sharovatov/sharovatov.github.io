@@ -56,7 +56,11 @@ First step, as discussed in the [previous article](), would be to identify what 
 5. implement risk management practices
 6. review and reevaluate this strategy regularly
 
-Each item on the list has to be reviewed 
+#### 1. Identifing the most critical parts of the job
+
+Certainly, item 6 is "recursive": if a candidate can prepare the risk assessment strategy, they will also be able to review and reevaluate that strategy. Therefore it's safe to omit checking for this item.
+
+
 
 
 To see 
