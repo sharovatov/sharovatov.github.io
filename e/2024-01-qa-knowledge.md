@@ -8,7 +8,7 @@ This is another article in the series on hiring. The [first one](https://qase.io
 
 In the previous article I postulated that the best way to verify the candidate's proficiency in doing a certain job is to actually let them perform that job, observe the process and check the results.
 
-However, some work types demand significant time. Imagine we want to hire a proper QA engineer and one of the types of work we want them to perform is to prepare the risk assessment strategy. Preparing risk assessment strategy involves many steps, each of them is quite significant. Even understanding the project scope and objectives along with identifying potential risks would likely take days if not weeks.
+However, some work types demand significant time to be performed. Imagine we want to hire a proper QA engineer and one of the types of work we want them to perform is to prepare the risk assessment strategy. Performing risk assessment strategy preparation involves many steps, and each of them is quite significant. Even understanding the project scope and objectives along with identifying potential risks would likely take days if not weeks.
 
 Increasing interview time to a week will considerably decrease the attractiveness of the position. Candidates rarely choose companies with extremely lengthy interviews.
 
@@ -16,16 +16,44 @@ This leads to choosing between two options:
 1. invest in improving the EVP so that candidates will still desire to pass lengthy interviews
 2. decreasing the quality and extensiveness of the verification process
 
-Improving the EVP always sounds like a good plan, but not all companies allow EMs to influence the budgeting unfortunately.
+Improving the EVP always sounds like a good plan, but unfortunately not all companies are flexible enough to allow managers to significantly influence the budgeting.
 
 This leaves us with the option 2: decreasing the quality and extensiveness of the verification process.
 
-If the interview is short, it will not deter candidates, but if it's not possible to fully perform the jobs we need to verify during the short interview, the interview design should change.
+If the interview is short, it will not deter candidates. However, as it's not possible to fully perform the jobs we need to verify during the shorter interview, the interview design should change.
 
 In QC, we design smoke test plan to cover just the most critical verification scenarios. Similarly to our case, smoke testing doesn't provide extensive verification coverage, but can be performed faster than the detailed test plan.
 
-## Designing a -smoke test plan- short interview for a job type
+## Designing a ~~smoke test plan~~ shorter interview for a job type
 
+When [designing a smoke test plan](https://qase.io/blog/smoke-testing/), the first thing to do is to identify the critical functionality — something that we believe the product **must** do.
+
+Similarly, when designing the shorter interview, we consciously reduce the extensiveness of the verification, and the first step would be to define everything which is not critical for performing this job type.
+
+Then we leave all the non-critical checks out, potentially noting them so that they can be checked later during the probation period.
+
+For example, if we are abo
+
+
+
+Second, we prepare the list of things which are very hard to check, and decide whether to find proxy methods of checking what is in that list, or simply skip these checks (which will reduce the overall extensiveness even further).
+
+At this stage we should have a list of skills we must check during the interview process, but we still don't know if the verification process can fit in a reasonable interview time. (or how much time the whole verification process would take).
+
+To see 
+
+
+
+
+## cover test strategies expiration!
+
+- Scope is changed!  scope of testing, including the features to be tested, the features to be excluded, and the overall approach to testing within the project.
+
+- technological Advancements: As new technologies emerge and existing ones evolve, test strategies based on older technologies may no longer be applicable. For example, a test strategy designed for a monolithic architecture might not suit a microservices architecture.
+Changes in Software Development Methodologies: The shift from traditional waterfall models to agile methodologies requires a more iterative and flexible approach to testing. Test strategies that do not adapt to these changes can become obsolete.
+Regulatory and Compliance Changes: In certain industries, software products must adhere to regulatory standards. As these standards are updated, test strategies must also evolve to ensure compliance.
+Changes in Business Goals and User Expectations: As market demands and user expectations change, software products must adapt to meet these new requirements. A test strategy that does not consider these changes may fail to identify critical issues.
+Emergence of New Testing Tools and Practices: The introduction of new testing tools and practices can render existing test strategies less efficient or effective. Incorporating modern tools and practices, such as automated testing and DevOps practices, can necessitate updates to test strategies.
 
 
 (тимлид? программист?)
