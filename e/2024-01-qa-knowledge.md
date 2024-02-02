@@ -36,7 +36,7 @@ If some of the remaining checks still yield overly long interview time, we need 
 
 **[what is proxy check?]**
 
-At this stage we should end up having a list of checks (or proxy checks) which all would fit in a short interview.
+At this stage we should end up having a list of checks (or proxy checks) which all would fit in a short interview. We are aware that these checks won't provide full confidence in the candidates abilities, but similarly to smoke testing we traded the extensiveness of verification for time.
 
 ### Smoke test plan for a QA engineer
 
