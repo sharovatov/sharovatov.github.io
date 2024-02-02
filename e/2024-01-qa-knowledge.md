@@ -38,7 +38,12 @@ If some of the remaining checks still yield overly long interview time, we need 
 
 At this stage we should end up having a list of checks (or proxy checks) which all would fit in a short interview. We are aware that these checks won't provide full confidence in the candidates abilities, but similarly to smoke testing we traded the extensiveness of verification for time.
 
-### Smoke test plan for a QA engineer
+To recap, the approach is:
+1. identify the most critical parts of the job, leave out all other parts
+2. ...
+3. ...
+
+### Designing a smoke test plan for a QA engineer
 
 Let's proceed with the case of hiring a QA engineer who has among other duties to prepare a risk assessment strategy. Let's try to come up with a way to reduce the extensiveness of the verification process of skills required for this task.
 
@@ -69,21 +74,10 @@ Regulatory and Compliance Changes: In certain industries, software products must
 Changes in Business Goals and User Expectations: As market demands and user expectations change, software products must adapt to meet these new requirements. A test strategy that does not consider these changes may fail to identify critical issues.
 Emergence of New Testing Tools and Practices: The introduction of new testing tools and practices can render existing test strategies less efficient or effective. Incorporating modern tools and practices, such as automated testing and DevOps practices, can necessitate updates to test strategies.
 
+left to cover:
 
-(тимлид? программист?)
-
-лучшая проверка — деятельности проверка
-но иногда она может заниматьс too much time
-да и не все покрывает
-
-мы можем сознательно ухудшать качество проверки для сокращения времени
-редуцируя сложную деятельность до простых действий, необходимых но недостаточных
-
-или тестовый день
-
-(закон литтла?)
-
-soft skills 
-cultural fit
-proactivity
+- little's law
+- soft skills 
+- cultural fit
+- proactivity
 
