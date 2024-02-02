@@ -32,6 +32,12 @@ Similarly, when designing the shorter interview, we consciously reduce the exten
 
 Then we leave all the non-critical checks out, potentially noting them so that they can be checked later during the probation period.
 
+If some of the remaining checks still yield overly long interview time, we need to decide whether to find proxy methods for each check, or simply skip these checks (which will reduce the overall extensiveness even further).
+
+**[what is proxy check?]**
+
+At this stage we should end up having a list of checks (or proxy checks) which all would fit in a short interview.
+
 ### Smoke test plan for a QA engineer
 
 Let's proceed with the case of hiring a QA engineer who has among other duties to prepare a risk assessment strategy. Let's try to come up with a way to reduce the extensiveness of the verification process of skills required for this task.
@@ -47,10 +53,6 @@ First step, as discussed in the [previous article](), would be to identify what 
 
 Each item on the list has to be reviewed 
 
-
-Second, we prepare the list of things which are very hard to check, and decide whether to find proxy methods of checking what is in that list, or simply skip these checks (which will reduce the overall extensiveness even further).
-
-At this stage we should have a list of skills we must check during the interview process, but we still don't know if the verification process can fit in a reasonable interview time. (or how much time the whole verification process would take).
 
 To see 
 
