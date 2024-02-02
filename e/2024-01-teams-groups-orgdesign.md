@@ -24,7 +24,22 @@ Certain process activities and organisational design peculiarities are well-know
 
 ### PR-based code reviews
 
-As I described in [my article on code reviews](https://qase.io/blog/code-review-alternatives/#social-dynamics), PR-based code reviews can trigger negative social dynamics or even conflict within a team. This is due to the inherent subjectivity of criticism and the difficulty in separating self from work. Imagine someone from outside a hunting team asking its members to recall each interaction and pinpoint mistakes and inefficiencies in each one.
+As I described in [my article on code reviews](https://qase.io/blog/code-review-alternatives/#social-dynamics), PR-based code reviews can trigger negative social dynamics or even conflict within a team.
+
+Every human being associates her work results with themselves, valuing things we spend effort on doing is innate to our nature.
+
+Whenever a developer receives feedback like “this has to be redone”, they will inevitably associate this feedback with themselves: the more effort a person spent on doing something, the more vulnerable they are to the critics. And while they hadn’t been taught properly how the problem should have been solved, they consider negative feedback even worse.
+
+Internet’s full of posts and articles on how to “solve” this “negativity problem”. Most of these posts talk about how to provide more “positive” feedback. Microsoft even [hired a fully dedicated specialist](https://www.michaelagreiler.com/accept-code-review-feedback/?ref=hackernoon.com) working on this issue.
+
+The activity design has a flaw: reviewer is invited to find defects or issues. Consider this scenario: a hunting team comes back from the hunt, and their manager asks them to find defects in each other actions. If a "hunting actions review" is considered successful when the reviewer finds at least some mistakes, the reviewer starts trying to find mistakes. And they will find mistakes, inevitably blaming and being blamed.
+
+Consider the scenario when the hunting team sees and corrects the mistakes straight away, right during the hunt. First, correcting the mistake _interactively_ (right when the mistake occurs) reduces the probability of the mistake occurring again. Second, the mistake correction can be (and will be!) achieved in a collaborative manner.
+
+Say, the distracting specialist failed to notice that the attacking specialist needs more distraction. What is more preferable:
+
+1. others, seeing the mistake, let the distraction specialist know that he has to be more vigilant, and he corrects the behaviour straight away
+2. everyone not doing anything until the team comes back from the hunt and the manager asks "now, follks, let's recall who did which mistakes and correct them"
 
 ### "Chapters" and "Guilds"
 
@@ -36,3 +51,6 @@ Organizing employees into chapters and guilds based on their specialization migh
 - [From Stability to Change: The Potential Application of Bifurcation Theory to Opinion Dynamics Considerations](https://arxiv.org/pdf/2311.05488.pdf)
 - [Work Team Trust and Effectiveness](https://www.researchgate.net/publication/235260441_Work_Team_Trust_and_Effectiveness)
 - [Impact of trust in colleagues and management on knowledge sharing within and across work groups](https://www.researchgate.net/publication/228413672_Impact_of_trust_in_colleagues_and_management_on_knowledge_sharing_within_and_across_work_groups)
+- [Exploring the causes and consequences of cooperative behaviour in wild animal populations using a social network approach](https://onlinelibrary.wiley.com/doi/10.1111/brv.12757)
+- [The checkerboard model of social interaction](https://www.tandfonline.com/doi/abs/10.1080/0022250X.1971.9989791)
+- [Expectations, Outcomes, and Challenges of Modern Code Review](http://sback.it/publications/icse2013.pdf)
