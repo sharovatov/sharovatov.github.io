@@ -36,7 +36,7 @@ The activity design has a flaw: reviewer is invited to find defects or issues. C
 
 Consider the scenario when the hunting team sees and corrects the mistakes straight away, right during the hunt. First, correcting the mistake _interactively_ (right when the mistake occurs) reduces the probability of the mistake occurring again. Second, the mistake correction can be (and will be!) achieved in a collaborative manner.
 
-Say, the distracting specialist failed to notice that the attacking specialist needs more distraction. What is more preferable:
+Say, the distracting specialist failed to notice that the attacking specialist needs more distraction. What is more preferable from the social dynamics and utility perspective:
 
 1. others, seeing the mistake, let the distraction specialist know that he has to be more vigilant, and he corrects the behaviour straight away
 2. everyone not doing anything until the team comes back from the hunt and the manager asks "now, follks, let's recall who did which mistakes and correct them"
