@@ -26,21 +26,20 @@ Our social behavior exhibits "tipping points" or "threshold effects": the impact
 
 Furthermore, it's impossible to _quantify_ the adverse effects of destructive effect of a layoff on a team.
 
-### PR-based code reviews
+## PR-based code reviews
 
 Certain process activities, even though not directly destroying teams, are well-known for provoking conflict or other types of negative social dynamics within teams. One of the famous examples of such a process activity is PR-based code review.
 
 As I described in [my article on code reviews](https://qase.io/blog/code-review-alternatives/#social-dynamics), PR-based code reviews can trigger negative social dynamics or even conflict within a team.
 
-Every human being associates her work results with themselves, valuing things we spend effort on doing is innate to our nature.
-
-Whenever a developer receives feedback like “this has to be redone”, they will inevitably associate this feedback with themselves: the more effort a person spent on doing something, the more vulnerable they are to the critics. And while they hadn’t been taught properly how the problem should have been solved, they consider negative feedback even worse.
-
 Internet’s full of posts and articles on how to “solve” this “negativity problem”. Most of these posts talk about how to provide more “positive” feedback. Microsoft even [hired a fully dedicated specialist](https://www.michaelagreiler.com/accept-code-review-feedback/?ref=hackernoon.com) working on this issue.
 
-The activity design has a flaw: reviewer is invited to find defects or issues. Consider this scenario: a hunting team comes back from the hunt, and their manager asks them to find defects in each other actions. If a "hunting actions review" is considered successful when the reviewer finds at least some mistakes, the reviewer starts trying to find mistakes. And they will find mistakes, inevitably blaming and being blamed.
+However, it's hard to improve on an activity which simply suits badly for teams. The activity design has a flaw: reviewer is invited to find defects or issues in other's work.
 
-Consider the "opposite" scenario when the hunting team sees and corrects the mistakes straight away, right during the hunt. First, correcting the mistake _interactively_ (right when the mistake occurs) reduces the probability of the mistake occurring again. Second, the mistake correction can be (and will be!) achieved in a collaborative manner.
+Every human being associates her work results with themselves, valuing things we spend effort on doing is innate to our nature. When a developer spends a significant effort on solving a certain problem / completing a task, and then receives feedback like “this has to be redone”, they will inevitably associate this feedback with themselves: the more effort a person spent on doing something, the more vulnerable they are to the critics. And while there wasn't an upfront agreement as to how the problem should have been solved, they consider negative feedback even worse.
+
+The shorter the feedback cycle, the less negativity will emerge, and the less rework will be done.
+Simply employing [pair](https://qase.io/blog/pair-programming/) or [mob](https://qase.io/blog/mob-programming/) work approach would both improve productivity and quality, and also foster team work instead of diminishing.
 
 ### "Chapters" and "Guilds"
 
