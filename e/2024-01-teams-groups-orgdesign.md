@@ -18,13 +18,21 @@ Furthermore, it's impossible to quantify the adverse effects of lying or other d
 
 Interestingly, in the study of animal behavior in biology, the concept of tipping points is well-explored. These tipping points bear a striking resemblance to the bifurcation points observed in our social systems.
 
-Layoffs in most cases are [not economically justified](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer. Such actions exploit the vulnerability of the employee, instilling fear among those who remain.
+Layoffs in most cases are [not economically justified](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer.
+
+The result — the team is likely to deteriorate to a mere group.
+
+The reason for deterioration is simple: as teams are characterised by interdependence and trust, each team member expects others to cooperate and collaborate, and to protect when needed.
+
+As soon as one or a few members of the team are fired for a seemingly trivial reason (which could have been avoided), the collaboration mechanism shutters, and the trust that the team members gained towards each others is gone: a team member can't rely on others to be present even!
+
+Layoffs kills two of three main characteristics of a team: interdependence and trust.
+
+Trust is built with the expectation of reciprocity, and if there's no reciprocity — when those who stay see they themselves didn't protect the person who's fired, they will know that others won't protect them if they are about to be fired. Individualistic fear emerges.
 
 [Current research on trust and distrust in organizational settings](https://www.jstor.org/stable/259288) identifies fear as one of the primary indicators of the highest degree of distrust:
 
 ![trust-distrust](/img/trust-distrust.png)
-
-As soon as one or a few members of the hunting team are expelled for a seemingly trivial reason (which could have been avoided), the team is likely to disintegrate and revert to a mere group.
 
 ## Process activities or organisation design peculiarities promoting negative or conflictual social dynamics.
 
