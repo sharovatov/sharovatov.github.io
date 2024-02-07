@@ -2,11 +2,11 @@ This article proceeds the "teams & groups" series:
 - [Are you working in a team or in a group](https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf/)
 - [How a team changes to a group](https://www.linkedin.com/pulse/how-team-changes-group-vitaly-sharovatov-y8gce)
 
-This article focus on the negative social dynamics triggered by a few aspects of organizational design, process activities, and certain managerial actions.
+The article focuses on the negative social dynamics triggered by a few aspects of organizational design, process activities, and certain managerial actions.
 
 ## Layoffs
 
-Layoffs in most cases are [not economically justified](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affects laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer and within the team.
+Layoffs in most cases are [not economically justified](https://www.careerusa.org/jobs/179-resources/168-career-files/158-16-must-read-articles/372-lay-off-the-layoffs.html), [negatively affect laid off employees health](https://pubmed.ncbi.nlm.nih.gov/11199253/) (sometimes even [provoke suicide](https://journals.sagepub.com/doi/full/10.1177/0004867414521502)), [negatively affects managers health](https://onlinelibrary.wiley.com/doi/10.1002/hrm.20102), [significantly decrease performance of remaining employees](https://www.econstor.eu/bitstream/10419/174038/1/dp11128.pdf). Layoffs are generally perceived as unjust and erode trust in the employer and within the team.
 
 The result is that the team is likely to deteriorate into a mere group.
 
@@ -57,7 +57,7 @@ The second issue is akin to PR-based code review: planning anything for long per
 
 Instead of PDPs, the team can collaborate to help a team member improve and do so interactively, with Mob Learning, the chances are higher that the team member will appreciate the collaboration, which reinforces team bonding.
 
-Additionally, modern pedagogy and andragogy [reached a scientific consensus](https://link.springer.com/article/10.1007/s10648-006-9038-8): collaborative learning is the most effective one.
+Additionally, modern pedagogy and andragogy have [reached a scientific consensus](https://link.springer.com/article/10.1007/s10648-006-9038-8): collaborative learning is the most effective one.
 
 ---
 
