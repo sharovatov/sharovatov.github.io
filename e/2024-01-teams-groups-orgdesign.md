@@ -2,7 +2,7 @@ This article proceeds the "teams & groups" series:
 - [Are you working in a team or in a group](https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf/)
 - [How a team changes to a group](https://www.linkedin.com/pulse/how-team-changes-group-vitaly-sharovatov-y8gce)
 
-This article focus on the negative social dynamics triggered by various aspects of organizational design, process activities, and certain managerial actions.
+This article focus on the negative social dynamics triggered by a few aspects of organizational design, process activities, and certain managerial actions.
 
 ## Layoffs
 
