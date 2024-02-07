@@ -45,6 +45,16 @@ Simply employing [pair](https://qase.io/blog/pair-programming/) or [mob](https:/
 
 Organizing employees into chapters and guilds based on their specialization might negatively affect teams. Interdependence, trust, and cooperation heavily rely on team bonding. When employees of a certain specialization begin to value their chapter or guild more than the product team they are part of, there's a probability that they will associate themselves more with the chapter or guild than the team. This can lead to a [silo mentality](https://www.investopedia.com/terms/s/silo-mentality.asp) or even [outgroup prejudice](https://opentextbc.ca/socialpsychology/chapter/ingroup-favoritism-and-prejudice/) within their team.
 
+### Personal Development Plans
+
+Personal development plans are tailored to individual employees to outline their career goals, skills to develop, and steps to take in their professional growth. This process is inherently individual-focused, aiming to support the employee's growth and alignment with their career aspirations.
+
+Similarly to individual performance reviews, personal development plans shift employees focus from the team common goal and objectives to individual development.
+
+The first problem with PDP is that the team members get used to the fact that the source of information (and feedback!) regarding their individual development comes not from the team itself, but from the outsider — the manager. This diminishes inter-dependence and trust.
+
+The second problem is similar to PR-based code review: planning anything for long periods of time means that the plan can get outdated really quickly, so the reality will demand something which is not planned. When the team collaborates on helping a team member to improve, and does this interactively, chances are higher the team member will appreciate the collaboration, which reinforces team bonding.
+
 **References**:
 - [Social tipping points in animal societies](https://royalsocietypublishing.org/doi/10.1098/rspb.2018.1282)
 - [Threshold Models of Collective Behavior II: The Predictability Paradox and Spontaneous Instigation](https://www.researchgate.net/publication/347175703_Threshold_Models_of_Collective_Behavior_II_The_Predictability_Paradox_and_Spontaneous_Instigation)
