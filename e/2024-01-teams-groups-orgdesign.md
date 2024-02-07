@@ -57,11 +57,11 @@ The second issue is akin to PR-based code review: planning anything for long per
 
 Instead of PDPs, the team can collaborate to help a team member improve and do so interactively, with Mob Learning, the chances are higher that the team member will appreciate the collaboration, which reinforces team bonding.
 
-Modern pedagogy and andragogy [reached a scientific consensus](https://link.springer.com/article/10.1007/s10648-006-9038-8): collaborative learning is the most effective one.
+Additionally, modern pedagogy and andragogy [reached a scientific consensus](https://link.springer.com/article/10.1007/s10648-006-9038-8): collaborative learning is the most effective one.
 
 ---
 
-These 
+These activities and approaches represent only a fraction of the factors that can undermine teamwork. Extensive research within the fields of the sociology of work and organizational psychology delves into teams, groups, and the various elements that can either hinder or enhance team cohesion and performance. It is highly recommended that managers familiarize themselves with this body of knowledge. By doing so, their actions will be better informed, and their decisions will be more effective.
 
 **References**:
 - [Social tipping points in animal societies](https://royalsocietypublishing.org/doi/10.1098/rspb.2018.1282)
