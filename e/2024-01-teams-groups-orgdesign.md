@@ -47,13 +47,13 @@ Organizing employees into chapters and guilds based on their specialization migh
 
 ### Personal Development Plans
 
-Personal development plans are tailored to individual employees to outline their career goals, skills to develop, and steps to take in their professional growth. This process is inherently individual-focused, aiming to support the employee's growth and alignment with their career aspirations.
+Personal development plans are tailored to individual employees to outline their career goals, develop their skills, and identify steps for their professional growth. This process is inherently focused on the individual, aiming to support the employee's growth and alignment with their career aspirations.
 
-Similarly to individual performance reviews, personal development plans shift employees focus from the team common goal and objectives to individual development.
+Personal development plans, like individual performance reviews, shift the employees' focus from the team's common goals and objectives to individual development.
 
-The first problem with PDP is that the team members get used to the fact that the source of information (and feedback!) regarding their individual development comes not from the team itself, but from the outsider — the manager. This diminishes inter-dependence and trust.
+The first issue with PDPs is that team members become accustomed to receiving information (and feedback) about their individual development not from the team itself but from an outsider—the manager. This diminishes interdependence and trust.
 
-The second problem is similar to PR-based code review: planning anything for long periods of time means that the plan can get outdated really quickly, so the reality will demand something which is not planned. When the team collaborates on helping a team member to improve, and does this interactively, chances are higher the team member will appreciate the collaboration, which reinforces team bonding.
+The second issue is akin to PR-based code review: planning anything for long periods means that the plan can quickly become outdated, as reality will demand something unplanned. When the team collaborates to help a team member improve and does so interactively, the chances are higher that the team member will appreciate the collaboration, which reinforces team bonding.
 
 **References**:
 - [Social tipping points in animal societies](https://royalsocietypublishing.org/doi/10.1098/rspb.2018.1282)
