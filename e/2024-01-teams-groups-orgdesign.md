@@ -1,6 +1,6 @@
 This article proceeds the "teams & groups" series:
-- [Are you working in a team or in a group](https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf/)
-- [How a team changes to a group](https://www.linkedin.com/pulse/how-team-changes-group-vitaly-sharovatov-y8gce)
+- [Are you working in a team or in a group](https://sharovatov.github.io/e/2024-01-teams-groups.html)
+- [How a team changes to a group](https://sharovatov.github.io/e/2024-01-teams-groups-processes.html)
 
 The article focuses on the negative social dynamics triggered by a few aspects of organizational design, process activities, and certain managerial actions.
 
