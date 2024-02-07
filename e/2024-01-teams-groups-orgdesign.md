@@ -53,7 +53,15 @@ Personal development plans, like individual performance reviews, shift the emplo
 
 The first issue with PDPs is that team members become accustomed to receiving information (and feedback) about their individual development not from the team itself but from an outsider—the manager. This diminishes interdependence and trust.
 
-The second issue is akin to PR-based code review: planning anything for long periods means that the plan can quickly become outdated, as reality will demand something unplanned. When the team collaborates to help a team member improve and does so interactively, the chances are higher that the team member will appreciate the collaboration, which reinforces team bonding.
+The second issue is akin to PR-based code review: planning anything for long periods means that the plan can quickly become outdated, as reality will demand something unplanned.
+
+Instead of PDPs, the team can collaborate to help a team member improve and do so interactively, with Mob Learning, the chances are higher that the team member will appreciate the collaboration, which reinforces team bonding.
+
+Modern pedagogy and andragogy [reached a scientific consensus](https://link.springer.com/article/10.1007/s10648-006-9038-8): collaborative learning is the most effective one.
+
+---
+
+These 
 
 **References**:
 - [Social tipping points in animal societies](https://royalsocietypublishing.org/doi/10.1098/rspb.2018.1282)
@@ -65,3 +73,6 @@ The second issue is akin to PR-based code review: planning anything for long per
 - [The checkerboard model of social interaction](https://www.tandfonline.com/doi/abs/10.1080/0022250X.1971.9989791)
 - [Expectations, Outcomes, and Challenges of Modern Code Review](http://sback.it/publications/icse2013.pdf)
 - [Toward Understanding of the Social Hysteresis: Insights From Agent-Based Modeling](https://journals.sagepub.com/doi/10.1177/17456916231195361)
+- [Bringing the Neuroscience of Learning to Online Teaching: An Educator’s Handbook](https://www.amazon.com/Bringing-Neuroscience-Learning-Online-Teaching/dp/080776552X)
+- [Collaborative Learning in Higher Education: Evoking Positive Interdependence](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5132366/)
+- [The State of Cooperative Learning in Postsecondary and Professional Settings](https://link.springer.com/article/10.1007/s10648-006-9038-8)
