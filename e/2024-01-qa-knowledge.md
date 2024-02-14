@@ -28,7 +28,7 @@ When [designing a smoke test plan](https://qase.io/blog/smoke-testing/), the fir
 
 Similarly, when designing the shorter interview, we consciously reduce the extensiveness of the verification, and the first step would be to define everything which is not critical for performing this job type and _leave it out_. When leaving things out, we can take note of them and check them during the probation period. This leaves us with what the candidate **must** be able to do, and this is what we will focus on checking during the interview.
 
-**example?**
+For example, does it really matter that much for your team if the QA engineer has experience with Playwright, or any other automation frameworks experience would suffice? Or maybe no experience with automation is ok since you have a good SDET in your team? If you think some skills aren't critical for the job and/or can easily be obtained during the probation period, it's a good idea to skip them.
 
 If the list of activities still demand verification which impossible to fit in a short interview, as is the case of 'ability to prepare and execute QA strategy', we need to decide whether to find _smoke checks_ for each activity.
 
