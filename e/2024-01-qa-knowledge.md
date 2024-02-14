@@ -56,7 +56,7 @@ A proxy check for 'ability to prepare and execute QA strategy' might be simply a
 
 8. Can you provide an example of how you've used data and analytics to inform your QA strategy?
 
-This list of questions is not extensive at all, please don't copy it. It's just an example of an attempt to _map skills to knowledge_.
+This list of questions is not extensive at all, please don't copy it. It's just an example of an attempt to _map skills to knowledge_. You will have to do the mapping yourself!
 
 **[what is proxy check?]**
 
