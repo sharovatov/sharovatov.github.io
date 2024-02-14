@@ -60,9 +60,7 @@ Therefore, in order to verify candidate's ability to prepare and execute QA stra
 
 This list of questions is not extensive at all, please don't copy it. It's just an example of an attempt to _map skills to knowledge_. You will have to do the mapping yourself!
 
-**[what is proxy check?]**
-
-At this stage we should end up having a list of checks (or proxy checks) which all would fit in a short interview. We are aware that these checks won't provide full confidence in the candidates abilities, but similarly to smoke testing we traded the extensiveness of verification for time.
+At this stage we should end up having a list of checks (or smoke checks) which all would fit in a short interview. We are aware that these checks won't provide full confidence in the candidates abilities, but similarly to smoke testing we traded the extensiveness of verification for time.
 
 To recap, the approach is:
 1. identify the most critical parts of the job, leave out all other parts
