@@ -64,20 +64,4 @@ At this stage we should end up having a list of checks (or smoke checks) which a
 
 To recap, if you know that verification process for all the candidate's abilities would take too much time, the approach is to identify the most critical parts of the job, and for each critical part, to define the list of smoke checks.
 
-## cover test strategies expiration!
-
-- Scope is changed!  scope of testing, including the features to be tested, the features to be excluded, and the overall approach to testing within the project.
-
-- technological Advancements: As new technologies emerge and existing ones evolve, test strategies based on older technologies may no longer be applicable. For example, a test strategy designed for a monolithic architecture might not suit a microservices architecture.
-Changes in Software Development Methodologies: The shift from traditional waterfall models to agile methodologies requires a more iterative and flexible approach to testing. Test strategies that do not adapt to these changes can become obsolete.
-Regulatory and Compliance Changes: In certain industries, software products must adhere to regulatory standards. As these standards are updated, test strategies must also evolve to ensure compliance.
-Changes in Business Goals and User Expectations: As market demands and user expectations change, software products must adapt to meet these new requirements. A test strategy that does not consider these changes may fail to identify critical issues.
-Emergence of New Testing Tools and Practices: The introduction of new testing tools and practices can render existing test strategies less efficient or effective. Incorporating modern tools and practices, such as automated testing and DevOps practices, can necessitate updates to test strategies.
-
-left to cover:
-
-- little's law
-- soft skills 
-- cultural fit
-- proactivity
 
