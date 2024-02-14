@@ -8,17 +8,19 @@ This is another article in the series on hiring. The [first one](https://qase.io
 
 In the previous article I postulated that the best way to verify the candidate's proficiency in doing a certain job is to actually let them perform that job, observe the process and check the results.
 
-However, some work types demand significant time to be performed. Imagine we want to hire a QA engineer and one of the types of work we want them to perform is to prepare the QA strategy and execute upon together with the team later. Performing QA strategy preparation involves many steps, and each of them is quite significant. Even understanding the project scope, its current state in terms of quality, and how the processes work in the company would likely take days if not weeks.
+However, some work types demand significant time to be performed. Imagine we want to hire a QA engineer and one of the types of work we want them to perform is to prepare the QA strategy and execute upon together with the team later. It's certainly impossible to check the execution of a QA strategy during the interview. Even creating a QA strategy involves many steps, and each of them is quite significant and very context-specific: for each company in each period of time QA strategy will be unique. Even understanding the project scope, its current state in terms of quality, and how the processes work in the company would likely take days if not weeks.
 
-Increasing interview time to a week will considerably decrease the attractiveness of the position. Candidates rarely choose companies with extremely lengthy interviews.
+This all means that certain types of job activities are almost impossible to verify during the short interview.
+
+Additionally, increasing interview time to a week will considerably decrease the attractiveness of the position — candidates rarely choose companies with extremely lengthy interviews.
 
 This leads to choosing between two options:
 1. invest in improving the EVP so that candidates will still desire to pass lengthy interviews
-2. decreasing the quality and extensiveness of the verification process
+2. decreasing the quality and extensiveness of the verification process of an interview
 
 Improving the EVP always sounds like a good plan, but unfortunately not all companies are flexible enough to allow managers to significantly influence the budgeting.
 
-This leaves us with the option 2: decreasing the quality and extensiveness of the verification process.
+This leaves us with the option 2: decreasing the quality and extensiveness of the verification process of an interview.
 
 If the interview is short, it will not deter candidates. However, as it's not possible to fully perform the jobs we need to verify during the shorter interview, the interview design should change.
 
