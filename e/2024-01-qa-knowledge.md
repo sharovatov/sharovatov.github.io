@@ -56,6 +56,9 @@ This list of questions is not extensive at all, please don't copy it. It's just 
 
 At this stage we should end up having a list of checks (or smoke checks) which all would fit in a short interview. We are aware that these checks won't provide full confidence in the candidates abilities, but similarly to smoke testing we traded the extensiveness of verification for time.
 
-To recap, if you know that verification process for all the candidate's abilities would take too much time, the approach is to identify the most critical parts of the job, and for each critical part, to define the list of smoke checks.
+To recap, if you know that verification process for all the candidate's abilities would take too much time, the approach is to consciously reduce the extensiveness of the verification:
+- to identify the most critical parts of the job,
+- for each critical part, to define the list of smoke checks. Smoke checks might be simply in a form of interview question.
 
+Please remember that reducing the extensiveness of the verification yields less quality control!
 
