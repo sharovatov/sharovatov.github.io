@@ -8,7 +8,7 @@ This is another article in the series on hiring. The [first one](https://qase.io
 
 In the previous article I postulated that the best way to verify the candidate's proficiency in doing a certain job is to actually let them perform that job, observe the process and check the results.
 
-However, some work types demand significant time to be performed. Imagine we want to hire a proper QA engineer and one of the types of work we want them to perform is to prepare the risk assessment strategy and execute upon it later. Performing risk assessment strategy preparation involves many steps, and each of them is quite significant. Even understanding the project scope and objectives along with identifying potential risks would likely take days if not weeks.
+However, some work types demand significant time to be performed. Imagine we want to hire a QA engineer and one of the types of work we want them to perform is to prepare the QA strategy and execute upon together with the team later. Performing QA strategy preparation involves many steps, and each of them is quite significant. Even understanding the project scope, its current state in terms of quality, and how the processes work in the company would likely take days if not weeks.
 
 Increasing interview time to a week will considerably decrease the attractiveness of the position. Candidates rarely choose companies with extremely lengthy interviews.
 
