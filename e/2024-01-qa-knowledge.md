@@ -36,9 +36,11 @@ Similarly, when designing the shorter interview, we consciously reduce the exten
 
 **example?**
 
-If the list of activities still demand verification which impossible to fit in a short interview, as is the case of 'ability to prepare and execute QA strategy', we need to decide whether to find _proxy methods_ for each check.
+If the list of activities still demand verification which impossible to fit in a short interview, as is the case of 'ability to prepare and execute QA strategy', we need to decide whether to find _smoke checks_ for each activity.
 
-A proxy check for 'ability to prepare and execute QA strategy' might be simply a series of questions:
+A smoke check might simply be a list of questions. Knowledge does not equate skill, a person might have learned something but has never practiced it. However, we consciously decided to reduce the quality of the verification in order to shorten the interview, and questions 'for knowledge' might just suffice.
+
+Therefore, in order to verify candidate's ability to prepare and execute QA strategy we might come up with a list of questions that we think would _indicate_ the candidate's knowledge:
 
 1. Can you explain the key components that you believe should be included in an effective QA strategy?
 
