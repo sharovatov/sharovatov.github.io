@@ -62,35 +62,7 @@ This list of questions is not extensive at all, please don't copy it. It's just 
 
 At this stage we should end up having a list of checks (or smoke checks) which all would fit in a short interview. We are aware that these checks won't provide full confidence in the candidates abilities, but similarly to smoke testing we traded the extensiveness of verification for time.
 
-To recap, the approach is:
-1. identify the most critical parts of the job, leave out all other parts
-2. ...
-3. ...
-
-### Designing a smoke test plan for a QA engineer
-
-Let's proceed with the case of hiring a QA engineer who has among other duties to prepare a risk assessment strategy. Let's try to come up with a way to reduce the extensiveness of the verification process of skills required for this task.
-
-First step, as discussed in the [previous article](), would be to identify what exactly this type of work comprises:
-
-1. identify and define potential risks
-2. analyze and evaluate them
-3. define mitigation strategies
-4. plan for risk monitoring and reporting
-5. implement risk management practices
-6. review and reevaluate this strategy regularly
-
-#### 1. Identifing the most critical parts of the job
-
-Certainly, item 6 is "recursive": if a candidate can prepare the risk assessment strategy, they will also be able to review and reevaluate that strategy. Therefore it's safe to omit checking for this item.
-
-
-
-
-To see 
-
-
-
+To recap, if you know that verification process for all the candidate's abilities would take too much time, the approach is to identify the most critical parts of the job, and for each critical part, to define the list of smoke checks.
 
 ## cover test strategies expiration!
 
