@@ -1,9 +1,3 @@
-**Todo**:
-- fix link to the "second one" article — it should point **to the blog** when the post is published
-
-
----
-
 This is another article in the series on hiring. The [first one](https://qase.io/blog/hiring-quality-cvs/) was about the JDs and CVs, the [second one on designing the interview process](https://sharovatov.github.io/e/2024-01-qa-interview.html).
 
 In the previous article I postulated that the best way to verify the candidate's proficiency in doing a certain job is to actually let them perform that job, observe the process and check the results.
