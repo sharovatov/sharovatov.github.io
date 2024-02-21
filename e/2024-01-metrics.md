@@ -76,6 +76,21 @@ for (
 
 Managers wanted more lines of code, they got more lines of code. The introduction of "lines of code" metric achieved exactly what was needed: it changed people's behaviour.
 
+Recall the idea behind this metric: managers saw that the more the developers add features, the more lines of code appeared.
+
+It seems that the desired change of behaviour ("engineers to start writing more lines of code") wasn't actually what made sense to desire, right?
+
+That's the biggest problem with any metric: it changes the behaviour of people whose work is "measured" in ways which weren't desired at all.
+
+Charles Goodhart adage, often called "Goodhart's Law", states:
+
+> Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes
+
+The mere fact of a metric introduction puts "pressure upon it for control purposes".
+
+The issue i
+
+There's 
 
 
 
