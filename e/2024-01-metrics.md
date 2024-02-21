@@ -74,7 +74,7 @@ for (
 }
 ```
 
-There was a 
+Managers wanted more lines of code, they got more lines of code. The introduction of "lines of code" metric achieved exactly what was needed: it changed people's behaviour.
 
 
 
