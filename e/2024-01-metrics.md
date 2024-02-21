@@ -88,9 +88,13 @@ The mere fact of a metric introduction puts "pressure upon it for control purpos
 
 That's the biggest problem with any metric: it changes the behaviour of people whose work is "measured" in ways which weren't desired at all.
 
-Introducing metrics is the perfect example of lack of understanding of the Law of Unintended Consequences.
+Sociology has been studying this particular phenomenon called "The unanticipated consequences of Purposive Social Action [2]: where actions of individuals or groups, especially those actions taken with a specific goal in mind, can lead to outcomes that were not intended or foreseen.
+
+The phenomenon well describes the mismatch between what the desired change of behaviour was (more features) and the actual change of behaviour is (more lines of code).
+
 
 **References**:
-- [Der Kobra- Effekt. Wie man Irrwege der Wirtschaftspolitik vermeidet](https://www.amazon.com/Kobra-Effekt-Irrwege-Wirtschaftspolitik-vermeidet/dp/3421056781)
 - [The Law of Unintended Consequences](https://themindcollection.com/law-of-unintended-consequences/)
+- [The Unanticipated Consequences of Purposive Social Action](https://www.jstor.org/stable/2084615)
+- [Der Kobra- Effekt. Wie man Irrwege der Wirtschaftspolitik vermeidet](https://www.amazon.com/Kobra-Effekt-Irrwege-Wirtschaftspolitik-vermeidet/dp/3421056781)
 
