@@ -80,22 +80,15 @@ Recall the idea behind this metric: managers saw that the more the developers ad
 
 It seems that the desired change of behaviour ("engineers to start writing more lines of code") wasn't actually what made sense to desire, right?
 
-That's the biggest problem with any metric: it changes the behaviour of people whose work is "measured" in ways which weren't desired at all.
-
 Charles Goodhart adage, often called "Goodhart's Law", states:
 
 > Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes
 
 The mere fact of a metric introduction puts "pressure upon it for control purposes".
 
-The issue i
+That's the biggest problem with any metric: it changes the behaviour of people whose work is "measured" in ways which weren't desired at all.
 
-There's 
-
-
-
-
-
+Introducing metrics is the perfect example of lack of understanding of the Law of Unintended Consequences.
 
 **References**:
 - [Der Kobra- Effekt. Wie man Irrwege der Wirtschaftspolitik vermeidet](https://www.amazon.com/Kobra-Effekt-Irrwege-Wirtschaftspolitik-vermeidet/dp/3421056781)
