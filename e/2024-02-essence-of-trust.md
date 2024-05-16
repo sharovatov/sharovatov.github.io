@@ -32,9 +32,16 @@ Another [good explanation is given by OECD](https://www.oecd.org/officialdocumen
 
 To summarize, trust is the act of placing belief in another person without control over them, and making yourself vulnerable or investing resources in them with the expectation that they will reciprocate by acting in your interest. Trust is a _proactive_ behavior, where you take the first step in trusting the person and anticipate that they will behave accordingly.
 
-This behavior is altruistic, and is often viewed negatively despite being a powerful evolutionary mechanism observed not only in humans but in many other species.
+Instances of trusting behaviour are so common in life that people rarely clearly identify or notice them.
 
-**todo**: examples of trusting and non-trusting behaviours? Maybe use the article as the starting point?
+For example, you might offer a colleague to stay at your place when they visit your city. The guest will use some of the resources like water or soap and potentially can, for example, break things. You're voluntarily placing resources at their disposal as there's no legal obligation for them to pay in a situation when damage does occur.
+
+Another case would be helping a junior dev on your team to understand a complex topic, even when mentorship is not a presupposed or contractually expected part of your job duties. You're voluntarily placing resources (time) at their disposal.
+
+For most people it feels naturally good or virtuous to trust others.
+
+Trusting behavior is altruistic, and is a powerful evolutionary mechanism observed not only in humans but in many other species.
+
 
 ## The roots of trust
 
