@@ -95,7 +95,7 @@ To summarise:
 - [Control Aversion in Hierarchies](https://www.econstor.eu/bitstream/10419/263709/1/cesifo1_wp9779.pdf)
 - [On the Economics and Biology of Trust](https://academic.oup.com/jeea/article-abstract/7/2-3/235/2295805?redirectedFrom=fulltext)
 - [Neural representations of honesty predict future trust behavior](https://pubmed.ncbi.nlm.nih.gov/31729396/)
-- [Why good leaders make you feel safe | Simon Sinek](https://www.youtube.com/watch?v=lmyZMtPVodo)
+- [Why good leaders make you feel safe — Simon Sinek](https://www.youtube.com/watch?v=lmyZMtPVodo)
 - [How does rapport impact knowledge transfer from older to younger employees? The moderating role of supportive climate](https://www.frontiersin.org/articles/10.3389/fpsyg.2022.1032143/full)
 - [Coworker Trust and Knowledge Sharing among Public Sector Employees in Kenya](https://pubmed.ncbi.nlm.nih.gov/32197432/)
 - [Registered Nurses (RNs)' knowledge sharing and decision-making: the mediating role of organizational trust](https://pubmed.ncbi.nlm.nih.gov/30740677/)
