@@ -45,11 +45,11 @@ Trusting behavior is altruistic, and is a powerful evolutionary mechanism observ
 
 ## The roots of trust
 
-The renowned evolutionary biologist Hamilton studied the behaviors of various species that exhibit what appears to be altruistic behavior. In his paper "[The Genetical Evolution of Social Behaviour](https://www.sciencedirect.com/science/article/abs/pii/0022519364900384))", he introduced and mathematically demonstrated the concept of "inclusive fitness theory," which elucidates the evolution of altruism:
+The renowned evolutionary biologist Hamilton studied the behaviors of various species that exhibit what appears to be altruistic behavior. In his paper "[The Genetical Evolution of Social Behaviour](https://www.sciencedirect.com/science/article/abs/pii/0022519364900384))", he introduced and mathematically demonstrated the concept of "inclusive fitness theory," which described the evolution of altruism:
 
 > kin selection causes genes to increase in frequency when the genetic relatedness of a recipient to an actor multiplied by the benefit to the recipient is greater than the reproductive cost to the actor.
 
-Belding's ground squirrels provide a prime example of altruistic behavior. While feeding in groups, some individuals act as sentries and watch for predators. When a predator is detected, the sentry issues an alarm call, and the group scurries away. However, this behavior is not always advantageous from a selfish "survival of the fittest" perspective since the sentry is nearly three times more likely to be pursued by the predator due to drawing attention to herself by issuing the alarm. Despite this, the behavior is rational and understandable when viewed from an evolutionary perspective, almost as if the squirrels have read Hamilton's paper. The squirrels are more likely to give alarm calls when close relatives are present, thus increasing the likelihood of genes being passed down to future generations. In turn, the sentry trusts that others will alert her if necessary.
+Belding's ground squirrels provide a prime example of altruistic behavior. While feeding in groups, some squirrels act as sentries and watch for predators. When a predator is detected, the sentry shouts an alarm call, and the group scurries away. However, this behavior is not always advantageous from a selfish "survival of the fittest" perspective since the sentry is nearly three times more likely to be pursued by the predator due to drawing attention to herself by issuing the alarm. Despite this, the behavior is rational and understandable when viewed from an evolutionary perspective, almost as if the squirrels have read Hamilton's paper. The squirrels are more likely to give alarm calls when close relatives are present, thus increasing the likelihood of genes being passed down to future generations. In turn, the sentry trusts that others will alert her if necessary.
 
 Homo sapiens couldn’t have evolved without altruism and trust inside the small groups too. It was impossible for the individual to constantly stay awake and vigilant, and the world was full of dangers. People needed to watch over and ensure each other’s safety. Lack of trust meant certain death.
 
@@ -66,8 +66,6 @@ In "The Selfish Gene", Richard Dawkins delved into the factors and requirements 
 Dawkins proposed the idea that genes act as "selfish" units of evolution, but the species that carry these genes function as "vehicles". He suggested that cooperation between these vehicles in a "non-zero sum game" can be beneficial for the selfish genes.
 
 ## Game theory explaining benefits of trust
-
-**todo**: link to the teams article and note that trust is a must-have for teams
 
 The model of zero-sum and non-zero-sum game comes from [**Game Theory**](https://plato.stanford.edu/entries/game-theory/), a multi-disciplinary area of study "of the ways in which interacting choices of economic agents produce outcomes with respect to the preferences (or utilities) of those agents, where the outcomes in question might have been intended by none of the agents":
 
