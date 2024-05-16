@@ -1,8 +1,5 @@
 # Trust
 
-%%BLOG-LINK%%: https://sharovatov.github.io/e/2024-01-teams-groups.html
-%%LI-LINK%%: https://www.linkedin.com/pulse/you-working-team-group-vitaly-sharovatov-2ipwf
-
 This is spin-off post to the series on teams and groups:
 - Are you working in a team or in a group?
 - How a team changes to a group
