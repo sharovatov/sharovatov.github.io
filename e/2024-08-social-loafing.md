@@ -3,9 +3,10 @@ When I explain the numerous negative effects of individual performance reviews o
 However, social loafing is a symptom of a set of systemic issues that deform the team, and individual performance review, instead of improving the situation, will only worsen the overall problem.
 
 According to various studies \[[1](https://journals.sagepub.com/doi/10.1177/0146167284101011)\]\[[2](https://psycnet.apa.org/doiLanding?doi=10.1037/0022-3514.37.6.822)\]\[[3](https://www.researchgate.net/publication/228608182_Social_Loafing_A_Field_Investigation)\]\[[4](https://journals.sagepub.com/doi/10.1177/0022002183014003009)\], the main reasons for the social loafing effect are:
-1️⃣ Oversized groups
-2️⃣ A sense of unfairness when people see that others aren’t putting in much effort
-3️⃣ “Uninteresting tasks”
+
+1. Oversized groups
+2. A sense of unfairness when people see that others aren’t putting in much effort
+3. “Uninteresting tasks”
 
 So, it turns out that people suddenly get bored and lose interest if teams are made [unnecessarily large](https://qase.io/blog/quality-and-team-size/), and when user problems are broken down by “bosses” (PMs and team leads) and [handed out as individual tasks](https://qase.io/blog/quality-and-interest/).
 
