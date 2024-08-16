@@ -1,5 +1,3 @@
-# On teams and parasitism
-
 Answering a very good question by Sebastian Svensson on parasitism:
 
 > What about the effect of parasitism and letting others do the heavy work if you completely eliminate individual measurement? Intuitively, it seems like there must be two extremes - hyper-individuality that causes competition, and hyper-collectivism that causes people to slack and let one or two hard workers do everything until they too eventually lose motivation - with a sweet spot somewhere in between. Have you observed any such effects, when eg exploring different factors such as short term vs long term, and different ways of expressing individual vs collective KPIs? The reason I’m asking is that I’ve seen teams fail both due to hyper individualism and due to hyper collectivism and I’d expect both effects to show up in experiments, given the right conditions. If so, are there findings in what those factors may be?
